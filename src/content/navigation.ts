@@ -1,6 +1,5 @@
 import { routes } from "@/lib/routes";
 import { industries } from "./industries";
-import { serviceLocations } from "./locations";
 import { services } from "./services";
 
 export type NavigationChild = {
@@ -25,12 +24,6 @@ export const industryNavigationItems: NavigationChild[] = industries.map((indust
   description: industry.description,
 }));
 
-export const serviceAreaNavigationItems: NavigationChild[] = serviceLocations.map((location) => ({
-  label: `${location.city}, ${location.state}`,
-  href: routes.location(location.slug),
-  description: location.intro,
-}));
-
 export const primaryNavigation: NavigationItem[] = [
   { label: "Home", href: routes.home },
   { label: "Services", href: routes.services, children: serviceNavigationItems },
@@ -43,5 +36,4 @@ export const primaryNavigation: NavigationItem[] = [
 export const utilityNavigation: NavigationItem[] = [
   { label: "Request Service", href: routes.requestService },
   { label: "Financing", href: routes.financing },
-  { label: "Service Area", href: routes.serviceArea, children: serviceAreaNavigationItems },
 ];
