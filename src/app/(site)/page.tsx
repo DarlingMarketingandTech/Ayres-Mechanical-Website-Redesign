@@ -47,7 +47,7 @@ export default function HomePage() {
       </Section>
       <Section className="bg-white">
         <Container>
-          <Testimonials />
+          <Testimonials limit={3} />
         </Container>
       </Section>
       <Section className="bg-brand-ice">
