@@ -1,0 +1,181 @@
+{
+  "plugins": {
+    "firecrawl": {
+      "enabled": true
+    },
+    "cloudinary": {
+      "enabled": true,
+      "projectFolder": "ayres-mechanical-website",
+      "assetFolders": {
+        "brandSystem": "ayres-mechanical-website/00-brand-system",
+        "logos": "ayres-mechanical-website/00-brand-system/logos",
+        "marksIcons": "ayres-mechanical-website/00-brand-system/marks-icons",
+        "patternsBackgrounds": "ayres-mechanical-website/00-brand-system/patterns-backgrounds",
+        "globalUi": "ayres-mechanical-website/01-global-ui",
+        "heroBackgrounds": "ayres-mechanical-website/01-global-ui/hero-backgrounds",
+        "sectionBackgrounds": "ayres-mechanical-website/01-global-ui/section-backgrounds",
+        "socialOpenGraph": "ayres-mechanical-website/01-global-ui/social-open-graph",
+        "pages": "ayres-mechanical-website/02-pages",
+        "home": "ayres-mechanical-website/02-pages/home",
+        "about": "ayres-mechanical-website/02-pages/about",
+        "contactRequestService": "ayres-mechanical-website/02-pages/contact-request-service",
+        "services": "ayres-mechanical-website/03-services",
+        "heating": "ayres-mechanical-website/03-services/heating",
+        "airConditioning": "ayres-mechanical-website/03-services/air-conditioning",
+        "maintenance": "ayres-mechanical-website/03-services/maintenance",
+        "ductwork": "ayres-mechanical-website/03-services/ductwork",
+        "emergencyService": "ayres-mechanical-website/03-services/emergency-service",
+        "commercialHvac": "ayres-mechanical-website/03-services/commercial-hvac",
+        "industrialHvac": "ayres-mechanical-website/03-services/industrial-hvac",
+        "industries": "ayres-mechanical-website/04-industries",
+        "residentialIndustry": "ayres-mechanical-website/04-industries/residential",
+        "commercialIndustry": "ayres-mechanical-website/04-industries/commercial",
+        "industrialIndustry": "ayres-mechanical-website/04-industries/industrial",
+        "locations": "ayres-mechanical-website/05-locations",
+        "cityPageHeroes": "ayres-mechanical-website/05-locations/city-page-heroes",
+        "projectsCaseStudies": "ayres-mechanical-website/06-projects-case-studies",
+        "teamTrucksOffice": "ayres-mechanical-website/07-team-trucks-office",
+        "rawWorkingFiles": "ayres-mechanical-website/08-raw-working-files"
+      },
+      "namingConvention": {
+        "case": "kebab-case",
+        "includePageOrUseCase": true,
+        "includeVariant": true,
+        "avoidSpaces": true,
+        "examples": [
+          "home-hero-hvac-technician-rooftop",
+          "heating-service-furnace-repair",
+          "commercial-hvac-rooftop-units",
+          "triangle-pattern-dark-blue",
+          "ayres-logo-primary-horizontal",
+          "ayres-mark-stacked-red-blue"
+        ]
+      },
+      "recommendedTags": [
+        "ayres-mechanical",
+        "hvac",
+        "website-redesign",
+        "nextjs",
+        "brand-system",
+        "residential",
+        "commercial",
+        "industrial",
+        "heating",
+        "cooling",
+        "maintenance",
+        "emergency-service"
+      ]
+    },
+    "figma": {
+      "enabled": true
+    }
+  },
+
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.rulers": [100],
+  "editor.wordWrap": "on",
+
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "search.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/out": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/.vercel": true,
+    "**/package-lock.json": true,
+    "**/pnpm-lock.yaml": true,
+    "**/yarn.lock": true
+  },
+
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/.vercel": true,
+    "**/out": true,
+    "**/dist": true
+  },
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.quoteStyle": "double",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
+  "emmet.includeLanguages": {
+    "typescriptreact": "html",
+    "javascriptreact": "html"
+  },
+
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#D71920",
+    "activityBarBadge.background": "#D71920",
+    "statusBar.background": "#0A1A44",
+    "statusBar.foreground": "#FFFFFF",
+    "titleBar.activeBackground": "#0A1A44",
+    "titleBar.activeForeground": "#FFFFFF"
+  },
+
+  "ayresMechanical.project": {
+    "framework": "Next.js App Router",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "animation": "Motion for React",
+    "imageCdn": "Cloudinary",
+    "cloudinaryRootFolder": "ayres-mechanical-website",
+    "primaryPhone": "317-538-9837",
+    "brandColors": {
+      "blue": "#0D3FB8",
+      "blueDark": "#0A1A44",
+      "red": "#D71920",
+      "gray": "#6B7280",
+      "grayLight": "#E5E7EB",
+      "white": "#F3F4F6",
+      "black": "#101014"
+    },
+    "buildPriorities": [
+      "Use server components by default",
+      "Keep Cloudinary asset IDs centralized in src/content/media.ts or src/lib/cloudinary.ts",
+      "Use next/image with Cloudinary remote patterns",
+      "Create reusable page templates for services, industries, and locations",
+      "Use footer-linked SEO location pages without cluttering primary navigation",
+      "Avoid duplicate doorway-style location pages",
+      "Keep animations subtle and performance-safe",
+      "Use accessible semantic markup",
+      "Run npm run lint and npm run build before considering a phase complete"
+    ]
+  }
+}
