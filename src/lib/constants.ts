@@ -1,3 +1,5 @@
+import { siteConfig } from "@/content/site";
+
 export const brand = {
   blue: "#0D3FB8",
   blueDark: "#0A1A44",
@@ -8,5 +10,5 @@ export const brand = {
   black: "#101014",
 } as const;
 
-export const phoneHref = "tel:+13175389837";
-export const emailHref = "mailto:service@example.com";
+export const phoneHref = `tel:${siteConfig.phoneE164}`;
+export const emailHref = siteConfig.email ? `mailto:${siteConfig.email}` : null;

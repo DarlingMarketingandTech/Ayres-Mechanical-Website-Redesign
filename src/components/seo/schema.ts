@@ -8,18 +8,22 @@ export function localBusinessSchema() {
     "@type": "HVACBusiness",
     name: siteConfig.name,
     telephone: siteConfig.phone,
-    email: siteConfig.email,
     url: siteConfig.url,
     areaServed: siteConfig.serviceArea,
     description: siteConfig.description,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.address.street,
-      addressLocality: siteConfig.address.city,
-      addressRegion: siteConfig.address.state,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: "US",
-    },
+    ...(siteConfig.email ? { email: siteConfig.email } : {}),
+    ...(siteConfig.address
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: siteConfig.address.street,
+            addressLocality: siteConfig.address.city,
+            addressRegion: siteConfig.address.state,
+            postalCode: siteConfig.address.postalCode,
+            addressCountry: "US",
+          },
+        }
+      : {}),
   };
 }
 

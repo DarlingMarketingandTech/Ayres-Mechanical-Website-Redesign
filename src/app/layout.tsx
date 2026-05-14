@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   description:
     "Ayres Mechanical provides residential, commercial, and industrial heating and air conditioning services throughout Central Indiana. Call 317-538-9837 for service.",
   alternates: {
-    canonical: "/",
+    canonical: siteConfig.url,
   },
   openGraph: {
     type: "website",

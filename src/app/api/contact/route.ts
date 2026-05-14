@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { submitContactRequest } from "@/lib/contact-submission";
 import { contactFormSchema } from "@/lib/validators";
 
 export async function POST(request: Request) {
@@ -10,5 +11,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, errors: parsed.error.flatten().fieldErrors }, { status: 400 });
   }
 
-  return NextResponse.json({ ok: true, message: "Request captured by placeholder API route." });
+  try {
+    const result = await submitContactRequest(parsed.data);
+    return NextResponse.json({ ok: true, ...result }, { status: result.status === "delivered" ? 200 : 202 });
+  } catch {
+    return NextResponse.json({ ok: false, message: "Unable to send this request right now. Please call for immediate service." }, { status: 502 });
+  }
 }

@@ -13,9 +13,15 @@ const serviceTypes = ["Heating", "Air Conditioning", "Maintenance", "Ductwork", 
 const customerTypes = ["Residential", "Commercial", "Industrial"];
 const urgencyOptions = ["Emergency", "This week", "Routine maintenance", "Planning ahead"];
 const contactMethods = ["Phone", "Email", "Either"];
+const fallbackErrorMessage = "Something went wrong. Please call for immediate service.";
+
+type SubmissionStatus = {
+  type: "success" | "error";
+  message: string;
+} | null;
 
 export function ContactForm({ compact = false }: { compact?: boolean }) {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<SubmissionStatus>(null);
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -27,18 +33,23 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
   });
 
   async function onSubmit(values: ContactFormValues) {
-    setStatus("idle");
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    if (response.ok) {
-      setStatus("success");
-      reset();
-      return;
+    setStatus(null);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const result = (await response.json().catch(() => null)) as { message?: string } | null;
+      if (response.ok) {
+        setStatus({ type: "success", message: result?.message ?? "Thanks. Your request has been sent." });
+        reset();
+        return;
+      }
+      setStatus({ type: "error", message: result?.message ?? fallbackErrorMessage });
+    } catch {
+      setStatus({ type: "error", message: fallbackErrorMessage });
     }
-    setStatus("error");
   }
 
   return (
@@ -60,8 +71,8 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
       ) : null}
       <Field label="Message" error={errors.message?.message}><Textarea rows={5} {...register("message")} aria-invalid={Boolean(errors.message)} /></Field>
       <Button type="submit" variant="emergency" size="lg" disabled={isSubmitting}>{isSubmitting ? "Sending..." : "Submit Request"}</Button>
-      {status === "success" ? <p className="rounded-lg bg-secondary p-3 text-sm font-semibold text-brand-blue-dark">Thanks. This phase-one form is wired to a placeholder API route and ready for production integration.</p> : null}
-      {status === "error" ? <p className="rounded-lg bg-accent p-3 text-sm font-semibold text-brand-red">Something went wrong. Please call for immediate service.</p> : null}
+      {status?.type === "success" ? <p className="rounded-lg bg-secondary p-3 text-sm font-semibold text-brand-blue-dark">{status.message}</p> : null}
+      {status?.type === "error" ? <p className="rounded-lg bg-accent p-3 text-sm font-semibold text-brand-red">{status.message}</p> : null}
     </form>
   );
 }

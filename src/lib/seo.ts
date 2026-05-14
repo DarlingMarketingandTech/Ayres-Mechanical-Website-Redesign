@@ -19,7 +19,7 @@ export function pageMetadata({
     title,
     description,
     alternates: {
-      canonical: path,
+      canonical: absoluteUrl(path),
     },
     openGraph: {
       title,
