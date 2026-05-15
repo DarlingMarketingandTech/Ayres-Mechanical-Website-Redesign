@@ -12,12 +12,13 @@ export type CloudinaryMediaAsset = {
 export const media = {
   brand: {
     primaryLogo: {
-      publicId: "am-primary-logo",
+      publicId: "ayres-mech-website-logo",
       alt: "Ayres Mechanical logo.",
-      width: 2172,
-      height: 724,
+      width: 2045,
+      height: 265,
       format: "png",
       assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+      usageNotes: "Wide wordmark with minimal padding; preferred for header and footer.",
     },
     /** For dark UI surfaces; delivered with background removal for transparency (Cloudinary AI credits). */
     secondaryLogoLight: {

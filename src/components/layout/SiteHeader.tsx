@@ -104,14 +104,23 @@ export function SiteHeader() {
       <div
         ref={mainRowRef}
         className={cn(
-          "border-b border-border bg-white/95 backdrop-blur transition-transform duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none",
-          barHidden ? "-translate-y-full pointer-events-none" : "translate-y-0",
+          "border-b border-border bg-white/95 backdrop-blur transition-[max-height,opacity,padding,border-width] duration-300 ease-out motion-reduce:transition-none",
+          barHidden
+            ? "max-h-0 min-h-0 overflow-hidden border-b-0 py-0 opacity-0 pointer-events-none"
+            : "max-h-48 opacity-100",
         )}
       >
-        <Container className="flex min-h-18 items-center justify-between gap-6 py-3 sm:min-h-20">
+        <Container
+          className={cn(
+            "flex items-center justify-between gap-6 py-3",
+            barHidden ? "hidden" : "min-h-20 sm:min-h-21 lg:min-h-24",
+          )}
+        >
           <Logo
             priority
-            className="h-12 w-auto max-w-[min(100%,300px)] object-contain object-left sm:h-14 sm:max-w-[min(100%,380px)]"
+            linkClassName="max-w-[50%]"
+            sizes="(max-width: 1024px) 50vw, 640px"
+            className="h-auto w-full max-h-14 object-contain object-left sm:max-h-16 lg:max-h-19"
           />
           <DesktopNav />
           <div className="hidden items-center gap-3 lg:flex">

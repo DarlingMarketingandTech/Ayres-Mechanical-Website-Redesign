@@ -19,7 +19,7 @@ export function SiteFooter() {
         <FooterPromoCta />
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo className="max-w-[min(100%,280px)]" />
+            <Logo linkClassName="max-w-full" className="h-auto w-full max-h-12 sm:max-h-14" />
             <p className="mt-5 max-w-sm text-white/75">{siteConfig.description}</p>
             <a href={phoneHref} className="mt-5 inline-block text-xl font-black text-white hover:underline">{siteConfig.phone}</a>
           </div>

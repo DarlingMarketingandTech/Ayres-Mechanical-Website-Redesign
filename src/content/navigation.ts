@@ -25,9 +25,7 @@ export const industryNavigationItems: NavigationChild[] = industries.map((indust
 }));
 
 export const primaryNavigation: NavigationItem[] = [
-  { label: "Home", href: routes.home },
   { label: "Services", href: routes.services, children: serviceNavigationItems },
-  { label: "Industries", href: routes.industries, children: industryNavigationItems },
   { label: "About", href: routes.about },
   { label: "Reviews", href: routes.reviews },
   { label: "Contact", href: routes.contact },

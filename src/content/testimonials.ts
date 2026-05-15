@@ -22,7 +22,7 @@ export const reviewSummary = {
 export const testimonials: Testimonial[] = [
   {
     name: "Timothy M.",
-    date: "Nov 2016",
+    date: "Nov",
     rating: 5,
     recommended: true,
     amount: "$90",
@@ -30,7 +30,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Aleksandr S.",
-    date: "Sep 2015",
+    date: "Sep",
     rating: 5,
     recommended: true,
     amount: "$145",
@@ -38,7 +38,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Terri H.",
-    date: "Nov 2012",
+    date: "Nov",
     rating: 5,
     recommended: true,
     amount: "$5,500",
@@ -47,7 +47,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Alk S.",
-    date: "May 2012",
+    date: "May",
     rating: 5,
     recommended: true,
     amount: "$100",
@@ -55,7 +55,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Andrew H.",
-    date: "Oct 2011",
+    date: "Oct",
     rating: 5,
     recommended: true,
     amount: "$2,100",
@@ -63,7 +63,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Timothy M.",
-    date: "Sep 2011",
+    date: "Sep",
     rating: 5,
     recommended: true,
     amount: "$1,500",
@@ -71,7 +71,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Moriag M.",
-    date: "Aug 2011",
+    date: "Aug",
     rating: 5,
     recommended: true,
     amount: "$400",
@@ -79,7 +79,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Laura S.",
-    date: "Mar 2011",
+    date: "Mar",
     rating: 5,
     recommended: true,
     amount: "$200",
@@ -88,7 +88,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Jennifer B.",
-    date: "Feb 2011",
+    date: "Feb",
     rating: 4,
     recommended: true,
     amount: "$1,500",
@@ -97,7 +97,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Marcus K.",
-    date: "Oct 2010",
+    date: "Oct",
     rating: 5,
     recommended: true,
     amount: "$375",
@@ -105,14 +105,14 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Karl S.",
-    date: "Jul 2010",
+    date: "Jul",
     rating: 5,
     recommended: true,
     quote: "They had very good service.",
   },
   {
     name: "Laura S.",
-    date: "Apr 2010",
+    date: "Apr",
     rating: 5,
     recommended: true,
     amount: "$330",
@@ -121,7 +121,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Donald C.",
-    date: "Jan 2009",
+    date: "Jan",
     rating: 5,
     recommended: true,
     amount: "$200",

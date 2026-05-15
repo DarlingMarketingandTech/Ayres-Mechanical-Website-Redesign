@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ClipboardList, Home, LayoutGrid, Menu, Phone } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -21,7 +21,8 @@ import { cloudinaryTransparentLogoUrl } from "@/lib/cloudinary";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
-const SCROLL_IDLE_MS = 1100;
+const SCROLL_TOP_REVEAL = 48;
+const SCROLL_DELTA = 8;
 const LOGO_BAR_PX = 64;
 const SHEET_LOGO_MAX = 220;
 const REQUEST_FORM_HASH = "#request-service-form";
@@ -37,10 +38,11 @@ function barItemClass(active: boolean) {
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const chromeRef = useRef<HTMLDivElement>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [hiddenByScrollIdle, setHiddenByScrollIdle] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastScrollY = useRef(0);
 
   const [prevPathname, setPrevPathname] = useState(pathname);
   if (pathname !== prevPathname) {
@@ -50,6 +52,26 @@ export function MobileBottomNav() {
 
   const barVisible = reduceMotion || menuOpen || !hiddenByScrollIdle;
 
+  const updateChromeOffset = useCallback(() => {
+    if (!barVisible) {
+      document.documentElement.style.setProperty("--mobile-bottom-chrome-h", "0px");
+      return;
+    }
+    const height = chromeRef.current?.offsetHeight ?? 0;
+    document.documentElement.style.setProperty("--mobile-bottom-chrome-h", `${height}px`);
+  }, [barVisible]);
+
+  useLayoutEffect(() => {
+    updateChromeOffset();
+    const el = chromeRef.current;
+    if (!el || typeof ResizeObserver === "undefined") {
+      return;
+    }
+    const ro = new ResizeObserver(() => updateChromeOffset());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [updateChromeOffset]);
+
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => setReduceMotion(mq.matches);
@@ -58,34 +80,35 @@ export function MobileBottomNav() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  const onScrollActivity = useCallback(() => {
+  const onScroll = useCallback(() => {
     if (reduceMotion || menuOpen) {
       return;
     }
-    setHiddenByScrollIdle(false);
-    if (idleTimer.current) {
-      clearTimeout(idleTimer.current);
+
+    const y = window.scrollY;
+    const delta = y - lastScrollY.current;
+    lastScrollY.current = y;
+
+    if (y < SCROLL_TOP_REVEAL) {
+      setHiddenByScrollIdle(false);
+      return;
     }
-    idleTimer.current = setTimeout(() => {
+    if (delta > SCROLL_DELTA) {
       setHiddenByScrollIdle(true);
-    }, SCROLL_IDLE_MS);
+    } else if (delta < -SCROLL_DELTA) {
+      setHiddenByScrollIdle(false);
+    }
   }, [reduceMotion, menuOpen]);
 
   useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
     if (reduceMotion || menuOpen) {
-      if (idleTimer.current) {
-        clearTimeout(idleTimer.current);
-      }
       return;
     }
-    window.addEventListener("scroll", onScrollActivity, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScrollActivity);
-      if (idleTimer.current) {
-        clearTimeout(idleTimer.current);
-      }
-    };
-  }, [menuOpen, onScrollActivity, reduceMotion]);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [menuOpen, onScroll, reduceMotion]);
 
   const logoBarSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, LOGO_BAR_PX * 2);
   const logoSheetSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, SHEET_LOGO_MAX);
@@ -94,7 +117,13 @@ export function MobileBottomNav() {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 z-45 flex flex-col pb-[max(0.35rem,env(safe-area-inset-bottom))] lg:hidden">
+      <div
+        ref={chromeRef}
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-45 flex flex-col pb-[max(0.35rem,env(safe-area-inset-bottom))] transition-transform duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none lg:hidden",
+          barVisible ? "translate-y-0" : "pointer-events-none translate-y-full",
+        )}
+      >
         <div className="border-t border-border bg-white/98 px-2 pt-2 shadow-[0_-10px_28px_rgb(0_0_0_/0.08)] backdrop-blur-md">
           <div className="mx-auto grid max-w-lg grid-cols-2 gap-2">
             <a
@@ -118,16 +147,10 @@ export function MobileBottomNav() {
             </Link>
           </div>
         </div>
-        <div
-          className={cn(
-            "overflow-hidden transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none",
-            barVisible ? "max-h-32 opacity-100" : "pointer-events-none max-h-0 opacity-0",
-          )}
+        <nav
+          aria-label="Mobile primary navigation"
+          className="border-t border-border/90 bg-white/95 pt-1 shadow-[0_-6px_22px_rgb(0_0_0_/0.05)] backdrop-blur-md"
         >
-          <nav
-            aria-label="Mobile primary navigation"
-            className="border-t border-border/90 bg-white/95 pt-1 shadow-[0_-6px_22px_rgb(0_0_0_/0.05)] backdrop-blur-md"
-          >
           <div className="mx-auto grid max-w-lg grid-cols-5 items-stretch gap-0.5 px-1.5">
           <Link href={routes.home} className={barItemClass(pathname === routes.home)} aria-current={pathname === routes.home ? "page" : undefined}>
             <Home className="size-6 shrink-0" aria-hidden="true" />
@@ -166,7 +189,6 @@ export function MobileBottomNav() {
           </Button>
           </div>
         </nav>
-        </div>
       </div>
 
       <Sheet
