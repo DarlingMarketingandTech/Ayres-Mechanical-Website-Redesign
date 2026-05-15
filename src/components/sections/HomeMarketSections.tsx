@@ -121,7 +121,7 @@ export function CommercialHvacHomeSection() {
                   assetKey={card.assetId}
                   preset="commercial"
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
                 />
               </div>
               <div className="flex flex-1 flex-col p-5 sm:p-6">

@@ -52,7 +52,14 @@ export function TrustSequenceSection() {
         </h2>
         <ol className="grid gap-6 sm:gap-8 md:grid-cols-3 md:gap-6 lg:gap-10">
           {STEPS.map((step) => (
-            <li key={step.n} className="flex gap-4 sm:gap-5 md:flex-col md:items-start">
+            <li
+              key={step.n}
+              className={cn(
+                "flex gap-4 sm:gap-5 md:flex-col md:items-start reveal-on-load",
+                step.n === 2 && "reveal-on-load-delay-1",
+                step.n === 3 && "reveal-on-load-delay-2",
+              )}
+            >
               <div className="flex shrink-0 md:items-center">
                 <StepNumberBadge n={step.n} />
               </div>

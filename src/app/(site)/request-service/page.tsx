@@ -1,12 +1,12 @@
 import { RequestServiceForm } from "@/forms/RequestServiceForm";
 import { BasicPageTemplate } from "@/components/templates/BasicPageTemplate";
 import { prefillFromRequestServiceSearch } from "@/lib/request-service-prefill";
+import { siteConfig } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Request Service",
-  description:
-    "Request heating, cooling, maintenance, commercial HVAC, industrial HVAC, or emergency service from Ayres Mechanical Inc.",
+  title: "Request HVAC Service",
+  description: `Request heating, cooling, maintenance, commercial, industrial, or emergency HVAC service from ${siteConfig.shortName}. Call ${siteConfig.phone} for urgent needs.`,
   path: "/request-service",
 });
 

@@ -16,7 +16,15 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { TrustSequenceSection } from "@/components/sections/TrustSequenceSection";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { siteConfig } from "@/content/site";
 import { homeFaqs } from "@/content/faqs";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Heating & Air Conditioning Specialists",
+  description: `${siteConfig.description} Call ${siteConfig.phone} for service.`,
+  path: "/",
+});
 
 export default function HomePage() {
   return (
@@ -38,6 +46,12 @@ export default function HomePage() {
         <Container className="space-y-6">
           <SectionDivider className="max-w-2xl" />
           <LocalPresenceSection />
+        </Container>
+      </Section>
+
+      <Section className="border-t border-brand-red/10 bg-brand-ice/40">
+        <Container>
+          <EmergencyCTA compact />
         </Container>
       </Section>
 
@@ -78,7 +92,7 @@ export default function HomePage() {
         <BrandPattern variant="dark" />
         <Container className="relative grid gap-8 lg:grid-cols-[0.7fr_1fr]">
           <HomeSectionHeading light eyebrow="FAQ" title="Common HVAC service questions." />
-          <FAQSection faqs={homeFaqs} />
+          <FAQSection faqs={homeFaqs} variant="dark" />
         </Container>
       </Section>
     </>

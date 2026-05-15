@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Star } from "lucide-react";
+import type { CSSProperties } from "react";
 
 import { reviewSummary, testimonials } from "@/content/testimonials";
 import { routes } from "@/lib/routes";
@@ -17,22 +19,37 @@ export function Testimonials({ limit, showPitchColumn = true }: TestimonialsProp
   return (
     <div className="space-y-6">
       <div className={showPitchColumn ? "grid gap-5 lg:grid-cols-[0.85fr_1.15fr]" : "max-w-md"}>
-        <div className="rounded-2xl bg-brand-blue-dark p-6 text-white">
+        <div className="rounded-2xl bg-brand-blue-dark p-6 text-white shadow-lg ring-1 ring-brand-blue-dark/20">
           {showPitchColumn ? (
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-white/60">REVIEWS</p>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-white/60">Reviews</p>
           ) : null}
           <div className={cn("flex items-end gap-3", showPitchColumn ? "mt-4" : "mt-2")}>
-            <p className="text-6xl font-black leading-none">{reviewSummary.rating}</p>
-            <p className="pb-2 text-sm font-bold uppercase tracking-[0.18em] text-white/70">{reviewSummary.count} reviews</p>
+            <p className="text-6xl font-black leading-none tabular-nums">{reviewSummary.rating}</p>
+            <div className="pb-2">
+              <div className="flex items-center gap-0.5" aria-hidden>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="size-4 fill-brand-red text-brand-red" />
+                ))}
+              </div>
+              <p className="mt-1 text-sm font-bold text-white/70">{reviewSummary.count} verified reviews</p>
+            </div>
           </div>
           <div className="mt-6 space-y-3">
-            {reviewSummary.distribution.map((item) => (
+            {reviewSummary.distribution.map((item, index) => (
               <div key={item.stars} className="grid grid-cols-[1.5rem_1fr_3rem] items-center gap-3 text-sm font-bold text-white/80">
                 <span>{item.stars}</span>
                 <div className="h-2 overflow-hidden rounded-full bg-white/20">
-                  <div className="h-full rounded-full bg-brand-red" style={{ width: `${item.percentage}%` }} />
+                  <div
+                    className="h-full rounded-full bg-brand-red animate-rating-bar-fill"
+                    style={
+                      {
+                        "--rating-fill": `${item.percentage}%`,
+                        animationDelay: `${index * 80}ms`,
+                      } as CSSProperties
+                    }
+                  />
                 </div>
-                <span className="text-right">{item.percentage}%</span>
+                <span className="text-right tabular-nums">{item.percentage}%</span>
               </div>
             ))}
           </div>
@@ -64,19 +81,33 @@ export function Testimonials({ limit, showPitchColumn = true }: TestimonialsProp
           <figure
             key={`${testimonial.name}-${testimonial.date}`}
             className={cn(
-              "rounded-2xl border p-6 shadow-sm",
+              "flex flex-col rounded-2xl border p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transform-none",
               index === 0 ? "border-brand-blue-dark/20 bg-linear-to-br from-brand-ice/80 to-white" : "border-border bg-white",
             )}
           >
-            <div className="flex items-start justify-between gap-4">
-              <p className="text-2xl font-black text-brand-red">{testimonial.rating.toFixed(1)}</p>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-muted-foreground">{testimonial.date}</p>
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-1" aria-label={`${testimonial.rating} out of 5 stars`}>
+                <span className="text-xl font-black text-brand-red tabular-nums">{testimonial.rating.toFixed(1)}</span>
+                <Star className="size-4 fill-brand-red text-brand-red" aria-hidden />
+              </div>
+              <time dateTime={testimonial.date} className="text-xs font-medium text-muted-foreground/80">
+                {testimonial.date}
+              </time>
             </div>
-            <blockquote className="mt-4 text-lg font-semibold leading-8 text-brand-blue-dark">&ldquo;{testimonial.quote}&rdquo;</blockquote>
-            <figcaption className="mt-5 space-y-2 text-sm font-bold text-muted-foreground">
-              <p className="uppercase tracking-[0.18em] text-brand-blue-dark">{testimonial.name}</p>
-              <p>{testimonial.recommended ? "Recommends Ayres Mechanical" : "Customer review"}</p>
-              {testimonial.amount ? <p>Reported project cost: {testimonial.amount}</p> : null}
+            <blockquote className="mt-4 flex-1 text-base font-semibold leading-7 text-brand-blue-dark">
+              &ldquo;{testimonial.quote}&rdquo;
+            </blockquote>
+            <figcaption className="mt-5 space-y-1 border-t border-border/60 pt-4 text-sm">
+              <p className="font-black text-brand-blue-dark">{testimonial.name}</p>
+              <p className="text-muted-foreground">
+                {testimonial.recommended ? "Recommends Ayres Mechanical" : "Customer review"}
+              </p>
+              {testimonial.source ? (
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground/90">{testimonial.source}</p>
+              ) : null}
+              {testimonial.amount ? (
+                <p className="text-xs text-muted-foreground">Reported project cost: {testimonial.amount}</p>
+              ) : null}
             </figcaption>
           </figure>
         ))}

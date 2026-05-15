@@ -2,15 +2,11 @@ import { notFound } from "next/navigation";
 
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate";
 import { getServiceBySlug } from "@/content/services";
-import { pageMetadata } from "@/lib/seo";
+import { servicePageMetadata } from "@/lib/seo";
 
 const service = getServiceBySlug("heating");
 
-export const metadata = pageMetadata({
-  title: service ? service.title : "Service",
-  description: service ? service.description : "HVAC service from Ayres Mechanical Inc.",
-  path: "/services/heating",
-});
+export const metadata = service ? servicePageMetadata(service) : {};
 
 export default function Page() {
   if (!service) notFound();
