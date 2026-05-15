@@ -53,10 +53,10 @@ export function HomeHero() {
             {siteConfig.tagline}
           </motion.p>
           <motion.h1 variants={fadeUp} className="mt-4 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance sm:mt-5">
-            Heating & Air Conditioning Service Built for Central Indiana
+            20 Years of Trusted HVAC Service in Central Indiana.
           </motion.h1>
           <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
-            Ayres Mechanical provides residential, commercial, and industrial HVAC service with fast response, dependable workmanship, and 24-hour service when comfort cannot wait.
+            Practical heating and cooling solutions for your home, business, or facility. 24/7 emergency response in Marion, Hendricks, Hamilton, Montgomery, Putnam, and Boone Counties.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
             <Link
