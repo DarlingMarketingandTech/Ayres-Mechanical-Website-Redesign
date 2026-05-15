@@ -4,6 +4,7 @@ import { BrandDivider } from "@/components/brand/BrandDivider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/components/seo/schema";
 import { CTASection } from "@/components/sections/CTASection";
+import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FeatureBand } from "@/components/sections/FeatureBand";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -67,6 +68,7 @@ export function ServicePageTemplate({ service }: { service: Service }) {
           <FAQSection faqs={service.faqs} />
         </Container>
       </Section>
+      <FinancingPromoSection variant="service" />
       <CTASection title={"Need " + service.shortTitle.toLowerCase() + " service?"} />
     </>
   );

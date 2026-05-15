@@ -42,12 +42,12 @@ export function ProofMediaBlock({
           width={asset.width}
           height={asset.height}
           sizes={sizes}
-          className="h-full min-h-[280px] w-full object-cover"
+          className="h-full min-h-[220px] w-full object-cover sm:min-h-[280px]"
         />
       </div>
-      <div className="flex flex-col justify-center p-6 lg:p-8">
+      <div className="flex flex-col justify-center p-5 sm:p-6 lg:p-8">
         <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">{eyebrow}</p>
-        <h2 className="mt-3 text-3xl font-black text-brand-blue-dark sm:text-4xl">{title}</h2>
+        <h2 className="mt-3 text-(length:--text-section) font-black text-balance text-brand-blue-dark">{title}</h2>
         <p className="mt-4 leading-8 text-muted-foreground">{description}</p>
 
         {proofPoints.length > 0 ? (

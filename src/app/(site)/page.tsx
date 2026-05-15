@@ -1,3 +1,5 @@
+import { ComfortSolutionsSection } from "@/components/sections/ComfortSolutionsSection";
+import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { HomeHero } from "@/components/sections/Hero";
@@ -17,11 +19,13 @@ export default function HomePage() {
     <>
       <HomeHero />
       <TrustBar />
+      <FinancingPromoSection variant="home" />
+      <ComfortSolutionsSection />
       <Section>
         <Container>
           <div className="mb-8 max-w-2xl">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Services</p>
-            <h2 className="mt-3 text-4xl font-black">HVAC service for homes, businesses, and facilities.</h2>
+            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">HVAC service for homes, businesses, and facilities.</h2>
           </div>
           <ServiceCards />
         </Container>
@@ -43,7 +47,7 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Why Ayres Mechanical</p>
-              <h2 className="mt-3 text-4xl font-black">A local mechanical partner with practical service instincts.</h2>
+              <h2 className="mt-3 text-(length:--text-section) font-black text-balance">A local mechanical partner with practical service instincts.</h2>
               <p className="mt-4 leading-8 text-muted-foreground">The site foundation emphasizes clear service paths, 24-hour availability, and distinct content for residential, commercial, and industrial customers.</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
@@ -61,7 +65,7 @@ export default function HomePage() {
         <Container>
           <div className="mb-8 max-w-2xl">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Service Area</p>
-            <h2 className="mt-3 text-4xl font-black">Central Indiana HVAC service areas.</h2>
+            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">Central Indiana HVAC service areas.</h2>
           </div>
           <ServiceAreaGrid limit={5} />
         </Container>
@@ -76,7 +80,10 @@ export default function HomePage() {
       </Section>
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">
-          <div><p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">FAQ</p><h2 className="mt-3 text-4xl font-black">Common HVAC service questions.</h2></div>
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">FAQ</p>
+            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">Common HVAC service questions.</h2>
+          </div>
           <FAQSection faqs={homeFaqs} />
         </Container>
       </Section>

@@ -10,6 +10,34 @@ export type CloudinaryMediaAsset = {
 };
 
 export const media = {
+  brand: {
+    primaryLogo: {
+      publicId: "am-primary-logo",
+      alt: "Ayres Mechanical logo.",
+      width: 2172,
+      height: 724,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
+    /** For dark UI surfaces; delivered with background removal for transparency (Cloudinary AI credits). */
+    secondaryLogoLight: {
+      publicId: "am-secondary-logo-light",
+      alt: "Ayres Mechanical secondary mark (light).",
+      width: 1254,
+      height: 1254,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
+    /** For light UI surfaces; delivered with background removal for transparency (Cloudinary AI credits). */
+    secondaryLogoDark: {
+      publicId: "am-secondary-logo-dark",
+      alt: "Ayres Mechanical secondary mark (dark).",
+      width: 1254,
+      height: 1254,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
+  },
   home: {
     workVan: {
       publicId: "work-van",
@@ -34,6 +62,17 @@ export const media = {
       usageNotes: "Use near company story content as authentic team and equipment proof.",
     },
   },
+  financing: {
+    ftlLogo: {
+      publicId: "FTL-Logo-1024x314",
+      alt: "FTL Finance logo.",
+      width: 1024,
+      height: 314,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/10-financing",
+      usageNotes: "Financing partner mark for homepage and financing page.",
+    },
+  },
   partners: {
     mitsubishi: {
       publicId: "mitsubishi-diamond-contractor.2107070651536",
@@ -41,28 +80,24 @@ export const media = {
       width: 500,
       height: 200,
       format: "png",
-      version: 1778787306,
       assetFolder: "ayres-mechanical-website/09-service-partners",
-      usageNotes:
-        "Verified asset. Do not render publicly until current credential wording is owner-approved.",
     },
-    proPlumbing: {
+    rheemDealer: {
       publicId: "Pro_Plumbing_Grey_Check",
-      alt: "Pro Plumbing logo.",
+      alt: "Rheem registered dealer credential mark.",
       width: 512,
       height: 173,
       format: "png",
-      version: 1778787307,
       assetFolder: "ayres-mechanical-website/09-service-partners",
-      usageNotes:
-        "Verified asset. Do not render publicly until partner display is explicitly approved.",
     },
   },
   services: {},
   locations: {},
 } satisfies {
+  brand: Record<string, CloudinaryMediaAsset>;
   home: Record<string, CloudinaryMediaAsset>;
   about: Record<string, CloudinaryMediaAsset>;
+  financing: Record<string, CloudinaryMediaAsset>;
   partners: Record<string, CloudinaryMediaAsset>;
   services: Record<string, CloudinaryMediaAsset>;
   locations: Record<string, CloudinaryMediaAsset>;

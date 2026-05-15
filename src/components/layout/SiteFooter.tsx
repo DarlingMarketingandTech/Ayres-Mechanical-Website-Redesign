@@ -2,14 +2,13 @@ import Link from "next/link";
 
 import { BrandPattern } from "@/components/brand/BrandPattern";
 import { Logo } from "@/components/brand/Logo";
-import { buttonVariants } from "@/components/ui/button";
+import { FooterPromoCta } from "@/components/layout/FooterPromoCta";
 import { industries } from "@/content/industries";
 import { serviceLocations } from "@/content/locations";
 import { services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
-import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 
 export function SiteFooter() {
@@ -17,20 +16,10 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden bg-brand-blue-dark text-white">
       <BrandPattern variant="dark" />
       <Container className="relative py-12">
-        <div className="mb-10 grid gap-6 rounded-2xl bg-white p-6 text-brand-blue-dark shadow-xl lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">24 Hour Service</p>
-            <h2 className="mt-2 text-3xl font-black">Need HVAC help now?</h2>
-            <p className="mt-2 max-w-2xl text-muted-foreground">Call Ayres Mechanical or request service online for residential, commercial, and industrial HVAC support.</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>Request Service</Link>
-            <a href={phoneHref} className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>Call {siteConfig.phone}</a>
-          </div>
-        </div>
+        <FooterPromoCta />
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo markTone="light" className="[&_span:last-child_span:first-child]:text-white [&_span:last-child_span:last-child]:text-[#ff8a8f]" />
+            <Logo className="max-w-[min(100%,280px)]" />
             <p className="mt-5 max-w-sm text-white/75">{siteConfig.description}</p>
             <a href={phoneHref} className="mt-5 inline-block text-xl font-black text-white hover:underline">{siteConfig.phone}</a>
           </div>

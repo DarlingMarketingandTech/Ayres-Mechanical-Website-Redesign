@@ -1,26 +1,35 @@
+import Image from "next/image";
 import Link from "next/link";
 
+import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
+import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import { TriangleMark } from "./TriangleMark";
+
+const logoAsset = media.brand.primaryLogo;
 
 type LogoProps = {
   className?: string;
-  markTone?: "default" | "light";
   href?: string;
+  /** Use on the header mark for faster LCP. */
+  priority?: boolean;
 };
 
-export function Logo({ className, markTone = "default", href = routes.home }: LogoProps) {
+export function Logo({ className, href = routes.home, priority = false }: LogoProps) {
+  const src = cloudinaryImageUrl(logoAsset);
+
   return (
-    <Link href={href} className={cn("group inline-flex items-center gap-3", className)} aria-label={siteConfig.name}>
-      <span className="flex size-12 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-border">
-        <TriangleMark className="h-9 w-6" tone={markTone} />
-      </span>
-      <span className="leading-none">
-        <span className="block font-heading text-2xl font-black tracking-tight text-brand-blue">AYRES</span>
-        <span className="block font-heading text-lg font-black tracking-[0.12em] text-brand-red">MECHANICAL</span>
-      </span>
+    <Link href={href} className="group inline-flex shrink-0" aria-label={siteConfig.name}>
+      <Image
+        src={src}
+        alt={logoAsset.alt}
+        width={logoAsset.width}
+        height={logoAsset.height}
+        sizes="(max-width: 640px) 240px, 360px"
+        className={cn("h-10 w-auto max-w-[min(100%,240px)] object-contain object-left sm:h-11 sm:max-w-[280px]", className)}
+        priority={priority}
+      />
     </Link>
   );
 }
