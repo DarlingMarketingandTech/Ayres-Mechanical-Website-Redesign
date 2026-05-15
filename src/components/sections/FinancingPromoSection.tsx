@@ -1,17 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
+import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { buttonVariants } from "@/components/ui/button";
 import { financingHomePromo, financingServicePromo, ftlFinanceLearnMoreUrl } from "@/content/financing";
-import { media } from "@/content/media";
-import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-
-const ftlAsset = media.financing.ftlLogo;
 
 export function FinancingPromoSection({ variant }: { variant: "home" | "service" }) {
   const isHome = variant === "home";
@@ -26,11 +22,9 @@ export function FinancingPromoSection({ variant }: { variant: "home" | "service"
           )}
         >
           <div className={cn("flex items-center justify-center bg-muted/60", isHome ? "p-8 lg:p-10" : "shrink-0 rounded-2xl p-6 sm:max-w-[min(100%,280px)]")}>
-            <Image
-              src={cloudinaryImageUrl(ftlAsset)}
-              alt={ftlAsset.alt}
-              width={ftlAsset.width}
-              height={ftlAsset.height}
+            <CloudinaryImage
+              assetKey="ftlFinanceLogo1024"
+              preset="logo"
               sizes={isHome ? "(min-width: 1024px) 42vw, 100vw" : "(min-width: 640px) 240px, 100vw"}
               className={cn("h-auto w-full object-contain", isHome ? "max-h-[200px]" : "max-h-[120px] sm:max-h-[100px]")}
             />
