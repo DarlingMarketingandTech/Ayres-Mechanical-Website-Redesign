@@ -8,17 +8,17 @@ import { Container } from "@/components/layout/Container";
 import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
-import { routes, type RequestServiceIntent } from "@/lib/routes";
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 const REQUEST_FORM_HASH = "#request-service-form";
 
-const QUICK_INTENTS: { label: string; intent: RequestServiceIntent }[] = [
-  { label: "AC Repair", intent: "ac-repair" },
-  { label: "Heating", intent: "heating" },
-  { label: "Maintenance", intent: "maintenance" },
-  { label: "Commercial", intent: "commercial" },
-  { label: "Emergency", intent: "emergency" },
+const QUICK_INTENTS: { label: string; href: string }[] = [
+  { label: "AC Repair", href: routes.requestServiceQuery({ service: "ac-repair" }) },
+  { label: "Heating", href: routes.requestServiceQuery({ service: "heating" }) },
+  { label: "Maintenance", href: routes.requestServiceQuery({ service: "maintenance" }) },
+  { label: "Commercial", href: routes.requestServiceQuery({ service: "commercial" }) },
+  { label: "Emergency", href: routes.requestServiceQuery({ service: "emergency", emergency: true }) },
 ];
 
 export function HomeHero() {
@@ -79,10 +79,10 @@ export function HomeHero() {
           <div className="mt-6 rounded-2xl border border-brand-blue-dark/12 bg-white/90 p-4 shadow-sm sm:mt-7">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-red">Start a request</p>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {QUICK_INTENTS.map(({ label, intent }) => (
-                <li key={intent}>
+              {QUICK_INTENTS.map(({ label, href }) => (
+                <li key={href}>
                   <Link
-                    href={routes.requestServiceIntent(intent) + REQUEST_FORM_HASH}
+                    href={href + REQUEST_FORM_HASH}
                     className={cn(
                       buttonVariants({ variant: "secondary", size: "sm" }),
                       "min-h-11 rounded-full border border-brand-blue-dark/10 px-4 text-sm font-bold text-brand-blue-dark hover:border-brand-red/35 hover:bg-brand-ice",

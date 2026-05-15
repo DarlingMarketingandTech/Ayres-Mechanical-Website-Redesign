@@ -27,7 +27,13 @@ export const media = {
     proCredential: registryToMediaAsset(CLOUDINARY_ASSETS.rheemRegisteredDealerGreyCheck),
     ftl: registryToMediaAsset(CLOUDINARY_ASSETS.ftlFinanceLogo1024),
   },
-  services: {},
+  services: {
+    acOutdoorUnit: registryToMediaAsset(CLOUDINARY_ASSETS.rheemCentralAirOutdoorUnit),
+    ductlessWallUnit: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessSmallMhk2Wall),
+    heatPumpEducational: registryToMediaAsset(CLOUDINARY_ASSETS.heatPumpEducationalSmall),
+    ductlessInstallDetail: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessMedium3W7),
+    ductlessFinishedSpace: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessMediumGxMancave),
+  },
   locations: {},
 } satisfies {
   brand: Record<string, CloudinaryMediaAsset>;
