@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Canonical mobile navigation: fixed bottom bar plus full-site menu sheet.
+ * The header stays desktop-only (`DesktopNav`); do not add a separate header `MobileNav`.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,9 +37,17 @@ function barItemClass(active: boolean) {
 export function MobileBottomNav() {
   const pathname = usePathname();
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [barVisible, setBarVisible] = useState(true);
+  const [hiddenByScrollIdle, setHiddenByScrollIdle] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setHiddenByScrollIdle(false);
+  }
+
+  const barVisible = reduceMotion || menuOpen || !hiddenByScrollIdle;
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -46,15 +59,14 @@ export function MobileBottomNav() {
 
   const onScrollActivity = useCallback(() => {
     if (reduceMotion || menuOpen) {
-      setBarVisible(true);
       return;
     }
-    setBarVisible(true);
+    setHiddenByScrollIdle(false);
     if (idleTimer.current) {
       clearTimeout(idleTimer.current);
     }
     idleTimer.current = setTimeout(() => {
-      setBarVisible(false);
+      setHiddenByScrollIdle(true);
     }, SCROLL_IDLE_MS);
   }, [reduceMotion, menuOpen]);
 
@@ -63,7 +75,6 @@ export function MobileBottomNav() {
       if (idleTimer.current) {
         clearTimeout(idleTimer.current);
       }
-      setBarVisible(true);
       return;
     }
     window.addEventListener("scroll", onScrollActivity, { passive: true });
@@ -74,10 +85,6 @@ export function MobileBottomNav() {
       }
     };
   }, [menuOpen, onScrollActivity, reduceMotion]);
-
-  useEffect(() => {
-    setBarVisible(true);
-  }, [pathname]);
 
   const logoBarSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, LOGO_BAR_PX * 2);
   const logoSheetSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, SHEET_LOGO_MAX);
@@ -130,7 +137,15 @@ export function MobileBottomNav() {
         </div>
       </nav>
 
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+      <Sheet
+        open={menuOpen}
+        onOpenChange={(open) => {
+          setMenuOpen(open);
+          if (!open) {
+            setHiddenByScrollIdle(false);
+          }
+        }}
+      >
         <SheetContent side="right" className="w-full gap-0 overflow-y-auto p-0 sm:max-w-md" showCloseButton>
           <SheetHeader className="border-b border-border bg-brand-ice px-4 py-6">
             <div className="flex flex-col items-center gap-3">

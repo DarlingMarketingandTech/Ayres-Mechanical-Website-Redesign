@@ -21,7 +21,7 @@ export function FooterPromoCta() {
     <div className="mb-10 grid gap-6 rounded-2xl bg-white p-6 text-brand-blue-dark shadow-xl lg:grid-cols-[1fr_auto] lg:items-center">
       <div>
         <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">24 Hour Service</p>
-        <h2 className="mt-2 text-(length:--text-section) font-black text-balance">Need HVAC help now?</h2>
+        <h2 className="mt-2 text-(length:--text-section)-black text-balance">Need HVAC help now?</h2>
         <p className="mt-2 max-w-2xl text-muted-foreground">
           Call Ayres Mechanical or request service online for residential, commercial, and industrial HVAC support.
         </p>
