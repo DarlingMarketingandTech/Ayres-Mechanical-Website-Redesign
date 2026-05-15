@@ -170,59 +170,6 @@
       linear-gradient(135deg, rgb(13 63 184 / 6%) 0 1px, transparent 1px 72px),
       linear-gradient(45deg, rgb(215 25 32 / 5%) 0 1px, transparent 1px 72px);
   }
-
-  .reveal-on-load {
-    animation: reveal-fade-up 0.55s ease-out both;
-  }
-
-  .reveal-on-load-delay-1 {
-    animation-delay: 80ms;
-  }
-
-  .reveal-on-load-delay-2 {
-    animation-delay: 160ms;
-  }
-
-  @keyframes reveal-fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes rating-bar-fill {
-    from {
-      width: 0;
-    }
-
-    to {
-      width: var(--rating-fill, 0%);
-    }
-  }
-
-  .animate-rating-bar-fill {
-    animation: rating-bar-fill 0.7s ease-out forwards;
-  }
-
-  @keyframes emergency-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 rgb(255 255 255 / 0.22);
-    }
-
-    50% {
-      box-shadow: 0 0 0 6px rgb(255 255 255 / 0);
-    }
-  }
-
-  .animate-emergency-pulse {
-    animation: emergency-pulse 2.8s ease-in-out infinite;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

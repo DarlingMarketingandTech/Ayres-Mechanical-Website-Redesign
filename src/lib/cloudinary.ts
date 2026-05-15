@@ -1,34 +1,11 @@
-import type { CloudinaryMediaAsset } from "@/lib/cloudinary-assets";
-import type { CloudinaryImagePreset } from "@/lib/cloudinary-image-presets";
-import { presetToTransformSegment } from "@/lib/cloudinary-image-presets";
+import type { CloudinaryMediaAsset } from "@/content/media";
 
 const cloudinaryCloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "djhqowk67";
 
-export type CloudinaryImageUrlOptions = {
-  preset?: CloudinaryImagePreset;
-  /** Additional Cloudinary transform tokens appended after `f_auto,q_auto,` */
-  extraTransforms?: string;
-};
-
-function buildTransformChain(options?: CloudinaryImageUrlOptions): string {
-  const parts: string[] = [];
-  if (options?.preset) {
-    parts.push(presetToTransformSegment(options.preset));
-  }
-  if (options?.extraTransforms) {
-    parts.push(options.extraTransforms);
-  }
-  if (!parts.length) {
-    return "f_auto,q_auto";
-  }
-  return `f_auto,q_auto,${parts.join(",")}`;
-}
-
-export function cloudinaryImageUrl(asset: CloudinaryMediaAsset, options?: CloudinaryImageUrlOptions) {
+export function cloudinaryImageUrl(asset: CloudinaryMediaAsset) {
   const versionPath = asset.version ? `v${asset.version}/` : "";
-  const transforms = buildTransformChain(options);
 
-  return `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/${transforms}/${versionPath}${asset.publicId}.${asset.format}`;
+  return `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/f_auto,q_auto/${versionPath}${asset.publicId}.${asset.format}`;
 }
 
 /**

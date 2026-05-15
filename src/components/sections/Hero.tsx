@@ -1,117 +1,53 @@
 import Link from "next/link";
-import { ArrowRight, Clock, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 
 import { BrandPattern } from "@/components/brand/BrandPattern";
-import { CloudinaryImage } from "@/components/media/CloudinaryImage";
+import { TriangleMark } from "@/components/brand/TriangleMark";
 import { buttonVariants } from "@/components/ui/button";
-import { Container } from "@/components/layout/Container";
-import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-
-const REQUEST_FORM_HASH = "#request-service-form";
-
-const QUICK_INTENTS: { label: string; href: string }[] = [
-  { label: "AC Repair", href: routes.requestServiceQuery({ service: "ac-repair" }) },
-  { label: "Heating", href: routes.requestServiceQuery({ service: "heating" }) },
-  { label: "Maintenance", href: routes.requestServiceQuery({ service: "maintenance" }) },
-  { label: "Commercial", href: routes.requestServiceQuery({ service: "commercial" }) },
-  { label: "Emergency", href: routes.requestServiceQuery({ service: "emergency", emergency: true }) },
-];
+import { Container } from "@/components/layout/Container";
 
 export function HomeHero() {
-  const van = media.home.workVan;
-
   return (
     <section className="relative overflow-hidden bg-white section-pattern">
       <BrandPattern variant="blue" />
-      <Container className="relative grid gap-8 py-8 sm:gap-10 sm:py-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:items-stretch lg:gap-12 lg:py-20">
-        <div className="flex min-w-0 flex-col">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Central Indiana HVAC</p>
-          <h1 className="mt-3 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance sm:mt-4">
-            Fast dispatch for Central Indiana homes and businesses.
+      <Container className="relative grid gap-8 py-12 sm:gap-10 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-12 lg:py-24">
+        <div>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">{siteConfig.tagline}</p>
+          <h1 className="mt-4 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance sm:mt-5">
+            Heating & Air Conditioning Service Built for Central Indiana
           </h1>
-          <p className="mt-4 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-5 sm:leading-8">
-            Local crew, branded fleet, and clear emergency coverage when heating or cooling cannot wait.
+          <p className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
+            Ayres Mechanical provides residential, commercial, and industrial HVAC service with fast response, dependable workmanship, and 24-hour service when comfort cannot wait.
           </p>
-
-          <div className="mt-4 flex items-start gap-3 rounded-xl border border-brand-blue-dark/10 bg-brand-ice/90 px-4 py-3 text-brand-blue-dark sm:mt-5">
-            <Clock className="mt-0.5 size-5 shrink-0 text-brand-red" aria-hidden />
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-red">Emergency availability</p>
-              <p className="mt-1 text-sm font-semibold leading-snug sm:text-base">{siteConfig.hours.emergency}</p>
-              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{siteConfig.emergencyMessage}</p>
-            </div>
-          </div>
-
-          <div className="mt-6 flex w-full min-w-0 flex-col gap-3 sm:mt-7">
-            <a
-              href={phoneHref}
-              className={cn(
-                buttonVariants({ variant: "emergency", size: "lg" }),
-                "min-h-14 w-full justify-center gap-2.5 py-3.5 text-base font-black sm:text-lg",
-              )}
-            >
-              <Phone data-icon="inline-start" className="size-5" aria-hidden />
-              Call now — {siteConfig.phone}
+          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>
+              Request Service <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </Link>
+            <a href={phoneHref} className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+              <Phone data-icon="inline-start" aria-hidden="true" /> Call {siteConfig.phone}
             </a>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link
-                href={routes.requestService + REQUEST_FORM_HASH}
-                className={cn(buttonVariants({ variant: "dark", size: "lg" }), "min-h-14 w-full justify-center gap-2 px-4 text-base font-bold")}
-              >
-                Request service <ArrowRight data-icon="inline-end" className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href={routes.requestServiceIntent("maintenance") + REQUEST_FORM_HASH}
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "min-h-14 w-full justify-center gap-2 border-brand-blue-dark/25 px-4 text-base font-bold",
-                )}
-              >
-                Book service <ArrowRight data-icon="inline-end" className="size-4" aria-hidden />
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-6 rounded-2xl border border-brand-blue-dark/12 bg-white/90 p-4 shadow-sm sm:mt-7">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-red">Start a request</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {QUICK_INTENTS.map(({ label, href }) => (
-                <li key={href}>
-                  <Link
-                    href={href + REQUEST_FORM_HASH}
-                    className={cn(
-                      buttonVariants({ variant: "secondary", size: "sm" }),
-                      "min-h-11 rounded-full border border-brand-blue-dark/10 px-4 text-sm font-bold text-brand-blue-dark hover:border-brand-red/35 hover:bg-brand-ice",
-                    )}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
-
-        <div className="relative min-w-0 lg:flex lg:flex-col lg:justify-center">
-          <div className="relative overflow-hidden rounded-3xl bg-brand-blue-dark shadow-2xl ring-2 ring-brand-red/35">
-            <BrandPattern variant="dark" />
-            <div className="relative aspect-4/3 w-full overflow-hidden">
-              <CloudinaryImage
-                asset={van}
-                fill
-                priority
-                preset="hero"
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
-              />
+        <div className="relative min-h-[min(22rem,70dvh)] rounded-3xl bg-brand-blue-dark p-4 text-white shadow-2xl sm:min-h-104 sm:rounded-[2rem] sm:p-6 lg:min-h-[420px]">
+          <BrandPattern variant="dark" />
+          <div className="relative flex h-full min-h-64 flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur sm:min-h-80 sm:rounded-[1.5rem] sm:p-6 lg:min-h-[372px]">
+            <TriangleMark className="h-16 w-11 shrink-0 sm:h-24 sm:w-16" tone="light" />
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-white/70 sm:text-sm">Residential · Commercial · Industrial</p>
+              <h2 className="mt-3 text-(length:--text-section) font-black leading-tight text-balance text-white sm:mt-4">
+                24-hour service with a clear path from call to comfort.
+              </h2>
             </div>
-            <div className="pointer-events-none absolute left-3 top-3 max-w-[min(100%,19rem)] rounded-lg bg-brand-blue-dark/92 px-3 py-2 text-white shadow-lg ring-1 ring-white/20 backdrop-blur-sm sm:left-4 sm:top-4 sm:px-4 sm:py-2.5">
-              <p className="text-[10px] font-black uppercase leading-tight tracking-[0.18em] text-brand-red sm:text-xs">Local service presence</p>
-              <p className="mt-1 text-xs font-bold leading-snug sm:text-sm">Central Indiana HVAC service</p>
+            <div className="grid grid-cols-2 gap-2 text-xs font-bold sm:gap-3 sm:text-sm">
+              {['Heating', 'Cooling', 'Maintenance', 'Emergency'].map((item) => (
+                <div key={item} className="rounded-lg border border-white/15 bg-white/10 p-3 sm:rounded-xl sm:p-4">
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </div>

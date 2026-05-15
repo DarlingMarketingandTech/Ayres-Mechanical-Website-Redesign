@@ -1,39 +1,97 @@
-import { CLOUDINARY_ASSETS, type CloudinaryMediaAsset, registryToMediaAsset } from "@/lib/cloudinary-assets";
+export type CloudinaryMediaAsset = {
+  publicId: string;
+  alt: string;
+  width: number;
+  height: number;
+  format: "jpg" | "png" | "webp" | "svg";
+  version?: number;
+  assetFolder: `ayres-mechanical-website/${string}`;
+  usageNotes?: string;
+};
 
-export type { CloudinaryMediaAsset } from "@/lib/cloudinary-assets";
-
-/** Curated media picks for existing pages — each maps to a row in `@/lib/cloudinary-assets`. */
 export const media = {
   brand: {
-    primaryLogo: registryToMediaAsset(CLOUDINARY_ASSETS.amPrimaryLogo),
-    secondaryLogoLight: registryToMediaAsset(CLOUDINARY_ASSETS.amSecondaryLogoLight),
-    secondaryLogoDark: registryToMediaAsset(CLOUDINARY_ASSETS.amSecondaryLogoDark),
+    primaryLogo: {
+      publicId: "am-primary-logo",
+      alt: "Ayres Mechanical logo.",
+      width: 2172,
+      height: 724,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
+    /** For dark UI surfaces; delivered with background removal for transparency (Cloudinary AI credits). */
+    secondaryLogoLight: {
+      publicId: "am-secondary-logo-light",
+      alt: "Ayres Mechanical secondary mark (light).",
+      width: 1254,
+      height: 1254,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
+    /** For light UI surfaces; delivered with background removal for transparency (Cloudinary AI credits). */
+    secondaryLogoDark: {
+      publicId: "am-secondary-logo-dark",
+      alt: "Ayres Mechanical secondary mark (dark).",
+      width: 1254,
+      height: 1254,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/00-brand-system/logos",
+    },
   },
   home: {
-    workVan: registryToMediaAsset(CLOUDINARY_ASSETS.workVan),
-    heloAndVan: registryToMediaAsset(CLOUDINARY_ASSETS.heloAndVan),
-    roofIndustrialCrane: registryToMediaAsset(CLOUDINARY_ASSETS.roofIndustrialWithCrane),
-    helicopterRoofInstall: registryToMediaAsset(CLOUDINARY_ASSETS.helicopterIndustrialRoofInstall),
+    workVan: {
+      publicId: "work-van",
+      alt: "Ayres Mechanical branded work van parked outdoors.",
+      width: 960,
+      height: 720,
+      format: "jpg",
+      version: 1778784902,
+      assetFolder: "ayres-mechanical-website/07-team-trucks-office",
+      usageNotes: "Use as restrained operational proof near trust or service-area content.",
+    },
   },
   about: {
-    ownerTeam: registryToMediaAsset(CLOUDINARY_ASSETS.ownerBrianAndOfficeManagerSabra),
+    ownerTeam: {
+      publicId: "owner_brian-and-_offivce_manager_Sabra",
+      alt: "Ayres Mechanical team members standing with HVAC equipment.",
+      width: 1255,
+      height: 1263,
+      format: "png",
+      version: 1778784964,
+      assetFolder: "ayres-mechanical-website/07-team-trucks-office",
+      usageNotes: "Use near company story content as authentic team and equipment proof.",
+    },
   },
   financing: {
-    ftlLogo: registryToMediaAsset(CLOUDINARY_ASSETS.ftlFinanceLogo1024),
+    ftlLogo: {
+      publicId: "FTL-Logo-1024x314",
+      alt: "FTL Finance logo.",
+      width: 1024,
+      height: 314,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/10-financing",
+      usageNotes: "Financing partner mark for homepage and financing page.",
+    },
   },
   partners: {
-    mitsubishi: registryToMediaAsset(CLOUDINARY_ASSETS.mitsubishiDiamondContractor),
-    rheemLineup: registryToMediaAsset(CLOUDINARY_ASSETS.rheemHvacWaterHeaterProductLineup),
-    proCredential: registryToMediaAsset(CLOUDINARY_ASSETS.rheemRegisteredDealerGreyCheck),
-    ftl: registryToMediaAsset(CLOUDINARY_ASSETS.ftlFinanceLogo1024),
+    mitsubishi: {
+      publicId: "mitsubishi-diamond-contractor.2107070651536",
+      alt: "Mitsubishi Diamond Contractor logo.",
+      width: 500,
+      height: 200,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/09-service-partners",
+    },
+    rheemDealer: {
+      publicId: "Pro_Plumbing_Grey_Check",
+      alt: "Rheem registered dealer credential mark.",
+      width: 512,
+      height: 173,
+      format: "png",
+      assetFolder: "ayres-mechanical-website/09-service-partners",
+    },
   },
-  services: {
-    acOutdoorUnit: registryToMediaAsset(CLOUDINARY_ASSETS.rheemCentralAirOutdoorUnit),
-    ductlessWallUnit: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessSmallMhk2Wall),
-    heatPumpEducational: registryToMediaAsset(CLOUDINARY_ASSETS.heatPumpEducationalSmall),
-    ductlessInstallDetail: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessMedium3W7),
-    ductlessFinishedSpace: registryToMediaAsset(CLOUDINARY_ASSETS.ductlessMediumGxMancave),
-  },
+  services: {},
   locations: {},
 } satisfies {
   brand: Record<string, CloudinaryMediaAsset>;

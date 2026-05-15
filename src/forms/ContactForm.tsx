@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { contactFormSchema, type ContactFormValues } from "@/lib/validators";
@@ -21,29 +20,15 @@ type SubmissionStatus = {
   message: string;
 } | null;
 
-export function ContactForm({
-  compact = false,
-  prefill,
-  formId,
-}: {
-  compact?: boolean;
-  prefill?: Partial<ContactFormValues>;
-  /** When set, enables in-page anchor links (e.g. `#request-service-form`) and scroll margin. */
-  formId?: "request-service-form";
-}) {
+export function ContactForm({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<SubmissionStatus>(null);
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: "",
-      phone: "",
-      email: "",
       serviceType: "",
       customerType: "",
       urgency: "",
       preferredContact: "Phone",
-      message: "",
-      ...prefill,
     },
   });
 
@@ -68,11 +53,7 @@ export function ContactForm({
   }
 
   return (
-    <form
-      {...(formId ? { id: formId } : {})}
-      onSubmit={handleSubmit(onSubmit)}
-      className={cn("grid gap-4 rounded-3xl border bg-white p-6 shadow-sm", formId === "request-service-form" && "scroll-mt-28")}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 rounded-3xl border bg-white p-6 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" error={errors.name?.message}><Input {...register("name")} aria-invalid={Boolean(errors.name)} /></Field>
         <Field label="Phone" error={errors.phone?.message}><Input {...register("phone")} aria-invalid={Boolean(errors.phone)} /></Field>

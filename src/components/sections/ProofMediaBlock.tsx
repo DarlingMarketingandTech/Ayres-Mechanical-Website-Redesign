@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
-import { CloudinaryImage } from "@/components/media/CloudinaryImage";
-import type { CloudinaryMediaAsset } from "@/lib/cloudinary-assets";
+import type { CloudinaryMediaAsset } from "@/content/media";
+import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 
 type ProofMediaBlockProps = {
@@ -35,9 +36,11 @@ export function ProofMediaBlock({
       )}
     >
       <div className={cn("bg-muted", reverse && "lg:order-2")}>
-        <CloudinaryImage
-          asset={asset}
-          preset="card"
+        <Image
+          src={cloudinaryImageUrl(asset)}
+          alt={asset.alt}
+          width={asset.width}
+          height={asset.height}
           sizes={sizes}
           className="h-full min-h-[220px] w-full object-cover sm:min-h-[280px]"
         />

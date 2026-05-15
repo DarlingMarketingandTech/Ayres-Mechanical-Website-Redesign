@@ -1,1 +1,1 @@
-export { absoluteUrl, pageMetadata, servicePageMetadata } from "@/lib/seo";
+export { pageMetadata, absoluteUrl } from "@/lib/seo";

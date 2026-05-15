@@ -1,10 +1,14 @@
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
-import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { BasicPageTemplate } from "@/components/templates/BasicPageTemplate";
 import { buttonVariants } from "@/components/ui/button";
 import { financingPageCopy, ftlFinanceLearnMoreUrl } from "@/content/financing";
+import { media } from "@/content/media";
+import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { pageMetadata } from "@/lib/seo";
+
+const ftlAsset = media.financing.ftlLogo;
 
 export const metadata = pageMetadata({
   title: "Financing",
@@ -25,9 +29,11 @@ export default function FinancingPage() {
       <div className="space-y-10">
         <div className="overflow-hidden rounded-3xl border bg-white p-6 shadow-sm ring-1 ring-border sm:p-8">
           <div className="flex justify-center rounded-2xl bg-muted/50 py-8">
-            <CloudinaryImage
-              assetKey="ftlFinanceLogo1024"
-              preset="logo"
+            <Image
+              src={cloudinaryImageUrl(ftlAsset)}
+              alt={ftlAsset.alt}
+              width={ftlAsset.width}
+              height={ftlAsset.height}
               sizes="(min-width: 768px) 640px, 100vw"
               className="h-auto max-h-[200px] w-full max-w-2xl object-contain px-4"
               priority

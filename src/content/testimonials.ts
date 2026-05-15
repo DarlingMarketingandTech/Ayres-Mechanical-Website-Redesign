@@ -4,8 +4,6 @@ export type Testimonial = {
   rating: number;
   recommended: boolean;
   amount?: string;
-  /** Review platform label — only shown when provided. */
-  source?: string;
   quote: string;
 };
 

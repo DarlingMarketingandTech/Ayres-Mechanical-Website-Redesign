@@ -5,12 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
-  title: "HVAC Services in Central Indiana",
-  description:
-    "Heating, air conditioning, maintenance, ductwork, commercial HVAC, industrial HVAC, and emergency service from Ayres Mechanical throughout Central Indiana.",
-  path: "/services",
-});
+export const metadata = pageMetadata({ title: "HVAC Services", description: "Heating, air conditioning, maintenance, ductwork, commercial HVAC, industrial HVAC, and emergency service from Ayres Mechanical Inc.", path: "/services" });
 
 export default function ServicesPage() {
   return (

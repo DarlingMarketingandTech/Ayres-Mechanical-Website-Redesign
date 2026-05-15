@@ -34,7 +34,7 @@ export const financingPageCopy = {
 } as const;
 
 export const financingHomePromo = {
-  eyebrow: "FINANCING",
+  eyebrow: "Financing",
   title: "Comfort now, pay later.",
   description:
     "Residential HVAC projects may qualify for fixed-interest financing through FTL Finance. Learn how flexible payment options can keep your home comfortable without stretching your budget.",
