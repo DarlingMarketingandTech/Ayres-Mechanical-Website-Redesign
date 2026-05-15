@@ -1,4 +1,3 @@
-import type { Service } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -27,7 +26,7 @@ export function localBusinessSchema() {
   };
 }
 
-export function serviceSchema(service: Service) {
+export function serviceSchema(service: { title: string; description: string; slug: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -41,21 +40,6 @@ export function serviceSchema(service: Service) {
     },
     areaServed: siteConfig.serviceArea,
     url: absoluteUrl("/services/" + service.slug),
-  };
-}
-
-export function faqSchema(faqs: { question: string; answer: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
   };
 }
 

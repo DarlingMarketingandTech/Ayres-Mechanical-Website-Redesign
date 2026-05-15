@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({ title: "HVAC Services", description: "Heating, air conditioning, maintenance, ductwork, commercial HVAC, industrial HVAC, and emergency service from Ayres Mechanical Inc.", path: "/services" });
+export const metadata = pageMetadata({ title: "HVAC Services", description: "Air conditioning, heating, preventive maintenance, commercial HVAC, industrial HVAC, and 24-hour emergency service from Ayres Mechanical Inc.", path: "/services" });
 
 export default function ServicesPage() {
   return (

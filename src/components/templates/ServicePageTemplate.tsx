@@ -1,75 +1,163 @@
 import Link from "next/link";
 
-import { BrandDivider } from "@/components/brand/BrandDivider";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema, faqSchema, serviceSchema } from "@/components/seo/schema";
-import { CTASection } from "@/components/sections/CTASection";
-import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { FeatureBand } from "@/components/sections/FeatureBand";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { ServiceHero } from "@/components/sections/Hero";
+import { breadcrumbSchema, serviceSchema } from "@/components/seo/schema";
 import { ServiceIcon } from "@/components/icons/ServiceIcon";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import type { Service } from "@/content/services";
-import { getServiceBySlug } from "@/content/services";
+import { MotionReveal } from "@/components/sections/MotionReveal";
+import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
+import { ServiceHero } from "@/components/sections/Hero";
+import { buttonVariants } from "@/components/ui/button";
+import type { ServiceContent } from "@/data/services-content";
+import { getServiceContentBySlug } from "@/data/services-content";
+import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
+import { cn } from "@/lib/utils";
+import { ArrowRight, Phone, Sparkles } from "lucide-react";
 
-export function ServicePageTemplate({ service }: { service: Service }) {
-  const related = service.relatedServices.map(getServiceBySlug).filter(Boolean) as Service[];
+const calloutToneClasses = {
+  tip: "border-primary/30 bg-primary/8 text-brand-blue-dark",
+  safety: "border-brand-red/20 bg-brand-red/8 text-brand-blue-dark",
+  business: "border-brand-blue-dark/12 bg-brand-blue-dark text-white",
+  assurance: "border-brand-blue-dark/15 bg-brand-ice text-brand-blue-dark",
+} as const;
+
+export function ServicePageTemplate({ service }: { service: ServiceContent }) {
+  const related = service.relatedServices.map(getServiceContentBySlug).filter(Boolean) as ServiceContent[];
+  const primaryActionProps = {
+    className: buttonVariants({ variant: "emergency", size: "lg" }),
+  };
+  const secondaryActionProps = {
+    className: buttonVariants({ variant: "outline", size: "lg" }),
+  };
+
   return (
     <>
       <JsonLd data={serviceSchema(service)} />
-      <JsonLd data={faqSchema(service.faqs)} />
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: routes.home }, { name: "Services", url: routes.services }, { name: service.title, url: routes.service(service.slug) }])} />
-      <ServiceHero eyebrow={service.heroEyebrow} title={service.heroTitle} description={service.description} accent={service.accent} />
+      <ServiceHero eyebrow={service.eyebrow} title={service.heroTitle} description={service.summary} accent={service.accent} />
       <Section>
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-border">
-              <ServiceIcon icon={service.icon} className={service.accent === "red" ? "bg-accent text-brand-red" : ""} />
-              <h2 className="mt-5 text-3xl font-black">What we help with</h2>
-              <BrandDivider className="mt-5" />
-              <ul className="mt-6 grid gap-3">
-                {service.highlights.map((item) => <li key={item} className="rounded-xl bg-secondary p-4 font-semibold text-brand-blue-dark">{item}</li>)}
-              </ul>
+        <Container className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <MotionReveal>
+            <div className="rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
+              <ServiceIcon icon={service.icon} className={service.accent === "red" ? "bg-accent text-brand-red" : service.accent === "dark" ? "bg-brand-blue-dark text-white" : ""} />
+              <p className="mt-6 text-sm font-black uppercase tracking-[0.24em] text-brand-red">What we help with</p>
+              <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">{service.title}</h2>
+              <p className="mt-5 text-lg leading-8 text-muted-foreground">{service.intro}</p>
+              <div className="mt-6 rounded-2xl bg-brand-ice p-5">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-brand-blue-dark/65">Built for practical diagnostics</p>
+                <p className="mt-3 leading-7 text-brand-blue-dark">
+                  Every visit is designed to identify the root issue, explain the options clearly, and move you toward a dependable repair or replacement path.
+                </p>
+              </div>
             </div>
-            <FeatureBand title="Common problems solved" features={service.problemsSolved} />
-          </div>
+          </MotionReveal>
+          <MotionReveal>
+            <div className="rounded-[2rem] border border-border/70 bg-brand-blue-dark p-7 text-white shadow-sm sm:p-8">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-white/60">Need service now?</p>
+              <h2 className="mt-3 text-3xl font-black text-balance">Get a direct path to answers, scheduling, and support.</h2>
+              <p className="mt-4 leading-8 text-white/75">
+                Whether you are dealing with comfort loss, rising utility bills, or equipment that seems slightly off, Ayres Mechanical helps you move from uncertainty to a clear next step.
+              </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}>
+                  Request Service
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+                <a href={phoneHref} className={cn(buttonVariants({ variant: "inverse", size: "lg" }), "justify-center")}>
+                  <Phone aria-hidden="true" />
+                  Call 317-538-9837
+                </a>
+              </div>
+            </div>
+          </MotionReveal>
         </Container>
       </Section>
       <Section className="bg-brand-ice">
         <Container>
-          <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Service Process</p>
-            <h2 className="mt-3 text-4xl font-black">A straightforward path from request to resolution.</h2>
+          <div className="mb-8 max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">What We Help With</p>
+            <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">Direct support for the parts of the system that matter most.</h2>
           </div>
-          <ProcessSteps />
+          <AnimatedCardGrid items={service.whatWeHelpWith} />
         </Container>
       </Section>
       <Section>
+        <Container>
+          <div className="mb-8 max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Common Problems Solved</p>
+            <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">Clear diagnostics for the issues customers notice first.</h2>
+          </div>
+          <AnimatedCardGrid items={service.commonProblems} />
+        </Container>
+      </Section>
+      {service.specialNote ? (
+        <Section className="pt-0">
+          <Container>
+            <MotionReveal>
+              <div className={cn("rounded-[2rem] border p-7 shadow-sm sm:p-8", calloutToneClasses[service.specialNote.tone])}>
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-white/85 text-brand-red shadow-sm">
+                    <Sparkles className="size-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className={cn("text-sm font-black uppercase tracking-[0.22em]", service.specialNote.tone === "business" ? "text-white/60" : "text-brand-red")}>{service.specialNote.label}</p>
+                    <p className={cn("mt-3 text-lg leading-8", service.specialNote.tone === "business" ? "text-white/85" : "text-muted-foreground")}>{service.specialNote.text}</p>
+                  </div>
+                </div>
+              </div>
+            </MotionReveal>
+          </Container>
+        </Section>
+      ) : null}
+      <Section>
         <Container className="grid gap-10 lg:grid-cols-[0.7fr_1fr]">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Related Services</p>
-            <h2 className="mt-3 text-4xl font-black">Keep exploring HVAC support.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Why Ayres Mechanical</p>
+            <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">{service.closingCTA.title}</h2>
+            <p className="mt-5 leading-8 text-muted-foreground">{service.closingCTA.description}</p>
+            {service.closingCTA.subtext ? <p className="mt-5 text-sm font-bold text-brand-red">{service.closingCTA.subtext}</p> : null}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {service.closingCTA.primaryHref.startsWith("/") ? (
+                <Link href={service.closingCTA.primaryHref} {...primaryActionProps}>
+                  {service.closingCTA.primaryLabel}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              ) : (
+                <a href={service.closingCTA.primaryHref} {...primaryActionProps}>
+                  <Phone aria-hidden="true" />
+                  {service.closingCTA.primaryLabel}
+                </a>
+              )}
+              {service.closingCTA.secondaryHref.startsWith("/") ? (
+                <Link href={service.closingCTA.secondaryHref} {...secondaryActionProps}>
+                  <ArrowRight aria-hidden="true" />
+                  {service.closingCTA.secondaryLabel}
+                </Link>
+              ) : (
+                <a href={service.closingCTA.secondaryHref} {...secondaryActionProps}>
+                  <Phone aria-hidden="true" />
+                  {service.closingCTA.secondaryLabel}
+                </a>
+              )}
+            </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            {related.map((item) => <Link key={item.slug} href={routes.service(item.slug)} className="rounded-2xl border bg-white p-5 font-black text-brand-blue-dark shadow-sm hover:border-primary hover:text-primary">{item.shortTitle}</Link>)}
+            {related.map((item) => (
+              <Link
+                key={item.slug}
+                href={routes.service(item.slug)}
+                className="rounded-[1.5rem] border border-border/70 bg-white p-5 shadow-sm transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl"
+              >
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-brand-red">Related Service</p>
+                <h3 className="mt-3 text-xl font-black text-brand-blue-dark">{item.shortTitle}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.summary}</p>
+              </Link>
+            ))}
           </div>
         </Container>
       </Section>
-      <Section className="bg-white">
-        <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">FAQ</p>
-            <h2 className="mt-3 text-4xl font-black">Questions about {service.shortTitle.toLowerCase()}?</h2>
-          </div>
-          <FAQSection faqs={service.faqs} />
-        </Container>
-      </Section>
-      <FinancingPromoSection variant="service" />
-      <CTASection title={"Need " + service.shortTitle.toLowerCase() + " service?"} />
     </>
   );
 }
