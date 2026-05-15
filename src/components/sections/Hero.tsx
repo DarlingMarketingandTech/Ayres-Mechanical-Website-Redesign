@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import { motion } from "motion/react";
 
 import { BrandPattern } from "@/components/brand/BrandPattern";
 import { TriangleMark } from "@/components/brand/TriangleMark";
@@ -10,32 +13,64 @@ import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export function HomeHero() {
   return (
     <section className="relative overflow-hidden bg-white section-pattern">
-      <BrandPattern variant="blue" />
+      {/* Ambient background animation */}
+      <motion.div 
+        animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.05, 1] }} 
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <BrandPattern variant="blue" />
+      </motion.div>
+      
       <Container className="relative grid gap-8 py-12 sm:gap-10 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-12 lg:py-24">
-        <div>
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">{siteConfig.tagline}</p>
-          <h1 className="mt-4 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance sm:mt-5">
+        <motion.div variants={staggerContainer} initial="hidden" animate="show">
+          <motion.p variants={fadeUp} className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">
+            {siteConfig.tagline}
+          </motion.p>
+          <motion.h1 variants={fadeUp} className="mt-4 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance sm:mt-5">
             Heating & Air Conditioning Service Built for Central Indiana
-          </h1>
-          <p className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
+          </motion.h1>
+          <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
             Ayres Mechanical provides residential, commercial, and industrial HVAC service with fast response, dependable workmanship, and 24-hour service when comfort cannot wait.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
-            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "shadow-lg shadow-brand-red/20 hover:shadow-brand-red/40 hover:-translate-y-0.5 transition-all")}>
               Request Service <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
-            <a href={phoneHref} className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+            <a href={phoneHref} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "hover:bg-brand-blue-dark/5 hover:-translate-y-0.5 transition-all")}>
               <Phone data-icon="inline-start" aria-hidden="true" /> Call {siteConfig.phone}
             </a>
-          </div>
-        </div>
-        <div className="relative min-h-[min(22rem,70dvh)] rounded-3xl bg-brand-blue-dark p-4 text-white shadow-2xl sm:min-h-104 sm:rounded-[2rem] sm:p-6 lg:min-h-[420px]">
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 20, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative min-h-[min(22rem,70dvh)] rounded-3xl bg-brand-blue-dark p-4 text-white shadow-2xl sm:min-h-104 sm:rounded-[2rem] sm:p-6 lg:min-h-[420px]"
+        >
           <BrandPattern variant="dark" />
-          <div className="relative flex h-full min-h-64 flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur sm:min-h-80 sm:rounded-[1.5rem] sm:p-6 lg:min-h-[372px]">
-            <TriangleMark className="h-16 w-11 shrink-0 sm:h-24 sm:w-16" tone="light" />
+          <div className="relative flex h-full min-h-64 flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur sm:min-h-80 sm:rounded-[1.5rem] sm:p-6 lg:min-h-[372px] hover:border-white/30 transition-colors duration-500">
+            <TriangleMark className="h-16 w-11 shrink-0 sm:h-24 sm:w-16 drop-shadow-xl" tone="light" />
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-white/70 sm:text-sm">Residential · Commercial · Industrial</p>
               <h2 className="mt-3 text-(length:--text-section) font-black leading-tight text-balance text-white sm:mt-4">
@@ -44,13 +79,13 @@ export function HomeHero() {
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs font-bold sm:gap-3 sm:text-sm">
               {['Heating', 'Cooling', 'Maintenance', 'Emergency'].map((item) => (
-                <div key={item} className="rounded-lg border border-white/15 bg-white/10 p-3 sm:rounded-xl sm:p-4">
+                <div key={item} className="rounded-lg border border-white/15 bg-white/10 p-3 sm:rounded-xl sm:p-4 hover:bg-white/20 transition-colors">
                   {item}
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
@@ -62,18 +97,21 @@ export function PageHero({ eyebrow, title, description, variant = "light" }: { e
     <section className={cn("relative overflow-hidden", dark ? "bg-brand-blue-dark text-white" : "bg-white")}>
       <BrandPattern variant={dark ? "dark" : variant === "red" ? "red" : "blue"} />
       <Container className="relative py-12 sm:py-16 lg:py-20">
-        <p className={cn("text-sm font-black uppercase tracking-[0.24em]", dark ? "text-white/70" : "text-brand-red")}>{eyebrow}</p>
-        <h1
-          className={cn(
-            "mt-3 max-w-4xl text-(length:--text-hero-sub) font-black leading-[1.02] text-balance sm:mt-4",
-            dark ? "text-white" : "text-brand-blue-dark",
-          )}
-        >
-          {title}
-        </h1>
-        <p className={cn("mt-4 max-w-3xl text-(length:--text-lead) leading-relaxed sm:mt-5 sm:leading-8", dark ? "text-white/75" : "text-muted-foreground")}>
-          {description}
-        </p>
+        <motion.div variants={staggerContainer} initial="hidden" animate="show">
+          <motion.p variants={fadeUp} className={cn("text-sm font-black uppercase tracking-[0.24em]", dark ? "text-white/70" : "text-brand-red")}>{eyebrow}</motion.p>
+          <motion.h1
+            variants={fadeUp}
+            className={cn(
+              "mt-3 max-w-4xl text-(length:--text-hero-sub) font-black leading-[1.02] text-balance sm:mt-4",
+              dark ? "text-white" : "text-brand-blue-dark",
+            )}
+          >
+            {title}
+          </motion.h1>
+          <motion.p variants={fadeUp} className={cn("mt-4 max-w-3xl text-(length:--text-lead) leading-relaxed sm:mt-5 sm:leading-8", dark ? "text-white/75" : "text-muted-foreground")}>
+            {description}
+          </motion.p>
+        </motion.div>
       </Container>
     </section>
   );

@@ -16,19 +16,23 @@ export function ServiceCards({ limit }: { limit?: number }) {
       {visibleServices.map((service, index) => {
         const accent = cardAccentPattern[index] ?? "blue";
         return (
-          <Link key={service.slug} href={routes.service(service.slug)} className="group block">
-            <Card className="relative h-full overflow-hidden border-border bg-white transition duration-200 hover:-translate-y-1 hover:shadow-xl">
+          <Link key={service.slug} href={routes.service(service.slug)} className="group block h-full">
+            <Card className="relative h-full overflow-hidden border border-border/60 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-brand-blue-dark/20 flex flex-col justify-between">
               <CornerAccent color={accent} />
               <CardHeader>
-                <ServiceIcon icon={service.icon} className={accent === "red" ? "bg-accent text-brand-red" : ""} />
-                <CardTitle className="mt-4 text-2xl font-black">{service.shortTitle}</CardTitle>
-                <CardDescription className="text-base leading-7">{service.description}</CardDescription>
+                <div className="mb-2 p-3 w-fit rounded-xl bg-gray-50 group-hover:bg-brand-blue-dark/5 group-hover:scale-110 transition-transform duration-300">
+                  <ServiceIcon icon={service.icon} className={accent === "red" ? "text-brand-red" : "text-brand-blue-dark"} />
+                </div>
+                <CardTitle className="mt-4 text-2xl font-black text-brand-blue-dark group-hover:text-brand-red transition-colors duration-300">{service.shortTitle}</CardTitle>
+                <CardDescription className="text-base leading-7 text-muted-foreground mt-2">{service.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <span className="inline-flex items-center gap-2 text-sm font-black text-primary">
-                  View service <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden="true" />
+                <span className="inline-flex items-center gap-2 text-sm font-black text-brand-blue-dark group-hover:text-brand-red transition-colors duration-300">
+                  View service <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true" />
                 </span>
               </CardContent>
+              {/* Subtle inner glow effect on hover */}
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_20px_rgba(0,0,0,0.03)]" />
             </Card>
           </Link>
         );
