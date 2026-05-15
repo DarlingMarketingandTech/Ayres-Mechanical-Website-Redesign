@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
+import { SectionDivider } from "@/components/home/SectionDivider";
+import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { buttonVariants } from "@/components/ui/button";
 import { financingHomePromo, financingServicePromo, ftlFinanceLearnMoreUrl } from "@/content/financing";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
 
 export function FinancingPromoSection({ variant }: { variant: "home" | "service" }) {
   const isHome = variant === "home";
@@ -15,6 +16,7 @@ export function FinancingPromoSection({ variant }: { variant: "home" | "service"
   return (
     <Section className={isHome ? "bg-white" : "bg-brand-ice"}>
       <Container>
+        {isHome ? <SectionDivider className="mb-6" /> : null}
         <div
           className={cn(
             "overflow-hidden rounded-3xl border bg-white shadow-sm ring-1 ring-border",

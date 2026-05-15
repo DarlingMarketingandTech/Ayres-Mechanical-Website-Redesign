@@ -11,6 +11,9 @@ export const media = {
   },
   home: {
     workVan: registryToMediaAsset(CLOUDINARY_ASSETS.workVan),
+    heloAndVan: registryToMediaAsset(CLOUDINARY_ASSETS.heloAndVan),
+    roofIndustrialCrane: registryToMediaAsset(CLOUDINARY_ASSETS.roofIndustrialWithCrane),
+    helicopterRoofInstall: registryToMediaAsset(CLOUDINARY_ASSETS.helicopterIndustrialRoofInstall),
   },
   about: {
     ownerTeam: registryToMediaAsset(CLOUDINARY_ASSETS.ownerBrianAndOfficeManagerSabra),
@@ -20,7 +23,9 @@ export const media = {
   },
   partners: {
     mitsubishi: registryToMediaAsset(CLOUDINARY_ASSETS.mitsubishiDiamondContractor),
-    rheemDealer: registryToMediaAsset(CLOUDINARY_ASSETS.rheemRegisteredDealerGreyCheck),
+    rheemLineup: registryToMediaAsset(CLOUDINARY_ASSETS.rheemHvacWaterHeaterProductLineup),
+    proCredential: registryToMediaAsset(CLOUDINARY_ASSETS.rheemRegisteredDealerGreyCheck),
+    ftl: registryToMediaAsset(CLOUDINARY_ASSETS.ftlFinanceLogo1024),
   },
   services: {},
   locations: {},

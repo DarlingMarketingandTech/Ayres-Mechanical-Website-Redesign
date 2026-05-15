@@ -1,19 +1,22 @@
+import { BrandPattern } from "@/components/brand/BrandPattern";
+import { HomeSectionHeading } from "@/components/home/SectionEyebrow";
+import { SectionDivider } from "@/components/home/SectionDivider";
 import { ComfortSolutionsSection } from "@/components/sections/ComfortSolutionsSection";
-import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
+import { CommercialHvacHomeSection, OwnerOperatedHomeSection } from "@/components/sections/HomeMarketSections";
 import { HomeHero } from "@/components/sections/Hero";
-import { TrustSequenceSection } from "@/components/sections/TrustSequenceSection";
-import { ProofMediaBlock } from "@/components/sections/ProofMediaBlock";
+import { LocalPresenceSection } from "@/components/sections/LocalPresenceSection";
+import { PartnerTrustStrip } from "@/components/sections/PartnerTrustStrip";
 import { ServiceAreaGrid } from "@/components/sections/ServiceAreaGrid";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { TrustBar } from "@/components/sections/TrustBar";
+import { TrustSequenceSection } from "@/components/sections/TrustSequenceSection";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { industries } from "@/content/industries";
 import { homeFaqs } from "@/content/faqs";
-import { media } from "@/content/media";
 
 export default function HomePage() {
   return (
@@ -22,70 +25,59 @@ export default function HomePage() {
       <TrustSequenceSection />
       <TrustBar />
       <FinancingPromoSection variant="home" />
-      <ComfortSolutionsSection />
-      <Section>
+
+      <Section className="border-t border-brand-blue-dark/10 bg-brand-ice">
         <Container>
-          <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Services</p>
-            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">HVAC service for homes, businesses, and facilities.</h2>
-          </div>
+          <SectionDivider className="mb-6 max-w-2xl" />
+          <HomeSectionHeading eyebrow="SERVICES" title="HVAC service for homes, businesses, and facilities." />
           <ServiceCards />
         </Container>
       </Section>
-      <Section className="bg-brand-ice">
-        <Container className="space-y-8">
-          <ProofMediaBlock
-            asset={media.about.ownerTeam}
-            eyebrow="Local proof"
-            title="Owner-led service with a Central Indiana footprint."
-            description="The Ayres Mechanical team pairs hands-on mechanical experience with responsive dispatch, so residential, commercial, and industrial customers get clear answers and dependable field support."
-            proofPoints={[
-              "Faces and leadership you can recognize alongside fleet-backed operations.",
-              "Aligned with Central Indiana service-area coverage and emergency availability.",
-              "Keeps trust grounded in people, not stock photography.",
-            ]}
-            caption="Ayres Mechanical team"
-          />
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Why Ayres Mechanical</p>
-              <h2 className="mt-3 text-(length:--text-section) font-black text-balance">A local mechanical partner with practical service instincts.</h2>
-              <p className="mt-4 leading-8 text-muted-foreground">The site foundation emphasizes clear service paths, 24-hour availability, and distinct content for residential, commercial, and industrial customers.</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {industries.map((industry) => (
-                <div key={industry.slug} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-border">
-                  <h3 className="text-xl font-black">{industry.title.replace(" Services", "")}</h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{industry.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+
+      <Section className="relative bg-linear-to-b from-background via-white to-brand-ice/35">
+        <Container className="space-y-6">
+          <SectionDivider className="max-w-2xl" />
+          <LocalPresenceSection />
         </Container>
       </Section>
-      <Section>
+
+      <OwnerOperatedHomeSection />
+      <CommercialHvacHomeSection />
+      <PartnerTrustStrip />
+      <ComfortSolutionsSection />
+
+      <Section className="border-t border-brand-blue-dark/8 bg-muted/35">
         <Container>
-          <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Service Area</p>
-            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">Central Indiana HVAC service areas.</h2>
-          </div>
+          <SectionDivider className="mb-6 max-w-2xl" />
+          <HomeSectionHeading eyebrow="SERVICE AREAS" title="Central Indiana HVAC service areas." />
           <ServiceAreaGrid limit={5} />
         </Container>
       </Section>
-      <Section className="bg-white">
+
+      <Section className="bg-linear-to-br from-brand-ice/55 via-background to-white">
         <Container>
-          <Testimonials limit={3} />
+          <SectionDivider className="mb-6 max-w-2xl" />
+          <HomeSectionHeading
+            eyebrow="REVIEWS"
+            title="Real reviews from Central Indiana HVAC customers."
+            description="Ayres Mechanical has earned consistent recommendations for prompt service, practical diagnostics, fair pricing, and follow-through on heating and cooling work."
+          />
+          <Testimonials limit={3} showPitchColumn={false} />
         </Container>
       </Section>
-      <Section className="bg-brand-ice">
-        <Container><EmergencyCTA /></Container>
+
+      <Section className="relative overflow-hidden border-y border-white/25 bg-brand-red py-10 text-white lg:py-14">
+        <BrandPattern variant="dark" />
+        <Container className="relative">
+          <SectionDivider variant="onDark" className="mb-6 max-w-2xl opacity-90" />
+          <EmergencyCTA className="rounded-2xl border border-white/25 bg-white/12 shadow-[0_16px_48px_rgb(0_0_0_/0.28)] backdrop-blur-md" />
+        </Container>
       </Section>
-      <Section>
-        <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">FAQ</p>
-            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">Common HVAC service questions.</h2>
-          </div>
+
+      <Section className="relative overflow-hidden bg-brand-blue-dark text-white">
+        <BrandPattern variant="dark" />
+        <Container className="relative grid gap-8 lg:grid-cols-[0.7fr_1fr]">
+          <HomeSectionHeading light eyebrow="FAQ" title="Common HVAC service questions." />
           <FAQSection faqs={homeFaqs} />
         </Container>
       </Section>
