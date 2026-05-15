@@ -8,7 +8,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ClipboardList, Home, LayoutGrid, Menu } from "lucide-react";
+import { ClipboardList, Home, LayoutGrid, Menu, Phone } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 const SCROLL_IDLE_MS = 1100;
 const LOGO_BAR_PX = 64;
 const SHEET_LOGO_MAX = 220;
+const REQUEST_FORM_HASH = "#request-service-form";
 
 const secondaryDark = media.brand.secondaryLogoDark;
 
@@ -89,16 +90,45 @@ export function MobileBottomNav() {
   const logoBarSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, LOGO_BAR_PX * 2);
   const logoSheetSrc = cloudinaryTransparentLogoUrl(secondaryDark.publicId, SHEET_LOGO_MAX);
 
+  const bookServiceHref = routes.requestService + REQUEST_FORM_HASH;
+
   return (
     <>
-      <nav
-        aria-label="Mobile primary navigation"
-        className={cn(
-          "fixed inset-x-0 bottom-0 z-45 border-t border-border bg-white/95 pb-[max(0.35rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-8px_30px_rgb(0_0_0_/0.06)] backdrop-blur-md transition-transform duration-300 ease-out motion-reduce:transform-none lg:hidden",
-          barVisible ? "translate-y-0" : "translate-y-[calc(100%+0.5rem)]",
-        )}
-      >
-        <div className="mx-auto grid max-w-lg grid-cols-5 items-stretch gap-0.5 px-1.5">
+      <div className="fixed inset-x-0 bottom-0 z-45 flex flex-col pb-[max(0.35rem,env(safe-area-inset-bottom))] lg:hidden">
+        <div className="border-t border-border bg-white/98 px-2 pt-2 shadow-[0_-10px_28px_rgb(0_0_0_/0.08)] backdrop-blur-md">
+          <div className="mx-auto grid max-w-lg grid-cols-2 gap-2">
+            <a
+              href={phoneHref}
+              className={cn(
+                buttonVariants({ variant: "emergency", size: "lg" }),
+                "min-h-14 w-full justify-center gap-2 px-3 py-3.5 text-sm font-black uppercase tracking-wide sm:text-base",
+              )}
+            >
+              <Phone className="size-5 shrink-0" aria-hidden />
+              Call now
+            </a>
+            <Link
+              href={bookServiceHref}
+              className={cn(
+                buttonVariants({ variant: "dark", size: "lg" }),
+                "min-h-14 w-full justify-center gap-2 px-3 py-3.5 text-center text-sm font-black uppercase tracking-wide sm:text-base",
+              )}
+            >
+              Book service
+            </Link>
+          </div>
+        </div>
+        <div
+          className={cn(
+            "overflow-hidden transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none",
+            barVisible ? "max-h-32 opacity-100" : "pointer-events-none max-h-0 opacity-0",
+          )}
+        >
+          <nav
+            aria-label="Mobile primary navigation"
+            className="border-t border-border/90 bg-white/95 pt-1 shadow-[0_-6px_22px_rgb(0_0_0_/0.05)] backdrop-blur-md"
+          >
+          <div className="mx-auto grid max-w-lg grid-cols-5 items-stretch gap-0.5 px-1.5">
           <Link href={routes.home} className={barItemClass(pathname === routes.home)} aria-current={pathname === routes.home ? "page" : undefined}>
             <Home className="size-6 shrink-0" aria-hidden="true" />
             <span>Home</span>
@@ -134,8 +164,10 @@ export function MobileBottomNav() {
             <Menu className="size-6 shrink-0" aria-hidden="true" />
             <span>Menu</span>
           </Button>
+          </div>
+        </nav>
         </div>
-      </nav>
+      </div>
 
       <Sheet
         open={menuOpen}

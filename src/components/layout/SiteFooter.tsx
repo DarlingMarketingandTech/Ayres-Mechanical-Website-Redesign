@@ -15,7 +15,7 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-brand-blue-dark text-white">
       <BrandPattern variant="dark" />
-      <Container className="relative py-12">
+      <Container className="relative py-12 max-lg:pb-[calc(var(--mobile-bottom-chrome-h)+3rem+env(safe-area-inset-bottom))] lg:pb-12">
         <FooterPromoCta />
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

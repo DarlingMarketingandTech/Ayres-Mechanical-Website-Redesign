@@ -3,6 +3,7 @@ import { FinancingPromoSection } from "@/components/sections/FinancingPromoSecti
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { HomeHero } from "@/components/sections/Hero";
+import { TrustSequenceSection } from "@/components/sections/TrustSequenceSection";
 import { ProofMediaBlock } from "@/components/sections/ProofMediaBlock";
 import { ServiceAreaGrid } from "@/components/sections/ServiceAreaGrid";
 import { ServiceCards } from "@/components/sections/ServiceCards";
@@ -18,6 +19,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <TrustSequenceSection />
       <TrustBar />
       <FinancingPromoSection variant="home" />
       <ComfortSolutionsSection />

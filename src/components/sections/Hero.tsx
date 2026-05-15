@@ -51,7 +51,7 @@ export function HomeHero() {
               href={phoneHref}
               className={cn(
                 buttonVariants({ variant: "emergency", size: "lg" }),
-                "min-h-14 w-full justify-center gap-2.5 py-3.5 text-base font-black shadow-lg sm:text-lg",
+                "min-h-14 w-full justify-center gap-2.5 py-3.5 text-base font-black sm:text-lg",
               )}
             >
               <Phone data-icon="inline-start" className="size-5" aria-hidden />

@@ -12,7 +12,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main
         id="main-content"
-        className="min-h-screen pt-(--site-header-h,7.25rem) max-lg:pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-[env(safe-area-inset-bottom)]"
+        className="min-h-screen pt-(--site-header-h,7.25rem) max-lg:pb-[calc(var(--mobile-bottom-chrome-h)+env(safe-area-inset-bottom))] lg:pb-[env(safe-area-inset-bottom)]"
       >
         {children}
       </main>
