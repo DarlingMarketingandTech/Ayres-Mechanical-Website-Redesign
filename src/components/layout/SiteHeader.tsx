@@ -7,6 +7,7 @@ import { Logo } from "@/components/brand/Logo";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
+import { requestServiceCtaClassNames } from "@/lib/cta-interactions";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
@@ -127,7 +128,7 @@ export function SiteHeader() {
             <a href={phoneHref} className="text-sm font-black text-brand-blue-dark hover:text-primary">
               {siteConfig.phone}
             </a>
-            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>
+            <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceCtaClassNames())}>
               Request Service
             </Link>
           </div>

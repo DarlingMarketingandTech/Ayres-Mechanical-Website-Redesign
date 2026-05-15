@@ -170,6 +170,28 @@
       linear-gradient(135deg, rgb(13 63 184 / 6%) 0 1px, transparent 1px 72px),
       linear-gradient(45deg, rgb(215 25 32 / 5%) 0 1px, transparent 1px 72px);
   }
+
+  /* Testimonials marquee fade — keep out of styled-jsx to avoid SSR/client class mismatches */
+  .mask-edges {
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  @keyframes ayres-marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .ayres-marquee-track {
+    animation: ayres-marquee var(--ayres-marquee-duration, 40s) linear infinite;
+    will-change: transform;
+  }
+
+  .ayres-marquee:hover .ayres-marquee-track,
+  .ayres-marquee:focus-within .ayres-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

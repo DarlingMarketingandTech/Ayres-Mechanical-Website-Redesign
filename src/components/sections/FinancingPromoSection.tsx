@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
+import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { buttonVariants } from "@/components/ui/button";
 import { financingHomePromo, financingServicePromo, ftlFinanceLearnMoreUrl } from "@/content/financing";
 import { media } from "@/content/media";
-import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
@@ -26,9 +25,9 @@ export function FinancingPromoSection({ variant }: { variant: "home" | "service"
           )}
         >
           <div className={cn("flex items-center justify-center bg-muted/60", isHome ? "p-8 lg:p-10" : "shrink-0 rounded-2xl p-6 sm:max-w-[min(100%,280px)]")}>
-            <Image
-              src={cloudinaryImageUrl(ftlAsset)}
-              alt={ftlAsset.alt}
+            <CloudinaryImage
+              asset={ftlAsset}
+              disableLqip
               width={ftlAsset.width}
               height={ftlAsset.height}
               sizes={isHome ? "(min-width: 1024px) 42vw, 100vw" : "(min-width: 640px) 240px, 100vw"}
@@ -42,14 +41,25 @@ export function FinancingPromoSection({ variant }: { variant: "home" | "service"
             <h2 className="text-2xl font-black text-brand-blue-dark sm:text-3xl">{isHome ? financingHomePromo.title : financingServicePromo.title}</h2>
             <p className="leading-7 text-muted-foreground">{isHome ? financingHomePromo.description : financingServicePromo.description}</p>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link href={routes.financing} className={cn(buttonVariants({ variant: "default", size: "lg" }))}>
+              <Link
+                href={routes.financing}
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "group/fin shadow-md transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transform-none",
+                  "[&_[data-icon='inline-end']]:transition-transform [&_[data-icon='inline-end']]:duration-300 [&_[data-icon='inline-end']]:group-hover/fin:translate-x-1 motion-reduce:[&_[data-icon='inline-end']]:transform-none",
+                )}
+              >
                 Financing details <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
               <a
                 href={ftlFinanceLearnMoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "group/ftl transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md motion-reduce:transform-none",
+                  "[&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:group-hover/ftl:translate-x-0.5 motion-reduce:[&_svg]:transform-none",
+                )}
               >
                 Visit FTL Finance to Learn More <ExternalLink className="size-4" aria-hidden="true" />
               </a>

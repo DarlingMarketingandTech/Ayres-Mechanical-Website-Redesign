@@ -8,7 +8,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ClipboardList, Home, LayoutGrid, Menu, Phone } from "lucide-react";
+import { ClipboardList, Home, LayoutGrid, Menu, Phone, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -18,6 +18,7 @@ import { primaryNavigation, utilityNavigation } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { cloudinaryTransparentLogoUrl } from "@/lib/cloudinary";
+import { bookServiceDarkCtaClassNames, requestServiceCtaClassNames } from "@/lib/cta-interactions";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -130,16 +131,18 @@ export function MobileBottomNav() {
               href={phoneHref}
               className={cn(
                 buttonVariants({ variant: "emergency", size: "lg" }),
-                "min-h-14 w-full justify-center gap-2 px-3 py-3.5 text-sm font-black uppercase tracking-wide sm:text-base",
+                "group/call-now min-h-14 w-full justify-center gap-2 px-3 py-3.5 text-sm font-black uppercase tracking-wide shadow-lg shadow-brand-red/20 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-red/40 motion-reduce:transform-none sm:text-base",
+                "[&_[data-icon]]:transition-transform [&_[data-icon]]:duration-300 [&_[data-icon]]:group-hover/call-now:scale-110 motion-reduce:[&_[data-icon]]:transform-none",
               )}
             >
-              <Phone className="size-5 shrink-0" aria-hidden />
+              <Phone data-icon="inline-start" className="size-5 shrink-0" aria-hidden />
               Call now
             </a>
             <Link
               href={bookServiceHref}
               className={cn(
                 buttonVariants({ variant: "dark", size: "lg" }),
+                bookServiceDarkCtaClassNames(),
                 "min-h-14 w-full justify-center gap-2 px-3 py-3.5 text-center text-sm font-black uppercase tracking-wide sm:text-base",
               )}
             >
@@ -267,9 +270,9 @@ export function MobileBottomNav() {
               <Link
                 href={routes.requestService}
                 onClick={() => setMenuOpen(false)}
-                className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center text-center")}
+                className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceCtaClassNames(), "justify-center text-center")}
               >
-                Request Service
+                Request Service <ArrowRight data-icon="inline-end" className="size-4 shrink-0" aria-hidden />
               </Link>
               <a
                 href={phoneHref}

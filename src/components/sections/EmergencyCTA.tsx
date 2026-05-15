@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Siren } from "lucide-react";
+import { Phone, Siren } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
+import { phoneOutlineCtaClassNames, requestServiceOnDarkCtaClassNames } from "@/lib/cta-interactions";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -16,8 +17,10 @@ export function EmergencyCTA() {
         <p className="mt-2 text-white/85">Call {siteConfig.phone} for urgent HVAC service, or submit the request form with emergency urgency selected.</p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row">
-        <a href={phoneHref} className={cn(buttonVariants({ variant: "inverse", size: "lg" }))}>Call Now</a>
-        <Link href={routes.requestService} className={cn(buttonVariants({ variant: "dark", size: "lg" }))}>Request Service</Link>
+        <a href={phoneHref} className={cn(buttonVariants({ variant: "inverse", size: "lg" }), phoneOutlineCtaClassNames())}>
+          <Phone data-icon="inline-start" className="size-4" aria-hidden="true" /> Call Now
+        </a>
+        <Link href={routes.requestService} className={cn(buttonVariants({ variant: "dark", size: "lg" }), requestServiceOnDarkCtaClassNames())}>Request Service</Link>
       </div>
     </div>
   );

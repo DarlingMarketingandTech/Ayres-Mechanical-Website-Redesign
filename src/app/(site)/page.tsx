@@ -52,7 +52,10 @@ export default function HomePage() {
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               {industries.map((industry) => (
-                <div key={industry.slug} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-border">
+                <div
+                  key={industry.slug}
+                  className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-border transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-primary/15 motion-reduce:transform-none"
+                >
                   <h3 className="text-xl font-black">{industry.title.replace(" Services", "")}</h3>
                   <p className="mt-3 text-sm leading-6 text-muted-foreground">{industry.description}</p>
                 </div>
@@ -72,7 +75,7 @@ export default function HomePage() {
       </Section>
       <Section className="bg-white">
         <Container>
-          <Testimonials limit={3} />
+          <Testimonials />
         </Container>
       </Section>
       <Section className="bg-brand-ice">
