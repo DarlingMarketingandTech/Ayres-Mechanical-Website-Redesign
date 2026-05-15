@@ -25,7 +25,7 @@ const calloutToneClasses = {
 
 const iconAccentClasses = {
   red: "bg-accent text-brand-red",
-  blue: "",
+  blue: "bg-secondary text-primary",
   dark: "bg-brand-blue-dark text-white",
 } as const;
 

@@ -45,7 +45,7 @@ export const serviceSlugs = {
   preventiveMaintenance: "preventive-maintenance",
   commercial: "commercial",
   industrial: "industrial",
-  emergency: "24-hour-emergency",
+  twentyFourHourEmergency: "24-hour-emergency",
 } as const;
 
 export const servicePageContent: ServiceContent[] = [
@@ -117,7 +117,7 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call 317-538-9837",
       secondaryHref: phoneHref,
     },
-    relatedServices: [serviceSlugs.heating, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
+    relatedServices: [serviceSlugs.heating, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
   },
   {
     slug: serviceSlugs.heating,
@@ -188,7 +188,7 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call 317-538-9837",
       secondaryHref: phoneHref,
     },
-    relatedServices: [serviceSlugs.airConditioning, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
+    relatedServices: [serviceSlugs.airConditioning, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
   },
   {
     slug: serviceSlugs.preventiveMaintenance,
@@ -327,7 +327,7 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: phoneHref,
       subtext: "Do you manage multiple locations in Central Indiana that require a consolidated maintenance plan?",
     },
-    relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.emergency],
+    relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.twentyFourHourEmergency],
   },
   {
     slug: serviceSlugs.industrial,
@@ -399,10 +399,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: phoneHref,
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
     },
-    relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
+    relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
   },
   {
-    slug: serviceSlugs.emergency,
+    slug: serviceSlugs.twentyFourHourEmergency,
     title: "24-Hour HVAC Service",
     shortTitle: "24-Hour Service",
     summary: "Round-the-clock HVAC emergency response for residential, commercial, and industrial comfort failures.",
