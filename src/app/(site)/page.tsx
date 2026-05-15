@@ -33,16 +33,16 @@ export default function HomePage() {
       <Section className="bg-brand-ice">
         <Container className="space-y-8">
           <ProofMediaBlock
-            asset={media.home.workVan}
+            asset={media.about.ownerTeam}
             eyebrow="Local proof"
-            title="A recognizable local service presence."
-            description="A verified Ayres Mechanical work van gives the homepage grounded operational proof while the main calls to action stay focused on service requests."
+            title="Owner-led service with a Central Indiana footprint."
+            description="The Ayres Mechanical team pairs hands-on mechanical experience with responsive dispatch, so residential, commercial, and industrial customers get clear answers and dependable field support."
             proofPoints={[
-              "Branded vehicle imagery from the company media library.",
-              "Supports Central Indiana service-area content.",
-              "Keeps the proof layer credible and uncluttered.",
+              "Faces and leadership you can recognize alongside fleet-backed operations.",
+              "Aligned with Central Indiana service-area coverage and emergency availability.",
+              "Keeps trust grounded in people, not stock photography.",
             ]}
-            caption="Ayres Mechanical service vehicle"
+            caption="Ayres Mechanical team"
           />
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>

@@ -1,3 +1,5 @@
+export type RequestServiceIntent = "ac-repair" | "heating" | "maintenance" | "commercial" | "emergency";
+
 export const routes = {
   home: "/",
   services: "/services",
@@ -10,6 +12,8 @@ export const routes = {
   reviews: "/reviews",
   contact: "/contact",
   requestService: "/request-service",
+  requestServiceIntent: (intent: RequestServiceIntent) =>
+    "/request-service?intent=" + encodeURIComponent(intent),
   financing: "/financing",
   privacy: "/privacy-policy",
   terms: "/terms",
