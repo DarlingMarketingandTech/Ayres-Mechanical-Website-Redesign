@@ -77,7 +77,7 @@ export default function AboutPage() {
             <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Why Choose Ayres Mechanical</p>
             <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">A direct service experience backed by practical expertise.</h2>
           </div>
-          <AnimatedCardGrid items={whyChooseItems} className="xl:grid-cols-4 md:grid-cols-2" />
+          <AnimatedCardGrid items={whyChooseItems} className="md:grid-cols-2 xl:grid-cols-4" />
         </Container>
       </Section>
       <Section>

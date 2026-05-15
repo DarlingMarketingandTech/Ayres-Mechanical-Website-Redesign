@@ -17,8 +17,8 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, Phone, Sparkles } from "lucide-react";
 
 const calloutToneClasses = {
-  tip: "border-primary/30 bg-primary/8 text-brand-blue-dark",
-  safety: "border-brand-red/20 bg-brand-red/8 text-brand-blue-dark",
+  tip: "border-primary/30 bg-primary/[0.08] text-brand-blue-dark",
+  safety: "border-brand-red/20 bg-brand-red/[0.08] text-brand-blue-dark",
   business: "border-brand-blue-dark/12 bg-brand-blue-dark text-white",
   assurance: "border-brand-blue-dark/15 bg-brand-ice text-brand-blue-dark",
 } as const;

@@ -39,9 +39,18 @@ export type ServiceContent = {
   relatedServices: string[];
 };
 
+export const serviceSlugs = {
+  airConditioning: "air-conditioning",
+  heating: "heating",
+  preventiveMaintenance: "preventive-maintenance",
+  commercial: "commercial",
+  industrial: "industrial",
+  emergency: "24-hour-emergency",
+} as const;
+
 export const servicePageContent: ServiceContent[] = [
   {
-    slug: "air-conditioning",
+    slug: serviceSlugs.airConditioning,
     title: "Air Conditioning Service",
     shortTitle: "Air Conditioning",
     summary: "Professional AC diagnostics, tune-ups, comfort checks, and replacement guidance for Central Indiana homes and facilities.",
@@ -108,10 +117,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call 317-538-9837",
       secondaryHref: phoneHref,
     },
-    relatedServices: ["heating", "preventive-maintenance", "24-hour-emergency"],
+    relatedServices: [serviceSlugs.heating, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
   },
   {
-    slug: "heating",
+    slug: serviceSlugs.heating,
     title: "Reliable Heating Service",
     shortTitle: "Heating",
     summary: "Furnace and heat pump diagnostics, maintenance, and performance support built for safe Indiana winters.",
@@ -179,10 +188,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call 317-538-9837",
       secondaryHref: phoneHref,
     },
-    relatedServices: ["air-conditioning", "preventive-maintenance", "24-hour-emergency"],
+    relatedServices: [serviceSlugs.airConditioning, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
   },
   {
-    slug: "preventive-maintenance",
+    slug: serviceSlugs.preventiveMaintenance,
     title: "Preventive HVAC Maintenance",
     shortTitle: "Preventive Maintenance",
     summary: "Seasonal HVAC maintenance plans that reduce breakdown risk, improve airflow, and clarify equipment condition.",
@@ -246,10 +255,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: phoneHref,
       subtext: "Do you have multiple properties or a commercial facility that requires a custom maintenance schedule?",
     },
-    relatedServices: ["air-conditioning", "heating", "commercial"],
+    relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
   },
   {
-    slug: "commercial",
+    slug: serviceSlugs.commercial,
     title: "Commercial HVAC Service",
     shortTitle: "Commercial HVAC",
     summary: "Commercial HVAC diagnostics, maintenance, zoning support, and responsive scheduling built around business continuity.",
@@ -318,10 +327,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: phoneHref,
       subtext: "Do you manage multiple locations in Central Indiana that require a consolidated maintenance plan?",
     },
-    relatedServices: ["preventive-maintenance", "industrial", "24-hour-emergency"],
+    relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.emergency],
   },
   {
-    slug: "industrial",
+    slug: serviceSlugs.industrial,
     title: "Industrial HVAC Support",
     shortTitle: "Industrial HVAC",
     summary: "Industrial HVAC service, maintenance coordination, and equipment condition reviews for demanding facilities.",
@@ -390,10 +399,10 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: phoneHref,
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
     },
-    relatedServices: ["commercial", "preventive-maintenance", "24-hour-emergency"],
+    relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.emergency],
   },
   {
-    slug: "24-hour-emergency",
+    slug: serviceSlugs.emergency,
     title: "24-Hour HVAC Service",
     shortTitle: "24-Hour Service",
     summary: "Round-the-clock HVAC emergency response for residential, commercial, and industrial comfort failures.",
@@ -462,7 +471,7 @@ export const servicePageContent: ServiceContent[] = [
       secondaryHref: routes.requestService,
       subtext: "Are you currently experiencing a system failure, or are you looking to add us to your facility’s emergency contact list?",
     },
-    relatedServices: ["heating", "air-conditioning", "commercial"],
+    relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
   },
 ];
 
