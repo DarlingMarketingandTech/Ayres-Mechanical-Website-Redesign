@@ -31,12 +31,6 @@ const iconAccentClasses = {
 
 export function ServicePageTemplate({ service }: { service: ServiceContent }) {
   const related = service.relatedServices.map(getServiceContentBySlug).filter(Boolean) as ServiceContent[];
-  const primaryActionProps = {
-    className: buttonVariants({ variant: "emergency", size: "lg" }),
-  };
-  const secondaryActionProps = {
-    className: buttonVariants({ variant: "outline", size: "lg" }),
-  };
 
   return (
     <>
@@ -125,28 +119,16 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
             <p className="mt-5 leading-8 text-muted-foreground">{service.closingCTA.description}</p>
             {service.closingCTA.subtext ? <p className="mt-5 text-sm font-bold text-brand-red">{service.closingCTA.subtext}</p> : null}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              {service.closingCTA.primaryHref.startsWith("/") ? (
-                <Link href={service.closingCTA.primaryHref} {...primaryActionProps}>
-                  {service.closingCTA.primaryLabel}
-                  <ArrowRight aria-hidden="true" />
-                </Link>
-              ) : (
-                <a href={service.closingCTA.primaryHref} {...primaryActionProps}>
-                  <Phone aria-hidden="true" />
-                  {service.closingCTA.primaryLabel}
-                </a>
-              )}
-              {service.closingCTA.secondaryHref.startsWith("/") ? (
-                <Link href={service.closingCTA.secondaryHref} {...secondaryActionProps}>
-                  <ArrowRight aria-hidden="true" />
-                  {service.closingCTA.secondaryLabel}
-                </Link>
-              ) : (
-                <a href={service.closingCTA.secondaryHref} {...secondaryActionProps}>
-                  <Phone aria-hidden="true" />
-                  {service.closingCTA.secondaryLabel}
-                </a>
-              )}
+              {renderServiceAction({
+                href: service.closingCTA.primaryHref,
+                label: service.closingCTA.primaryLabel,
+                variant: "emergency",
+              })}
+              {renderServiceAction({
+                href: service.closingCTA.secondaryHref,
+                label: service.closingCTA.secondaryLabel,
+                variant: "outline",
+              })}
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -165,5 +147,29 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
         </Container>
       </Section>
     </>
+  );
+}
+
+function renderServiceAction({
+  href,
+  label,
+  variant,
+}: {
+  href: string;
+  label: string;
+  variant: "emergency" | "outline";
+}) {
+  const className = buttonVariants({ variant, size: "lg" });
+
+  return href.startsWith("/") ? (
+    <Link href={href} className={className}>
+      {label}
+      <ArrowRight aria-hidden="true" />
+    </Link>
+  ) : (
+    <a href={href} className={className}>
+      <Phone aria-hidden="true" />
+      {label}
+    </a>
   );
 }
