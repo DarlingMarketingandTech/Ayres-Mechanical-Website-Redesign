@@ -11,6 +11,7 @@ import { ServiceHero } from "@/components/sections/Hero";
 import { buttonVariants } from "@/components/ui/button";
 import type { ServiceContent } from "@/data/services-content";
 import { getServiceContentBySlug } from "@/data/services-content";
+import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -67,7 +68,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
                 </Link>
                 <a href={phoneHref} className={cn(buttonVariants({ variant: "inverse", size: "lg" }), "justify-center")}>
                   <Phone aria-hidden="true" />
-                  Call 317-538-9837
+                  Call {siteConfig.phone}
                 </a>
               </div>
             </div>

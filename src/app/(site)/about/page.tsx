@@ -6,6 +6,7 @@ import { PageHero } from "@/components/sections/Hero";
 import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
 import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
@@ -147,7 +148,7 @@ export default function AboutPage() {
                 </Link>
                 <a href={phoneHref} className={buttonVariants({ variant: "dark", size: "lg" })}>
                   <Phone aria-hidden="true" />
-                  Call 317-538-9837
+                  Call {siteConfig.phone}
                 </a>
               </div>
             </div>
