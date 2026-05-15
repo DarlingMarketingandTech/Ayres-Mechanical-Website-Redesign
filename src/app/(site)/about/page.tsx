@@ -135,7 +135,7 @@ export default function AboutPage() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Ready to get started?</p>
               <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">Whether you have a quick question or need a full project quote, we would love to assist you.</h2>
               <p className="mt-5 max-w-3xl leading-8 text-muted-foreground">
-                Whether you have a quick question about a strange noise in your furnace or need a comprehensive quote for a new commercial installation, we would love to assist you.
+                From a strange furnace noise at home to a detailed commercial installation scope, our team is ready to help you choose the clearest next step.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>

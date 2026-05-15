@@ -23,6 +23,12 @@ const calloutToneClasses = {
   assurance: "border-brand-blue-dark/15 bg-brand-ice text-brand-blue-dark",
 } as const;
 
+const iconAccentClasses = {
+  red: "bg-accent text-brand-red",
+  blue: "",
+  dark: "bg-brand-blue-dark text-white",
+} as const;
+
 export function ServicePageTemplate({ service }: { service: ServiceContent }) {
   const related = service.relatedServices.map(getServiceContentBySlug).filter(Boolean) as ServiceContent[];
   const primaryActionProps = {
@@ -41,7 +47,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
         <Container className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <MotionReveal>
             <div className="rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
-              <ServiceIcon icon={service.icon} className={service.accent === "red" ? "bg-accent text-brand-red" : service.accent === "dark" ? "bg-brand-blue-dark text-white" : ""} />
+              <ServiceIcon icon={service.icon} className={iconAccentClasses[service.accent]} />
               <p className="mt-6 text-sm font-black uppercase tracking-[0.24em] text-brand-red">What we help with</p>
               <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">{service.title}</h2>
               <p className="mt-5 text-lg leading-8 text-muted-foreground">{service.intro}</p>
