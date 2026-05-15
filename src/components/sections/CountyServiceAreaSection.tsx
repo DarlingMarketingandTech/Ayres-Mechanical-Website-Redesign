@@ -3,16 +3,8 @@ import { MapPin } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { serviceCounties } from "@/content/locations";
 import { routes } from "@/lib/routes";
-
-const counties = [
-  { name: "Marion County", representative: "Indianapolis" },
-  { name: "Hendricks County", representative: "Plainfield" },
-  { name: "Hamilton County", representative: "Carmel / Fishers" },
-  { name: "Montgomery County", representative: "Crawfordsville" },
-  { name: "Putnam County", representative: "Greencastle" },
-  { name: "Boone County", representative: "Lebanon" },
-] as const;
 
 export function CountyServiceAreaSection() {
   return (
@@ -29,7 +21,7 @@ export function CountyServiceAreaSection() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {counties.map(({ name, representative }) => (
+          {serviceCounties.map(({ name, representative }) => (
             <div
               key={name}
               className="flex items-center gap-3 overflow-hidden rounded-2xl border border-border/80 bg-white p-5 shadow-sm"

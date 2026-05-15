@@ -8,6 +8,7 @@ import { BrandPattern } from "@/components/brand/BrandPattern";
 import { TriangleMark } from "@/components/brand/TriangleMark";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
+import { serviceCountyNames } from "@/content/locations";
 import { phoneOutlineCtaClassNames, requestServiceCtaClassNames } from "@/lib/cta-interactions";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
@@ -56,7 +57,7 @@ export function HomeHero() {
             20 Years of Trusted HVAC Service in Central Indiana.
           </motion.h1>
           <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
-            Practical heating and cooling solutions for your home, business, or facility. 24/7 emergency response in Marion, Hendricks, Hamilton, Montgomery, Putnam, and Boone Counties.
+            Practical heating and cooling solutions for your home, business, or facility. 24/7 emergency response in {serviceCountyNames} Counties.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
             <Link

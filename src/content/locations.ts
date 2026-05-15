@@ -86,3 +86,16 @@ export const serviceLocations: ServiceLocation[] = [
 export function getLocationBySlug(slug: string) {
   return serviceLocations.find((location) => location.slug === slug);
 }
+
+/** The six Indiana counties that make up the primary Ayres Mechanical service area. */
+export const serviceCounties = [
+  { name: "Marion County", representative: "Indianapolis" },
+  { name: "Hendricks County", representative: "Plainfield" },
+  { name: "Hamilton County", representative: "Carmel / Fishers" },
+  { name: "Montgomery County", representative: "Crawfordsville" },
+  { name: "Putnam County", representative: "Greencastle" },
+  { name: "Boone County", representative: "Lebanon" },
+] as const;
+
+/** Comma-separated county name list for use in prose copy. */
+export const serviceCountyNames = serviceCounties.map((c) => c.name.replace(" County", "")).join(", ");

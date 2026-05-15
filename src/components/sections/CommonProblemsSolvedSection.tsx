@@ -53,7 +53,7 @@ export function CommonProblemsSolvedSection() {
             const inner = (
               <>
                 <span className="text-base font-black text-white sm:text-lg">{symptom}</span>
-                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-red/90 group-hover:text-white transition-colors duration-300">
+                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-red/90 group-hover:text-brand-red transition-colors duration-300">
                   {solution}
                   <ArrowRight
                     className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none"
