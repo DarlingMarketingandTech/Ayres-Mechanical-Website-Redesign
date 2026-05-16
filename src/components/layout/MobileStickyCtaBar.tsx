@@ -11,7 +11,7 @@ import { phoneOutlineCtaClassNames, requestServiceOnDarkCtaClassNames } from "@/
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
-const MOBILE_MQ = "(max-width: 767px)";
+const MOBILE_MQ = "(max-width: 1023px)";
 
 function isMobileViewport() {
   return typeof window !== "undefined" && window.matchMedia(MOBILE_MQ).matches;
@@ -96,7 +96,7 @@ export function MobileStickyCtaBar() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-brand-blue-dark/95 shadow-[0_-12px_40px_rgb(0_0_0/35%)] backdrop-blur-md transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden",
+        "fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-brand-carbon/95 shadow-[0_-12px_40px_rgb(0_0_0/45%)] backdrop-blur-md transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden",
         revealed ? "translate-y-0" : "pointer-events-none translate-y-full",
       )}
       role="region"

@@ -28,7 +28,7 @@ export function FooterPromoCta() {
           Call Ayres Mechanical or request service online for residential, commercial, and industrial HVAC support.
         </p>
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="hidden flex-col gap-3 lg:flex lg:flex-row">
         <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceCtaClassNames())}>
           Request Service
         </Link>

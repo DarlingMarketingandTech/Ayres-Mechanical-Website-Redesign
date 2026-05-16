@@ -10,7 +10,7 @@ import { Container } from "./Container";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-md:pb-[var(--mobile-bottom-chrome-h)]">
+    <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-lg:pb-[var(--mobile-bottom-chrome-h)]">
       <Container className="py-16 lg:py-24">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:justify-between">
           {/* Left: Brand & Contact */}

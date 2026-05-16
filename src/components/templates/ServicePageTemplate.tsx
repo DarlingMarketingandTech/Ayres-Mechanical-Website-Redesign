@@ -203,13 +203,13 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
         </Section>
       ) : null}
 
-      <Section className="bg-brand-blue-dark text-white">
+      <Section className="bg-brand-carbon text-white">
         <Container className="max-w-4xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-white/60">Need service now?</p>
           <h2 className="mt-3 text-3xl font-black text-balance sm:text-4xl">{service.closingCTA.title}</h2>
           <p className="mt-5 text-(length:--text-lead) leading-relaxed text-white/85">{service.closingCTA.description}</p>
           {service.closingCTA.subtext ? <p className="mt-4 text-sm font-bold text-brand-ice/90">{service.closingCTA.subtext}</p> : null}
-          <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-8 hidden w-full flex-col gap-3 lg:flex lg:flex-row lg:flex-wrap">
             {renderServiceAction({
               href: service.closingCTA.primaryHref,
               label: service.closingCTA.primaryLabel,

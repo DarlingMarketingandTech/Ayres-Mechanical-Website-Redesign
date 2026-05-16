@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export function CTASection({ title = "Ready to schedule HVAC service?", description = "Tell Ayres Mechanical what is happening and how urgent it is. A clear request helps route the right next step." }: { title?: string; description?: string }) {
   return (
     <RegisterInPageCta>
-      <section className="relative overflow-hidden bg-brand-blue-dark py-16 sm:py-24 text-white group">
+      <section className="relative overflow-hidden bg-brand-carbon py-16 sm:py-24 text-white group">
         <BrandPattern variant="dark" className="opacity-50 transition-opacity duration-1000 group-hover:opacity-100" />
         {/* Subtle glowing radial gradient in the background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue-light/10 via-brand-blue-dark/0 to-transparent pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
@@ -24,7 +24,7 @@ export function CTASection({ title = "Ready to schedule HVAC service?", descript
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">{title}</h2>
             <p className="mt-4 text-lg sm:text-xl leading-relaxed text-white/75">{description}</p>
           </div>
-          <div className="flex flex-col gap-4 sm:flex-row mt-6 lg:mt-0">
+          <div className="hidden flex-col gap-4 lg:flex lg:flex-row lg:mt-0">
             <Link
               href={routes.requestService}
               className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceCtaClassNames(), "relative overflow-hidden")}

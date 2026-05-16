@@ -167,7 +167,7 @@ export default function AboutPage() {
               <p className="mt-5 max-w-3xl leading-8 text-muted-foreground">
                 From a strange furnace noise at home to a detailed commercial installation scope, our team is ready to help you choose the clearest next step.
               </p>
-              <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-8 hidden w-full flex-col gap-3 lg:flex lg:flex-row lg:flex-wrap">
                 <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "w-full min-h-12 justify-center sm:w-auto")}>
                   Request Service
                   <ArrowRight aria-hidden="true" />

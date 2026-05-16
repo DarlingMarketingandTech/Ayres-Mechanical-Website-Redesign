@@ -10,7 +10,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <InPageCtaProvider>
       <JsonLd data={localBusinessSchema()} />
       <SiteHeader />
-      <main id="main-content" className="min-h-screen pt-(--site-header-h,7rem) max-md:pb-[var(--mobile-bottom-chrome-h)]">
+      <main id="main-content" className="min-h-screen pt-(--site-header-h,7rem) max-lg:pb-[var(--mobile-bottom-chrome-h)]">
         {children}
       </main>
       <MobileStickyCtaBar />
