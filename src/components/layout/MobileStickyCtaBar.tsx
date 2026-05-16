@@ -10,6 +10,7 @@ import { phoneHref } from "@/lib/constants";
 import { phoneOutlineCtaClassNames, requestServiceOnDarkCtaClassNames } from "@/lib/cta-interactions";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
+import { useMobileChromeHidden } from "./useMobileChromeHidden";
 
 const MOBILE_MQ = "(max-width: 1023px)";
 
@@ -42,6 +43,7 @@ function syncBottomChrome(showBar: boolean) {
  */
 export function MobileStickyCtaBar() {
   const [revealed, setRevealed] = useState(false);
+  const mobileChromeHidden = useMobileChromeHidden();
 
   useLayoutEffect(() => {
     const sentinel = document.querySelector("[data-mobile-cta-sentinel]");
@@ -96,18 +98,18 @@ export function MobileStickyCtaBar() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-brand-carbon/95 shadow-[0_-12px_40px_rgb(0_0_0/45%)] backdrop-blur-md transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden",
-        revealed ? "translate-y-0" : "pointer-events-none translate-y-full",
+        "fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-brand-carbon/95 shadow-[0_-12px_40px_rgb(0_0_0/45%)] backdrop-blur-md transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none lg:hidden",
+        revealed && !mobileChromeHidden ? "translate-y-0" : "pointer-events-none translate-y-full",
       )}
       role="region"
       aria-label="Request service or call Ayres Mechanical"
-      aria-hidden={!revealed}
+      aria-hidden={!revealed || mobileChromeHidden}
     >
       <div className="mx-auto flex max-w-lg flex-col gap-2 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <Link
           href={routes.requestService}
           className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceOnDarkCtaClassNames(), "min-h-12 w-full justify-center")}
-          tabIndex={revealed ? undefined : -1}
+          tabIndex={revealed && !mobileChromeHidden ? undefined : -1}
         >
           Request Service
         </Link>
@@ -115,7 +117,7 @@ export function MobileStickyCtaBar() {
           href={phoneHref}
           className={cn(buttonVariants({ variant: "inverse", size: "lg" }), phoneOutlineCtaClassNames(), "min-h-12 w-full justify-center")}
           aria-label={`Call now at ${siteConfig.phone}`}
-          tabIndex={revealed ? undefined : -1}
+          tabIndex={revealed && !mobileChromeHidden ? undefined : -1}
         >
           <Phone data-icon="inline-start" className="size-4 shrink-0" aria-hidden="true" />
           Call Now

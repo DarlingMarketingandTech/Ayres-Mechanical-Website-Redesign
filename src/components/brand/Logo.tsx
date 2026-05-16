@@ -22,7 +22,7 @@ export function Logo({ className, linkClassName, href = routes.home, priority = 
   const src = cloudinaryImageUrl(logoAsset);
 
   return (
-    <Link href={href} className={cn("group inline-flex min-w-0 shrink", linkClassName)} aria-label={siteConfig.name}>
+    <Link href={href} className={cn("group inline-flex min-w-0 shrink items-center", linkClassName)} aria-label={siteConfig.name}>
       <Image
         src={src}
         alt={logoAsset.alt}
