@@ -33,9 +33,7 @@ type ServiceSchemaBase = {
   summary?: string;
 };
 
-type ServiceSchemaInput = ServiceSchemaBase;
-
-export function serviceSchema(service: ServiceSchemaInput) {
+export function serviceSchema(service: ServiceSchemaBase) {
   const description = service.description ?? service.summary;
 
   if (!description) {
