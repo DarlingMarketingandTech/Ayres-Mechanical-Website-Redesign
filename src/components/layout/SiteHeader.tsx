@@ -22,6 +22,7 @@ import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import { DesktopNav } from "./DesktopNav";
+import { useMobileChromeHidden } from "./useMobileChromeHidden";
 
 function isRouteActive(pathname: string, href: string) {
   if (href === "/") {
@@ -44,6 +45,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const mobileChromeHidden = useMobileChromeHidden({ disabled: menuOpen });
 
   const updateHeaderOffset = useCallback(() => {
     const height = headerRef.current?.offsetHeight ?? 96;
@@ -67,19 +69,37 @@ export function SiteHeader() {
     <>
       <header
         ref={headerRef}
-        className="fixed inset-x-0 top-0 z-50 border-b border-brand-blue-dark/10 bg-white/72 shadow-[0_12px_40px_rgb(10_26_68_/0.08)] backdrop-blur-xl"
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 border-b border-brand-blue-dark/10 bg-white/78 shadow-[0_12px_40px_rgb(10_26_68_/0.08)] backdrop-blur-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none",
+          mobileChromeHidden ? "max-lg:-translate-y-full" : "translate-y-0",
+        )}
       >
-        <Container className="py-3 lg:py-4">
-          <div className="flex items-center justify-between gap-4 lg:gap-6">
+        <Container className="py-2.5 lg:py-4">
+          <div className="flex items-center justify-between gap-3 lg:gap-6">
             <Logo
               priority
-              linkClassName="min-w-0 max-w-[16rem] lg:max-w-[20rem]"
-              sizes="(max-width: 1024px) 220px, 320px"
-              className="h-auto w-full max-h-12 object-contain object-left sm:max-h-14"
+              linkClassName="min-w-0 max-w-[11.75rem] items-center sm:max-w-[13rem] lg:max-w-[20rem]"
+              sizes="(max-width: 640px) 188px, (max-width: 1024px) 208px, 320px"
+              className="h-auto w-full max-h-[2.65rem] object-contain object-left sm:max-h-12 lg:max-h-14"
             />
 
             <div className="hidden min-w-0 flex-1 justify-center lg:flex">
               <DesktopNav />
+            </div>
+
+            <div className="lg:hidden">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="size-11 rounded-full border-brand-blue-dark/10 bg-white/92 text-brand-blue-dark shadow-[0_8px_24px_rgb(10_26_68_/0.12)] hover:border-primary/20 hover:bg-brand-ice"
+                aria-label="Open site navigation"
+                aria-expanded={menuOpen}
+                aria-haspopup="dialog"
+                onClick={() => setMenuOpen(true)}
+              >
+                <Menu className="size-5" aria-hidden="true" />
+              </Button>
             </div>
 
             <div className="hidden items-center gap-3 lg:flex">
@@ -95,21 +115,6 @@ export function SiteHeader() {
                 {emergencyNavigation.label}
               </Link>
             </div>
-          </div>
-
-          <div className="mt-3 flex items-center justify-end lg:hidden">
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              className="shrink-0"
-              aria-label="Open site navigation"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(true)}
-            >
-              <Menu className="size-5" aria-hidden="true" />
-              Menu
-            </Button>
           </div>
         </Container>
       </header>
