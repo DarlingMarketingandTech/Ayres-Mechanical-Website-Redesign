@@ -51,6 +51,8 @@ export function CloudinaryImage({
 
   const resolvedWidth = width ?? asset.width;
   const resolvedHeight = height ?? asset.height;
+  /** Next/Image forbids `width`/`height` together with `fill`; the Cloudinary loader still gets width from Next when `fill` is set. */
+  const layoutDimensions = fill ? {} : { width: resolvedWidth, height: resolvedHeight };
 
   return (
     <span
@@ -76,8 +78,7 @@ export function CloudinaryImage({
         alt={asset.alt}
         priority={priority}
         fill={fill}
-        width={resolvedWidth}
-        height={resolvedHeight}
+        {...layoutDimensions}
         format="auto"
         quality="auto"
         onLoad={handleLoad}

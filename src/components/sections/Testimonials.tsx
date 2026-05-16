@@ -26,16 +26,24 @@ export function Testimonials({ limit }: TestimonialsProps) {
   const marqueeDurationSec = Math.max(28, displayTestimonials.length * 5.5);
 
   return (
-    <div className="space-y-12">
-      <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="group relative overflow-hidden rounded-3xl bg-brand-blue-dark p-6 text-white shadow-xl transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-blue-dark/35 motion-reduce:transform-none">
+    <div className="space-y-8 sm:space-y-12">
+      <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="group relative overflow-hidden rounded-3xl bg-brand-blue-dark p-5 text-white shadow-xl transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-blue-dark/35 motion-reduce:transform-none sm:p-6">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-red/15 via-transparent to-primary/20 opacity-60 transition-opacity duration-700 group-hover:opacity-100" />
           <p className="relative z-10 text-sm font-black uppercase tracking-[0.2em] text-white/60">Reviews</p>
-          <div className="relative z-10 mt-4 flex items-end gap-3">
-            <p className="text-7xl font-black leading-none drop-shadow-md">{reviewSummary.rating}</p>
-            <p className="pb-2 text-sm font-bold uppercase tracking-[0.18em] text-white/80">{reviewSummary.count} reviews</p>
+          <div className="relative z-10 mt-3 flex items-center justify-between gap-4 sm:mt-4 sm:items-end sm:justify-start">
+            <div className="flex items-end gap-2 sm:gap-3">
+              <p className="text-5xl font-black leading-none drop-shadow-md sm:text-7xl">{reviewSummary.rating}</p>
+              <div className="flex items-center gap-0.5 pb-1 sm:pb-2" aria-hidden="true">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-brand-red text-brand-red sm:h-4 sm:w-4" />
+                ))}
+              </div>
+            </div>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/80 sm:hidden">{reviewSummary.count} reviews</p>
+            <p className="hidden pb-2 text-sm font-bold uppercase tracking-[0.18em] text-white/80 sm:block">{reviewSummary.count} reviews</p>
           </div>
-          <div className="relative z-10 mt-8 space-y-3">
+          <div className="relative z-10 mt-5 space-y-2 sm:mt-8 sm:space-y-3 max-sm:[&>div:nth-child(n+3)]:hidden">
             {reviewSummary.distribution.map((item) => (
               <div key={item.stars} className="grid grid-cols-[1.5rem_1fr_3rem] items-center gap-3 text-sm font-bold text-white/90">
                 <span className="flex items-center gap-1">
@@ -56,11 +64,11 @@ export function Testimonials({ limit }: TestimonialsProps) {
           </div>
         </div>
 
-        <Card className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-blue-dark/10 motion-reduce:transform-none">
+        <Card className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-blue-dark/10 motion-reduce:transform-none sm:p-8">
           <CardContent className="p-0">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">Customer proof</p>
-            <h3 className="mt-4 text-3xl font-black leading-tight text-brand-blue-dark sm:text-4xl">Real reviews from Central Indiana HVAC customers.</h3>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            <h3 className="mt-3 text-2xl font-black leading-tight text-brand-blue-dark sm:mt-4 sm:text-3xl lg:text-4xl">Real reviews from Central Indiana HVAC customers.</h3>
+            <p className="mt-3 hidden text-base leading-relaxed text-muted-foreground sm:mt-4 sm:block sm:text-lg">
               Ayres Mechanical has earned consistent recommendations for prompt service, practical diagnostics, fair pricing, and follow-through on heating and cooling work.
             </p>
             {hasMoreReviews ? (

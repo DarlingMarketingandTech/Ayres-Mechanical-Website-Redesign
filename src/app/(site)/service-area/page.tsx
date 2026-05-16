@@ -14,8 +14,8 @@ export default function ServiceAreaPage() {
     <>
       <PageHero
         eyebrow="Service Area"
-        title="Central Indiana HVAC service areas."
-        description="Explore local HVAC service pages for Ayres Mechanical. Confirm final service areas with the business owner before publishing."
+        title="Serving 6 counties in Central Indiana."
+        description="No travel charges within our service area. We're local, we're prompt, and we're ready—from Marion and Hendricks to Montgomery, Putnam, Boone, and Hamilton counties."
         variant="light"
         backgroundImage={mapAsset}
         photoOverlay="navy-strong"

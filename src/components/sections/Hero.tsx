@@ -43,7 +43,7 @@ export function HomeHero() {
   const vanAsset = media.home.localProof;
 
   return (
-    <section className="relative overflow-hidden bg-white section-pattern">
+    <section className="relative overflow-hidden bg-white section-pattern" data-mobile-cta-sentinel>
       <motion.div
         animate={reduceMotion ? undefined : { opacity: [0.45, 0.72, 0.45], scale: [1, 1.04, 1] }}
         transition={reduceMotion ? undefined : { duration: 14, repeat: Infinity, ease: "easeInOut" }}
@@ -125,25 +125,15 @@ export function HomeHero() {
               />
             </>
           ) : null}
-          <div className="relative z-[3] flex h-full min-h-[inherit] flex-col justify-between gap-5 p-4 text-white sm:gap-6 sm:p-6">
+          <div className="relative z-[3] flex h-full min-h-[inherit] flex-col justify-end gap-5 p-4 text-white sm:gap-6 sm:p-6">
             <BrandPattern variant="dark" className="opacity-40" />
-            <div className="relative flex flex-1 flex-col justify-between gap-6">
+            <div className="relative flex flex-1 flex-col justify-end gap-6">
               <div className="rounded-2xl border border-white/15 bg-black/20 p-4 backdrop-blur-md sm:rounded-[1.5rem] sm:p-6">
                 <TriangleMark className="h-14 w-10 shrink-0 drop-shadow-xl sm:h-24 sm:w-16" tone="light" />
                 <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-white/75 sm:text-sm">Residential · Commercial · Industrial</p>
                 <h2 className="mt-3 text-(length:--text-section) font-black leading-tight text-balance text-white sm:mt-4">
                   24-hour service with a clear path from call to comfort.
                 </h2>
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-xs font-bold sm:gap-3 sm:text-sm">
-                {["Heating", "Cooling", "Maintenance", "Emergency"].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-lg border border-white/20 bg-white/10 p-3 backdrop-blur-sm transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-white/20 hover:shadow-lg hover:shadow-black/25 sm:rounded-xl sm:p-4 motion-reduce:transform-none"
-                  >
-                    {item}
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -220,6 +210,7 @@ export function PageHero({
         hasPhoto ? "min-h-[220px] bg-brand-blue-dark sm:min-h-[260px]" : dark ? "bg-brand-blue-dark text-white" : "bg-white",
         hasPhoto && forceLightForeground ? "text-white" : !hasPhoto && dark ? "text-white" : "",
       )}
+      {...(heroActions ? { "data-mobile-cta-sentinel": true } : {})}
     >
       {hasPhoto && backgroundImage ? (
         <>

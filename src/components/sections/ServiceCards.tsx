@@ -29,8 +29,6 @@ export function ServiceCards({ limit }: { limit?: number }) {
                     asset={thumb}
                     fill
                     sizes="(min-width: 1024px) 320px, 90vw"
-                    width={Math.min(thumb.width, 900)}
-                    height={Math.max(2, Math.round((thumb.height / thumb.width) * Math.min(thumb.width, 900)))}
                     className="object-cover object-[center_30%] transition-transform duration-500 group-hover:scale-[1.03]"
                     crop="fill"
                     gravity="auto"

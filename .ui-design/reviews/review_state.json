@@ -1,0 +1,17 @@
+{
+  "review_id": "homepage_20260516_054200",
+  "target": "src/app/(site)/page.tsx",
+  "focus_areas": ["visual", "usability", "code", "performance"],
+  "context": "HVAC service marketing homepage — conversion and trust",
+  "platform": "responsive",
+  "status": "complete",
+  "started_at": "2026-05-16T05:42:00.000Z",
+  "completed_at": "2026-05-16T05:42:00.000Z",
+  "issues_found": 12,
+  "severity_counts": {
+    "critical": 1,
+    "major": 5,
+    "minor": 4,
+    "suggestion": 2
+  }
+}

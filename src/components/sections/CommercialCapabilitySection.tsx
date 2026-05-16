@@ -21,8 +21,6 @@ export function CommercialCapabilitySection() {
             asset={hero}
             fill
             sizes="(min-width: 1024px) 48vw, 100vw"
-            width={Math.min(hero.width, 1600)}
-            height={Math.max(2, Math.round((hero.height / hero.width) * Math.min(hero.width, 1600)))}
             className="object-cover object-[center_32%]"
             crop="fill"
             gravity="auto"

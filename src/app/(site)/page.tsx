@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { AuthoritySection } from "@/components/sections/AuthoritySection";
 import { CommercialCapabilitySection } from "@/components/sections/CommercialCapabilitySection";
 import { CountyServiceAreaSection } from "@/components/sections/CountyServiceAreaSection";
@@ -10,6 +13,7 @@ import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { homeFaqs } from "@/content/faqs";
+import { routes } from "@/lib/routes";
 
 export default function HomePage() {
   return (
@@ -24,11 +28,20 @@ export default function HomePage() {
 
       <Section>
         <Container>
-          <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Services</p>
-            <h2 className="mt-3 text-(length:--text-section) font-black text-balance">HVAC service for homes, businesses, and facilities.</h2>
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Services</p>
+              <h2 className="mt-3 text-(length:--text-section) font-black text-balance">HVAC service for homes, businesses, and facilities.</h2>
+            </div>
+            <Link
+              href={routes.services}
+              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-black text-brand-blue-dark underline-offset-4 transition-colors hover:text-brand-red"
+            >
+              View all services
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
           </div>
-          <ServiceCards />
+          <ServiceCards limit={4} />
         </Container>
       </Section>
 
@@ -45,12 +58,6 @@ export default function HomePage() {
       <CountyServiceAreaSection />
 
       <FinancingPromoSection variant="home" />
-
-      <Section className="bg-brand-ice">
-        <Container>
-          <EmergencyCTA />
-        </Container>
-      </Section>
 
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">

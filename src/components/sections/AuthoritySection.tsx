@@ -31,39 +31,46 @@ export function AuthoritySection() {
               <h2 className="mt-3 text-(length:--text-section) font-black text-balance text-brand-blue-dark">
                 A Family-Run Business Built on Practical Diagnostics.
               </h2>
-              <p className="mt-4 leading-8 text-muted-foreground">
-                We don&apos;t believe in high-pressure sales. We believe in finding the most efficient,
-                cost-effective path to get your system running again. For over 20 years, Brian and Sabra
-                Ayres have served Central Indiana homes and businesses with honest diagnostics and
-                dependable follow-through.
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-8">
+                For over 20 years, Brian and Sabra Ayres have served Central Indiana with honest diagnostics,
+                practical repairs, and dependable follow-through—not high-pressure sales.
               </p>
-              <p className="mt-4 leading-8 text-muted-foreground">
-                Our 4.9-star rating across six counties reflects the trust our neighbors have placed in
-                us—and the standard we hold ourselves to on every call.
+              <p className="mt-3 text-sm font-bold text-brand-blue-dark">
+                4.9 stars across six counties—the standard we hold on every call.
               </p>
             </div>
 
-            {/* Partner logos */}
-            <div
-              className="flex flex-wrap items-center gap-8 border-t border-border pt-6"
-              aria-label="Authorized equipment partners"
-            >
-              <CloudinaryImage
-                asset={rheemAsset}
-                disableLqip
-                width={rheemAsset.width}
-                height={rheemAsset.height}
-                sizes="200px"
-                className="h-auto max-h-[56px] w-[min(100%,180px)] object-contain object-left"
-              />
-              <CloudinaryImage
-                asset={mitsubishiAsset}
-                disableLqip
-                width={mitsubishiAsset.width}
-                height={mitsubishiAsset.height}
-                sizes="200px"
-                className="h-auto max-h-[64px] w-[min(100%,200px)] object-contain object-left"
-              />
+            {/* Elite certifications */}
+            <div className="border-t border-border pt-6" aria-label="Authorized equipment certifications">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">
+                Elite Certifications
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                As a Rheem Dealer and a Mitsubishi Diamond Contractor, we are factory-trained to provide
+                the highest level of installation and service available today.
+              </p>
+              <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
+                  <CloudinaryImage
+                    asset={rheemAsset}
+                    disableLqip
+                    width={rheemAsset.width}
+                    height={rheemAsset.height}
+                    sizes="180px"
+                    className="h-auto max-h-[52px] w-full object-contain"
+                  />
+                </div>
+                <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
+                  <CloudinaryImage
+                    asset={mitsubishiAsset}
+                    disableLqip
+                    width={mitsubishiAsset.width}
+                    height={mitsubishiAsset.height}
+                    sizes="180px"
+                    className="h-auto max-h-[60px] w-full object-contain"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -60,7 +60,8 @@
   --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.25rem);
   --section-y: clamp(2.75rem, 1.5rem + 5vw, 6rem);
   /* Mobile fixed bottom: sticky Request + Call bar (see MobileStickyCtaBar). Used by main padding. */
-  --mobile-bottom-chrome-h: calc(9.5rem + env(safe-area-inset-bottom, 0px));
+  --mobile-bottom-chrome-active: calc(9.5rem + env(safe-area-inset-bottom, 0px));
+  --mobile-bottom-chrome-h: var(--mobile-bottom-chrome-active);
 
   --brand-blue: #0d3fb8;
   --brand-blue-dark: #0a1a44;
@@ -98,6 +99,22 @@
   --sidebar-accent-foreground: #0a1a44;
   --sidebar-border: #dce2ec;
   --sidebar-ring: #0d3fb8;
+}
+
+/* Hero in view on mobile: hide sticky CTAs and bottom chrome padding (MobileStickyCtaBar). */
+:root[data-mobile-cta-suppressed="true"] {
+  --mobile-bottom-chrome-h: 0px;
+}
+
+/* Hero in view: suppress full-width Call row in SiteHeader; show slim menu-only row instead. */
+@media (max-width: 1023px) {
+  :root[data-mobile-cta-suppressed="true"] [data-mobile-header-call] {
+    display: none;
+  }
+
+  :root[data-mobile-cta-suppressed="true"] [data-mobile-menu-only] {
+    display: flex;
+  }
 }
 
 .dark {
