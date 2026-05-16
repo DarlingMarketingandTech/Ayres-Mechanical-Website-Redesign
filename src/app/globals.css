@@ -53,13 +53,14 @@
 
 :root {
   /* Fluid type (mobile-first bounds) */
-  --text-hero: clamp(2rem, 0.55rem + 6.4vw, 4.5rem);
-  --text-hero-sub: clamp(1.75rem, 0.85rem + 4.2vw, 3.75rem);
+  /* Tighter mobile floor so long H1s stay within ~8–11 visible lines on phones */
+  --text-hero: clamp(1.625rem, 0.45rem + 5.6vw, 4.5rem);
+  --text-hero-sub: clamp(1.5rem, 0.55rem + 4vw, 3.75rem);
   --text-section: clamp(1.75rem, 1.1rem + 2.4vw, 2.5rem);
   --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.25rem);
   --section-y: clamp(2.75rem, 1.5rem + 5vw, 6rem);
-  /* Mobile fixed bottom: CTA row + icon nav (see MobileBottomNav). Used by main + footer padding. */
-  --mobile-bottom-chrome-h: 9.25rem;
+  /* Mobile fixed bottom: sticky Request + Call bar (see MobileStickyCtaBar). Used by main padding. */
+  --mobile-bottom-chrome-h: calc(9.5rem + env(safe-area-inset-bottom, 0px));
 
   --brand-blue: #0d3fb8;
   --brand-blue-dark: #0a1a44;

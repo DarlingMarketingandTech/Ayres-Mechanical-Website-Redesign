@@ -39,6 +39,8 @@ export const serviceNavigationGroups: NavigationGroup[] = [
     items: [
       serviceLink(serviceSlugs.heating),
       serviceLink(serviceSlugs.airConditioning),
+      serviceLink(serviceSlugs.ductless),
+      serviceLink(serviceSlugs.indoorAirQuality),
       serviceLink(serviceSlugs.preventiveMaintenance),
     ],
   },
@@ -92,6 +94,8 @@ export const emergencyNavigation: NavigationChild = {
 export const footerServiceLinks: NavigationChild[] = [
   serviceLink(serviceSlugs.heating),
   serviceLink(serviceSlugs.airConditioning),
+  serviceLink(serviceSlugs.ductless),
+  serviceLink(serviceSlugs.indoorAirQuality),
   serviceLink(serviceSlugs.preventiveMaintenance),
   serviceLink(serviceSlugs.commercial),
   serviceLink(serviceSlugs.industrial),

@@ -1,13 +1,11 @@
 import { AuthoritySection } from "@/components/sections/AuthoritySection";
-import { CommonProblemsSolvedSection } from "@/components/sections/CommonProblemsSolvedSection";
+import { CommercialCapabilitySection } from "@/components/sections/CommercialCapabilitySection";
 import { CountyServiceAreaSection } from "@/components/sections/CountyServiceAreaSection";
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { HomeHero } from "@/components/sections/Hero";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { TrustBar } from "@/components/sections/TrustBar";
-import { WhoWeServeSection } from "@/components/sections/WhoWeServeSection";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
@@ -16,22 +14,14 @@ import { homeFaqs } from "@/content/faqs";
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero — Hook */}
       <HomeHero />
 
-      {/* Trust signal bar */}
-      <TrustBar />
+      <Section className="bg-brand-ice">
+        <Container>
+          <EmergencyCTA />
+        </Container>
+      </Section>
 
-      {/* 2. Who We Serve — Immediate user segmentation */}
-      <WhoWeServeSection />
-
-      {/* 3. Authority — Family-owned trust builder with team photo & partner logos */}
-      <AuthoritySection />
-
-      {/* 4. Common Problems Solved — Empathy / SEO layer */}
-      <CommonProblemsSolvedSection />
-
-      {/* 5. Services overview */}
       <Section>
         <Container>
           <div className="mb-8 max-w-2xl">
@@ -42,25 +32,26 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 6. Service area — 6-county coverage with no-travel-fee hook */}
-      <CountyServiceAreaSection />
+      <AuthoritySection />
 
-      {/* 7. Reviews — Validation */}
+      <CommercialCapabilitySection />
+
       <Section className="bg-white">
         <Container>
           <Testimonials />
         </Container>
       </Section>
 
-      {/* 8. Financing & Maintenance — Value proposition */}
+      <CountyServiceAreaSection />
+
       <FinancingPromoSection variant="home" />
 
-      {/* 9. Emergency CTA — Safety net closer */}
       <Section className="bg-brand-ice">
-        <Container><EmergencyCTA /></Container>
+        <Container>
+          <EmergencyCTA />
+        </Container>
       </Section>
 
-      {/* 10. FAQ */}
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">
           <div>
@@ -73,4 +64,3 @@ export default function HomePage() {
     </>
   );
 }
-

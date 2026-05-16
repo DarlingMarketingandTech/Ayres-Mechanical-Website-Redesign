@@ -12,12 +12,15 @@ export type CloudinaryImageProps = Omit<CldImageProps, "src" | "quality" | "alt"
   asset: CloudinaryMediaAsset;
   /** Skip LQIP overlay (small logos, marks). */
   disableLqip?: boolean;
+  /** When true, hints LCP priority for above-the-fold heroes. */
+  priority?: boolean;
 };
 
 export function CloudinaryImage({
   asset,
   className,
   disableLqip = false,
+  priority = false,
   onLoad,
   fill,
   width,
@@ -46,8 +49,8 @@ export function CloudinaryImage({
     onLoad?.(e);
   };
 
-  const resolvedWidth = fill ? undefined : (width ?? asset.width);
-  const resolvedHeight = fill ? undefined : (height ?? asset.height);
+  const resolvedWidth = width ?? asset.width;
+  const resolvedHeight = height ?? asset.height;
 
   return (
     <span
@@ -71,6 +74,7 @@ export function CloudinaryImage({
         {...props}
         src={asset.publicId}
         alt={asset.alt}
+        priority={priority}
         fill={fill}
         width={resolvedWidth}
         height={resolvedHeight}

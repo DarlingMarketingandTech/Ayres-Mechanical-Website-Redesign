@@ -6,7 +6,7 @@ export type Service = {
   shortTitle: string;
   description: string;
   accent: "red" | "blue" | "dark";
-  icon: "heating" | "cooling" | "maintenance" | "commercial" | "industrial" | "emergency";
+  icon: "heating" | "cooling" | "maintenance" | "commercial" | "industrial" | "emergency" | "ductwork";
 };
 
 export const services: Service[] = servicePageContent.map((service) => ({

@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { PageHero } from "@/components/sections/Hero";
 import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
 import { buttonVariants } from "@/components/ui/button";
+import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 import { phoneHref } from "@/lib/constants";
@@ -47,13 +49,28 @@ export default function AboutPage() {
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">
           <MotionReveal>
-            <PlaceholderPanel
-              eyebrow="Team Placeholder"
-              title="Brian & Sabra image placeholder"
-              description="Swap this block with the owner-approved Brian and Sabra image when the final Cloudinary asset is ready."
-              tag="Placeholder Asset"
-              caption="Pictured here is owner/operator Brian Ayres and Office Manager Sabra Evanoff. We are the faces behind the phone calls and the service vans, and we are personally committed to your comfort."
-            />
+            <figure className="overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
+              <div className="relative w-full" style={{ aspectRatio: `${media.about.ownerTeam.width} / ${media.about.ownerTeam.height}` }}>
+                <CloudinaryImage
+                  asset={media.about.ownerTeam}
+                  fill
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  width={Math.min(media.about.ownerTeam.width, 1400)}
+                  height={Math.max(
+                    2,
+                    Math.round(
+                      (media.about.ownerTeam.height / media.about.ownerTeam.width) * Math.min(media.about.ownerTeam.width, 1400),
+                    ),
+                  )}
+                  className="object-cover object-top"
+                  crop="fill"
+                  gravity="auto"
+                />
+              </div>
+              <figcaption className="border-t border-border/60 px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+                Brian Ayres and Sabra Evanoff are the faces behind the phone calls and the service vans, personally committed to your comfort.
+              </figcaption>
+            </figure>
           </MotionReveal>
           <MotionReveal>
             <div className="rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
@@ -109,12 +126,21 @@ export default function AboutPage() {
                   We provide high-quality heating and cooling at a reasonable rate, serving residential, commercial, and industrial customers throughout Central Indiana.
                 </p>
               </div>
-              <PlaceholderPanel
-                eyebrow="Service Vans Placeholder"
-                title="Service van image placeholder"
-                description="Swap this block with approved service van or fleet imagery from Cloudinary."
-                tag="Placeholder Asset"
-              />
+              <figure className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 shadow-lg">
+                <div className="relative w-full" style={{ aspectRatio: `${media.home.localProof.width} / ${media.home.localProof.height}` }}>
+                  <CloudinaryImage
+                    asset={media.home.localProof}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    width={960}
+                    height={720}
+                    className="object-cover object-center"
+                    crop="fill"
+                    gravity="auto"
+                  />
+                </div>
+                <figcaption className="sr-only">{media.home.localProof.alt}</figcaption>
+              </figure>
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-white/60">Currently serving</p>
                 <div className="mt-4 flex flex-wrap gap-3">
@@ -138,15 +164,15 @@ export default function AboutPage() {
               <p className="mt-5 max-w-3xl leading-8 text-muted-foreground">
                 From a strange furnace noise at home to a detailed commercial installation scope, our team is ready to help you choose the clearest next step.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }))}>
+              <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link href={routes.requestService} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "w-full min-h-12 justify-center sm:w-auto")}>
                   Request Service
                   <ArrowRight aria-hidden="true" />
                 </Link>
-                <Link href={routes.services} className={buttonVariants({ variant: "outline", size: "lg" })}>
+                <Link href={routes.services} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full min-h-12 justify-center sm:w-auto")}>
                   Explore Our Services
                 </Link>
-                <a href={phoneHref} className={buttonVariants({ variant: "dark", size: "lg" })}>
+                <a href={phoneHref} className={cn(buttonVariants({ variant: "dark", size: "lg" }), "w-full min-h-12 justify-center sm:w-auto")}>
                   <Phone aria-hidden="true" />
                   Call {siteConfig.phone}
                 </a>

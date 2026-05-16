@@ -15,7 +15,7 @@ const trustMarkers = ["Rheem Dealer", "Mitsubishi Diamond Contractor", "4.9 Star
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-brand-blue-dark text-white">
+    <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-md:pb-[var(--mobile-bottom-chrome-h)]">
       <Container className="py-14 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
           <div>

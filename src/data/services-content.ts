@@ -1,5 +1,21 @@
+import type { CloudinaryMediaAsset } from "@/content/media";
+import { media } from "@/content/media";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
+
+export type HeroPhotoOverlayPreset = "none" | "navy-strong" | "navy-soft" | "light-soft";
+
+export type ServicePageMedia = {
+  heroBackground?: CloudinaryMediaAsset;
+  /** Tailwind object-position / cover tuning on hero photo (e.g. `object-[center_30%]`). */
+  heroImageClassName?: string;
+  heroPhotoOverlay?: HeroPhotoOverlayPreset;
+  heroGallery?: CloudinaryMediaAsset[];
+  contentIllustration?: CloudinaryMediaAsset;
+  /** When true, renders Mitsubishi badge with demo disclaimer (ductless page). */
+  showMitsubishiDemoBadge?: boolean;
+  heroDeliveryWidth?: number;
+};
 
 export type ServiceContentCard = {
   title: string;
@@ -30,18 +46,21 @@ export type ServiceContent = {
   heroTitle: string;
   eyebrow: string;
   accent: "red" | "blue" | "dark";
-  icon: "heating" | "cooling" | "maintenance" | "commercial" | "industrial" | "emergency";
+  icon: "heating" | "cooling" | "maintenance" | "commercial" | "industrial" | "emergency" | "ductwork";
   intro: string;
   whatWeHelpWith: ServiceContentCard[];
   commonProblems: ServiceContentCard[];
   specialNote?: ServiceSpecialNote;
   closingCTA: ServiceClosingCta;
   relatedServices: string[];
+  media?: ServicePageMedia;
 };
 
 export const serviceSlugs = {
   airConditioning: "air-conditioning",
   heating: "heating",
+  ductless: "ductless-mini-splits",
+  indoorAirQuality: "indoor-air-quality",
   preventiveMaintenance: "preventive-maintenance",
   commercial: "commercial",
   industrial: "industrial",
@@ -114,10 +133,16 @@ export const servicePageContent: ServiceContent[] = [
         "We believe in a straightforward path to resolution. From the moment you Book Service, our goal is to provide clear communication and dependable work that restores your confidence in your home’s comfort. We also offer Flexible Financing through FTL Finance to help make major repairs or replacements manageable.",
       primaryLabel: "Request Service Today",
       primaryHref: routes.requestService,
-      secondaryLabel: "Call 317-538-9837",
+      secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
     },
     relatedServices: [serviceSlugs.heating, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
+    media: {
+      heroBackground: media.pages.airConditioning.hero,
+      heroImageClassName: "object-[center_22%]",
+      heroDeliveryWidth: 2400,
+      heroGallery: [media.pages.airConditioning.supporting],
+    },
   },
   {
     slug: serviceSlugs.heating,
@@ -185,10 +210,14 @@ export const servicePageContent: ServiceContent[] = [
         "We know that heating repairs can be an unexpected stress. That’s why Ayres Mechanical focuses on practical diagnostics and clear communication. If a replacement is necessary, we offer Flexible Financing through FTL Finance to help you prioritize your family’s comfort without breaking the bank.",
       primaryLabel: "Request Heating Service",
       primaryHref: routes.requestService,
-      secondaryLabel: "Call 317-538-9837",
+      secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
+    media: {
+      heroBackground: media.pages.heating.hero,
+      heroImageClassName: "object-[center_28%]",
+    },
   },
   {
     slug: serviceSlugs.preventiveMaintenance,
@@ -251,11 +280,14 @@ export const servicePageContent: ServiceContent[] = [
         "A well-maintained system can run up to 20% more efficiently than a neglected one. At Ayres Mechanical, we believe in a straightforward path to resolution. If our maintenance check reveals a need for an upgrade, we offer Flexible Financing to help you transition to a new system without the financial sting of an emergency.",
       primaryLabel: "Request Maintenance Service",
       primaryHref: routes.requestService,
-      secondaryLabel: "Call 317-538-9837",
+      secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Do you have multiple properties or a commercial facility that requires a custom maintenance schedule?",
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
+    media: {
+      contentIllustration: media.pages.maintenance.supporting,
+    },
   },
   {
     slug: serviceSlugs.commercial,
@@ -323,11 +355,17 @@ export const servicePageContent: ServiceContent[] = [
         "At Ayres Mechanical, we view ourselves as an extension of your facility team. From the moment you Book Service, our goal is to provide dependable work that restores your confidence in your building’s infrastructure. For larger projects or unexpected replacements, we also offer Financing Details to help manage your capital expenditures.",
       primaryLabel: "Request Commercial Service",
       primaryHref: routes.requestService,
-      secondaryLabel: "Call 317-538-9837",
+      secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Do you manage multiple locations in Central Indiana that require a consolidated maintenance plan?",
     },
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.twentyFourHourEmergency],
+    media: {
+      heroBackground: media.pages.commercial.hero,
+      heroImageClassName: "object-[center_32%]",
+      heroDeliveryWidth: 1600,
+      heroGallery: [media.pages.commercial.supporting],
+    },
   },
   {
     slug: serviceSlugs.industrial,
@@ -395,11 +433,150 @@ export const servicePageContent: ServiceContent[] = [
         "Ayres Mechanical provides a straightforward path to resolution for even the most complex industrial challenges. Whether you need a one-time repair or a comprehensive Maintenance Plan, we bring the technical skill and dependable work Central Indiana businesses trust.",
       primaryLabel: "Request Industrial Service",
       primaryHref: routes.requestService,
-      secondaryLabel: "Call 317-538-9837",
+      secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
     },
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
+  },
+  {
+    slug: serviceSlugs.ductless,
+    title: "Ductless Mini-Split Systems",
+    shortTitle: "Ductless",
+    summary: "High-efficiency ductless heating and cooling for room additions, tight spaces, and zoned comfort without ductwork.",
+    heroTitle: "Ductless Mini-Split Service",
+    eyebrow: "Ductless HVAC",
+    accent: "blue",
+    icon: "ductwork",
+    intro:
+      "Ductless mini-splits deliver targeted comfort where traditional ductwork is impractical. Ayres Mechanical designs, installs, and services wall-mounted and multi-zone systems with the same practical diagnostics we bring to every residential visit.",
+    whatWeHelpWith: [
+      {
+        title: "Single- and Multi-Zone Layouts",
+        description:
+          "We map how you use each space—primary suites, bonus rooms, garages, and workshops—then recommend a single- or multi-zone layout that avoids short cycling and keeps humidity under control.",
+      },
+      {
+        title: "Installation and Line Set Routing",
+        description:
+          "Clean line hide, proper condensate management, and secure mounting matter as much as the equipment itself. Our installs prioritize long-term service access and a finished look that matches your home.",
+      },
+      {
+        title: "Seasonal Performance Checks",
+        description:
+          "Mini-splits work year-round as heat pumps. We verify defrost behavior, filter maintenance intervals, and refrigerant circuit health so you stay efficient through Indiana’s humid summers and cold snaps.",
+      },
+      {
+        title: "Replacement and Upgrade Guidance",
+        description:
+          "When an aging ductless head or outdoor unit is beyond economical repair, we walk through efficiency tiers, electrical requirements, and financing paths so you can choose confidently.",
+      },
+    ],
+    commonProblems: [
+      {
+        title: "Water Dripping at the Wall Unit",
+        description: "Clogged condensate lines or failed pumps are common culprits. We restore drainage quickly to protect drywall and flooring.",
+      },
+      {
+        title: "Weak Heating in Extreme Cold",
+        description: "Heat pumps can lose capacity at low temperatures. We evaluate supplemental strategies and defrost controls to keep you comfortable.",
+      },
+      {
+        title: "Odd Smells from the Head",
+        description: "Mold on blower wheels or dirty coils can affect indoor air. We deep clean accessible components and recommend filter routines.",
+      },
+      {
+        title: "Communication Errors Between Heads",
+        description: "Multi-zone systems rely on clean electrical and control wiring. We trace faults methodically instead of swapping parts blindly.",
+      },
+    ],
+    specialNote: {
+      tone: "assurance",
+      label: "Demo Partner Note",
+      text: "Mitsubishi credential artwork on this page is labeled as a temporary demo element until ownership confirms final partner marks for publication.",
+    },
+    closingCTA: {
+      title: "Comfort Without the Ductwork Headache",
+      description:
+        "Whether you are finishing a basement or solving a hot second floor, Ayres Mechanical provides clear options and dependable workmanship. Ask about financing for multi-zone upgrades.",
+      primaryLabel: "Request Ductless Service",
+      primaryHref: routes.requestService,
+      secondaryLabel: "Call Now",
+      secondaryHref: phoneHref,
+    },
+    relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
+    media: {
+      heroGallery: [media.pages.ductless.supporting],
+      showMitsubishiDemoBadge: true,
+    },
+  },
+  {
+    slug: serviceSlugs.indoorAirQuality,
+    title: "Indoor Air Quality Services",
+    shortTitle: "Indoor Air Quality",
+    summary: "Filtration, humidity balance, ventilation, and airflow reviews to make your home feel fresher and healthier.",
+    heroTitle: "Indoor Air Quality Support",
+    eyebrow: "Healthy Air",
+    accent: "blue",
+    icon: "maintenance",
+    intro:
+      "Indoor air quality is more than a single gadget—it is the combination of filtration, humidity, ventilation, and balanced airflow. Ayres Mechanical evaluates how your whole system works together, then recommends practical upgrades that match your budget.",
+    whatWeHelpWith: [
+      {
+        title: "Media and Filtration Upgrades",
+        description:
+          "We match filter styles to your equipment and allergy sensitivities, from high-MERV pleated filters to cabinet media air cleaners that do not choke airflow.",
+      },
+      {
+        title: "Humidity and Moisture Control",
+        description:
+          "Sticky summers and dry winters both create comfort issues. We measure dew points and recommend humidification or dehumidification strategies tied to your existing HVAC system.",
+      },
+      {
+        title: "Ventilation and Fresh Air Options",
+        description:
+          "Tightly sealed homes can trap pollutants. We evaluate ERV/HRV and controlled ventilation paths so fresh air does not undermine efficiency.",
+      },
+      {
+        title: "Duct Leakage and Airflow Balancing",
+        description:
+          "Even premium filters cannot fix leaky ducts. We inspect distribution systems for pressure imbalances that create stuffy rooms or excess dust.",
+      },
+    ],
+    commonProblems: [
+      {
+        title: "Persistent Dust After Cleaning",
+        description: "Leaky return pathways or missing filtration can recycle particulates. We pinpoint infiltration and duct issues.",
+      },
+      {
+        title: "Dry Static Shocks in Winter",
+        description: "Low humidity is common when furnaces run nonstop. We recommend safe humidification tied to your water supply and maintenance plan.",
+      },
+      {
+        title: "Musty Odors When AC Runs",
+        description: "Moisture on coils or in drain pans can support microbial growth. We clean accessible components and verify condensate removal.",
+      },
+      {
+        title: "Allergy Flare-ups Indoors",
+        description: "We review filtration, ventilation, and humidity together—often a combination fix works better than a single product pitch.",
+      },
+    ],
+    closingCTA: {
+      title: "Breathe Easier with Whole-Home Thinking",
+      description:
+        "Ayres Mechanical focuses on measurable improvements—not buzzwords. If equipment upgrades make sense, we explain why, what they cost, and how they interact with your heating and cooling system.",
+      primaryLabel: "Request IAQ Review",
+      primaryHref: routes.requestService,
+      secondaryLabel: "Call Now",
+      secondaryHref: phoneHref,
+    },
+    relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.airConditioning, serviceSlugs.heating],
+    media: {
+      heroBackground: media.pages.indoorAirQuality.hero,
+      heroImageClassName: "object-[center_25%]",
+      heroPhotoOverlay: "navy-soft",
+      heroGallery: [media.pages.indoorAirQuality.supporting],
+    },
   },
   {
     slug: serviceSlugs.twentyFourHourEmergency,
@@ -465,10 +642,10 @@ export const servicePageContent: ServiceContent[] = [
       title: "Restoring Comfort and Confidence",
       description:
         "At Ayres Mechanical, we believe an emergency repair shouldn’t be a temporary patch. Our goal is to provide a permanent fix through Practical Diagnostics. If an emergency requires a major replacement, we offer Flexible Financing through FTL Finance to help you make the right decision for your home without financial panic.",
-      primaryLabel: "Call Now for Emergency Service",
-      primaryHref: phoneHref,
-      secondaryLabel: "Request Emergency Service",
-      secondaryHref: routes.requestService,
+      primaryLabel: "Request Emergency Service",
+      primaryHref: routes.requestService,
+      secondaryLabel: "Call Now",
+      secondaryHref: phoneHref,
       subtext: "Are you currently experiencing a system failure, or are you looking to add us to your facility’s emergency contact list?",
     },
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
