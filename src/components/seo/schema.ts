@@ -26,12 +26,16 @@ export function localBusinessSchema() {
   };
 }
 
-export function serviceSchema(service: { title: string; slug: string; description?: string; summary?: string }) {
+type ServiceSchemaInput =
+  | { title: string; slug: string; description: string; summary?: string }
+  | { title: string; slug: string; description?: string; summary: string };
+
+export function serviceSchema(service: ServiceSchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
-    description: service.description ?? service.summary ?? "",
+    description: service.description ?? service.summary,
     provider: {
       "@type": "HVACBusiness",
       name: siteConfig.name,
