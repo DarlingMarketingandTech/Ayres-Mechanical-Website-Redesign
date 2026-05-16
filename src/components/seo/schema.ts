@@ -29,16 +29,24 @@ export function localBusinessSchema() {
 type ServiceSchemaBase = {
   title: string;
   slug: string;
+  description?: string;
+  summary?: string;
 };
 
-type ServiceSchemaInput = ServiceSchemaBase & ({ description: string; summary?: string } | { description?: string; summary: string });
+type ServiceSchemaInput = ServiceSchemaBase;
 
 export function serviceSchema(service: ServiceSchemaInput) {
+  const description = service.description ?? service.summary;
+
+  if (!description) {
+    throw new Error("serviceSchema requires a description or summary.");
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
-    description: service.description ?? service.summary,
+    description,
     provider: {
       "@type": "HVACBusiness",
       name: siteConfig.name,
