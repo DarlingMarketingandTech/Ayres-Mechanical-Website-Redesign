@@ -57,6 +57,7 @@ export const siteConfig: {
   description: string;
   serviceArea: string;
   emergencyMessage: string;
+  creditLine: string;
   address: CompanyAddress | null;
   hours: {
     emergency: string;
@@ -78,6 +79,7 @@ export const siteConfig: {
     "Ayres Mechanical provides residential, commercial, and industrial heating and air conditioning services throughout Central Indiana.",
   serviceArea: "Central Indiana",
   emergencyMessage: "24 Hour Service for heating and cooling problems that cannot wait.",
+  creditLine: "Built by Darling Marketing & Tech",
   address: null,
   hours: {
     emergency: "24 Hour Service Available",

@@ -80,7 +80,7 @@ export function SiteFooter() {
             <Link href={routes.privacy} className="transition-colors hover:text-white">
               Privacy Policy
             </Link>
-            <span>Built by Darling Marketing &amp; Tech</span>
+            <span>{siteConfig.creditLine}</span>
           </div>
         </div>
       </Container>
