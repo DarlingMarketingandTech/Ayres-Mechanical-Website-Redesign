@@ -21,7 +21,8 @@ export function CommercialCapabilitySection() {
             asset={hero}
             fill
             sizes="(min-width: 1024px) 48vw, 100vw"
-            className="object-cover object-[center_32%]"
+            aspectRatio="16:10"
+            className="object-cover object-center"
             crop="fill"
             gravity="auto"
           />

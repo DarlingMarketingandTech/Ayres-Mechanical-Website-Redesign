@@ -5,11 +5,32 @@ import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import type { Industry } from "@/content/industries";
+import type { CloudinaryMediaAsset } from "@/content/media";
+import { media } from "@/content/media";
+
+function industryHeroBackground(tone: Industry["tone"]): CloudinaryMediaAsset {
+  switch (tone) {
+    case "commercial":
+      return media.pages.commercial.hero;
+    case "residential":
+      return media.ui.coldBg;
+    case "industrial":
+      return media.services.commercialRoofIndustrial;
+  }
+}
 
 export function IndustryPageTemplate({ industry }: { industry: Industry }) {
   return (
     <>
-      <PageHero eyebrow={industry.eyebrow} title={industry.title} description={industry.description} variant={industry.tone === "industrial" ? "dark" : "light"} />
+      <PageHero
+        eyebrow={industry.eyebrow}
+        title={industry.title}
+        description={industry.description}
+        variant="light"
+        backgroundImage={industryHeroBackground(industry.tone)}
+        photoOverlay="light-blend"
+        backgroundPriority
+      />
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <FeatureBand title="Pain points we help solve" features={industry.painPoints} />
@@ -19,7 +40,7 @@ export function IndustryPageTemplate({ industry }: { industry: Industry }) {
       <Section className="bg-brand-ice">
         <Container>
           <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Why Ayres Mechanical</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Why Ayres Mechanical</p>
             <h2 className="mt-3 text-4xl font-black">Built for the way {industry.tone} customers make service decisions.</h2>
           </div>
           <FeatureBand title="What to expect" features={industry.proofPoints} />
@@ -28,7 +49,7 @@ export function IndustryPageTemplate({ industry }: { industry: Industry }) {
       <Section>
         <Container>
           <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Services</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Services</p>
             <h2 className="mt-3 text-4xl font-black">HVAC services for {industry.tone} needs.</h2>
           </div>
           <ServiceCards limit={6} />

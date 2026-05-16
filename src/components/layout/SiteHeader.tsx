@@ -159,7 +159,7 @@ export function SiteHeader() {
             <div className="space-y-6">
               <section>
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-red">Services</p>
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">Services</p>
                   <Link
                     href={serviceOverviewLink.href}
                     onClick={() => setMenuOpen(false)}
@@ -189,7 +189,7 @@ export function SiteHeader() {
               </section>
 
               <section>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-red">Company</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">Company</p>
                 <ul className="mt-3 grid gap-2">
                   {companyNavigation.map((item) => (
                     <li key={item.href}>
@@ -204,7 +204,7 @@ export function SiteHeader() {
               </section>
 
               <section>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-red">More</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">More</p>
                 <ul className="mt-3 grid gap-2">
                   {primaryNavigation.map((item) => (
                     <li key={item.href}>

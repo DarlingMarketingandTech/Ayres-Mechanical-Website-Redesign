@@ -16,7 +16,7 @@ export function BasicPageTemplate({
   description: string;
   children: React.ReactNode;
   heroBackground?: CloudinaryMediaAsset;
-  heroPhotoOverlay?: "none" | "navy-strong" | "navy-soft" | "light-soft";
+  heroPhotoOverlay?: "none" | "navy-strong" | "navy-soft" | "light-soft" | "light-blend";
 }) {
   return (
     <>

@@ -45,6 +45,9 @@ export default function AboutPage() {
         eyebrow="About Ayres Mechanical"
         title="A Practical HVAC Service Partner for Central Indiana."
         description="Ayres Mechanical serves residential, commercial, and industrial customers with direct communication and dependable service."
+        backgroundImage={media.home.localProof}
+        photoOverlay="light-blend"
+        backgroundPriority
       />
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">

@@ -103,6 +103,7 @@ export function HomeHero() {
               fill
               priority
               sizes="(min-width: 1024px) 42vw, 100vw"
+              aspectRatio="4:3"
               className="object-cover object-center"
               crop="fill"
               gravity="auto"
@@ -147,9 +148,12 @@ const photoScrim = {
   "navy-strong": "bg-gradient-to-br from-brand-blue-dark via-brand-blue-dark/96 to-black/58",
   "navy-soft": "bg-gradient-to-t from-brand-blue-dark/90 via-brand-blue-dark/58 to-brand-blue-dark/40",
   "light-soft": "bg-gradient-to-b from-white/92 via-white/82 to-white/70",
+  "light-blend": "bg-gradient-to-b from-white/85 via-white/68 to-white/52",
 } as const;
 
 export type PageHeroPhotoOverlay = keyof typeof photoScrim;
+
+const lightPhotoOverlays = new Set<PageHeroPhotoOverlay>(["light-soft", "light-blend"]);
 
 export type PageHeroHeroActions = {
   primary: { href: string; label: string };
@@ -189,7 +193,7 @@ export function PageHero({
     : photoOverlay === undefined || photoOverlay === "none"
       ? "navy-strong"
       : photoOverlay;
-  const forceLightForeground = Boolean(effectiveOverlay && effectiveOverlay !== "light-soft");
+  const forceLightForeground = Boolean(effectiveOverlay && !lightPhotoOverlays.has(effectiveOverlay));
   const patternVariant = hasPhoto && !forceLightForeground ? "blue" : dark ? "dark" : variant === "red" ? "red" : "blue";
 
   const deliveryW =
@@ -210,14 +214,14 @@ export function PageHero({
         hasPhoto ? "min-h-[220px] bg-brand-blue-dark sm:min-h-[260px]" : dark ? "bg-brand-blue-dark text-white" : "bg-white",
         hasPhoto && forceLightForeground ? "text-white" : !hasPhoto && dark ? "text-white" : "",
       )}
-      {...(heroActions ? { "data-mobile-cta-sentinel": true } : {})}
+      data-mobile-cta-sentinel
     >
       {hasPhoto && backgroundImage ? (
         <>
           <div
             className={cn(
               "absolute inset-0 z-0",
-              hasPhoto && effectiveOverlay && effectiveOverlay !== "light-soft" ? "brightness-[0.58]" : "",
+              hasPhoto && effectiveOverlay && !lightPhotoOverlays.has(effectiveOverlay) ? "brightness-[0.58]" : "",
             )}
           >
             <CloudinaryImage
@@ -368,5 +372,14 @@ export function ServiceHero(props: {
 }
 
 export function LocationHero({ city, state, intro }: { city: string; state: string; intro: string }) {
-  return <PageHero eyebrow="Service Area" title={"HVAC Services in " + city + ", " + state} description={intro} />;
+  return (
+    <PageHero
+      eyebrow="Service Area"
+      title={"HVAC Services in " + city + ", " + state}
+      description={intro}
+      backgroundImage={media.home.localProof}
+      photoOverlay="light-blend"
+      backgroundPriority
+    />
+  );
 }

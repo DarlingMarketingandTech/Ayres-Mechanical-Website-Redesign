@@ -45,7 +45,7 @@ function renderProofGallery({
       <Container>
         <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Supporting image &amp; proof</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Supporting image &amp; proof</p>
             <h2 className="mt-2 max-w-2xl text-2xl font-black text-balance text-brand-blue-dark sm:text-3xl">What this service looks like on real Central Indiana jobs.</h2>
           </div>
           {service.media?.showMitsubishiDemoBadge ? (
@@ -75,9 +75,8 @@ function renderProofGallery({
                   asset={asset}
                   fill
                   sizes="(min-width: 640px) 45vw, 100vw"
-                  width={Math.min(asset.width, 1200)}
-                  height={Math.max(2, Math.round((asset.height / asset.width) * Math.min(asset.width, 1200)))}
-                  className="object-cover object-center sm:object-[center_40%]"
+                  aspectRatio="16:10"
+                  className="object-cover object-center"
                   crop="fill"
                   gravity="auto"
                 />
@@ -130,7 +129,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
           <MotionReveal>
             <div className="rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
               <ServiceIcon icon={service.icon} className={iconAccentClasses[service.accent]} />
-              <p className="mt-6 text-sm font-black uppercase tracking-[0.24em] text-brand-red">What we help with</p>
+              <p className="mt-6 text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">What we help with</p>
               <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">{service.title}</h2>
               <p className="mt-5 text-lg leading-8 text-muted-foreground">{service.intro}</p>
               <div className="mt-6 rounded-2xl bg-brand-ice p-5">
@@ -142,7 +141,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
             </div>
           </MotionReveal>
           <div className="mt-10 max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">How we support you</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">How we support you</p>
             <h3 className="mt-3 text-2xl font-black text-balance text-brand-blue-dark sm:text-3xl">Direct support for the parts of the system that matter most.</h3>
           </div>
           <div className="mt-8">
@@ -162,12 +161,8 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
                   asset={service.media.contentIllustration}
                   fill
                   sizes="(min-width: 1024px) 900px, 100vw"
-                  width={Math.min(service.media.contentIllustration.width, 1400)}
-                  height={Math.max(
-                    2,
-                    Math.round((service.media.contentIllustration.height / service.media.contentIllustration.width) * Math.min(service.media.contentIllustration.width, 1400)),
-                  )}
-                  className="object-cover object-[center_45%]"
+                  aspectRatio="16:10"
+                  className="object-cover object-center"
                   crop="fill"
                   gravity="auto"
                 />
@@ -181,7 +176,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
       <Section>
         <Container>
           <div className="mb-8 max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Common problems</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Common problems</p>
             <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">Clear diagnostics for the issues customers notice first.</h2>
           </div>
           <AnimatedCardGrid items={service.commonProblems} />
@@ -232,7 +227,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
       <Section className="bg-brand-ice">
         <Container>
           <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Related services</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Related services</p>
             <h2 className="mt-3 text-3xl font-black text-balance text-brand-blue-dark sm:text-4xl">Keep exploring the right next step.</h2>
             <p className="mt-3 text-muted-foreground">Prefer answers first? See common questions on the homepage FAQ, or jump to a related service below.</p>
           </div>
@@ -243,7 +238,7 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
                 href={routes.service(item.slug)}
                 className="rounded-[1.5rem] border border-border/70 bg-white p-5 shadow-sm transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl"
               >
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-brand-red">Related service</p>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-brand-blue-dark/60">Related service</p>
                 <h3 className="mt-3 text-xl font-black text-brand-blue-dark">{item.shortTitle}</h3>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.summary}</p>
               </Link>
