@@ -1,4 +1,3 @@
-import type { Service } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -27,12 +26,25 @@ export function localBusinessSchema() {
   };
 }
 
-export function serviceSchema(service: Service) {
+type ServiceSchemaBase = {
+  title: string;
+  slug: string;
+  description?: string;
+  summary?: string;
+};
+
+export function serviceSchema(service: ServiceSchemaBase) {
+  const description = service.description ?? service.summary;
+
+  if (!description) {
+    throw new Error("serviceSchema requires a description or summary.");
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
-    description: service.description,
+    description,
     provider: {
       "@type": "HVACBusiness",
       name: siteConfig.name,
@@ -41,21 +53,6 @@ export function serviceSchema(service: Service) {
     },
     areaServed: siteConfig.serviceArea,
     url: absoluteUrl("/services/" + service.slug),
-  };
-}
-
-export function faqSchema(faqs: { question: string; answer: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
   };
 }
 

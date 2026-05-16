@@ -11,7 +11,7 @@ const problems = [
   {
     symptom: "Blowing warm air?",
     solution: "See AC Repair",
-    href: routes.service("cooling"),
+    href: routes.service("air-conditioning"),
     external: false,
   },
   {
@@ -23,7 +23,7 @@ const problems = [
   {
     symptom: "Spiking your energy bills?",
     solution: "View Maintenance Plans",
-    href: routes.service("maintenance"),
+    href: routes.service("preventive-maintenance"),
     external: false,
   },
   {
