@@ -17,7 +17,7 @@ function serviceLink(slug: Service["slug"]): NavigationChild {
   const service = services.find((item) => item.slug === slug);
 
   if (!service) {
-    throw new Error(`Missing service navigation entry for slug: ${slug}`);
+    throw new Error(`serviceLink() could not find a service navigation entry for slug "${slug}".`);
   }
 
   return {

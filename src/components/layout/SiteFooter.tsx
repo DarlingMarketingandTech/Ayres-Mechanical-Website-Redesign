@@ -65,7 +65,7 @@ export function SiteFooter() {
               {trustMarkers.map((marker) => (
                 <div key={marker} className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
                   <p className="text-sm font-black text-white">{marker}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">Icon placeholder</p>
+                  <div className="mt-3 h-9 rounded-xl border border-dashed border-white/20 bg-white/4" aria-hidden="true" />
                 </div>
               ))}
             </div>
