@@ -137,8 +137,8 @@ export const media = {
     primaryLogo: {
       publicId: "ayres-mech-website-logo",
       alt: "Ayres Mechanical logo.",
-      width: 2045,
-      height: 265,
+      width: 2138,
+      height: 580,
       format: "png",
       assetFolder: "ayres-mechanical-website/00-brand-system/logos",
       usageNotes: "Wide wordmark with minimal padding; preferred for header and footer.",

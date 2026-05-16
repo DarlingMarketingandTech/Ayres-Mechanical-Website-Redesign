@@ -97,27 +97,7 @@ export function SiteHeader() {
             </div>
           </div>
 
-          <div className="mt-3 flex items-center gap-2 lg:hidden" data-mobile-header-call>
-            <a href={phoneHref} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "min-w-0 flex-1 justify-center gap-2 px-4 text-sm sm:text-base")}>
-              <Phone className="size-4" aria-hidden="true" />
-              Call {siteConfig.phone}
-            </a>
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              className="shrink-0"
-              aria-label="Open site navigation"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(true)}
-            >
-              <Menu className="size-5" aria-hidden="true" />
-              Menu
-            </Button>
-          </div>
-
-          {/* Menu-only row shown when hero is in view and call row is suppressed */}
-          <div className="mt-3 hidden items-center justify-end lg:hidden" data-mobile-menu-only>
+          <div className="mt-3 flex items-center justify-end lg:hidden">
             <Button
               type="button"
               variant="outline"

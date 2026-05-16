@@ -44,36 +44,48 @@ export function DesktopNav() {
             Services
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[720px] p-4">
+            <div className="w-[760px] p-3">
               <div className="rounded-2xl border border-border/70 bg-white/90 p-4 shadow-sm">
-                <div className="flex items-center justify-between gap-4 border-b border-border/70 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-border/70 pb-3">
                   <div>
                     <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">Rule of Three</p>
-                    <h3 className="mt-2 text-lg font-black text-brand-blue-dark">Service paths for every property type</h3>
+                    <h3 className="mt-1 text-lg font-black text-brand-blue-dark">Service paths for every property type</h3>
                   </div>
                   <NavigationMenuLink
                     render={<Link href={serviceOverviewLink.href} />}
                     className={cn(
-                      "rounded-full border border-border bg-secondary px-4 py-2 text-sm font-black text-brand-blue-dark hover:bg-secondary/80",
+                      "rounded-full border border-border bg-secondary px-4 py-2 text-sm font-black text-brand-blue-dark transition-colors hover:bg-secondary/80",
                       isRouteActive(pathname, serviceOverviewLink.href) && "border-primary/15 bg-brand-ice text-primary",
                     )}
                   >
                     {serviceOverviewLink.label}
                   </NavigationMenuLink>
                 </div>
-                <div className="mt-4 grid gap-3 md:grid-cols-3">
-                  {serviceNavigationGroups.map((group) => (
-                    <div key={group.label} className="rounded-2xl border border-border/70 bg-white p-4 shadow-sm">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">{group.label}</p>
-                      <ul className="mt-3 grid gap-2">
-                        {group.items.map((item) => (
-                          <li key={item.href}>
-                            <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="mt-3 grid gap-3 md:grid-cols-3">
+                  <div className="md:col-span-2 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
+                    <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">Residential</p>
+                    <ul className="grid gap-1 md:grid-cols-2">
+                      {serviceNavigationGroups.find(g => g.label === "Residential")?.items.map((item) => (
+                        <li key={item.href}>
+                          <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {serviceNavigationGroups.filter(g => g.label !== "Residential").map((group) => (
+                      <div key={group.label} className="flex-1 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
+                        <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">{group.label}</p>
+                        <ul className="grid gap-1">
+                          {group.items.map((item) => (
+                            <li key={item.href}>
+                              <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -85,10 +97,10 @@ export function DesktopNav() {
             Company
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[380px] p-4">
+            <div className="w-[380px] p-3">
               <div className="rounded-2xl border border-border/70 bg-white/90 p-4 shadow-sm">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">Company</p>
-                <ul className="mt-3 grid gap-2">
+                <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">Company</p>
+                <ul className="grid gap-1">
                   {companyNavigation.map((item) => (
                     <li key={item.href}>
                       <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
@@ -124,14 +136,12 @@ function DesktopNavChild({ child, active }: { child: NavigationChild; active: bo
     <NavigationMenuLink
       render={<Link href={child.href} />}
       className={cn(
-        "items-start rounded-xl border border-transparent bg-transparent px-3 py-3 text-left hover:border-brand-blue-dark/10 hover:bg-secondary/70",
+        "flex flex-col gap-1 rounded-lg border border-transparent bg-transparent px-3 py-2.5 text-left transition-colors hover:border-brand-blue-dark/10 hover:bg-secondary/70",
         active && "border-primary/15 bg-brand-ice text-primary",
       )}
     >
-      <div className="flex min-w-0 flex-col gap-1">
-        <span className="text-sm font-black text-brand-blue-dark">{child.label}</span>
-        {child.description ? <span className="text-xs leading-relaxed text-muted-foreground">{child.description}</span> : null}
-      </div>
+      <span className="text-sm font-black text-brand-blue-dark">{child.label}</span>
+      {child.description ? <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{child.description}</span> : null}
     </NavigationMenuLink>
   );
 }
