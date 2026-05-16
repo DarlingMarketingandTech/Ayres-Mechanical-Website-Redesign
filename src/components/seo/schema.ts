@@ -26,9 +26,12 @@ export function localBusinessSchema() {
   };
 }
 
-type ServiceSchemaInput =
-  | { title: string; slug: string; description: string; summary?: string }
-  | { title: string; slug: string; description?: string; summary: string };
+type ServiceSchemaBase = {
+  title: string;
+  slug: string;
+};
+
+type ServiceSchemaInput = ServiceSchemaBase & ({ description: string; summary?: string } | { description?: string; summary: string });
 
 export function serviceSchema(service: ServiceSchemaInput) {
   return {
