@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Geist_Mono, Source_Sans_3 } from "next/font/google";
 
+import { WebVitals } from "@/components/analytics/WebVitals";
 import { siteConfig } from "@/content/site";
 import { resolveMetadataBaseUrl } from "@/lib/resolve-metadata-base";
 import { robotsMetadata } from "@/lib/seo";
@@ -78,6 +79,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
+        <WebVitals />
         {children}
       </body>
     </html>

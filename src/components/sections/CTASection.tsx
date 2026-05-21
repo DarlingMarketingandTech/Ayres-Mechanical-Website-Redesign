@@ -27,12 +27,25 @@ export function CTASection({ title = "Ready to schedule HVAC service?", descript
           <div className="hidden flex-col gap-4 lg:flex lg:flex-row lg:mt-0">
             <Link
               href={routes.requestService}
+              data-analytics-event="cta_click"
+              data-analytics-category="section_cta"
+              data-analytics-label="request_service"
+              data-analytics-location="cta_section"
+              data-analytics-href={routes.requestService}
               className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceCtaClassNames(), "relative overflow-hidden")}
             >
               Request Service
               <ArrowRight data-icon="inline-end" className="w-4 h-4" aria-hidden />
             </Link>
-            <a href={phoneHref} className={cn(buttonVariants({ variant: "inverse", size: "lg" }), phoneOutlineCtaClassNames(), "shadow-lg shadow-black/10 hover:bg-white/90")}>
+            <a
+              href={phoneHref}
+              data-analytics-event="cta_click"
+              data-analytics-category="section_cta"
+              data-analytics-label="call_now"
+              data-analytics-location="cta_section"
+              data-analytics-href={phoneHref}
+              className={cn(buttonVariants({ variant: "inverse", size: "lg" }), phoneOutlineCtaClassNames(), "shadow-lg shadow-black/10 hover:bg-white/90")}
+            >
               <Phone data-icon="inline-start" className="w-4 h-4" aria-hidden />
               Call {siteConfig.phone}
             </a>

@@ -105,12 +105,25 @@ export function SiteHeader() {
             <div className="hidden items-center gap-3 lg:flex">
               <a
                 href={phoneHref}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label="call_now"
+                data-analytics-location="desktop_header"
+                data-analytics-href={phoneHref}
                 className="inline-flex items-center gap-2 rounded-full border border-brand-blue-dark/10 bg-white/80 px-4 py-2 text-sm font-black text-brand-blue-dark transition-colors hover:text-primary"
               >
                 <Phone className="size-4" aria-hidden="true" />
                 Call {siteConfig.phone}
               </a>
-              <Link href={emergencyNavigation.href} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "px-5")}>
+              <Link
+                href={emergencyNavigation.href}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label={emergencyNavigation.label}
+                data-analytics-location="desktop_header"
+                data-analytics-href={emergencyNavigation.href}
+                className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "px-5")}
+              >
                 <Clock className="size-4" aria-hidden="true" />
                 {emergencyNavigation.label}
               </Link>
@@ -210,6 +223,11 @@ export function SiteHeader() {
               <Link
                 href={emergencyNavigation.href}
                 onClick={() => setMenuOpen(false)}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label={emergencyNavigation.label}
+                data-analytics-location="mobile_menu"
+                data-analytics-href={emergencyNavigation.href}
                 className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}
               >
                 <Clock className="size-4" aria-hidden="true" />
@@ -218,12 +236,22 @@ export function SiteHeader() {
               <Link
                 href={routes.requestService}
                 onClick={() => setMenuOpen(false)}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label="request_service"
+                data-analytics-location="mobile_menu"
+                data-analytics-href={routes.requestService}
                 className={cn(buttonVariants({ variant: "dark", size: "lg" }), "justify-center")}
               >
                 Request Service Online
               </Link>
               <a
                 href={phoneHref}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label="call_now"
+                data-analytics-location="mobile_menu"
+                data-analytics-href={phoneHref}
                 className={cn(buttonVariants({ variant: "outline", size: "lg" }), "justify-center")}
               >
                 <Phone className="size-4" aria-hidden="true" />

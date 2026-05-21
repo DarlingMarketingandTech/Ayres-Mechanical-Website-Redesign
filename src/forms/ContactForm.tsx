@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import { contactFormSchema, type ContactFormValues } from "@/lib/validators";
 
 const serviceTypes = ["Heating", "Air Conditioning", "Maintenance", "Ductwork", "Commercial HVAC", "Industrial HVAC", "Emergency Service"];
@@ -53,6 +54,12 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
 
   async function onSubmit(values: ContactFormValues) {
     setStatus(null);
+    trackAnalyticsEvent("form_submit_attempt", {
+      form: compact ? "compact_contact" : "contact_request",
+      serviceType: values.serviceType,
+      customerType: values.customerType,
+      urgency: values.urgency,
+    });
 
     try {
       const response = await fetch("/api/contact", {
@@ -64,6 +71,11 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
       const result = (await response.json().catch(() => null)) as ContactApiResponse | null;
 
       if (response.ok && result?.ok) {
+        trackAnalyticsEvent("form_submit_success", {
+          form: compact ? "compact_contact" : "contact_request",
+          serviceType: values.serviceType,
+          customerType: values.customerType,
+        });
         setStatus({ type: "success", message: result.message ?? "Thanks. Your request has been sent." });
         reset();
         return;
@@ -79,8 +91,16 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
         }
       }
 
+      trackAnalyticsEvent("form_submit_error", {
+        form: compact ? "compact_contact" : "contact_request",
+        status: response.status,
+      });
       setStatus({ type: "error", message: result?.message ?? fallbackErrorMessage });
     } catch {
+      trackAnalyticsEvent("form_submit_error", {
+        form: compact ? "compact_contact" : "contact_request",
+        status: "network_error",
+      });
       setStatus({ type: "error", message: fallbackErrorMessage });
     }
   }

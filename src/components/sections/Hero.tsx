@@ -69,6 +69,11 @@ export function HomeHero() {
           <motion.div variants={fadeUp} className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap">
             <Link
               href={routes.requestService}
+              data-analytics-event="cta_click"
+              data-analytics-category="hero"
+              data-analytics-label="request_service"
+              data-analytics-location="home_hero"
+              data-analytics-href={routes.requestService}
               className={cn(
                 buttonVariants({ variant: "emergency", size: "lg" }),
                 requestServiceCtaClassNames(),
@@ -79,6 +84,11 @@ export function HomeHero() {
             </Link>
             <a
               href={phoneHref}
+              data-analytics-event="cta_click"
+              data-analytics-category="hero"
+              data-analytics-label="call_now"
+              data-analytics-location="home_hero"
+              data-analytics-href={phoneHref}
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 phoneOutlineCtaClassNames(),
@@ -280,6 +290,11 @@ export function PageHero({
             >
               <Link
                 href={heroActions.primary.href}
+                data-analytics-event="cta_click"
+                data-analytics-category="hero"
+                data-analytics-label={heroActions.primary.label}
+                data-analytics-location={eyebrow}
+                data-analytics-href={heroActions.primary.href}
                 className={cn(
                   buttonVariants({
                     variant: forceLightForeground ? "emergency" : dark ? "emergency" : "default",
@@ -295,6 +310,11 @@ export function PageHero({
               {heroActions.secondary.external !== false ? (
                 <a
                   href={heroActions.secondary.href}
+                  data-analytics-event="cta_click"
+                  data-analytics-category="hero"
+                  data-analytics-label={heroActions.secondary.label}
+                  data-analytics-location={eyebrow}
+                  data-analytics-href={heroActions.secondary.href}
                   className={cn(
                     buttonVariants({
                       variant: forceLightForeground ? "inverse" : dark ? "inverse" : "outline",
@@ -311,6 +331,11 @@ export function PageHero({
               ) : (
                 <Link
                   href={heroActions.secondary.href}
+                  data-analytics-event="cta_click"
+                  data-analytics-category="hero"
+                  data-analytics-label={heroActions.secondary.label}
+                  data-analytics-location={eyebrow}
+                  data-analytics-href={heroActions.secondary.href}
                   className={cn(
                     buttonVariants({
                       variant: forceLightForeground ? "inverse" : dark ? "inverse" : "outline",
