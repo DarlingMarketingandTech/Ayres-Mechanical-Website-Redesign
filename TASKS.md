@@ -1,6 +1,6 @@
 # Ayres Mechanical Website — Task List
 
-_Last updated: 2026-05-21 (session 2)_
+_Last updated: 2026-05-21 (session 3)_
 
 ---
 
@@ -13,6 +13,12 @@ _Last updated: 2026-05-21 (session 2)_
 - [x] **Cloudinary audit** — catalogued all 53 assets in `ayres-mechanical-website/` folder; identified 7 real Ayres photos to replace placeholder images
 - [x] **Wire up real Cloudinary images in `media.ts`** — added 6 new asset entries (`amServicesHvac`, `amHeatingService`, `heatAmService`, `amRooftopUnitServices`, `industrialAm`, `emergencyServicePhoto`); updated `pages` mapping to use real photos; extended `satisfies` type to include `industrial` and `emergency` page slots
 - [x] **Wire up `heroBackground` in `services-content.ts`** — added `heroBackground` to `preventive-maintenance`, `industrial`, and `24-hour-emergency` service entries (all 7 service cards now have real images)
+- [x] **Cloudinary asset cleanup (session 3)** — applied renamed/moved assets to `media.ts`:
+  - `am-services-HVAC-` → renamed in Cloudinary to `ac-service-outdoor-hvac-system` (AC hero, 1536×1028 webp); `media.ts` `amServicesHvac` publicId, alt, and usageNotes updated.
+  - `FTL-Logo-1024x314` moved from `10-financing` → `ayres-mechanical-website/02-pages/financing`; `assetFolder` updated in `media.ts`.
+  - `pexels-katterinaaa-61454609-8065903` moved from `03-services/commercial-hvac` → `ayres-mechanical-website/90-temporary-stock/approved-for-demo`; `assetFolder` updated in `media.ts`.
+  - `hvac-repair-redding-ca` moved to `90-temporary-stock/license-or-source-review` in Cloudinary; marked `temporaryDemo: true` in `media.ts`, removed from `pages.emergency.hero`.
+  - Emergency card hero now uses `ac-service-outdoor-hvac-system` as a temporary fallback (same real Ayres image as AC hero). `heroImageClassName` updated to `object-[center_30%]` for landscape crop. Replace with an approved emergency photo before launch.
 
 ---
 
@@ -31,13 +37,14 @@ _Last updated: 2026-05-21 (session 2)_
 
 > Design critique (2026-05-21): Service card image fixes completed in code — real Ayres photos now wired up in `media.ts` and `services-content.ts`. Deploy to Vercel to go live.
 
-- [x] **AC hero** — replaced `cold-bg` (icebergs) with `am-services-HVAC-` (real Ayres technician photo). `temporaryDemo` flag removed from slot.
+- [x] **AC hero** — replaced `cold-bg` (icebergs) with `ac-service-outdoor-hvac-system` (real Ayres outdoor HVAC photo; renamed from `am-services-HVAC-` in Cloudinary cleanup). `temporaryDemo` flag removed from slot.
 - [x] **Heating hero** — replaced `hot-bg` (sand dunes) with `am-heating-service` (real heating service photo).
 - [x] **Commercial hero** — replaced `helicopter-industrial-roof-install` with `am-rooftopunit-services` (real Ayres rooftop unit photo).
 - [x] **Preventive Maintenance card** — added first-ever image: `heat-am-service` (technician on service call). `object-top` crop bias set to favor face/hands.
 - [x] **Industrial card** — added first-ever image: `industrial-am`.
-- [x] **24-Hour Emergency card** — added first-ever image: `hvac-repair-redding-ca`. `object-top` crop bias set.
+- [x] **24-Hour Emergency card** — ~~`hvac-repair-redding-ca`~~ removed (license/source review — references Redding, CA). Now uses `ac-service-outdoor-hvac-system` as a temporary fallback. `object-[center_30%]` crop set for landscape.
 - [ ] **Replace `fresh-air-bg` (Indoor Air Quality hero)** — still a stock photo (`temporaryDemo: true`). Upload a real IAQ photo to Cloudinary and re-point `pages.indoorAirQuality.hero` in `media.ts`.
+- [ ] **Replace emergency card hero** — `hvac-repair-redding-ca` is in license/source review (Redding, CA reference). Currently showing `ac-service-outdoor-hvac-system` as temp fallback. Upload a real Ayres emergency/service-call photo to `ayres-mechanical-website/03-services/emergency-service`, register in `media.ts`, and re-point `media.pages.emergency.hero`.
 - [ ] **Improve hero card image resolution** — dark forest image on right side of homepage hero is visibly blurry at card size. Re-upload higher-res source or verify `q_auto,f_auto` is being applied.
 
 ### Development

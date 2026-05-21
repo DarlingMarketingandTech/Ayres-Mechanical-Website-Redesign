@@ -648,7 +648,7 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.emergency.hero,
-      heroImageClassName: "object-top",
+      heroImageClassName: "object-[center_30%]",
     },
   },
 ];

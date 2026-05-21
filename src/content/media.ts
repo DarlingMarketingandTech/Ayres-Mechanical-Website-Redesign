@@ -107,10 +107,10 @@ const assets = {
     width: 4000,
     height: 6000,
     format: "jpg",
-    assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+    assetFolder: "ayres-mechanical-website/90-temporary-stock/approved-for-demo",
     temporaryDemo: true,
     usageNotes:
-      "Registry: `pages.commercial.supporting` — intended final public_id `commercial-rooftop-hvac-stock-photo` (not in account yet). Re-point after upload/rename.",
+      "Registry: `pages.commercial.supporting` — temporary approved-for-demo stock; moved from 03-services/commercial-hvac to 90-temporary-stock/approved-for-demo in Cloudinary cleanup. Intended final public_id `commercial-rooftop-hvac-stock-photo` (not in account yet). Re-point after upload/rename.",
   },
   systemsExplainer: {
     publicId: "systems-explainer",
@@ -131,13 +131,13 @@ const assets = {
     usageNotes: "Registry: `pages.ductless.supporting`.",
   },
   amServicesHvac: {
-    publicId: "am-services-HVAC-",
-    alt: "Ayres Mechanical HVAC technician working on equipment.",
+    publicId: "ac-service-outdoor-hvac-system",
+    alt: "Outdoor HVAC system for Ayres Mechanical air conditioning service.",
     width: 1536,
     height: 1028,
     format: "webp",
     assetFolder: "ayres-mechanical-website/03-services/air-conditioning",
-    usageNotes: "Registry: `pages.airConditioning.hero`. Real job photo — replaces cold-bg placeholder.",
+    usageNotes: "Registry: `pages.airConditioning.hero`. Real AC service image from Cloudinary cleanup; replaces cold-bg placeholder.",
   },
   amHeatingService: {
     publicId: "am-heating-service",
@@ -181,8 +181,10 @@ const assets = {
     width: 600,
     height: 800,
     format: "jpg",
-    assetFolder: "ayres-mechanical-website/03-services/emergency-service",
-    usageNotes: "Registry: `pages.emergency.hero`. First image for the 24-hour emergency card.",
+    assetFolder: "ayres-mechanical-website/90-temporary-stock/license-or-source-review",
+    temporaryDemo: true,
+    usageNotes:
+      "NOT in active use. Moved to 90-temporary-stock/license-or-source-review in Cloudinary cleanup — filename references Redding, CA and must not appear as a polished live Ayres asset. Replace with an approved real emergency/service-call photo before launch. Emergency hero currently uses `pages.airConditioning.hero` (ac-service-outdoor-hvac-system) as a temporary fallback.",
   },
 } satisfies Record<string, CloudinaryMediaAsset>;
 
@@ -233,7 +235,7 @@ export const media = {
       width: 1024,
       height: 314,
       format: "png",
-      assetFolder: "ayres-mechanical-website/10-financing",
+      assetFolder: "ayres-mechanical-website/02-pages/financing",
       usageNotes: "Financing partner mark for homepage and financing page.",
     },
   },
@@ -299,7 +301,8 @@ export const media = {
       hero: assets.industrialAm,
     },
     emergency: {
-      hero: assets.emergencyServicePhoto,
+      /** Temporary fallback: real emergency photo pending license review of `hvac-repair-redding-ca`. Replace with approved photo before launch. */
+      hero: assets.amServicesHvac,
     },
   },
   services: {
