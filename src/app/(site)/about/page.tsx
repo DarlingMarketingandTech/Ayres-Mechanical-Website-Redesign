@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/Section";
 import { PageHero } from "@/components/sections/Hero";
 import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { buttonVariants } from "@/components/ui/button";
 import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
@@ -108,16 +109,8 @@ export default function AboutPage() {
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Social Proof</p>
                 <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">What Our Customers Say</h2>
-                <p className="mt-4 leading-8 text-muted-foreground">
-                  Add your approved review carousel, testimonial cards, or review-summary module here when the final Cloudinary and review assets are ready.
-                </p>
               </div>
-              <PlaceholderPanel
-                eyebrow="Reviews Placeholder"
-                title="Customer review module placeholder"
-                description="Reserved for review cards, star ratings, or a testimonial reel."
-                tag="Placeholder Component"
-              />
+              <Testimonials limit={3} />
             </div>
           </MotionReveal>
           <MotionReveal>
@@ -188,32 +181,3 @@ export default function AboutPage() {
   );
 }
 
-function PlaceholderPanel({
-  eyebrow,
-  title,
-  description,
-  tag,
-  caption,
-}: {
-  eyebrow: string;
-  title: string;
-  description: string;
-  tag: string;
-  caption?: string;
-}) {
-  return (
-    <div className="rounded-[1.75rem] border border-dashed border-border/80 bg-gradient-to-br from-brand-ice via-white to-secondary p-6">
-      <div className="flex min-h-[18rem] flex-col justify-between rounded-[1.5rem] border border-dashed border-brand-blue-dark/15 bg-white/75 p-6">
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-black uppercase tracking-[0.22em] text-brand-red">{eyebrow}</p>
-          <span className="rounded-full bg-brand-blue-dark px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-white">{tag}</span>
-        </div>
-        <div>
-          <h3 className="text-2xl font-black text-brand-blue-dark">{title}</h3>
-          <p className="mt-3 max-w-xl leading-8 text-muted-foreground">{description}</p>
-        </div>
-      </div>
-      {caption ? <p className="mt-4 text-sm leading-7 text-muted-foreground">{caption}</p> : null}
-    </div>
-  );
-}

@@ -1,3 +1,42 @@
+export type ReviewPlatform = {
+  name: string;
+  /** URL to the public review profile page (e.g. Google Business or Facebook page reviews tab). */
+  profileUrl: string;
+  /** URL to go directly to the review compose screen, if available. */
+  writeReviewUrl: string;
+  /** Total review count shown on this platform (update when count changes). */
+  count: number;
+  /** Average rating shown on this platform. */
+  rating: number;
+};
+
+/**
+ * Review platform profiles for Ayres Mechanical Inc.
+ *
+ * TODO (client): Replace the demo Place ID below with the real Google Business Profile Place ID.
+ * Find it at https://developers.google.com/maps/documentation/places/web-service/place-id
+ * Also confirm the real Facebook page URL and update `profileUrl` / `writeReviewUrl` for Facebook.
+ * Update `count` and `rating` for each platform as reviews accumulate.
+ *
+ * Demo Place ID in use: ChIJDemo_AyresMechanical_Indianapolis (placeholder — not a real Place ID)
+ */
+export const reviewPlatforms: ReviewPlatform[] = [
+  {
+    name: "Google",
+    profileUrl: "https://www.google.com/maps/place/Ayres+Mechanical+Inc/@39.7684,-86.1581,15z",
+    writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJDemo_AyresMechanical_Indianapolis",
+    count: 13,
+    rating: 4.9,
+  },
+  {
+    name: "Facebook",
+    profileUrl: "https://www.facebook.com/AyresMechanicalInc",
+    writeReviewUrl: "https://www.facebook.com/AyresMechanicalInc/reviews",
+    count: 0,
+    rating: 5.0,
+  },
+];
+
 export type Testimonial = {
   name: string;
   date: string;

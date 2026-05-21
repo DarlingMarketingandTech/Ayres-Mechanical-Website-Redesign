@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Phone, Siren } from "lucide-react";
 
+import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 
 export function EmergencyCTA() {
   return (
@@ -26,11 +28,14 @@ export function EmergencyCTA() {
         </p>
         <a
           href={phoneHref}
-          className="mt-4 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.2em] text-white"
+          className={cn(
+            buttonVariants({ variant: "inverse", size: "lg" }),
+            "mt-5 w-full justify-center sm:w-auto",
+          )}
           aria-label={`Call now at ${siteConfig.phone}`}
         >
-          <Phone data-icon="inline-start" className="size-4" aria-hidden="true" />
-          Emergency call line
+          <Phone data-icon="inline-start" className="size-4 shrink-0" aria-hidden="true" />
+          Call {siteConfig.phone}
         </a>
       </div>
     </div>

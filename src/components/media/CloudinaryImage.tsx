@@ -54,12 +54,6 @@ export function CloudinaryImage({
   /** Next/Image forbids `width`/`height` together with `fill`; the Cloudinary loader still gets width from Next when `fill` is set. */
   const layoutDimensions = fill ? {} : { width: resolvedWidth, height: resolvedHeight };
   
-  // If fill is true and we have a crop mode that changes aspect ratio, we should pass aspectRatio
-  // so Cloudinary can crop it server-side using g_auto.
-  const autoAspectRatio = fill && props.crop === "fill" && !props.aspectRatio 
-    ? `${resolvedWidth}:${resolvedHeight}` 
-    : props.aspectRatio;
-
   return (
     <span
       className={cn(
