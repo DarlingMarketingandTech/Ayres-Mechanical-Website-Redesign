@@ -15,7 +15,6 @@ import { media } from "@/content/media";
 import type { ServiceContent } from "@/data/services-content";
 import { getServiceContentBySlug } from "@/data/services-content";
 import { siteConfig } from "@/content/site";
-import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Phone, Sparkles } from "lucide-react";

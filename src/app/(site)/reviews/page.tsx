@@ -1,4 +1,5 @@
 import { Testimonials } from "@/components/sections/Testimonials";
+import { ReviewPlatformBadges } from "@/components/sections/ReviewPlatformBadges";
 import { BasicPageTemplate } from "@/components/templates/BasicPageTemplate";
 import { media } from "@/content/media";
 import { pageMetadata } from "@/lib/seo";
@@ -14,6 +15,7 @@ export default function ReviewsPage() {
       heroBackground={media.ui.freshAirBg}
       heroPhotoOverlay="light-blend"
     >
+      <ReviewPlatformBadges />
       <Testimonials />
     </BasicPageTemplate>
   );
