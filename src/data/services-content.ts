@@ -3,7 +3,7 @@ import { media } from "@/content/media";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 
-export type HeroPhotoOverlayPreset = "none" | "photo-reveal" | "navy-strong" | "navy-soft" | "light-soft";
+export type HeroPhotoOverlayPreset = "none" | "navy-strong" | "navy-soft" | "light-soft";
 
 export type ServicePageMedia = {
   heroBackground?: CloudinaryMediaAsset;
@@ -138,8 +138,7 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.airConditioning.hero,
       heroImageClassName: "object-[center_22%]",
-      heroPhotoOverlay: "photo-reveal",
-      heroDeliveryWidth: 1920,
+      heroDeliveryWidth: 2400,
       heroGallery: [media.pages.airConditioning.supporting],
     },
   },
@@ -216,7 +215,6 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.heating.hero,
       heroImageClassName: "object-[center_28%]",
-      heroPhotoOverlay: "photo-reveal",
     },
   },
   {
@@ -287,8 +285,7 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.maintenance.hero,
-      heroImageClassName: "object-[center_28%]",
-      heroPhotoOverlay: "photo-reveal",
+      heroImageClassName: "object-top",
       contentIllustration: media.pages.maintenance.supporting,
     },
   },
@@ -366,8 +363,7 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.commercial.hero,
       heroImageClassName: "object-[center_32%]",
-      heroPhotoOverlay: "photo-reveal",
-      heroDeliveryWidth: 1200,
+      heroDeliveryWidth: 1600,
       heroGallery: [media.pages.commercial.supporting],
     },
   },
@@ -444,8 +440,6 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
     media: {
       heroBackground: media.pages.industrial.hero,
-      heroImageClassName: "object-[center_40%]",
-      heroPhotoOverlay: "photo-reveal",
     },
   },
   {
@@ -510,9 +504,6 @@ export const servicePageContent: ServiceContent[] = [
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
     media: {
-      heroBackground: media.pages.ductless.hero,
-      heroImageClassName: "object-[center_35%]",
-      heroPhotoOverlay: "photo-reveal",
       heroGallery: [media.pages.ductless.supporting],
     },
   },
@@ -579,8 +570,8 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.airConditioning, serviceSlugs.heating],
     media: {
       heroBackground: media.pages.indoorAirQuality.hero,
-      heroImageClassName: "object-[center_30%]",
-      heroPhotoOverlay: "photo-reveal",
+      heroImageClassName: "object-[center_25%]",
+      heroPhotoOverlay: "navy-soft",
       heroGallery: [media.pages.indoorAirQuality.supporting],
     },
   },
@@ -657,8 +648,7 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.emergency.hero,
-      heroImageClassName: "object-[center_28%]",
-      heroPhotoOverlay: "photo-reveal",
+      heroImageClassName: "object-top",
     },
   },
 ];

@@ -155,12 +155,6 @@ export function HomeHero() {
 }
 
 const photoScrim = {
-  /**
-   * "photo-reveal" — shows the real photo through while keeping headline legible.
-   * Bottom-weighted scrim so the image is clearly visible in the upper portion;
-   * text sits in the darker lower region. No brightness reduction on the image itself.
-   */
-  "photo-reveal": "bg-gradient-to-t from-brand-blue-dark/92 via-brand-blue-dark/52 to-brand-blue-dark/18",
   "navy-strong": "bg-gradient-to-br from-brand-blue-dark via-brand-blue-dark/96 to-black/58",
   "navy-soft": "bg-gradient-to-t from-brand-blue-dark/90 via-brand-blue-dark/58 to-brand-blue-dark/40",
   "light-soft": "bg-gradient-to-b from-white/92 via-white/82 to-white/70",
@@ -169,7 +163,6 @@ const photoScrim = {
 
 export type PageHeroPhotoOverlay = keyof typeof photoScrim;
 
-/** Overlays that place text on a light background (dark text, no white text forced). */
 const lightPhotoOverlays = new Set<PageHeroPhotoOverlay>(["light-soft", "light-blend"]);
 
 export type PageHeroHeroActions = {
@@ -238,11 +231,7 @@ export function PageHero({
           <div
             className={cn(
               "absolute inset-0 z-0",
-              // "photo-reveal" relies solely on the gradient scrim for contrast — no brightness reduction.
-              // "navy-strong" / "navy-soft" are nearly-opaque gradients, so a light brightness nudge is enough.
-              hasPhoto && effectiveOverlay && !lightPhotoOverlays.has(effectiveOverlay) && effectiveOverlay !== "photo-reveal"
-                ? "brightness-[0.72]"
-                : "",
+              hasPhoto && effectiveOverlay && !lightPhotoOverlays.has(effectiveOverlay) ? "brightness-[0.58]" : "",
             )}
           >
             <CloudinaryImage
