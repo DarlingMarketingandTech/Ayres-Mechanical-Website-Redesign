@@ -12,10 +12,22 @@ type PendingOwnerFact = {
 };
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const fallbackProductionSiteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+const canonicalSiteUrl = configuredSiteUrl || fallbackProductionSiteUrl;
 
 function normalizeSiteUrl(url: string) {
-  return url.replace(/\/+$/, "");
+  const withProtocol = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+  return withProtocol.replace(/\/+$/, "");
 }
+
+export const deploymentEnvironment =
+  process.env.VERCEL_ENV === "preview"
+    ? "preview"
+    : process.env.NODE_ENV === "production"
+      ? "production"
+      : "development";
+
+export const siteIndexingEnabled = deploymentEnvironment === "production" && Boolean(canonicalSiteUrl);
 
 export const pendingOwnerConfirmation = {
   productionUrl: {
@@ -72,7 +84,7 @@ export const siteConfig: {
   phone: "317-538-9837",
   phoneE164: "+13175389837",
   email: null,
-  url: normalizeSiteUrl(configuredSiteUrl || "http://localhost:3000"),
+  url: normalizeSiteUrl(canonicalSiteUrl || "http://localhost:3000"),
   urlStatus: configuredSiteUrl ? "configured" : "pending_owner_confirmation",
   tagline: "Heating & Air Conditioning Specialists",
   description:

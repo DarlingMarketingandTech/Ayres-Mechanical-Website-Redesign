@@ -3,8 +3,6 @@ import { ExternalLink, Star } from "lucide-react";
 import { reviewPlatforms } from "@/content/testimonials";
 import { cn } from "@/lib/utils";
 
-const GOOGLE_PLACEHOLDER_ID = "ChIJDemo_AyresMechanical_Indianapolis";
-
 /** Google "G" monogram rendered as inline SVG — no external dependency. */
 function GoogleIcon({ className }: { className?: string }) {
   return (
@@ -60,7 +58,7 @@ function PlatformIcon({ name, className }: { name: string; className?: string })
 }
 
 function hasConfirmedWriteReviewUrl(url: string) {
-  return Boolean(url) && !url.includes(GOOGLE_PLACEHOLDER_ID);
+  return Boolean(url);
 }
 
 export function ReviewPlatformBadges() {

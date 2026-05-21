@@ -11,7 +11,6 @@ import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
 import { ServiceHero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { buttonVariants } from "@/components/ui/button";
-import { media } from "@/content/media";
 import type { ServiceContent } from "@/data/services-content";
 import { getServiceContentBySlug } from "@/data/services-content";
 import { siteConfig } from "@/content/site";
@@ -37,7 +36,7 @@ function renderProofGallery({
 }: {
   service: ServiceContent;
 }) {
-  if (!service.media?.heroGallery?.length && !service.media?.showMitsubishiDemoBadge) return null;
+  if (!service.media?.heroGallery?.length) return null;
 
   return (
     <Section className="border-b border-border/60 bg-brand-ice py-8 sm:py-10">
@@ -47,21 +46,6 @@ function renderProofGallery({
             <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Supporting image &amp; proof</p>
             <h2 className="mt-2 max-w-2xl text-2xl font-black text-balance text-brand-blue-dark sm:text-3xl">What this service looks like on real Central Indiana jobs.</h2>
           </div>
-          {service.media?.showMitsubishiDemoBadge ? (
-            <div className="flex max-w-sm flex-col gap-2 rounded-2xl border border-border/70 bg-white p-4 shadow-sm">
-              <CloudinaryImage
-                asset={media.partners.mitsubishi}
-                disableLqip
-                width={media.partners.mitsubishi.width}
-                height={media.partners.mitsubishi.height}
-                sizes="200px"
-                className="h-auto max-h-14 w-[min(100%,220px)] object-contain object-left"
-              />
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Mitsubishi badge shown for demo layout only — confirm final credential usage with Ayres ownership before publishing compliance claims.
-              </p>
-            </div>
-          ) : null}
         </div>
         {service.media?.heroGallery?.length ? (
           <div className="grid gap-4 sm:grid-cols-2">
@@ -82,20 +66,6 @@ function renderProofGallery({
                 <figcaption className="sr-only">{asset.alt}</figcaption>
               </figure>
             ))}
-          </div>
-        ) : service.media?.showMitsubishiDemoBadge ? (
-          <div className="flex max-w-2xl flex-col gap-3 rounded-2xl border border-border/70 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6">
-            <CloudinaryImage
-              asset={media.partners.mitsubishi}
-              disableLqip
-              width={media.partners.mitsubishi.width}
-              height={media.partners.mitsubishi.height}
-              sizes="200px"
-              className="h-auto max-h-16 w-[min(100%,240px)] object-contain object-left"
-            />
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Mitsubishi badge shown for demo layout only — confirm final credential usage with Ayres ownership before publishing compliance claims.
-            </p>
           </div>
         ) : null}
       </Container>

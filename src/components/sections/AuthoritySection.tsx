@@ -5,7 +5,6 @@ import { media } from "@/content/media";
 
 const teamAsset = media.about.ownerTeam;
 const rheemAsset = media.partners.rheemDealer;
-const mitsubishiAsset = media.partners.mitsubishi;
 
 export function AuthoritySection() {
   return (
@@ -32,7 +31,7 @@ export function AuthoritySection() {
                 A Family-Run Business Built on Practical Diagnostics.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-8">
-                For over 20 years, Brian and Sabra Ayres have served Central Indiana with honest diagnostics,
+                Since 2007, Brian and Sabra Ayres have served Central Indiana with honest diagnostics,
                 practical repairs, and dependable follow-through—not high-pressure sales.
               </p>
               <p className="mt-3 text-sm font-bold text-brand-blue-dark">
@@ -40,16 +39,15 @@ export function AuthoritySection() {
               </p>
             </div>
 
-            {/* Elite certifications */}
+            {/* Equipment experience */}
             <div className="border-t border-border pt-6" aria-label="Authorized equipment certifications">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">
-                Elite Certifications
+                Featured Equipment Experience
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                As a Rheem Dealer and a Mitsubishi Diamond Contractor, we are factory-trained to provide
-                the highest level of installation and service available today.
+                Ayres Mechanical works across the residential and light-commercial equipment families customers see most often in Central Indiana, with a focus on practical diagnostics, clean installations, and dependable follow-through.
               </p>
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="mt-5 grid max-w-sm gap-3 sm:gap-4">
                 <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
                   <CloudinaryImage
                     asset={rheemAsset}
@@ -58,16 +56,6 @@ export function AuthoritySection() {
                     height={rheemAsset.height}
                     sizes="180px"
                     className="h-auto max-h-[52px] w-full object-contain"
-                  />
-                </div>
-                <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
-                  <CloudinaryImage
-                    asset={mitsubishiAsset}
-                    disableLqip
-                    width={mitsubishiAsset.width}
-                    height={mitsubishiAsset.height}
-                    sizes="180px"
-                    className="h-auto max-h-[60px] w-full object-contain"
                   />
                 </div>
               </div>

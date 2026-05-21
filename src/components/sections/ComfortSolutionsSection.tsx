@@ -4,7 +4,6 @@ import { Section } from "@/components/layout/Section";
 import { media } from "@/content/media";
 
 const rheemAsset = media.partners.rheemDealer;
-const mitsubishiAsset = media.partners.mitsubishi;
 
 export function ComfortSolutionsSection() {
   return (
@@ -22,9 +21,8 @@ export function ComfortSolutionsSection() {
               putting money back in your pocket.
             </p>
             <p className="mt-4 leading-8 text-muted-foreground">
-              We are proud to be a Mitsubishi Diamond Contractor, specializing in high-efficiency ductless options, and a
-              registered Rheem dealer. Because both brands offer a wide range of equipment, we can customize a solution
-              that meets your efficiency goals without breaking your budget.
+              We help customers compare repair versus replacement paths, equipment efficiencies, and comfort priorities so
+              the final recommendation fits the space and the budget instead of forcing a one-size-fits-all answer.
             </p>
           </div>
 
@@ -39,14 +37,6 @@ export function ComfortSolutionsSection() {
               height={rheemAsset.height}
               sizes="(min-width: 1024px) 280px, 45vw"
               className="h-auto max-h-[72px] w-[min(100%,240px)] object-contain object-left lg:object-center"
-            />
-            <CloudinaryImage
-              asset={mitsubishiAsset}
-              disableLqip
-              width={mitsubishiAsset.width}
-              height={mitsubishiAsset.height}
-              sizes="(min-width: 1024px) 280px, 45vw"
-              className="h-auto max-h-[80px] w-[min(100%,260px)] object-contain object-left lg:object-center"
             />
           </div>
         </div>

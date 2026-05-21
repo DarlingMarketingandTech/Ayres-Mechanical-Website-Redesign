@@ -1,13 +1,19 @@
 import type { MetadataRoute } from "next";
 
-import { siteConfig } from "@/content/site";
+import { siteConfig, siteIndexingEnabled } from "@/content/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: new URL("/sitemap.xml", siteConfig.url).toString(),
+    rules: siteIndexingEnabled
+      ? {
+          userAgent: "*",
+          allow: "/",
+        }
+      : {
+          userAgent: "*",
+          disallow: "/",
+        },
+    sitemap: siteIndexingEnabled ? new URL("/sitemap.xml", siteConfig.url).toString() : undefined,
+    host: siteIndexingEnabled ? siteConfig.url : undefined,
   };
 }

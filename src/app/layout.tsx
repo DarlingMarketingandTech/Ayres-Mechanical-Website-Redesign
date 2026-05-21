@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Geist_Mono, Source_Sans_3 } from "next/font/google";
 
+import { WebVitals } from "@/components/analytics/WebVitals";
 import { siteConfig } from "@/content/site";
 import { resolveMetadataBaseUrl } from "@/lib/resolve-metadata-base";
+import { robotsMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const heading = Archivo({
@@ -35,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description:
       "Ayres Mechanical provides residential, commercial, and industrial heating and air conditioning services throughout Central Indiana. Call 317-538-9837 for service.",
+    robots: robotsMetadata,
     alternates: {
       canonical,
     },
@@ -76,6 +79,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
+        <WebVitals />
         {children}
       </body>
     </html>

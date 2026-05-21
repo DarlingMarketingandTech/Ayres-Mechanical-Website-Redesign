@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 
-import { siteConfig } from "@/content/site";
+import { siteConfig, siteIndexingEnabled } from "@/content/site";
 
 export function absoluteUrl(path: string) {
   return new URL(path, siteConfig.url).toString();
 }
+
+export const robotsMetadata: Metadata["robots"] = {
+  index: siteIndexingEnabled,
+  follow: siteIndexingEnabled,
+  googleBot: {
+    index: siteIndexingEnabled,
+    follow: siteIndexingEnabled,
+    "max-image-preview": siteIndexingEnabled ? "large" : "none",
+    "max-snippet": siteIndexingEnabled ? -1 : 0,
+    "max-video-preview": siteIndexingEnabled ? -1 : 0,
+  },
+};
 
 export function pageMetadata({
   title,
@@ -18,13 +30,14 @@ export function pageMetadata({
   return {
     title,
     description,
+    robots: robotsMetadata,
     alternates: {
-      canonical: absoluteUrl(path),
+      canonical: path,
     },
     openGraph: {
       title,
       description,
-      url: absoluteUrl(path),
+      url: path,
       siteName: siteConfig.name,
       type: "website",
     },
