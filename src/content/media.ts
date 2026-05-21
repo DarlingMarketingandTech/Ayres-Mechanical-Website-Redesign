@@ -182,7 +182,37 @@ const assets = {
     height: 800,
     format: "jpg",
     assetFolder: "ayres-mechanical-website/03-services/emergency-service",
-    usageNotes: "Registry: `pages.emergency.hero`. First image for the 24-hour emergency card.",
+    usageNotes: "Registry: legacy slot — replaced by amHeatingService for emergency hero.",
+  },
+  /** 960×502 — Mitsubishi zoned comfort; best available ductless image in the ayres-mechanical folder. */
+  mitsubishiZonedComfort: {
+    publicId: "mitsubishi-zoned-comfort-solutions",
+    alt: "Mitsubishi ductless zoned comfort system installed in a Central Indiana home.",
+    width: 960,
+    height: 502,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/ductless-hvac",
+    usageNotes: "Registry: `pages.ductless.hero`. Best landscape ductless image in the ayres-mechanical folder.",
+  },
+  /** 1920×1280 — ceiling fan / bright room. Relevant to airflow & indoor comfort. */
+  fanFreshAirIaq: {
+    publicId: "fan-fresh-air",
+    alt: "Bright room with ceiling fan illustrating balanced airflow and indoor comfort.",
+    width: 1920,
+    height: 1280,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/01-global-ui/hero-backgrounds",
+    usageNotes: "Registry: `pages.indoorAirQuality.hero`. Replaces abstract sky placeholder.",
+  },
+  /** 960×720 — Ayres van + helicopter on a real commercial job site. Wider & more cinematic than rooftop alone. */
+  heloAndVan: {
+    publicId: "helo-and-van",
+    alt: "Ayres Mechanical service van on site beside helicopter heavy-lift HVAC equipment.",
+    width: 960,
+    height: 720,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+    usageNotes: "Registry: `pages.commercial.supportingExtra`. Optional wider commercial hero candidate.",
   },
 } satisfies Record<string, CloudinaryMediaAsset>;
 
@@ -285,21 +315,26 @@ export const media = {
       supporting: assets.commercialRooftopHvacStockPhoto,
     },
     maintenance: {
-      hero: assets.heatAmService,
+      /** amHeatingService (960×960) is sharper than heatAmService (720×960). */
+      hero: assets.amHeatingService,
       supporting: assets.systemsExplainer,
     },
     indoorAirQuality: {
-      hero: assets.freshAirBg,
+      /** fanFreshAir — ceiling fan in a bright room; directly relevant to airflow & indoor comfort. */
+      hero: assets.fanFreshAirIaq,
       supporting: assets.fanFreshAir,
     },
     ductless: {
+      /** mitsubishiZonedComfort — best landscape ductless image in the ayres-mechanical folder. */
+      hero: assets.mitsubishiZonedComfort,
       supporting: assets.ductlessSupportingGx,
     },
     industrial: {
       hero: assets.industrialAm,
     },
     emergency: {
-      hero: assets.emergencyServicePhoto,
+      /** amHeatingService — authentic Ayres job photo; better than the low-res Redding CA stock. */
+      hero: assets.amHeatingService,
     },
   },
   services: {
@@ -353,7 +388,7 @@ export const media = {
     commercial: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     maintenance: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     indoorAirQuality: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
-    ductless: { supporting: CloudinaryMediaAsset };
+    ductless: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     industrial: { hero: CloudinaryMediaAsset };
     emergency: { hero: CloudinaryMediaAsset };
   };

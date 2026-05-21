@@ -3,7 +3,7 @@ import { media } from "@/content/media";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 
-export type HeroPhotoOverlayPreset = "none" | "navy-strong" | "navy-soft" | "light-soft";
+export type HeroPhotoOverlayPreset = "none" | "photo-reveal" | "navy-strong" | "navy-soft" | "light-soft";
 
 export type ServicePageMedia = {
   heroBackground?: CloudinaryMediaAsset;
@@ -76,12 +76,12 @@ export const servicePageContent: ServiceContent[] = [
     accent: "blue",
     icon: "cooling",
     intro:
-      "While some AC issues are obvious, others hide behind high energy bills or slightly “off” humidity levels. Our team provides professional intervention for every stage of your system’s life cycle.",
+      "While some AC issues are obvious, others hide behind high energy bills or slightly “off” humidity levels. Our team provides professional intervention for every stage of your system's life cycle.",
     whatWeHelpWith: [
       {
         title: "AC Diagnostics and Repair",
         description:
-          "When your system fails, you need more than a quick fix; you need to know why it happened. Our technicians use advanced diagnostic tools to pinpoint the root cause—whether it’s a failed capacitor, a refrigerant leak, or a faulty compressor—preventing repeat breakdowns and costly “guesswork” repairs.",
+          "When your system fails, you need more than a quick fix; you need to know why it happened. Our technicians use advanced diagnostic tools to pinpoint the root cause—whether it's a failed capacitor, a refrigerant leak, or a faulty compressor—preventing repeat breakdowns and costly “guesswork” repairs.",
       },
       {
         title: "Cooling Tune-ups",
@@ -91,23 +91,23 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Indoor Comfort Checks",
         description:
-          "Cooling isn’t just about temperature; it’s about air quality and balance. We evaluate your home’s airflow and humidity levels to ensure every room feels consistent. If you have “hot spots” or “cold spots,” our comfort checks identify the ductwork or insulation issues causing the imbalance.",
+          "Cooling isn't just about temperature; it's about air quality and balance. We evaluate your home's airflow and humidity levels to ensure every room feels consistent. If you have “hot spots” or “cold spots,” our comfort checks identify the ductwork or insulation issues causing the imbalance.",
       },
       {
         title: "System Replacement Guidance",
         description:
-          "If your unit is more than 10–12 years old or requiring frequent repairs, it may be time to consider an upgrade. We provide transparent System Replacement Guidance, helping you choose a high-efficiency model that fits your home’s square footage and your budget.",
+          "If your unit is more than 10–12 years old or requiring frequent repairs, it may be time to consider an upgrade. We provide transparent System Replacement Guidance, helping you choose a high-efficiency model that fits your home's square footage and your budget.",
       },
     ],
     commonProblems: [
       {
         title: "Warm Air From Vents",
-        description: "Often caused by a restricted evaporator coil or low refrigerant levels. We’ll get the “chill” back in your air.",
+        description: "Often caused by a restricted evaporator coil or low refrigerant levels. We'll get the “chill” back in your air.",
       },
       {
         title: "Short Cycling",
         description:
-          "If your AC turns on and off rapidly, it’s wearing out the motor and failing to dehumidify. We’ll check for oversized units or faulty sensors.",
+          "If your AC turns on and off rapidly, it's wearing out the motor and failing to dehumidify. We'll check for oversized units or faulty sensors.",
       },
       {
         title: "Weak Airflow",
@@ -117,18 +117,18 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "High Humidity & Inconsistent Cooling",
         description:
-          "In Indiana, the humidity is the real enemy. If your home feels “sticky” despite the AC running, we can optimize your system’s dehumidification capabilities.",
+          "In Indiana, the humidity is the real enemy. If your home feels “sticky” despite the AC running, we can optimize your system's dehumidification capabilities.",
       },
     ],
     specialNote: {
       tone: "tip",
       label: "Pro Tip",
-      text: "Don’t wait for a total system failure. If your energy bills have spiked by more than 15% compared to last summer without a change in usage, your AC is likely working harder than it should.",
+      text: "Don't wait for a total system failure. If your energy bills have spiked by more than 15% compared to last summer without a change in usage, your AC is likely working harder than it should.",
     },
     closingCTA: {
       title: "Why Choose Ayres Mechanical?",
       description:
-        "We believe in a straightforward path to resolution. From the moment you Book Service, our goal is to provide clear communication and dependable work that restores your confidence in your home’s comfort. We also offer Flexible Financing through FTL Finance to help make major repairs or replacements manageable.",
+        "We believe in a straightforward path to resolution. From the moment you Book Service, our goal is to provide clear communication and dependable work that restores your confidence in your home's comfort. We also offer Flexible Financing through FTL Finance to help make major repairs or replacements manageable.",
       primaryLabel: "Request Service Today",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
@@ -138,7 +138,8 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.airConditioning.hero,
       heroImageClassName: "object-[center_22%]",
-      heroDeliveryWidth: 2400,
+      heroPhotoOverlay: "photo-reveal",
+      heroDeliveryWidth: 1920,
       heroGallery: [media.pages.airConditioning.supporting],
     },
   },
@@ -167,7 +168,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Preventive Heating Maintenance",
         description:
-          "The best time to fix a furnace is before you need to turn it on. Our preventive maintenance includes a rigorous multi-point inspection: cleaning burners, checking for carbon monoxide leaks, testing safety controls, and lubricating moving parts. Regular tuning reduces the risk of mid-winter breakdowns and keeps your manufacturer’s warranty valid.",
+          "The best time to fix a furnace is before you need to turn it on. Our preventive maintenance includes a rigorous multi-point inspection: cleaning burners, checking for carbon monoxide leaks, testing safety controls, and lubricating moving parts. Regular tuning reduces the risk of mid-winter breakdowns and keeps your manufacturer's warranty valid.",
       },
       {
         title: "System Performance Checks",
@@ -184,12 +185,12 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Unexpected Shutdowns",
         description:
-          "If your furnace starts and then immediately stops (short-cycling), it could be overheating or dealing with a dirty flame sensor. We’ll find the fix before it leads to a total lockout.",
+          "If your furnace starts and then immediately stops (short-cycling), it could be overheating or dealing with a dirty flame sensor. We'll find the fix before it leads to a total lockout.",
       },
       {
         title: "Rising Utility Bills",
         description:
-          "A sudden spike in heating costs usually means your system is losing efficiency. We help identify if a repair can restore efficiency or if it’s time for an upgrade.",
+          "A sudden spike in heating costs usually means your system is losing efficiency. We help identify if a repair can restore efficiency or if it's time for an upgrade.",
       },
       {
         title: "Aging Equipment",
@@ -205,7 +206,7 @@ export const servicePageContent: ServiceContent[] = [
     closingCTA: {
       title: "Transparent Solutions for Every Home",
       description:
-        "We know that heating repairs can be an unexpected stress. That’s why Ayres Mechanical focuses on practical diagnostics and clear communication. If a replacement is necessary, we offer Flexible Financing through FTL Finance to help you prioritize your family’s comfort without breaking the bank.",
+        "We know that heating repairs can be an unexpected stress. That's why Ayres Mechanical focuses on practical diagnostics and clear communication. If a replacement is necessary, we offer Flexible Financing through FTL Finance to help you prioritize your family's comfort without breaking the bank.",
       primaryLabel: "Request Heating Service",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
@@ -215,6 +216,7 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.heating.hero,
       heroImageClassName: "object-[center_28%]",
+      heroPhotoOverlay: "photo-reveal",
     },
   },
   {
@@ -227,7 +229,7 @@ export const servicePageContent: ServiceContent[] = [
     accent: "blue",
     icon: "maintenance",
     intro:
-      "Maintenance isn’t just a luxury; it is a strategy to protect one of your home’s most expensive assets. Our planned service ensures your HVAC system remains a silent, efficient partner in your comfort.",
+      "Maintenance isn't just a luxury; it is a strategy to protect one of your home's most expensive assets. Our planned service ensures your HVAC system remains a silent, efficient partner in your comfort.",
     whatWeHelpWith: [
       {
         title: "Seasonal Performance Checks",
@@ -237,7 +239,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Filter and Airflow Review",
         description:
-          "The leading cause of system failure is restricted airflow. We go beyond simply changing a filter; we inspect your entire intake system to ensure your blower motor isn’t straining against dust buildup or poorly designed filtration, which can slash equipment life by years.",
+          "The leading cause of system failure is restricted airflow. We go beyond simply changing a filter; we inspect your entire intake system to ensure your blower motor isn't straining against dust buildup or poorly designed filtration, which can slash equipment life by years.",
       },
       {
         title: "Equipment Condition Reporting",
@@ -247,7 +249,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Residential and Business Plans",
         description:
-          "Maintenance needs vary between a family home and a commercial facility. We offer tailored Residential and Business Plans that automate your service schedule. Members receive priority scheduling and the confidence that their systems are being managed by professionals who know their equipment’s history.",
+          "Maintenance needs vary between a family home and a commercial facility. We offer tailored Residential and Business Plans that automate your service schedule. Members receive priority scheduling and the confidence that their systems are being managed by professionals who know their equipment's history.",
       },
     ],
     commonProblems: [
@@ -285,7 +287,8 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.maintenance.hero,
-      heroImageClassName: "object-top",
+      heroImageClassName: "object-[center_28%]",
+      heroPhotoOverlay: "photo-reveal",
       contentIllustration: media.pages.maintenance.supporting,
     },
   },
@@ -299,7 +302,7 @@ export const servicePageContent: ServiceContent[] = [
     accent: "dark",
     icon: "commercial",
     intro:
-      "In a commercial setting, HVAC performance isn’t just about comfort—it’s about protecting your inventory, your electronics, and your bottom line. We provide specialized support tailored to the unique demands of business environments.",
+      "In a commercial setting, HVAC performance isn't just about comfort—it's about protecting your inventory, your electronics, and your bottom line. We provide specialized support tailored to the unique demands of business environments.",
     whatWeHelpWith: [
       {
         title: "Business HVAC Diagnostics",
@@ -319,7 +322,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Responsive Service Scheduling",
         description:
-          "We understand that a broken AC in a retail space or a failing furnace in an office is an emergency. Ayres Mechanical offers responsive service scheduling, prioritizing commercial clients to ensure your “business as usual” isn’t interrupted by mechanical failures.",
+          "We understand that a broken AC in a retail space or a failing furnace in an office is an emergency. Ayres Mechanical offers responsive service scheduling, prioritizing commercial clients to ensure your “business as usual” isn't interrupted by mechanical failures.",
       },
     ],
     commonProblems: [
@@ -347,12 +350,12 @@ export const servicePageContent: ServiceContent[] = [
     specialNote: {
       tone: "business",
       label: "Business Continuity Note",
-      text: "We focus on practical diagnostics. We won’t recommend a total system overhaul if a targeted repair can safely and reliably keep you operational.",
+      text: "We focus on practical diagnostics. We won't recommend a total system overhaul if a targeted repair can safely and reliably keep you operational.",
     },
     closingCTA: {
       title: "A Partner in Your Operations",
       description:
-        "At Ayres Mechanical, we view ourselves as an extension of your facility team. From the moment you Book Service, our goal is to provide dependable work that restores your confidence in your building’s infrastructure. For larger projects or unexpected replacements, we also offer Financing Details to help manage your capital expenditures.",
+        "At Ayres Mechanical, we view ourselves as an extension of your facility team. From the moment you Book Service, our goal is to provide dependable work that restores your confidence in your building's infrastructure. For larger projects or unexpected replacements, we also offer Financing Details to help manage your capital expenditures.",
       primaryLabel: "Request Commercial Service",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
@@ -363,7 +366,8 @@ export const servicePageContent: ServiceContent[] = [
     media: {
       heroBackground: media.pages.commercial.hero,
       heroImageClassName: "object-[center_32%]",
-      heroDeliveryWidth: 1600,
+      heroPhotoOverlay: "photo-reveal",
+      heroDeliveryWidth: 1200,
       heroGallery: [media.pages.commercial.supporting],
     },
   },
@@ -397,7 +401,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Maintenance Coordination",
         description:
-          "Managing HVAC across a sprawling facility requires organization. We offer Maintenance Coordination that integrates with your facility’s schedule. We handle the logistics of filter changes, belt replacements, and coil cleanings across dozens of units so your internal team can focus on core operations.",
+          "Managing HVAC across a sprawling facility requires organization. We offer Maintenance Coordination that integrates with your facility's schedule. We handle the logistics of filter changes, belt replacements, and coil cleanings across dozens of units so your internal team can focus on core operations.",
       },
     ],
     commonProblems: [
@@ -414,7 +418,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Aging Mechanical Systems",
         description:
-          "Many industrial facilities rely on legacy equipment. We provide expert evaluation to determine if a system can be reliably repaired or if it’s time to leverage Flexible Financing for a high-efficiency replacement.",
+          "Many industrial facilities rely on legacy equipment. We provide expert evaluation to determine if a system can be reliably repaired or if it's time to leverage Flexible Financing for a high-efficiency replacement.",
       },
       {
         title: "Specialized Service Coordination",
@@ -425,7 +429,7 @@ export const servicePageContent: ServiceContent[] = [
     specialNote: {
       tone: "assurance",
       label: "Industrial Assurance",
-      text: "We understand the “operational awareness” required for industrial work. Our technicians respect your facility’s safety protocols and operational flow.",
+      text: "We understand the “operational awareness” required for industrial work. Our technicians respect your facility's safety protocols and operational flow.",
     },
     closingCTA: {
       title: "Engineering Reliability into Your Facility",
@@ -440,6 +444,8 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
     media: {
       heroBackground: media.pages.industrial.hero,
+      heroImageClassName: "object-[center_40%]",
+      heroPhotoOverlay: "photo-reveal",
     },
   },
   {
@@ -467,7 +473,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Seasonal Performance Checks",
         description:
-          "Mini-splits work year-round as heat pumps. We verify defrost behavior, filter maintenance intervals, and refrigerant circuit health so you stay efficient through Indiana’s humid summers and cold snaps.",
+          "Mini-splits work year-round as heat pumps. We verify defrost behavior, filter maintenance intervals, and refrigerant circuit health so you stay efficient through Indiana's humid summers and cold snaps.",
       },
       {
         title: "Replacement and Upgrade Guidance",
@@ -504,6 +510,9 @@ export const servicePageContent: ServiceContent[] = [
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
     media: {
+      heroBackground: media.pages.ductless.hero,
+      heroImageClassName: "object-[center_35%]",
+      heroPhotoOverlay: "photo-reveal",
       heroGallery: [media.pages.ductless.supporting],
     },
   },
@@ -570,8 +579,8 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.airConditioning, serviceSlugs.heating],
     media: {
       heroBackground: media.pages.indoorAirQuality.hero,
-      heroImageClassName: "object-[center_25%]",
-      heroPhotoOverlay: "navy-soft",
+      heroImageClassName: "object-[center_30%]",
+      heroPhotoOverlay: "photo-reveal",
       heroGallery: [media.pages.indoorAirQuality.supporting],
     },
   },
@@ -585,12 +594,12 @@ export const servicePageContent: ServiceContent[] = [
     accent: "red",
     icon: "emergency",
     intro:
-      "When your HVAC system fails at the worst possible time, you don’t need an answering machine—you need a resolution. We provide round-the-clock support to ensure your safety and comfort are restored immediately.",
+      "When your HVAC system fails at the worst possible time, you don't need an answering machine—you need a resolution. We provide round-the-clock support to ensure your safety and comfort are restored immediately.",
     whatWeHelpWith: [
       {
         title: "24-Hour Service Availability",
         description:
-          "HVAC emergencies don’t stick to a 9-to-5 schedule, and neither do we. Whether it’s 2:00 AM on a holiday or a Sunday afternoon, our technicians are on standby. Our 24-Hour Service ensures that a qualified professional is always just a phone call away.",
+          "HVAC emergencies don't stick to a 9-to-5 schedule, and neither do we. Whether it's 2:00 AM on a holiday or a Sunday afternoon, our technicians are on standby. Our 24-Hour Service ensures that a qualified professional is always just a phone call away.",
       },
       {
         title: "Heating and Cooling Emergencies",
@@ -600,12 +609,12 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Residential, Commercial, and Industrial Response",
         description:
-          "The definition of an “emergency” changes depending on the setting. Whether it’s a family home without heat, a retail store with a broken AC, or an industrial plant facing a production-stopping climate failure, we provide a tailored response that matches the scale and urgency of your facility.",
+          "The definition of an “emergency” changes depending on the setting. Whether it's a family home without heat, a retail store with a broken AC, or an industrial plant facing a production-stopping climate failure, we provide a tailored response that matches the scale and urgency of your facility.",
       },
       {
         title: "Direct Call-to-Service Path",
         description:
-          "In an emergency, every minute counts. We’ve eliminated the red tape with a Direct Call-to-Service Path. When you call our emergency line, you are routed to a team that can take immediate action, helping you bypass lengthy intake forms when time is of the essence.",
+          "In an emergency, every minute counts. We've eliminated the red tape with a Direct Call-to-Service Path. When you call our emergency line, you are routed to a team that can take immediate action, helping you bypass lengthy intake forms when time is of the essence.",
       },
     ],
     commonProblems: [
@@ -617,7 +626,7 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "No Cooling During Peak Heat",
         description:
-          "Extreme humidity and heat aren’t just uncomfortable—they can be life-threatening for the elderly or those with health conditions. We restore your Air Conditioning quickly to get your home back to a safe temperature.",
+          "Extreme humidity and heat aren't just uncomfortable—they can be life-threatening for the elderly or those with health conditions. We restore your Air Conditioning quickly to get your home back to a safe temperature.",
       },
       {
         title: "Critical Comfort Failures",
@@ -638,17 +647,18 @@ export const servicePageContent: ServiceContent[] = [
     closingCTA: {
       title: "Restoring Comfort and Confidence",
       description:
-        "At Ayres Mechanical, we believe an emergency repair shouldn’t be a temporary patch. Our goal is to provide a permanent fix through Practical Diagnostics. If an emergency requires a major replacement, we offer Flexible Financing through FTL Finance to help you make the right decision for your home without financial panic.",
+        "At Ayres Mechanical, we believe an emergency repair shouldn't be a temporary patch. Our goal is to provide a permanent fix through Practical Diagnostics. If an emergency requires a major replacement, we offer Flexible Financing through FTL Finance to help you make the right decision for your home without financial panic.",
       primaryLabel: "Request Emergency Service",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
-      subtext: "Are you currently experiencing a system failure, or are you looking to add us to your facility’s emergency contact list?",
+      subtext: "Are you currently experiencing a system failure, or are you looking to add us to your facility's emergency contact list?",
     },
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.emergency.hero,
-      heroImageClassName: "object-top",
+      heroImageClassName: "object-[center_28%]",
+      heroPhotoOverlay: "photo-reveal",
     },
   },
 ];
