@@ -60,6 +60,9 @@
   --text-section: clamp(1.75rem, 1.1rem + 2.4vw, 2.5rem);
   --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.25rem);
   --section-y: clamp(2.75rem, 1.5rem + 5vw, 6rem);
+  --site-header-h: 7rem;
+  --system-strain-banner-h: 0px;
+  --system-strain-banner-visible-h: 0px;
   /* Mobile fixed bottom: sticky Request + Call bar (see MobileStickyCtaBar). Used by main padding. */
   --mobile-bottom-chrome-active: calc(9.5rem + env(safe-area-inset-bottom, 0px));
   --mobile-bottom-chrome-h: var(--mobile-bottom-chrome-active);

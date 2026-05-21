@@ -73,6 +73,7 @@ export function SiteHeader() {
           "fixed inset-x-0 top-0 z-50 border-b border-brand-blue-dark/10 bg-white/78 shadow-[0_12px_40px_rgb(10_26_68_/0.08)] backdrop-blur-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none",
           mobileChromeHidden ? "max-lg:-translate-y-full" : "translate-y-0",
         )}
+        style={{ top: "var(--system-strain-banner-visible-h, 0px)" }}
       >
         <Container className="py-2.5 lg:py-4">
           <div className="flex items-center justify-between gap-3 lg:gap-6">
