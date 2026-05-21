@@ -10,21 +10,12 @@ export type ReviewPlatform = {
   rating: number;
 };
 
-/**
- * Review platform profiles for Ayres Mechanical Inc.
- *
- * TODO (client): Replace the demo Place ID below with the real Google Business Profile Place ID.
- * Find it at https://developers.google.com/maps/documentation/places/web-service/place-id
- * Also confirm the real Facebook page URL and update `profileUrl` / `writeReviewUrl` for Facebook.
- * Update `count` and `rating` for each platform as reviews accumulate.
- *
- * Demo Place ID in use: ChIJDemo_AyresMechanical_Indianapolis (placeholder — not a real Place ID)
- */
+/** Review platform profiles for Ayres Mechanical Inc. Update counts, ratings, and review links as they change. */
 export const reviewPlatforms: ReviewPlatform[] = [
   {
     name: "Google",
     profileUrl: "https://www.google.com/maps/place/Ayres+Mechanical+Inc/@39.7684,-86.1581,15z",
-    writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJDemo_AyresMechanical_Indianapolis",
+    writeReviewUrl: "",
     count: 13,
     rating: 4.9,
   },

@@ -12,8 +12,6 @@ export type ServicePageMedia = {
   heroPhotoOverlay?: HeroPhotoOverlayPreset;
   heroGallery?: CloudinaryMediaAsset[];
   contentIllustration?: CloudinaryMediaAsset;
-  /** When true, renders Mitsubishi badge with demo disclaimer (ductless page). */
-  showMitsubishiDemoBadge?: boolean;
   heroDeliveryWidth?: number;
 };
 
@@ -490,11 +488,6 @@ export const servicePageContent: ServiceContent[] = [
         description: "Multi-zone systems rely on clean electrical and control wiring. We trace faults methodically instead of swapping parts blindly.",
       },
     ],
-    specialNote: {
-      tone: "assurance",
-      label: "Demo Partner Note",
-      text: "Mitsubishi credential artwork on this page is labeled as a temporary demo element until ownership confirms final partner marks for publication.",
-    },
     closingCTA: {
       title: "Comfort Without the Ductwork Headache",
       description:
@@ -507,7 +500,6 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
     media: {
       heroGallery: [media.pages.ductless.supporting],
-      showMitsubishiDemoBadge: true,
     },
   },
   {

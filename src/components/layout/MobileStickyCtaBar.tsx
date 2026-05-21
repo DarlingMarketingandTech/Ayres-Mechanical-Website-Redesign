@@ -108,6 +108,11 @@ export function MobileStickyCtaBar() {
       <div className="mx-auto flex max-w-lg flex-col gap-2 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <Link
           href={routes.requestService}
+          data-analytics-event="cta_click"
+          data-analytics-category="sticky_bar"
+          data-analytics-label="request_service"
+          data-analytics-location="mobile_sticky_bar"
+          data-analytics-href={routes.requestService}
           className={cn(buttonVariants({ variant: "emergency", size: "lg" }), requestServiceOnDarkCtaClassNames(), "min-h-12 w-full justify-center")}
           tabIndex={revealed && !mobileChromeHidden ? undefined : -1}
         >
@@ -115,6 +120,11 @@ export function MobileStickyCtaBar() {
         </Link>
         <a
           href={phoneHref}
+          data-analytics-event="cta_click"
+          data-analytics-category="sticky_bar"
+          data-analytics-label="call_now"
+          data-analytics-location="mobile_sticky_bar"
+          data-analytics-href={phoneHref}
           className={cn(buttonVariants({ variant: "inverse", size: "lg" }), phoneOutlineCtaClassNames(), "min-h-12 w-full justify-center")}
           aria-label={`Call now at ${siteConfig.phone}`}
           tabIndex={revealed && !mobileChromeHidden ? undefined : -1}
