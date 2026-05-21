@@ -61,7 +61,7 @@ export function HomeHero() {
             variants={fadeUp}
             className="mt-4 max-w-4xl text-(length:--text-hero) font-black leading-[0.98] text-balance max-sm:leading-[1.06] sm:mt-5"
           >
-            20 Years of Trusted HVAC Service in Central Indiana.
+            Trusted HVAC Service in Central Indiana Since 2007.
           </motion.h1>
           <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground sm:mt-6 sm:leading-8">
             Practical heating and cooling solutions for your home, business, or facility. 24/7 emergency response in {serviceCountyNames} Counties.

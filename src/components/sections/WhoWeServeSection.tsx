@@ -12,7 +12,7 @@ const segments = [
     eyebrow: "For Homeowners",
     title: "Residential",
     description:
-      "Expert furnace and AC repair for your family home. Rheem and Mitsubishi Diamond certified solutions tailored to your comfort and budget.",
+      "Expert furnace and AC repair for your family home, with practical recommendations tailored to your comfort goals and budget.",
     cta: "Residential services",
   },
   {

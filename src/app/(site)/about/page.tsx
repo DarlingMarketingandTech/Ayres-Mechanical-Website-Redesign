@@ -20,8 +20,8 @@ export const metadata = pageMetadata({ title: "About", description: "Learn about
 
 const whyChooseItems = [
   {
-    title: "Elite Credentials",
-    description: "We are a proud Rheem Dealer and a Mitsubishi Diamond Contractor.",
+    title: "Trusted Equipment Experience",
+    description: "We work on the heating and cooling systems Central Indiana customers rely on most, with clear recommendations and practical next steps.",
   },
   {
     title: "Straightforward Pricing",
@@ -180,4 +180,3 @@ export default function AboutPage() {
     </>
   );
 }
-
