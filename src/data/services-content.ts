@@ -286,6 +286,8 @@ export const servicePageContent: ServiceContent[] = [
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
     media: {
+      heroBackground: media.pages.maintenance.hero,
+      heroImageClassName: "object-top",
       contentIllustration: media.pages.maintenance.supporting,
     },
   },
@@ -438,6 +440,9 @@ export const servicePageContent: ServiceContent[] = [
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
     },
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
+    media: {
+      heroBackground: media.pages.industrial.hero,
+    },
   },
   {
     slug: serviceSlugs.ductless,
@@ -649,6 +654,10 @@ export const servicePageContent: ServiceContent[] = [
       subtext: "Are you currently experiencing a system failure, or are you looking to add us to your facility’s emergency contact list?",
     },
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
+    media: {
+      heroBackground: media.pages.emergency.hero,
+      heroImageClassName: "object-top",
+    },
   },
 ];
 

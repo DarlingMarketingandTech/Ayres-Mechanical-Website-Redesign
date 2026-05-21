@@ -1,6 +1,6 @@
 # Ayres Mechanical Website — Task List
 
-_Last updated: 2026-05-17_
+_Last updated: 2026-05-21 (session 2)_
 
 ---
 
@@ -9,6 +9,10 @@ _Last updated: 2026-05-17_
 - [x] Customize Cloudinary plugin for Ayres Mechanical project (cloud: djhqowk67, next-cloudinary stack, brand colors, named transform patterns)
 - [x] Customize voltagent `frontend-developer` agent for Ayres Mechanical stack (Next.js 16, React 19, Tailwind v4, motion, shadcn/ui)
 - [x] Fix About page — replace `PlaceholderPanel` in "What Our Customers Say" with real `Testimonials` component
+- [x] **Design critique** — full near-final review of live Vercel site at 390px mobile + 1440px desktop; findings saved to `memory/design-critique-2026-05-21.md`
+- [x] **Cloudinary audit** — catalogued all 53 assets in `ayres-mechanical-website/` folder; identified 7 real Ayres photos to replace placeholder images
+- [x] **Wire up real Cloudinary images in `media.ts`** — added 6 new asset entries (`amServicesHvac`, `amHeatingService`, `heatAmService`, `amRooftopUnitServices`, `industrialAm`, `emergencyServicePhoto`); updated `pages` mapping to use real photos; extended `satisfies` type to include `industrial` and `emergency` page slots
+- [x] **Wire up `heroBackground` in `services-content.ts`** — added `heroBackground` to `preventive-maintenance`, `industrial`, and `24-hour-emergency` service entries (all 7 service cards now have real images)
 
 ---
 
@@ -23,18 +27,35 @@ _Last updated: 2026-05-17_
 - [ ] **Confirm license / certification wording** — `siteConfig.credentials` is empty array; credential copy needs owner approval before adding claims.
 - [ ] **Confirm Mitsubishi Diamond Contractor badge** — `temporaryDemo: true` on ductless partner badge; confirm credential status before removing flag.
 
-### Image assets — awaiting client photos
+### Image assets
 
-- [ ] **Replace `cold-bg` (AC hero)** — currently a demo stock photo. Upload real asset to `ayres-mechanical-website/01-global-ui/hero-backgrounds` as `cold-bg.jpg`, remove `temporaryDemo: true`.
-- [ ] **Replace `hot-bg` (Heating hero)** — currently a demo stock photo. Same folder, public ID `hot-bg.jpg`.
-- [ ] **Replace `fresh-air-bg` (Indoor Air Quality hero)** — demo stock photo. Same folder, public ID `fresh-air-bg.jpg`.
-- [ ] **Upload / rename commercial rooftop photo** — intended public ID `commercial-rooftop-hvac-stock-photo` doesn't exist in Cloudinary yet; currently pointing at a pexels stock photo. Upload real asset or rename in Cloudinary, then update `media.ts`.
+> Design critique (2026-05-21): Service card image fixes completed in code — real Ayres photos now wired up in `media.ts` and `services-content.ts`. Deploy to Vercel to go live.
+
+- [x] **AC hero** — replaced `cold-bg` (icebergs) with `am-services-HVAC-` (real Ayres technician photo). `temporaryDemo` flag removed from slot.
+- [x] **Heating hero** — replaced `hot-bg` (sand dunes) with `am-heating-service` (real heating service photo).
+- [x] **Commercial hero** — replaced `helicopter-industrial-roof-install` with `am-rooftopunit-services` (real Ayres rooftop unit photo).
+- [x] **Preventive Maintenance card** — added first-ever image: `heat-am-service` (technician on service call). `object-top` crop bias set to favor face/hands.
+- [x] **Industrial card** — added first-ever image: `industrial-am`.
+- [x] **24-Hour Emergency card** — added first-ever image: `hvac-repair-redding-ca`. `object-top` crop bias set.
+- [ ] **Replace `fresh-air-bg` (Indoor Air Quality hero)** — still a stock photo (`temporaryDemo: true`). Upload a real IAQ photo to Cloudinary and re-point `pages.indoorAirQuality.hero` in `media.ts`.
+- [ ] **Improve hero card image resolution** — dark forest image on right side of homepage hero is visibly blurry at card size. Re-upload higher-res source or verify `q_auto,f_auto` is being applied.
 
 ### Development
 
 - [ ] **Wire up social links** — `siteConfig.socials` is an empty array. Add Facebook / Google Business Profile URLs once confirmed with client.
 - [x] **Google / Facebook review badges on Reviews page** — `ReviewPlatformBadges` component added; placeholder URLs in `src/content/testimonials.ts` → replace `REPLACE_WITH_PLACE_ID` with the real Google Place ID and update both `profileUrl` / `writeReviewUrl` for Facebook once client confirms their page URL.
 - [ ] **SEO: set `NEXT_PUBLIC_SITE_URL` in production env** — canonical URLs are currently `http://localhost:3000/*` in all generated metadata. Must be set at Cloudflare Pages / Vercel before launch.
+
+### UX / Conversion — from design critique 2026-05-21
+
+- [ ] **Mobile: make Call Now button full-width or dominant primary** — currently same size as Request Service on mobile. Click-to-call is the #1 conversion action for local HVAC on mobile.
+- [ ] **Mobile: make phone number in hero subhead a `tel:` link** — `317-538-9837` in paragraph text is plain text, not a clickable link on mobile.
+- [ ] **Hero: add 4.9★ trust signal above the fold** — star rating is buried below fold; add a badge ("Rated 4.9 by 13 Central Indiana customers") near the hero subhead.
+- [ ] **Hero: add trust bar below CTAs** — large whitespace gap between CTAs and emergency banner; fill with Rheem/Mitsubishi partner badges and certifications.
+- [ ] **Hamburger menu: increase tap target to 44×44px** — current tap area is ~24px, below WCAG 2.1 minimum.
+- [ ] **Service card icons: add `aria-label` attributes** — snowflake, flame, wrench icons are icon-only with no accessible label.
+- [ ] **Verify contrast on red eyebrow label** — "HEATING & AIR CONDITIONING SPECIALISTS" in spaced caps; light reds at small size may fail WCAG AA contrast ratio.
+- [ ] **Review card scroll affordance on mobile** — cards overflow slightly but swipeability is not obvious; add scroll indicator or stronger peek treatment.
 
 ---
 

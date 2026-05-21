@@ -130,6 +130,60 @@ const assets = {
     assetFolder: "ayres-mechanical-website/03-services/air-conditioning",
     usageNotes: "Registry: `pages.ductless.supporting`.",
   },
+  amServicesHvac: {
+    publicId: "am-services-HVAC-",
+    alt: "Ayres Mechanical HVAC technician working on equipment.",
+    width: 1536,
+    height: 1028,
+    format: "webp",
+    assetFolder: "ayres-mechanical-website/03-services/air-conditioning",
+    usageNotes: "Registry: `pages.airConditioning.hero`. Real job photo — replaces cold-bg placeholder.",
+  },
+  amHeatingService: {
+    publicId: "am-heating-service",
+    alt: "Ayres Mechanical technician servicing a residential heating system.",
+    width: 960,
+    height: 960,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/heating",
+    usageNotes: "Registry: `pages.heating.hero`. Real heating job photo — replaces hot-bg placeholder.",
+  },
+  heatAmService: {
+    publicId: "heat-am-service",
+    alt: "Ayres Mechanical technician on a heating service call.",
+    width: 720,
+    height: 960,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/heating",
+    usageNotes: "Registry: `pages.maintenance.hero`. Gives preventive maintenance card its first image.",
+  },
+  amRooftopUnitServices: {
+    publicId: "am-rooftopunit-services",
+    alt: "Commercial rooftop HVAC unit serviced by Ayres Mechanical.",
+    width: 831,
+    height: 500,
+    format: "png",
+    assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+    usageNotes: "Registry: `pages.commercial.hero`. Real Ayres rooftop photo — replaces helicopter placeholder.",
+  },
+  industrialAm: {
+    publicId: "industrial-am",
+    alt: "Ayres Mechanical industrial HVAC job site.",
+    width: 960,
+    height: 540,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/industrial-hvac",
+    usageNotes: "Registry: `pages.industrial.hero`. First image for the industrial service card.",
+  },
+  emergencyServicePhoto: {
+    publicId: "hvac-repair-redding-ca",
+    alt: "HVAC emergency repair service call.",
+    width: 600,
+    height: 800,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/emergency-service",
+    usageNotes: "Registry: `pages.emergency.hero`. First image for the 24-hour emergency card.",
+  },
 } satisfies Record<string, CloudinaryMediaAsset>;
 
 export const media = {
@@ -220,17 +274,18 @@ export const media = {
   /** Page-level slots (heroes, supporting figures) — prefer these in service content. */
   pages: {
     airConditioning: {
-      hero: assets.coldBg,
+      hero: assets.amServicesHvac,
       supporting: assets.rheemCentralAcInstalled,
     },
     heating: {
-      hero: assets.hotBg,
+      hero: assets.amHeatingService,
     },
     commercial: {
-      hero: assets.helicopterIndustrialRoof,
+      hero: assets.amRooftopUnitServices,
       supporting: assets.commercialRooftopHvacStockPhoto,
     },
     maintenance: {
+      hero: assets.heatAmService,
       supporting: assets.systemsExplainer,
     },
     indoorAirQuality: {
@@ -239,6 +294,12 @@ export const media = {
     },
     ductless: {
       supporting: assets.ductlessSupportingGx,
+    },
+    industrial: {
+      hero: assets.industrialAm,
+    },
+    emergency: {
+      hero: assets.emergencyServicePhoto,
     },
   },
   services: {
@@ -290,9 +351,11 @@ export const media = {
     airConditioning: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     heating: { hero: CloudinaryMediaAsset };
     commercial: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
-    maintenance: { supporting: CloudinaryMediaAsset };
+    maintenance: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     indoorAirQuality: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     ductless: { supporting: CloudinaryMediaAsset };
+    industrial: { hero: CloudinaryMediaAsset };
+    emergency: { hero: CloudinaryMediaAsset };
   };
   services: Record<string, CloudinaryMediaAsset>;
   locations: Record<string, CloudinaryMediaAsset>;
