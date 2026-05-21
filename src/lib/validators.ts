@@ -9,6 +9,7 @@ export const contactFormSchema = z.object({
   urgency: z.string().min(1, "Choose an urgency."),
   preferredContact: z.string().min(1, "Choose a contact method."),
   message: z.string().min(10, "Please share a few details about the request."),
+  website: z.string().trim().max(0).optional().or(z.literal("")),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
