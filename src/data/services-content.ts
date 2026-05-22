@@ -3,7 +3,12 @@ import { media } from "@/content/media";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
 
-export type HeroPhotoOverlayPreset = "none" | "navy-strong" | "navy-soft" | "light-soft";
+export type HeroPhotoOverlayPreset =
+  | "none"
+  | "navy-strong"
+  | "navy-soft"
+  | "light-soft"
+  | "light-blend";
 
 export type ServicePageMedia = {
   heroBackground?: CloudinaryMediaAsset;
