@@ -13,7 +13,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { buttonVariants } from "@/components/ui/button";
 import type { ServiceContent } from "@/data/services-content";
-import { getServiceContentBySlug } from "@/data/services-content";
+import { getServiceContentBySlug, serviceSlugs } from "@/data/services-content";
 import { siteConfig } from "@/content/site";
 import { routes } from "@/lib/routes";
 import { isCommercialServiceSlug, isResidentialServiceSlug } from "@/lib/site-policy";
@@ -77,7 +77,10 @@ function renderProofGallery({
 
 export function ServicePageTemplate({ service }: { service: ServiceContent }) {
   const related = service.relatedServices.map(getServiceContentBySlug).filter(Boolean) as ServiceContent[];
-  const partnershipPromo = isCommercialServiceSlug(service.slug) ? service.closingCTA.partnershipPromo : undefined;
+  const partnershipPromo =
+    isCommercialServiceSlug(service.slug) || service.slug === serviceSlugs.preventiveMaintenance
+      ? service.closingCTA.partnershipPromo
+      : undefined;
   const showResidentialTriage = isResidentialServiceSlug(service.slug);
 
   return (

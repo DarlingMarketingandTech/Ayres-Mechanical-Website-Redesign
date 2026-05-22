@@ -28,12 +28,6 @@ function serviceLink(slug: Service["slug"]): NavigationChild {
   };
 }
 
-export const serviceOverviewLink: NavigationChild = {
-  label: "All Services",
-  href: routes.services,
-  description: "Browse residential, commercial, industrial, and emergency HVAC support.",
-};
-
 const residentialOverviewLink: NavigationChild = {
   label: navigationLaneDefinitions.residential.overviewLabel,
   href: navigationLaneDefinitions.residential.href,
@@ -102,8 +96,6 @@ export const commercialNavigationGroup: NavigationGroup = {
     },
   ],
 };
-
-export const serviceNavigationGroups: NavigationGroup[] = [residentialNavigationGroup, commercialNavigationGroup];
 
 export const companyNavigation: NavigationChild[] = [
   {

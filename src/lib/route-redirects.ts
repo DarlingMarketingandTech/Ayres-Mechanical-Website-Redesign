@@ -1,13 +1,6 @@
-import { routes } from "./routes";
+import { routes } from "@/lib/routes";
+import { buildRouteRedirects, type RouteRedirect } from "@/lib/route-redirects-shared";
 
-export type RouteRedirect = {
-  source: string;
-  destination: string;
-  permanent: true;
-};
+export type { RouteRedirect };
 
-export const routeRedirects: RouteRedirect[] = [
-  { source: routes.industry("residential"), destination: routes.residential, permanent: true },
-  { source: routes.industry("commercial"), destination: routes.commercial, permanent: true },
-  { source: routes.industry("industrial"), destination: routes.industrialFacilities, permanent: true },
-];
+export const routeRedirects: RouteRedirect[] = buildRouteRedirects(routes);

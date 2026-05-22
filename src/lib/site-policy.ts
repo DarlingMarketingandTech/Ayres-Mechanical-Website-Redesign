@@ -97,7 +97,7 @@ export function isResidentialPath(pathname: string) {
   }
 
   const slug = getServiceSlugFromPath(pathname);
-  return slug ? isResidentialServiceSlug(slug) : false;
+  return slug ? isResidentialServiceSlug(slug) || isSharedServiceSlug(slug) : false;
 }
 
 export function isCommercialPath(pathname: string) {
@@ -110,7 +110,7 @@ export function isCommercialPath(pathname: string) {
   }
 
   const slug = getServiceSlugFromPath(pathname);
-  return slug ? isCommercialServiceSlug(slug) : false;
+  return slug ? isCommercialServiceSlug(slug) || isSharedServiceSlug(slug) : false;
 }
 
 export function isRedirectSourcePath(pathname: string) {
