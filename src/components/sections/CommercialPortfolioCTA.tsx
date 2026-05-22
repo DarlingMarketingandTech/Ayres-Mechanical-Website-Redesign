@@ -27,7 +27,7 @@ export function CommercialPortfolioCTA({ interactiveToolId }: { interactiveToolI
               crop="fill"
               gravity="auto"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-dark/75 to-transparent lg:bg-gradient-to-r" aria-hidden="true" />
+            <div className="absolute inset-0 bg-linear-to-t from-brand-blue-dark/75 to-transparent lg:bg-linear-to-r" aria-hidden="true" />
             <figcaption className="sr-only">{media.commercialPortal.hero.alt}</figcaption>
           </figure>
           <div className="p-7 sm:p-8 lg:p-10">

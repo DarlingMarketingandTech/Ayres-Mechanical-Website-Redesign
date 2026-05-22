@@ -14,7 +14,7 @@ const preferredOrder = [
   "heating",
   "ductless-mini-splits",
   "indoor-air-quality",
-  "preventive-maintenance",
+  "seasonal-tune-ups",
   "commercial",
   "industrial",
   "24-hour-emergency",

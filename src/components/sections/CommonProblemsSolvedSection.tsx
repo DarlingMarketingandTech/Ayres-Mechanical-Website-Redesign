@@ -22,8 +22,8 @@ const problems = [
   },
   {
     symptom: "Spiking your energy bills?",
-    solution: "View Maintenance Plans",
-    href: routes.service("preventive-maintenance"),
+    solution: "Book a Seasonal Tune-Up",
+    href: routes.service("seasonal-tune-ups"),
     external: false,
   },
   {

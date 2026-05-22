@@ -51,7 +51,7 @@ export default function CommercialPartnershipsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Commercial Partnerships"
+        eyebrow="Service Plans & Partnerships"
         title="Enterprise HVAC Fleet Operations & Operational Risk Mitigation for Central Indiana"
         description="Planned HVAC support for facility managers, property managers, procurement teams, and multi-site operators who need fewer surprises, clearer budgets, and faster response planning."
         backgroundImage={media.commercialPortal.hero}
@@ -95,7 +95,7 @@ export default function CommercialPartnershipsPage() {
               The portal is built for practical local service planning: equipment visibility, maintenance cadence, priority response conversations, and clearer follow-up for the facilities that matter most.
             </p>
           </div>
-          <figure className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
+          <figure className="relative aspect-4/3 overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
             <CloudinaryImage
               asset={media.commercialPortal.rooftopProof}
               fill

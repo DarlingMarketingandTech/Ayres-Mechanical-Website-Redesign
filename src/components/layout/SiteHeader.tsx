@@ -2,55 +2,65 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Clock, Menu, Phone } from "lucide-react";
+import { Building2, ChevronDown, Clock, Home, Menu, Phone } from "lucide-react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import { Logo } from "@/components/brand/Logo";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
-  commercialNavigationGroup,
+  commercialMegaMenu,
   companyNavigation,
   emergencyNavigation,
   primaryNavigation,
-  residentialNavigationGroup,
+  residentialMegaMenu,
 } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
+import { isCommercialPath, isResidentialPath } from "@/lib/site-policy";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import { DesktopNav } from "./DesktopNav";
 import { useMobileChromeHidden } from "./useMobileChromeHidden";
 
 function isRouteActive(pathname: string, href: string) {
-  if (href === "/") {
+  if (href === "/" || href.startsWith("tel:")) {
     return pathname === href;
   }
-
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+const audienceGroups = [
+  { group: residentialMegaMenu, icon: Home, primaryCta: { label: "Request Residential Service", href: routes.requestService } },
+  { group: commercialMegaMenu, icon: Building2, primaryCta: { label: "Request Commercial Service", href: routes.requestService } },
+] as const;
 
 export function SiteHeader() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileChromeHidden = useMobileChromeHidden({ disabled: menuOpen });
-  const [openGroups, setOpenGroups] = useState<Set<string>>(
-    () => new Set([residentialNavigationGroup.label, commercialNavigationGroup.label]),
-  );
+
+  // Accordion — only one audience group open at a time
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+
+  function handleMenuOpen(open: boolean) {
+    setMenuOpen(open);
+    if (open) {
+      // Default to the audience matching the current route
+      if (isResidentialPath(pathname)) {
+        setOpenGroup(residentialMegaMenu.label);
+      } else if (isCommercialPath(pathname)) {
+        setOpenGroup(commercialMegaMenu.label);
+      } else {
+        setOpenGroup(null);
+      }
+    }
+  }
 
   function toggleGroup(label: string) {
-    setOpenGroups((prev) => {
-      const next = new Set(prev);
-      if (next.has(label)) {
-        next.delete(label);
-      } else {
-        next.add(label);
-      }
-      return next;
-    });
+    setOpenGroup((prev) => (prev === label ? null : label));
   }
 
   const updateHeaderOffset = useCallback(() => {
@@ -115,7 +125,7 @@ export function SiteHeader() {
                 aria-label="Open site navigation"
                 aria-expanded={menuOpen}
                 aria-haspopup="dialog"
-                onClick={() => setMenuOpen(true)}
+                onClick={() => handleMenuOpen(true)}
               >
                 <Menu className="size-5" aria-hidden="true" />
               </Button>
@@ -151,7 +161,7 @@ export function SiteHeader() {
         </Container>
       </header>
 
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+      <Sheet open={menuOpen} onOpenChange={handleMenuOpen}>
         <SheetContent side="right" className="flex w-full max-w-sm flex-col gap-0 overflow-hidden p-0 sm:max-w-sm" showCloseButton>
           {/* Compact app-like header */}
           <SheetHeader className="border-b border-border/70 bg-white px-4 py-3 text-left">
@@ -170,48 +180,86 @@ export function SiteHeader() {
 
           {/* Scrollable nav content */}
           <div className="flex-1 overflow-y-auto overscroll-contain">
+
+            {/* Audience groups — accordion, one open at a time */}
             <div className="border-b border-border/60 px-3 py-3">
-              <div className="grid gap-1">
-                {[residentialNavigationGroup, commercialNavigationGroup].map((group) => {
-                  const isOpen = openGroups.has(group.label);
+              <div className="grid gap-1.5">
+                {audienceGroups.map(({ group, icon: GroupIcon, primaryCta }) => {
+                  const isOpen = openGroup === group.label;
+                  const groupId = `nav-group-${group.label.toLowerCase().replace(/\s+/g, "-")}`;
+
                   return (
                     <div key={group.label} className="overflow-hidden rounded-xl border border-border/60 bg-brand-ice/30">
                       <button
                         type="button"
                         onClick={() => toggleGroup(group.label)}
-                        className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left"
+                        className="flex w-full items-center gap-2.5 px-3 py-3 text-left"
                         aria-expanded={isOpen}
+                        aria-controls={groupId}
                       >
-                        <span className="text-xs font-black uppercase tracking-[0.16em] text-brand-blue-dark">
+                        <GroupIcon className="size-4 shrink-0 text-brand-blue-dark/60" aria-hidden="true" />
+                        <span className="flex-1 text-sm font-black text-brand-blue-dark">
                           {group.label}
                         </span>
                         <ChevronDown
                           className={cn(
-                            "size-3.5 shrink-0 text-brand-blue-dark/50 transition-transform duration-200",
+                            "size-3.5 shrink-0 text-brand-blue-dark/50 transition-transform duration-200 motion-reduce:transition-none",
                             isOpen && "rotate-180",
                           )}
                           aria-hidden="true"
                         />
                       </button>
+
                       {isOpen && (
-                        <ul className="border-t border-border/50 px-2 pb-2 pt-1">
-                          {group.items.map((item) => (
-                            <li key={item.href}>
-                              <Link
-                                href={item.href}
-                                onClick={() => setMenuOpen(false)}
-                                className={cn(
-                                  "flex min-h-10 items-center rounded-lg px-2 py-2 text-sm font-bold transition-colors",
-                                  isRouteActive(pathname, item.href)
-                                    ? "text-primary"
-                                    : "text-brand-blue-dark hover:text-primary",
-                                )}
-                              >
-                                {item.label}
-                              </Link>
-                            </li>
+                        <div id={groupId} className="border-t border-border/50">
+                          {/* Primary CTA at top */}
+                          <div className="px-2 pt-2 pb-1">
+                            <Link
+                              href={primaryCta.href}
+                              onClick={() => setMenuOpen(false)}
+                              data-analytics-event="cta_click"
+                              data-analytics-category="mobile_menu"
+                              data-analytics-label={primaryCta.label.toLowerCase().replace(/\s+/g, "_")}
+                              data-analytics-location="mobile_menu_group_cta"
+                              data-analytics-href={primaryCta.href}
+                              className={cn(
+                                buttonVariants({ variant: "dark", size: "default" }),
+                                "w-full justify-center text-xs",
+                              )}
+                            >
+                              {primaryCta.label}
+                            </Link>
+                          </div>
+
+                          {/* Stacked columns */}
+                          {group.columns.map((column) => (
+                            <div key={column.heading} className="px-2 pb-1">
+                              <p className="px-2 pt-2.5 pb-1 text-[0.6rem] font-black uppercase tracking-[0.2em] text-brand-blue-dark/40">
+                                {column.heading}
+                              </p>
+                              <ul className="grid gap-0.5">
+                                {column.items
+                                  .filter((item) => item.variant !== "cta") // primary CTAs already shown above
+                                  .map((item) => (
+                                    <li key={`${item.href}-${item.label}`}>
+                                      <Link
+                                        href={item.href}
+                                        onClick={() => setMenuOpen(false)}
+                                        className={cn(
+                                          "flex min-h-9 items-center rounded-lg px-2 py-1.5 text-sm font-bold transition-colors motion-reduce:transition-none",
+                                          isRouteActive(pathname, item.href)
+                                            ? "text-primary"
+                                            : "text-brand-blue-dark hover:text-primary",
+                                        )}
+                                      >
+                                        {item.label}
+                                      </Link>
+                                    </li>
+                                  ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       )}
                     </div>
                   );
@@ -229,7 +277,7 @@ export function SiteHeader() {
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
                       className={cn(
-                        "flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-bold transition-colors",
+                        "flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-bold transition-colors motion-reduce:transition-none",
                         isRouteActive(pathname, item.href)
                           ? "bg-brand-ice text-primary"
                           : "text-brand-blue-dark hover:bg-brand-ice/60",
@@ -243,7 +291,7 @@ export function SiteHeader() {
             </div>
           </div>
 
-          {/* Bottom CTAs — 2-up grid for compact layout */}
+          {/* Bottom CTAs */}
           <div className="border-t border-border/70 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
             <Link
               href={emergencyNavigation.href}

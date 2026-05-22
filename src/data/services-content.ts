@@ -70,7 +70,7 @@ export const serviceSlugs = {
   heating: "heating",
   ductless: "ductless-mini-splits",
   indoorAirQuality: "indoor-air-quality",
-  preventiveMaintenance: "preventive-maintenance",
+  preventiveMaintenance: "seasonal-tune-ups",
   commercial: "commercial",
   industrial: "industrial",
   twentyFourHourEmergency: "24-hour-emergency",
@@ -230,73 +230,74 @@ export const servicePageContent: ServiceContent[] = [
   },
   {
     slug: serviceSlugs.preventiveMaintenance,
-    title: "Preventive HVAC Maintenance",
-    shortTitle: "Preventive Maintenance",
-    summary: "Seasonal HVAC maintenance plans that reduce breakdown risk, improve airflow, and clarify equipment condition.",
-    heroTitle: "Preventive HVAC Maintenance",
-    eyebrow: "Maintenance",
+    title: "Seasonal HVAC Tune-Ups",
+    shortTitle: "Seasonal Tune-Ups",
+    summary:
+      "Pre-season HVAC tune-ups that improve efficiency by 5\u201340%, reduce breakdown risk, and prepare your system for Indiana\u2019s spring and fall.",
+    heroTitle: "Seasonal HVAC Tune-Ups",
+    eyebrow: "Seasonal Tune-Ups",
     accent: "blue",
     icon: "maintenance",
     intro:
-      "Maintenance isn't just a luxury; it is a strategy to protect one of your home's most expensive assets. Our planned service ensures your HVAC system remains a silent, efficient partner in your comfort.",
+      "A seasonal tune-up is the single best investment you can make before Indiana\u2019s heat arrives or the first cold snap hits. Properly tuned systems run 5\u201340% more efficiently, catch wear before it becomes a breakdown, and give you an honest picture of your equipment\u2019s condition heading into the season.",
     whatWeHelpWith: [
       {
-        title: "Seasonal Performance Checks",
+        title: "Spring AC Tune-Up",
         description:
-          "As the seasons shift in Central Indiana, so do the demands on your equipment. Our seasonal performance checks involve testing the system in its “live” state—checking refrigerant charge in the summer and heat exchanger integrity in the winter—to ensure you are prepared for the first heatwave or deep freeze of the year.",
+          "Before the summer heat, we inspect and clean your cooling system: test refrigerant charge, clean condenser coils, check electrical connections, verify thermostat calibration, and confirm airflow. You get a system that is ready for the first hot day—not one that fails on it.",
+      },
+      {
+        title: "Fall Furnace Tune-Up",
+        description:
+          "Before the first cold snap, we inspect your furnace or heat pump: clean burners, check the heat exchanger for cracks, test safety controls, verify ignition, and measure temperature rise. A fall tune-up significantly reduces the risk of a mid-winter breakdown when you need heat most.",
       },
       {
         title: "Filter and Airflow Review",
         description:
-          "The leading cause of system failure is restricted airflow. We go beyond simply changing a filter; we inspect your entire intake system to ensure your blower motor isn't straining against dust buildup or poorly designed filtration, which can slash equipment life by years.",
+          "Restricted airflow is the leading cause of HVAC failures. We go beyond a simple filter swap—we inspect the full intake system and blower to ensure nothing is working against your equipment’s efficiency and lifespan.",
       },
       {
-        title: "Equipment Condition Reporting",
+        title: "Equipment Condition Report",
         description:
-          "Knowledge is power. After every visit, we provide a detailed Equipment Condition Report. We translate technical readings into plain English, letting you know which components are healthy and which ones may need attention in the future, so you are never surprised by a sudden failure.",
-      },
-      {
-        title: "Residential and Business Plans",
-        description:
-          "Maintenance needs vary between a family home and a commercial facility. We offer tailored Residential and Business Plans that automate your service schedule. Members receive priority scheduling and the confidence that their systems are being managed by professionals who know their equipment's history.",
+          "After every tune-up, you receive a plain-English condition report. We tell you which components are healthy, which ones may need attention soon, and what to budget for—so you are never surprised by a sudden failure.",
       },
     ],
     commonProblems: [
       {
-        title: "Emergency Breakdown Risk",
+        title: "Mid-Season Surprise Breakdowns",
         description:
-          "Most mid-season failures are caused by parts that were already failing months prior. We catch these during the “off-season” so you stay comfortable when it matters most.",
+          "Most mid-season failures are caused by worn parts that were detectable months earlier. A spring or fall tune-up catches these before they become emergencies.",
       },
       {
-        title: "Neglected System Wear",
+        title: "Higher-Than-Expected Energy Bills",
         description:
-          "Friction and dirt are the enemies of efficiency. By cleaning and lubricating internal components, we reduce the mechanical stress that leads to expensive heating or AC repairs.",
+          "A dirty or maladjusted system can use 5–40% more energy than a properly tuned one. We restore peak efficiency so you are not paying for wasted energy all season.",
       },
       {
-        title: "Poor Airflow",
+        title: "Short Equipment Lifespan",
         description:
-          "If some rooms feel stuffy or your vents are whistling, our maintenance review identifies the bottlenecks in your system, ensuring air moves freely and quietly.",
+          "Skipped tune-ups accelerate wear on motors, belts, and coils. Regular seasonal maintenance is the most cost-effective way to maximize equipment life.",
       },
       {
         title: "Unclear Equipment Condition",
         description:
-          "Stop wondering if your 10-year-old unit will make it through the month. We provide a clear “health grade” for your system so you can plan for the future with confidence.",
+          "If you are not sure whether your system will make it through another Indiana summer or winter, a tune-up gives you a clear, honest assessment without pressure.",
       },
     ],
     closingCTA: {
-      title: "Invest in Efficiency, Not Emergencies",
+      title: "Book Your Seasonal Tune-Up",
       description:
-        "A well-maintained system can run up to 20% more efficiently than a neglected one. At Ayres Mechanical, we believe in a straightforward path to resolution. If our maintenance check reveals a need for an upgrade, we offer Flexible Financing to help you transition to a new system without the financial sting of an emergency.",
-      primaryLabel: "Request Maintenance Service",
+        "A well-maintained system runs up to 40% more efficiently than a neglected one. Book your spring or fall tune-up with Ayres Mechanical and head into the season with confidence. If we find anything that needs attention, we will explain your options clearly—no pressure, no guesswork.",
+      primaryLabel: "Book Your Spring/Fall Tune-Up",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
-      subtext: "Do you have multiple properties or a commercial facility that requires a custom maintenance schedule?",
+      subtext: "Managing maintenance for a commercial facility or portfolio?",
       partnershipPromo: {
-        title: "Managing maintenance for a commercial facility or portfolio?",
+        title: "Managing maintenance for a commercial facility?",
         description:
-          "Explore Commercial Partnerships to outline your footprint, recurring maintenance needs, and service planning priorities.",
-        label: "Explore Commercial Partnerships",
+          "Explore Service Plans & Partnerships to outline your equipment footprint, maintenance needs, and service coordination priorities.",
+        label: "Explore Service Plans & Partnerships",
         href: routes.commercialPartnerships,
       },
     },
@@ -379,7 +380,7 @@ export const servicePageContent: ServiceContent[] = [
       partnershipPromo: {
         title: "Need planned support for multiple systems or facilities?",
         description:
-          "Use the Commercial Partnerships portal to outline your footprint, equipment mix, and service priorities.",
+          "Use the Service Plans & Partnerships portal to outline your footprint, equipment mix, and service priorities.",
         label: "Build a Commercial Service Plan",
         href: routes.commercialPartnerships,
       },

@@ -31,7 +31,7 @@ const serviceLanes = [
     href: routes.commercialService,
   },
   {
-    title: "Industrial / Facility Support",
+    title: "Facility & Industrial HVAC",
     description: "Support for operational spaces where comfort, airflow, and downtime risk matter.",
     href: routes.industrialFacilities,
   },
@@ -77,7 +77,7 @@ export default function CommercialPage() {
         backgroundImageClassName="object-[center_36%]"
         photoOverlay="navy-strong"
         heroActions={{
-          primary: { href: routes.commercialPartnerships, label: "Explore Commercial Partnerships" },
+          primary: { href: routes.commercialPartnerships, label: "Explore Service Plans & Partnerships" },
           secondary: { href: routes.requestService, label: "Request Commercial Service", external: false },
         }}
       />
@@ -125,7 +125,7 @@ export default function CommercialPage() {
               ))}
             </div>
           </div>
-          <figure className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white bg-white shadow-sm">
+          <figure className="relative aspect-4/3 overflow-hidden rounded-[2rem] border border-white bg-white shadow-sm">
             <CloudinaryImage
               asset={media.pages.commercial.supporting}
               fill
@@ -145,7 +145,7 @@ export default function CommercialPage() {
           <div>
             <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">When to use the portal</p>
             <h2 className="mt-3 text-(length:--text-section) font-black text-balance text-brand-blue-dark">
-              Commercial Partnerships is for planned facility support.
+              Service Plans &amp; Partnerships is for planned facility support.
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
               Use the portal when your HVAC needs involve portfolios, recurring maintenance, procurement review, or lifecycle planning rather than a single repair call.

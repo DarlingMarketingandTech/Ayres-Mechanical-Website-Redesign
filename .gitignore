@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cursor — agent skills are local IDE tooling (not part of the deployed site).
+.cursor/skills/ayres-mechanical-nav-upgrade/
+skill.zip
