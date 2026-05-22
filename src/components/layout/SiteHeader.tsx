@@ -9,11 +9,11 @@ import { Logo } from "@/components/brand/Logo";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
+  commercialNavigationGroup,
   companyNavigation,
   emergencyNavigation,
   primaryNavigation,
-  serviceNavigationGroups,
-  serviceOverviewLink,
+  residentialNavigationGroup,
 } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
@@ -37,10 +37,8 @@ export function SiteHeader() {
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileChromeHidden = useMobileChromeHidden({ disabled: menuOpen });
-  // Track which service groups are open in the mobile nav.
-  // Default: both audience lanes open so residential and commercial paths are visible.
   const [openGroups, setOpenGroups] = useState<Set<string>>(
-    () => new Set(serviceNavigationGroups.map((group) => group.label)),
+    () => new Set([residentialNavigationGroup.label, commercialNavigationGroup.label]),
   );
 
   function toggleGroup(label: string) {
@@ -172,24 +170,12 @@ export function SiteHeader() {
 
           {/* Scrollable nav content */}
           <div className="flex-1 overflow-y-auto overscroll-contain">
-            {/* Services — collapsible groups */}
             <div className="border-b border-border/60 px-3 py-3">
-              <div className="mb-2 flex items-center justify-between px-1">
-                <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-brand-blue-dark/50">Services</p>
-                <Link
-                  href={serviceOverviewLink.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-xs font-bold text-primary"
-                >
-                  View all →
-                </Link>
-              </div>
               <div className="grid gap-1">
-                {serviceNavigationGroups.map((group) => {
+                {[residentialNavigationGroup, commercialNavigationGroup].map((group) => {
                   const isOpen = openGroups.has(group.label);
                   return (
                     <div key={group.label} className="overflow-hidden rounded-xl border border-border/60 bg-brand-ice/30">
-                      {/* Group toggle button */}
                       <button
                         type="button"
                         onClick={() => toggleGroup(group.label)}
@@ -207,7 +193,6 @@ export function SiteHeader() {
                           aria-hidden="true"
                         />
                       </button>
-                      {/* Collapsible items */}
                       {isOpen && (
                         <ul className="border-t border-border/50 px-2 pb-2 pt-1">
                           {group.items.map((item) => (
@@ -305,4 +290,3 @@ export function SiteHeader() {
     </>
   );
 }
-

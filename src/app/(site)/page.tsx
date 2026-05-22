@@ -53,7 +53,7 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      <CommercialPortfolioCTA />
+      <CommercialPortfolioCTA interactiveToolId="commercial-portfolio" />
 
       <AuthoritySection />
 

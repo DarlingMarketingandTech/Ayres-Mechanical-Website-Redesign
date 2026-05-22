@@ -13,13 +13,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   commercialNavigation,
+  commercialNavigationGroup,
   companyNavigation,
   primaryNavigation,
-  serviceNavigationGroups,
-  serviceOverviewLink,
+  residentialNavigation,
+  residentialNavigationGroup,
   type NavigationChild,
 } from "@/content/navigation";
-import { routes } from "@/lib/routes";
+import { isCommercialPath, isResidentialPath } from "@/lib/site-policy";
 import { cn } from "@/lib/utils";
 
 function isRouteActive(pathname: string, href: string) {
@@ -35,68 +36,43 @@ const topLevelClass =
 
 export function DesktopNav() {
   const pathname = usePathname();
-  const servicesActive = pathname.startsWith("/services");
-  const commercialActive =
-    isRouteActive(pathname, routes.commercial) ||
-    isRouteActive(pathname, routes.commercialPartnerships) ||
-    isRouteActive(pathname, routes.commercialService) ||
-    isRouteActive(pathname, routes.industrialFacilities);
+  const residentialActive = isResidentialPath(pathname);
+  const commercialActive = isCommercialPath(pathname);
   const companyActive = companyNavigation.some((item) => isRouteActive(pathname, item.href));
 
   return (
     <NavigationMenu align="center" className="flex-none">
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
-          <NavigationMenuTrigger className={cn(topLevelClass, servicesActive && "border-brand-blue-dark/10 bg-white/85 text-primary shadow-sm")}>
-            Services
+          <NavigationMenuTrigger className={cn(topLevelClass, residentialActive && "border-brand-blue-dark/10 bg-white/85 text-primary shadow-sm")}>
+            {residentialNavigation.label}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[760px] p-3">
+            <div className="w-[380px] p-3">
               <div className="rounded-2xl border border-border/70 bg-white/90 p-4 shadow-sm">
                 <div className="flex items-center justify-between gap-4 border-b border-border/70 pb-3">
                   <div>
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">Rule of Three</p>
-                    <h3 className="mt-1 text-lg font-black text-brand-blue-dark">Service paths for every property type</h3>
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">Residential</p>
+                    <h3 className="mt-1 text-lg font-black text-brand-blue-dark">Home comfort and repair paths</h3>
                   </div>
                   <NavigationMenuLink
-                    render={<Link href={serviceOverviewLink.href} />}
+                    render={<Link href={residentialNavigation.href} />}
                     className={cn(
                       "rounded-full border border-border bg-secondary px-4 py-2 text-sm font-black text-brand-blue-dark transition-colors hover:bg-secondary/80",
-                      isRouteActive(pathname, serviceOverviewLink.href) && "border-primary/15 bg-brand-ice text-primary",
+                      isRouteActive(pathname, residentialNavigation.href) && "border-primary/15 bg-brand-ice text-primary",
                     )}
                   >
-                    {serviceOverviewLink.label}
+                    {residentialNavigation.label}
                   </NavigationMenuLink>
                 </div>
-                <div className="mt-3 grid gap-3 md:grid-cols-3">
-                  {serviceNavigationGroups.map((group) => (
-                    <div key={group.label} className="rounded-xl border border-border/50 bg-white p-3 shadow-sm">
-                      <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">{group.label}</p>
-                      <ul className="grid gap-1">
-                        {group.items.map((item) => (
-                          <li key={item.href}>
-                            <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                  <div className="rounded-xl border border-brand-blue-dark/10 bg-brand-ice p-4 shadow-sm">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-blue-dark/60">Commercial portal</p>
-                    <h3 className="mt-2 text-lg font-black text-brand-blue-dark">Managing a facility or portfolio?</h3>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      Outline equipment, service priorities, and follow-up needs in the commercial partnerships portal.
-                    </p>
-                    <NavigationMenuLink
-                      render={<Link href={routes.commercialPartnerships} />}
-                      className={cn(
-                        "mt-4 inline-flex rounded-full bg-brand-blue-dark px-4 py-2 text-sm font-black text-white transition-colors hover:bg-primary",
-                        isRouteActive(pathname, routes.commercialPartnerships) && "bg-primary",
-                      )}
-                    >
-                      Commercial Partnerships
-                    </NavigationMenuLink>
-                  </div>
+                <div className="mt-3 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
+                  <ul className="grid gap-1">
+                    {residentialNavigationGroup.items.map((item) => (
+                      <li key={item.href}>
+                        <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -104,12 +80,39 @@ export function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink
-            render={<Link href={commercialNavigation.href} />}
-            className={cn(topLevelClass, commercialActive && "border-brand-blue-dark/10 bg-white/85 text-primary shadow-sm")}
-          >
+          <NavigationMenuTrigger className={cn(topLevelClass, commercialActive && "border-brand-blue-dark/10 bg-white/85 text-primary shadow-sm")}>
             {commercialNavigation.label}
-          </NavigationMenuLink>
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="w-[430px] p-3">
+              <div className="rounded-2xl border border-border/70 bg-white/90 p-4 shadow-sm">
+                <div className="flex items-center justify-between gap-4 border-b border-border/70 pb-3">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-red">Commercial</p>
+                    <h3 className="mt-1 text-lg font-black text-brand-blue-dark">Facility, RTU, and planning support</h3>
+                  </div>
+                  <NavigationMenuLink
+                    render={<Link href={commercialNavigation.href} />}
+                    className={cn(
+                      "rounded-full border border-border bg-secondary px-4 py-2 text-sm font-black text-brand-blue-dark transition-colors hover:bg-secondary/80",
+                      isRouteActive(pathname, commercialNavigation.href) && "border-primary/15 bg-brand-ice text-primary",
+                    )}
+                  >
+                    {commercialNavigation.label}
+                  </NavigationMenuLink>
+                </div>
+                <div className="mt-3 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
+                  <ul className="grid gap-1">
+                    {commercialNavigationGroup.items.map((item) => (
+                      <li key={item.href}>
+                        <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>

@@ -28,7 +28,7 @@ export default function ServicesPage() {
         </Container>
       </Section>
       <Section className="pt-0">
-        <VirtualTriageCTA />
+        <VirtualTriageCTA interactiveToolId="virtual-triage" />
       </Section>
       <EliteCertificationsBanner />
       <FinancingPromoSection variant="service" />

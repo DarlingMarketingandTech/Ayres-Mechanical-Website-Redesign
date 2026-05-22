@@ -28,14 +28,14 @@ const spendOptions = [
   { label: "$100k+", value: 100000 },
 ];
 
-export function CommercialAssetCalculator() {
+export function CommercialAssetCalculator({ interactiveToolId }: { interactiveToolId?: string }) {
   const [rtus, setRtus] = useState(6);
   const [age, setAge] = useState("6-10 years");
   const [energySpend, setEnergySpend] = useState(25000);
   const estimatedWaste = useMemo(() => currencyFormatter.format(energySpend * 0.15), [energySpend]);
 
   return (
-    <Section id="asset-planning" className="scroll-mt-28 bg-white">
+    <Section id="asset-planning" className="scroll-mt-28 bg-white" data-interactive-tool={interactiveToolId}>
       <Container className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Commercial asset calculator</p>

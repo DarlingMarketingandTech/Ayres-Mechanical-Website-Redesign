@@ -1,5 +1,6 @@
 import { serviceSlugs } from "@/data/services-content";
 import { routes } from "@/lib/routes";
+import { navigationLaneDefinitions } from "@/lib/site-policy";
 import { services, type Service } from "./services";
 
 export type NavigationChild = {
@@ -34,21 +35,27 @@ export const serviceOverviewLink: NavigationChild = {
 };
 
 const residentialOverviewLink: NavigationChild = {
-  label: "Residential Overview",
-  href: routes.residential,
-  description: "Heating, cooling, maintenance, and indoor comfort help for Central Indiana homes.",
+  label: navigationLaneDefinitions.residential.overviewLabel,
+  href: navigationLaneDefinitions.residential.href,
+  description: navigationLaneDefinitions.residential.description,
 };
 
 const commercialOverviewLink: NavigationChild = {
-  label: "Commercial Overview",
-  href: routes.commercial,
-  description: "Commercial diagnostics, rooftop unit service, planned maintenance, and facility support.",
+  label: navigationLaneDefinitions.commercial.overviewLabel,
+  href: navigationLaneDefinitions.commercial.href,
+  description: navigationLaneDefinitions.commercial.description,
+};
+
+export const residentialNavigation: NavigationChild = {
+  label: navigationLaneDefinitions.residential.label,
+  href: navigationLaneDefinitions.residential.href,
+  description: navigationLaneDefinitions.residential.description,
 };
 
 export const commercialNavigation: NavigationChild = {
-  label: "Commercial",
-  href: routes.commercial,
-  description: "Facility HVAC support, planned maintenance, and commercial service planning.",
+  label: navigationLaneDefinitions.commercial.label,
+  href: navigationLaneDefinitions.commercial.href,
+  description: navigationLaneDefinitions.commercial.description,
 };
 
 export const commercialPartnershipNavigation: NavigationChild = {
@@ -63,40 +70,40 @@ export const emergencyNavigation: NavigationChild = {
   description: "Fast help for heating and cooling issues that cannot wait.",
 };
 
-export const serviceNavigationGroups: NavigationGroup[] = [
-  {
-    label: "Residential",
-    items: [
-      residentialOverviewLink,
-      serviceLink(serviceSlugs.heating),
-      serviceLink(serviceSlugs.airConditioning),
-      serviceLink(serviceSlugs.ductless),
-      serviceLink(serviceSlugs.indoorAirQuality),
-      serviceLink(serviceSlugs.preventiveMaintenance),
-      {
-        ...serviceLink(serviceSlugs.twentyFourHourEmergency),
-        label: "Emergency Service",
-      },
-    ],
-  },
-  {
-    label: "Commercial",
-    items: [
-      commercialOverviewLink,
-      serviceLink(serviceSlugs.commercial),
-      {
-        ...serviceLink(serviceSlugs.industrial),
-        label: "Industrial / Facility Support",
-      },
-      commercialPartnershipNavigation,
-      serviceLink(serviceSlugs.preventiveMaintenance),
-      {
-        ...serviceLink(serviceSlugs.twentyFourHourEmergency),
-        label: "Emergency Service",
-      },
-    ],
-  },
-];
+export const residentialNavigationGroup: NavigationGroup = {
+  label: navigationLaneDefinitions.residential.label,
+  items: [
+    residentialOverviewLink,
+    serviceLink(serviceSlugs.heating),
+    serviceLink(serviceSlugs.airConditioning),
+    serviceLink(serviceSlugs.ductless),
+    serviceLink(serviceSlugs.indoorAirQuality),
+    serviceLink(serviceSlugs.preventiveMaintenance),
+    {
+      ...serviceLink(serviceSlugs.twentyFourHourEmergency),
+      label: "Emergency Service",
+    },
+  ],
+};
+
+export const commercialNavigationGroup: NavigationGroup = {
+  label: navigationLaneDefinitions.commercial.label,
+  items: [
+    commercialOverviewLink,
+    serviceLink(serviceSlugs.commercial),
+    {
+      ...serviceLink(serviceSlugs.industrial),
+      label: "Industrial / Facility Support",
+    },
+    commercialPartnershipNavigation,
+    {
+      ...serviceLink(serviceSlugs.twentyFourHourEmergency),
+      label: "Emergency Service",
+    },
+  ],
+};
+
+export const serviceNavigationGroups: NavigationGroup[] = [residentialNavigationGroup, commercialNavigationGroup];
 
 export const companyNavigation: NavigationChild[] = [
   {

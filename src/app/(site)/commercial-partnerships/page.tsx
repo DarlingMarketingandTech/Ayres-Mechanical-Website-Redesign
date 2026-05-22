@@ -122,7 +122,7 @@ export default function CommercialPartnershipsPage() {
       </Section>
 
       <CommercialSlaMatrix />
-      <CommercialAssetCalculator />
+      <CommercialAssetCalculator interactiveToolId="commercial-asset-calculator" />
       <RegionalDispatchMatrix />
 
       <Section id="commercial-intake" className="scroll-mt-28 bg-brand-carbon text-white">
