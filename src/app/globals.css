@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -121,35 +119,6 @@
   :root[data-mobile-cta-suppressed="true"] [data-mobile-menu-only] {
     display: flex;
   }
-}
-
-.dark {
-  --background: #07112c;
-  --foreground: #f8fafc;
-  --card: #0a1a44;
-  --card-foreground: #f8fafc;
-  --popover: #0a1a44;
-  --popover-foreground: #f8fafc;
-  --primary: #8fb0ff;
-  --primary-foreground: #07112c;
-  --secondary: #14275e;
-  --secondary-foreground: #f8fafc;
-  --muted: #14275e;
-  --muted-foreground: #b9c3d7;
-  --accent: #451013;
-  --accent-foreground: #ffd7d9;
-  --destructive: #ff6268;
-  --border: rgb(255 255 255 / 14%);
-  --input: rgb(255 255 255 / 18%);
-  --ring: #8fb0ff;
-  --sidebar: #0a1a44;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #8fb0ff;
-  --sidebar-primary-foreground: #07112c;
-  --sidebar-accent: #14275e;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: rgb(255 255 255 / 14%);
-  --sidebar-ring: #8fb0ff;
 }
 
 @layer base {

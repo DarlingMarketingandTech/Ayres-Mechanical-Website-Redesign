@@ -1,5 +1,5 @@
 import type { CloudinaryMediaAsset } from "@/content/media";
-import { PageHero } from "@/components/sections/Hero";
+import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 

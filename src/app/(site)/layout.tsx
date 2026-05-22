@@ -1,7 +1,8 @@
-import { MobileStickyCtaBar } from "@/components/layout/MobileStickyCtaBar";
+import { Suspense } from "react";
+
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SystemStrainBanner } from "@/components/layout/SystemStrainBanner";
+import { SystemStrainBanner, SystemStrainBannerFallback } from "@/components/layout/SystemStrainBanner";
 import { InPageCtaProvider } from "@/components/providers/in-page-cta-context";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/components/seo/schema";
@@ -10,8 +11,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <InPageCtaProvider>
       <JsonLd data={localBusinessSchema()} />
-      <SystemStrainBanner />
-      <SiteHeader />
+      <Suspense fallback={<SystemStrainBannerFallback />}>
+        <SystemStrainBanner />
+      </Suspense>
+      <SiteChrome />
       <main
         id="main-content"
         className="min-h-screen max-lg:pb-[var(--mobile-bottom-chrome-h)]"
@@ -19,7 +22,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       >
         {children}
       </main>
-      <MobileStickyCtaBar />
       <SiteFooter />
     </InPageCtaProvider>
   );

@@ -2,10 +2,37 @@ import type { CloudinaryMediaAsset } from "@/content/media";
 
 const cloudinaryCloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "djhqowk67";
 
-export function cloudinaryImageUrl(asset: CloudinaryMediaAsset) {
-  const versionPath = asset.version ? `v${asset.version}/` : "";
+export type CloudinaryImageTransformOptions = {
+  width?: number | `${number}`;
+  height?: number | `${number}`;
+  crop?: string;
+  gravity?: string;
+  aspectRatio?: string | number;
+};
 
-  return `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/f_auto,q_auto/${versionPath}${asset.publicId}.${asset.format}`;
+function numberLike(value: number | `${number}` | undefined) {
+  return value === undefined ? undefined : String(value);
+}
+
+function cloudinaryTransformChain(options: CloudinaryImageTransformOptions = {}) {
+  const transforms = [
+    options.crop ? `c_${options.crop}` : undefined,
+    options.gravity ? `g_${options.gravity}` : undefined,
+    options.aspectRatio ? `ar_${options.aspectRatio}` : undefined,
+    options.width ? `w_${numberLike(options.width)}` : undefined,
+    options.height ? `h_${numberLike(options.height)}` : undefined,
+    "f_auto",
+    "q_auto",
+  ].filter(Boolean);
+
+  return transforms.join(",");
+}
+
+export function cloudinaryImageUrl(asset: CloudinaryMediaAsset, options?: CloudinaryImageTransformOptions) {
+  const versionPath = asset.version ? `v${asset.version}/` : "";
+  const transformChain = cloudinaryTransformChain(options);
+
+  return `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/${transformChain}/${versionPath}${asset.publicId}.${asset.format}`;
 }
 
 /**

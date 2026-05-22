@@ -1,0 +1,23 @@
+{
+  "skill_name": "nextjs-backend-architect",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Audit the backend of this Next.js 16 repo — API routes, lib folder, and whether page data should go through a repository. We're on Resend only, no database yet. Write findings to docs.",
+      "expected_output": "Structured audit in docs/BACKEND_ARCHITECTURE_AUDIT.md with topology, boundaries, caching, and API consistency findings.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Refactor src/app/api/send-diagnostic/route.ts — it duplicates rate limiting and inlines Resend. Unify with the other form endpoints and move business logic to core/services.",
+      "expected_output": "Thin route using shared POST handler; diagnostic submission in core/services; shared rate limiter.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Our marketing pages import @/content/site everywhere. Propose and implement a page data layer so sitemap and dynamic [slug] routes use repositories/cache while keeping content/ as the source files.",
+      "expected_output": "src/core/repositories and src/core/cache with sitemap wired to repository; RSC dynamic routes use cached getters.",
+      "files": []
+    }
+  ]
+}

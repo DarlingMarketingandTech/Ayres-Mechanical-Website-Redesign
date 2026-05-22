@@ -86,7 +86,6 @@ export function SiteHeader() {
         <Container className="py-2.5 lg:py-4">
           <div className="flex items-center justify-between gap-3 lg:gap-6">
             <Logo
-              priority
               linkClassName="min-w-0 max-w-[11.75rem] items-center sm:max-w-[13rem] lg:max-w-[20rem]"
               sizes="(max-width: 640px) 188px, (max-width: 1024px) 208px, 320px"
               className="h-auto w-full max-h-[2.65rem] object-contain object-left sm:max-h-12 lg:max-h-14"

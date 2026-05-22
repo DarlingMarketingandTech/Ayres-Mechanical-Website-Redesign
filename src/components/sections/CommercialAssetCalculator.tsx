@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Calculator, TrendingUp } from "lucide-react";
 
-import { CloudinaryImage } from "@/components/media/CloudinaryImage";
+import { CloudinaryImageReveal } from "@/components/media/CloudinaryImageReveal";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { media } from "@/content/media";
@@ -46,7 +46,7 @@ export function CommercialAssetCalculator() {
             This lightweight capital planning widget helps facility teams frame maintenance and replacement conversations before costs become urgent.
           </p>
           <figure className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
-            <CloudinaryImage
+            <CloudinaryImageReveal
               asset={media.commercialPortal.assetPlanning}
               fill
               sizes="(min-width: 1024px) 48vw, 100vw"

@@ -1,18 +1,20 @@
 import { notFound } from "next/navigation";
 
 import { IndustryPageTemplate } from "@/components/templates/IndustryPageTemplate";
-import { getIndustryBySlug } from "@/content/industries";
 import { pageMetadata } from "@/lib/seo";
+import { getCachedIndustryBySlug } from "@/lib/static-content-cache";
 
-const industry = getIndustryBySlug("commercial");
+export async function generateMetadata() {
+  const industry = await getCachedIndustryBySlug("commercial");
+  return pageMetadata({
+    title: industry ? industry.title : "Industry",
+    description: industry ? industry.description : "HVAC service from Ayres Mechanical Inc.",
+    path: "/industries/commercial",
+  });
+}
 
-export const metadata = pageMetadata({
-  title: industry ? industry.title : "Industry",
-  description: industry ? industry.description : "HVAC service from Ayres Mechanical Inc.",
-  path: "/industries/commercial",
-});
-
-export default function Page() {
+export default async function Page() {
+  const industry = await getCachedIndustryBySlug("commercial");
   if (!industry) notFound();
   return <IndustryPageTemplate industry={industry} />;
 }

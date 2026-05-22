@@ -1,16 +1,17 @@
 import { notFound } from "next/navigation";
 
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate";
-import { getServiceContentBySlug, servicePageContent } from "@/data/services-content";
 import { pageMetadata } from "@/lib/seo";
+import { getCachedServiceContentBySlug, getCachedServicePageContent } from "@/lib/static-content-cache";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const servicePageContent = await getCachedServicePageContent();
   return servicePageContent.map((service) => ({ slug: service.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = getServiceContentBySlug(slug);
+  const service = await getCachedServiceContentBySlug(slug);
 
   if (!service) {
     return {};
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = getServiceContentBySlug(slug);
+  const service = await getCachedServiceContentBySlug(slug);
 
   if (!service) notFound();
 

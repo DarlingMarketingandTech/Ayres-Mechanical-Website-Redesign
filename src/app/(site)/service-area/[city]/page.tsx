@@ -1,16 +1,17 @@
 import { notFound } from "next/navigation";
 
 import { LocationPageTemplate } from "@/components/templates/LocationPageTemplate";
-import { getLocationBySlug, serviceLocations } from "@/content/locations";
 import { pageMetadata } from "@/lib/seo";
+import { getCachedLocationBySlug, getCachedServiceLocations } from "@/lib/static-content-cache";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const serviceLocations = await getCachedServiceLocations();
   return serviceLocations.map((location) => ({ city: location.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }) {
   const resolved = await params;
-  const location = getLocationBySlug(resolved.city);
+  const location = await getCachedLocationBySlug(resolved.city);
   if (!location) return {};
   return pageMetadata({
     title: "HVAC Services in " + location.city + ", " + location.state,
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function LocationPage({ params }: { params: Promise<{ city: string }> }) {
   const resolved = await params;
-  const location = getLocationBySlug(resolved.city);
+  const location = await getCachedLocationBySlug(resolved.city);
   if (!location) notFound();
   return <LocationPageTemplate location={location} />;
 }

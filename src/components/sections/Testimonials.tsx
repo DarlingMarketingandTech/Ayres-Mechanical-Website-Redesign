@@ -116,12 +116,11 @@ export function Testimonials({ limit, variant = "default", marqueeFadeClassName 
       {reduceMotion ? (
         <div
           id={regionId}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          tabIndex={0}
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
           aria-label="Customer reviews"
         >
           {displayTestimonials.map((testimonial, index) => (
-            <figure key={`${testimonial.name}-${testimonial.date}-${index}`} className="w-[min(100%,22rem)] shrink-0 snap-start sm:w-[26rem]">
+            <figure key={`${testimonial.name}-${testimonial.date}-${index}`}>
               <ReviewCard testimonial={testimonial} />
             </figure>
           ))}

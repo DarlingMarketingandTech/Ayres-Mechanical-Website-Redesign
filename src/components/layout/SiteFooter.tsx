@@ -11,9 +11,11 @@ import {
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
+import { getCachedCopyrightYear } from "@/lib/static-content-cache";
 import { Container } from "./Container";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const copyrightYear = await getCachedCopyrightYear();
   return (
     <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-lg:pb-[var(--mobile-bottom-chrome-h)]">
       <Container className="py-16 lg:py-24">
@@ -120,7 +122,7 @@ export function SiteFooter() {
 
         {/* Bottom: Legal */}
         <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs font-medium text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Ayres Mechanical Inc. All rights reserved.</p>
+          <p>© {copyrightYear} Ayres Mechanical Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href={routes.privacy} className="transition-colors hover:text-white">
               Privacy Policy

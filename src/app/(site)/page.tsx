@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { AuthoritySection } from "@/components/sections/AuthoritySection";
+import { ProofMediaBlock } from "@/components/sections/ProofMediaBlock";
+import { getCachedHomeFaqs, getCachedMedia } from "@/core/cache/static-content";
 import { CommercialCapabilitySection } from "@/components/sections/CommercialCapabilitySection";
 import { CommercialPortfolioCTA } from "@/components/sections/CommercialPortfolioCTA";
 import { CountyServiceAreaSection } from "@/components/sections/CountyServiceAreaSection";
@@ -14,10 +16,11 @@ import { ServiceCards } from "@/components/sections/ServiceCards";
 import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { homeFaqs } from "@/content/faqs";
 import { routes } from "@/lib/routes";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [media, homeFaqs] = await Promise.all([getCachedMedia(), getCachedHomeFaqs()]);
+
   return (
     <>
       <HomeHero />
@@ -53,6 +56,24 @@ export default function HomePage() {
       <CommercialPortfolioCTA />
 
       <AuthoritySection />
+
+      <Section className="bg-white">
+        <Container>
+          <ProofMediaBlock
+            asset={media.home.localProof}
+            eyebrow="On-site proof"
+            title="Local crews, real equipment, documented outcomes."
+            description="See the vans and teams serving Central Indiana — practical diagnostics, clear communication, and follow-through from first call to comfort restored."
+            proofPoints={[
+              "Residential, commercial, and industrial dispatch",
+              "24/7 emergency response across six counties",
+              "Factory-authorized Rheem and Mitsubishi support",
+            ]}
+            caption="Ayres Mechanical service fleet — Central Indiana"
+            reverse
+          />
+        </Container>
+      </Section>
 
       <CommercialCapabilitySection />
 

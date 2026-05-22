@@ -1,12 +1,2 @@
-export function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
-export function escapeAttribute(value: string) {
-  return escapeHtml(value).replaceAll("`", "&#96;");
-}
+/** @deprecated Import from `@/core/emails/html-utils` in new server code. */
+export { escapeAttribute, escapeHtml } from "@/core/emails/html-utils";
