@@ -37,8 +37,8 @@ const serviceLanes = [
   },
   {
     title: "Planned Maintenance",
-    description: "Move from reactive calls to documented service cadence and equipment visibility.",
-    href: routes.commercialPartnerships,
+    description: "Planned maintenance, equipment notes, and service planning for Central Indiana businesses.",
+    href: routes.commercialMaintenancePlans,
   },
   {
     title: "Emergency Commercial Response",
@@ -48,20 +48,20 @@ const serviceLanes = [
 ];
 
 const priorities = [
-  "Business continuity",
-  "Maintenance planning",
-  "Asset condition awareness",
-  "Multi-site coordination",
-  "Budget predictability",
+  "Business comfort",
+  "Rooftop unit service",
+  "Planned maintenance",
+  "Equipment condition notes",
+  "Clear follow-up",
 ];
 
-const portalFit = [
-  "Multiple facilities",
-  "Multiple RTUs",
-  "Recurring maintenance needs",
-  "Property management portfolios",
-  "Institutional or light industrial facilities",
-  "Procurement or RFP-style review",
+const maintenanceFit = [
+  "Offices and retail spaces",
+  "Restaurants and customer-facing businesses",
+  "Property managers with multiple systems",
+  "Light industrial and warehouse spaces",
+  "Multi-tenant buildings",
+  "Buildings with rooftop units or split systems",
 ];
 
 export default function CommercialPage() {
@@ -69,8 +69,8 @@ export default function CommercialPage() {
     <>
       <PageHero
         eyebrow="Commercial HVAC"
-        title="Facility HVAC Support for Central Indiana Businesses"
-        description="Commercial diagnostics, rooftop unit service, planned maintenance, and facility support for offices, retail, light industrial spaces, and multi-site properties."
+        title="Commercial HVAC Service for Central Indiana Businesses"
+        description="Ayres Mechanical helps offices, retail spaces, restaurants, property managers, and light industrial facilities keep heating and cooling systems reliable with practical diagnostics, RTU service, repairs, and planned maintenance."
         backgroundImage={media.pages.commercial.hero}
         backgroundPriority
         backgroundDeliveryWidth={1600}
@@ -113,9 +113,9 @@ export default function CommercialPage() {
       <Section className="bg-brand-ice">
         <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
           <div className="rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Operational priorities</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Commercial service priorities</p>
             <h2 className="mt-3 text-3xl font-black text-balance text-brand-blue-dark sm:text-4xl">
-              Commercial HVAC decisions affect more than comfort.
+              Keep building comfort steady without making service planning complicated.
             </h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {priorities.map((priority) => (
@@ -143,15 +143,15 @@ export default function CommercialPage() {
       <Section>
         <Container className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">When to use the portal</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Who we help</p>
             <h2 className="mt-3 text-(length:--text-section) font-black text-balance text-brand-blue-dark">
               Service Plans &amp; Partnerships is for planned facility support.
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              Use the portal when your HVAC needs involve portfolios, recurring maintenance, procurement review, or lifecycle planning rather than a single repair call.
+              When your building has multiple systems, rooftop units, recurring tenant comfort complaints, or equipment that needs closer tracking, planned service gives you a clearer path than waiting for the next breakdown.
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {portalFit.map((item) => (
+              {maintenanceFit.map((item) => (
                 <div key={item} className="rounded-2xl border border-border/70 bg-white p-4 font-bold text-brand-blue-dark shadow-sm">
                   {item}
                 </div>
@@ -169,17 +169,15 @@ export default function CommercialPage() {
       <Section className="bg-brand-carbon text-white">
         <Container className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-white/55">Commercial HVAC Partnerships</p>
-            <h2 className="mt-3 text-3xl font-black text-balance sm:text-4xl">
-              Managing a facility or portfolio? Build a commercial service plan.
-            </h2>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-white/55">Commercial maintenance plans</p>
+            <h2 className="mt-3 text-3xl font-black text-balance sm:text-4xl">Need planned HVAC maintenance for your business?</h2>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-white/75">
-              Outline your footprint, equipment mix, and service priorities so Ayres Mechanical can prepare the right commercial follow-up.
+              Start with the maintenance-plans page if you need seasonal service, equipment notes, or a steadier plan for rooftop units and building comfort.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-            <Link href={routes.commercialPartnerships} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}>
-              Build a Commercial Service Plan
+            <Link href={routes.commercialMaintenancePlans} className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}>
+              View Commercial Maintenance Plans
               <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
             <Link href={routes.commercialService} className={cn(buttonVariants({ variant: "inverse", size: "lg" }), "justify-center")}>
