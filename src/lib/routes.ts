@@ -2,6 +2,7 @@ export const routes = {
   home: "/",
   residential: "/residential",
   commercial: "/commercial",
+  commercialPartnerships: "/commercial-partnerships",
   commercialMaintenancePlans: "/commercial-maintenance-plans",
   services: "/services",
   service: (slug: string) => "/services/" + slug,
