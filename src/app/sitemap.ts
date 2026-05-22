@@ -6,6 +6,7 @@ import {
   getSitemapEntitySlugs,
 } from "@/core/repositories/content-repository";
 import { routes } from "@/lib/routes";
+import { filterRedirectSourcePaths } from "@/lib/site-policy";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!getSiteIndexingEnabled()) {
@@ -36,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const industryRoutes = industrySlugs.map((slug) => routes.industry(slug));
   const locationRoutes = locationSlugs.map((slug) => routes.location(slug));
 
-  return [...staticRoutes, ...serviceRoutes, ...industryRoutes, ...locationRoutes].map((route) => ({
+  return filterRedirectSourcePaths([...staticRoutes, ...serviceRoutes, ...industryRoutes, ...locationRoutes]).map((route) => ({
     url: new URL(route, siteConfig.url).toString(),
     changeFrequency: route === routes.home ? "weekly" : "monthly",
     priority:

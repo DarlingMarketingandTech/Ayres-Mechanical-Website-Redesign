@@ -9,11 +9,14 @@ import { media } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
-export function CommercialPortfolioCTA() {
+export function CommercialPortfolioCTA({ interactiveToolId }: { interactiveToolId?: string }) {
   return (
     <Section className="bg-white pt-0">
       <Container>
-        <div className="grid overflow-hidden rounded-[2rem] border border-brand-blue-dark/10 bg-brand-blue-dark text-white shadow-xl lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div
+          data-interactive-tool={interactiveToolId}
+          className="grid overflow-hidden rounded-[2rem] border border-brand-blue-dark/10 bg-brand-blue-dark text-white shadow-xl lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+        >
           <figure className="relative min-h-64 lg:min-h-full">
             <CloudinaryImage
               asset={media.commercialPortal.hero}

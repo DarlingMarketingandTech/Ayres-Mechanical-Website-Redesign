@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+import { buildRouteRedirects } from "./src/lib/route-redirects-shared";
+import { routes } from "./src/lib/routes";
+
 const cloudinaryCloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "djhqowk67";
 
 const nextConfig: NextConfig = {
@@ -17,6 +20,9 @@ const nextConfig: NextConfig = {
     ],
   },
   reactCompiler: true,
+  async redirects() {
+    return buildRouteRedirects(routes);
+  },
 };
 
 export default nextConfig;
