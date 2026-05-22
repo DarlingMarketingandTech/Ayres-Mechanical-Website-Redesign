@@ -125,13 +125,11 @@ export default function AboutPage() {
                 </p>
               </div>
               <figure className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 shadow-lg">
-                <div className="relative w-full" style={{ aspectRatio: `${media.home.localProof.width} / ${media.home.localProof.height}` }}>
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <CloudinaryImage
                     asset={media.home.localProof}
                     fill
                     sizes="(min-width: 1024px) 40vw, 100vw"
-                    width={960}
-                    height={720}
                     className="object-cover object-center"
                     crop="fill"
                     gravity="auto"

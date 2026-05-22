@@ -2,6 +2,7 @@ import { PageHero } from "@/components/sections/Hero";
 import { EliteCertificationsBanner } from "@/components/sections/EliteCertificationsBanner";
 import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { ServiceCards } from "@/components/sections/ServiceCards";
+import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { media } from "@/content/media";
@@ -25,6 +26,9 @@ export default function ServicesPage() {
         <Container>
           <ServiceCards />
         </Container>
+      </Section>
+      <Section className="pt-0">
+        <VirtualTriageCTA />
       </Section>
       <EliteCertificationsBanner />
       <FinancingPromoSection variant="service" />

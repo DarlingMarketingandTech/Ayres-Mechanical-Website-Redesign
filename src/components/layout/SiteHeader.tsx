@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Clock, Menu, Phone } from "lucide-react";
+import { ChevronDown, Clock, Menu, Phone } from "lucide-react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import { Logo } from "@/components/brand/Logo";
@@ -14,7 +14,6 @@ import {
   primaryNavigation,
   serviceNavigationGroups,
   serviceOverviewLink,
-  type NavigationChild,
 } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
@@ -32,20 +31,29 @@ function isRouteActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function mobileLinkClass(active: boolean) {
-  return cn(
-    "block rounded-2xl border px-4 py-3 transition-colors",
-    active
-      ? "border-primary/15 bg-brand-ice text-primary"
-      : "border-border/70 bg-white text-brand-blue-dark hover:border-brand-blue-dark/10 hover:bg-secondary/70",
-  );
-}
 
 export function SiteHeader() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileChromeHidden = useMobileChromeHidden({ disabled: menuOpen });
+  // Track which service groups are open in the mobile nav.
+  // Default: first group open, rest collapsed.
+  const [openGroups, setOpenGroups] = useState<Set<string>>(
+    () => new Set([serviceNavigationGroups[0]?.label ?? ""]),
+  );
+
+  function toggleGroup(label: string) {
+    setOpenGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(label)) {
+        next.delete(label);
+      } else {
+        next.add(label);
+      }
+      return next;
+    });
+  }
 
   const updateHeaderOffset = useCallback(() => {
     const height = headerRef.current?.offsetHeight ?? 96;
@@ -88,7 +96,20 @@ export function SiteHeader() {
               <DesktopNav />
             </div>
 
-            <div className="lg:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
+              <a
+                href={phoneHref}
+                data-analytics-event="cta_click"
+                data-analytics-category="header"
+                data-analytics-label="call_now"
+                data-analytics-location="mobile_header"
+                data-analytics-href={phoneHref}
+                className="inline-flex items-center gap-1.5 rounded-full border border-brand-blue-dark/10 bg-white/80 px-3 py-2 text-xs font-black text-brand-blue-dark shadow-sm transition-colors hover:bg-brand-ice"
+                aria-label={`Call Ayres Mechanical at ${siteConfig.phone}`}
+              >
+                <Phone className="size-3.5 shrink-0" aria-hidden="true" />
+                Call
+              </a>
               <Button
                 type="button"
                 variant="outline"
@@ -134,106 +155,126 @@ export function SiteHeader() {
       </header>
 
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <SheetContent side="right" className="flex w-full max-w-md flex-col gap-0 overflow-hidden p-0 sm:max-w-md" showCloseButton>
-          <SheetHeader className="border-b border-border bg-white/95 px-4 py-6 text-left backdrop-blur-xl">
-            <div className="flex items-start justify-between gap-4">
+        <SheetContent side="right" className="flex w-full max-w-sm flex-col gap-0 overflow-hidden p-0 sm:max-w-sm" showCloseButton>
+          {/* Compact app-like header */}
+          <SheetHeader className="border-b border-border/70 bg-white px-4 py-3 text-left">
+            <div className="flex items-center justify-between gap-3">
               <Logo
-                linkClassName="min-w-0 max-w-[12rem]"
-                sizes="192px"
-                className="h-auto w-full max-h-12 object-contain object-left"
+                linkClassName="min-w-0 max-w-[10rem]"
+                sizes="160px"
+                className="h-auto w-full max-h-9 object-contain object-left"
               />
-              <span className="inline-flex items-center rounded-full bg-brand-red/10 px-3 py-1 text-[0.7rem] font-black uppercase tracking-[0.18em] text-brand-red">
+              <SheetTitle className="sr-only">Site navigation</SheetTitle>
+              <span className="inline-flex items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-[0.18em] text-brand-red">
                 24/7 HVAC
               </span>
             </div>
-            <SheetTitle className="mt-4 text-left font-heading text-xl font-black text-brand-blue-dark">
-              Find service fast
-            </SheetTitle>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Residential, commercial, and 24/7 emergency HVAC for Central Indiana.
-            </p>
           </SheetHeader>
 
-          <div className="flex-1 overflow-y-auto px-4 py-6">
-            <div className="space-y-6">
-              <section>
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">Services</p>
-                  <Link
-                    href={serviceOverviewLink.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm font-bold text-primary underline-offset-4 hover:underline"
-                  >
-                    {serviceOverviewLink.label}
-                  </Link>
-                </div>
-                <div className="mt-3 grid gap-3">
-                  {serviceNavigationGroups.map((group) => (
-                    <div key={group.label} className="rounded-2xl border border-border/70 bg-brand-ice/45 p-4">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-blue-dark">{group.label}</p>
-                      <ul className="mt-3 grid gap-2">
-                        {group.items.map((item) => (
-                          <li key={item.href}>
-                            <MobileMenuLink
-                              item={item}
-                              active={isRouteActive(pathname, item.href)}
-                              onSelect={() => setMenuOpen(false)}
-                            />
-                          </li>
-                        ))}
-                      </ul>
+          {/* Scrollable nav content */}
+          <div className="flex-1 overflow-y-auto overscroll-contain">
+            {/* Services — collapsible groups */}
+            <div className="border-b border-border/60 px-3 py-3">
+              <div className="mb-2 flex items-center justify-between px-1">
+                <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-brand-blue-dark/50">Services</p>
+                <Link
+                  href={serviceOverviewLink.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-xs font-bold text-primary"
+                >
+                  View all →
+                </Link>
+              </div>
+              <div className="grid gap-1">
+                {serviceNavigationGroups.map((group) => {
+                  const isOpen = openGroups.has(group.label);
+                  return (
+                    <div key={group.label} className="overflow-hidden rounded-xl border border-border/60 bg-brand-ice/30">
+                      {/* Group toggle button */}
+                      <button
+                        type="button"
+                        onClick={() => toggleGroup(group.label)}
+                        className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left"
+                        aria-expanded={isOpen}
+                      >
+                        <span className="text-xs font-black uppercase tracking-[0.16em] text-brand-blue-dark">
+                          {group.label}
+                        </span>
+                        <ChevronDown
+                          className={cn(
+                            "size-3.5 shrink-0 text-brand-blue-dark/50 transition-transform duration-200",
+                            isOpen && "rotate-180",
+                          )}
+                          aria-hidden="true"
+                        />
+                      </button>
+                      {/* Collapsible items */}
+                      {isOpen && (
+                        <ul className="border-t border-border/50 px-2 pb-2 pt-1">
+                          {group.items.map((item) => (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setMenuOpen(false)}
+                                className={cn(
+                                  "flex min-h-10 items-center rounded-lg px-2 py-2 text-sm font-bold transition-colors",
+                                  isRouteActive(pathname, item.href)
+                                    ? "text-primary"
+                                    : "text-brand-blue-dark hover:text-primary",
+                                )}
+                              >
+                                {item.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </section>
+                  );
+                })}
+              </div>
+            </div>
 
-              <section>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">Company</p>
-                <ul className="mt-3 grid gap-2">
-                  {companyNavigation.map((item) => (
-                    <li key={item.href}>
-                      <MobileMenuLink
-                        item={item}
-                        active={isRouteActive(pathname, item.href)}
-                        onSelect={() => setMenuOpen(false)}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              <section>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue-dark/60">More</p>
-                <ul className="mt-3 grid gap-2">
-                  {primaryNavigation.map((item) => (
-                    <li key={item.href}>
-                      <MobileMenuLink
-                        item={item}
-                        active={isRouteActive(pathname, item.href)}
-                        onSelect={() => setMenuOpen(false)}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </section>
+            {/* Company + More — flat compact list */}
+            <div className="px-3 py-3">
+              <p className="mb-2 px-1 text-[0.65rem] font-black uppercase tracking-[0.2em] text-brand-blue-dark/50">Company</p>
+              <ul className="grid gap-0.5">
+                {[...companyNavigation, ...primaryNavigation].map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-bold transition-colors",
+                        isRouteActive(pathname, item.href)
+                          ? "bg-brand-ice text-primary"
+                          : "text-brand-blue-dark hover:bg-brand-ice/60",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="border-t border-border bg-white px-4 py-4">
-            <div className="grid gap-3">
-              <Link
-                href={emergencyNavigation.href}
-                onClick={() => setMenuOpen(false)}
-                data-analytics-event="cta_click"
-                data-analytics-category="header"
-                data-analytics-label={emergencyNavigation.label}
-                data-analytics-location="mobile_menu"
-                data-analytics-href={emergencyNavigation.href}
-                className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}
-              >
-                <Clock className="size-4" aria-hidden="true" />
-                {emergencyNavigation.label}
-              </Link>
+          {/* Bottom CTAs — 2-up grid for compact layout */}
+          <div className="border-t border-border/70 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
+            <Link
+              href={emergencyNavigation.href}
+              onClick={() => setMenuOpen(false)}
+              data-analytics-event="cta_click"
+              data-analytics-category="header"
+              data-analytics-label={emergencyNavigation.label}
+              data-analytics-location="mobile_menu"
+              data-analytics-href={emergencyNavigation.href}
+              className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "mb-2 w-full justify-center")}
+            >
+              <Clock className="size-4" aria-hidden="true" />
+              {emergencyNavigation.label}
+            </Link>
+            <div className="grid grid-cols-2 gap-2">
               <Link
                 href={routes.requestService}
                 onClick={() => setMenuOpen(false)}
@@ -242,9 +283,9 @@ export function SiteHeader() {
                 data-analytics-label="request_service"
                 data-analytics-location="mobile_menu"
                 data-analytics-href={routes.requestService}
-                className={cn(buttonVariants({ variant: "dark", size: "lg" }), "justify-center")}
+                className={cn(buttonVariants({ variant: "dark", size: "default" }), "justify-center text-xs")}
               >
-                Request Service Online
+                Request Service
               </Link>
               <a
                 href={phoneHref}
@@ -253,10 +294,10 @@ export function SiteHeader() {
                 data-analytics-label="call_now"
                 data-analytics-location="mobile_menu"
                 data-analytics-href={phoneHref}
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "justify-center")}
+                className={cn(buttonVariants({ variant: "outline", size: "default" }), "justify-center text-xs")}
               >
-                <Phone className="size-4" aria-hidden="true" />
-                Call {siteConfig.phone}
+                <Phone className="size-3.5" aria-hidden="true" />
+                Call Now
               </a>
             </div>
           </div>
@@ -266,19 +307,3 @@ export function SiteHeader() {
   );
 }
 
-function MobileMenuLink({
-  item,
-  active,
-  onSelect,
-}: {
-  item: NavigationChild;
-  active: boolean;
-  onSelect: () => void;
-}) {
-  return (
-    <Link href={item.href} onClick={onSelect} className={mobileLinkClass(active)}>
-      <span className="block text-sm font-black text-brand-blue-dark">{item.label}</span>
-      {item.description ? <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{item.description}</span> : null}
-    </Link>
-  );
-}

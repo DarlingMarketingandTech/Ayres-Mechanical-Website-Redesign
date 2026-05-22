@@ -13,3 +13,29 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
+
+export const diagnosticContactSchema = z.object({
+  name: z.string().min(2, "Please enter your name."),
+  phone: z.string().min(7, "Please enter a phone number."),
+  city: z.string().min(2, "Please enter your city."),
+  website: z.string().trim().max(0).optional().or(z.literal("")),
+});
+
+export type DiagnosticContactValues = z.infer<typeof diagnosticContactSchema>;
+
+export const diagnosticSubmissionSchema = z.object({
+  metaData: z.object({
+    propertyType: z.string().optional(),
+    propertyTypeLabel: z.string().optional(),
+    systemAge: z.string().optional(),
+    systemAgeLabel: z.string().optional(),
+    existingCustomer: z.string().optional(),
+    existingCustomerLabel: z.string().optional(),
+  }),
+  userAnswers: z.record(z.string(), z.string()),
+  contactInfo: diagnosticContactSchema,
+  pathSummary: z.array(z.string()).optional(),
+  currentStepId: z.string().optional(),
+});
+
+export type DiagnosticSubmissionPayload = z.infer<typeof diagnosticSubmissionSchema>;

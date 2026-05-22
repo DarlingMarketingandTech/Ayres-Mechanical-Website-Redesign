@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [];
   }
 
-  const staticRoutes = [routes.home, routes.services, routes.industries, routes.about, routes.reviews, routes.contact, routes.requestService, routes.financing, routes.serviceArea, routes.privacy, routes.terms];
+  const staticRoutes = [routes.home, routes.services, routes.troubleshoot, routes.industries, routes.about, routes.reviews, routes.contact, routes.requestService, routes.financing, routes.serviceArea, routes.privacy, routes.terms];
   const serviceRoutes = services.map((service) => routes.service(service.slug));
   const industryRoutes = industries.map((industry) => routes.industry(industry.slug));
   const locationRoutes = serviceLocations.map((location) => routes.location(location.slug));

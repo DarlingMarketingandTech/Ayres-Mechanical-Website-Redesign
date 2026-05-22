@@ -10,6 +10,7 @@ import { FinancingPromoSection } from "@/components/sections/FinancingPromoSecti
 import { HomeHero } from "@/components/sections/Hero";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ServiceCards } from "@/components/sections/ServiceCards";
+import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { homeFaqs } from "@/content/faqs";
@@ -42,6 +43,9 @@ export default function HomePage() {
             </Link>
           </div>
           <ServiceCards limit={6} />
+          <div className="mt-10">
+            <VirtualTriageCTA withContainer={false} />
+          </div>
         </Container>
       </Section>
 

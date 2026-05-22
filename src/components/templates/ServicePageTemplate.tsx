@@ -10,6 +10,7 @@ import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
 import { ServiceHero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
+import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { buttonVariants } from "@/components/ui/button";
 import type { ServiceContent } from "@/data/services-content";
 import { getServiceContentBySlug } from "@/data/services-content";
@@ -191,6 +192,10 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
             })}
           </div>
         </Container>
+      </Section>
+
+      <Section className="pt-0">
+        <VirtualTriageCTA />
       </Section>
 
       <Section className="bg-brand-ice">

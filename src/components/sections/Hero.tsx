@@ -286,7 +286,7 @@ export function PageHero({
           {heroActions ? (
             <motion.div
               variants={fadeUp}
-              className="mt-6 flex w-full max-w-xl flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap"
+              className="mt-6 hidden w-full max-w-xl flex-col gap-3 sm:mt-8 sm:flex sm:w-auto sm:flex-row sm:flex-wrap"
             >
               <Link
                 href={heroActions.primary.href}
