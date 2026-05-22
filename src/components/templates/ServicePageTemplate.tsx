@@ -2,19 +2,20 @@ import Link from "next/link";
 
 import { CloudinaryImage } from "@/components/media/CloudinaryImage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema, serviceSchema } from "@/components/seo/schema";
+import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/components/seo/schema";
 import { ServiceIcon } from "@/components/icons/ServiceIcon";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { ServiceHero } from "@/components/sections/Hero";
+import { MotionReveal } from "@/components/sections/MotionReveal";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { VirtualTriageCTA } from "@/components/sections/VirtualTriageCTA";
 import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/content/site";
 import type { ServiceContent } from "@/data/services-content";
 import { getServiceContentBySlug, serviceSlugs } from "@/data/services-content";
-import { siteConfig } from "@/content/site";
 import { routes } from "@/lib/routes";
 import { isCommercialServiceSlug, isResidentialServiceSlug } from "@/lib/site-policy";
 import { cn } from "@/lib/utils";
@@ -77,15 +78,17 @@ function renderProofGallery({
 
 export function ServicePageTemplate({ service }: { service: ServiceContent }) {
   const related = service.relatedServices.map(getServiceContentBySlug).filter(Boolean) as ServiceContent[];
-  const partnershipPromo =
+  const maintenancePromo =
     isCommercialServiceSlug(service.slug) || service.slug === serviceSlugs.preventiveMaintenance
-      ? service.closingCTA.partnershipPromo
+      ? service.closingCTA.maintenancePromo
       : undefined;
-  const showResidentialTriage = isResidentialServiceSlug(service.slug);
+  const showResidentialTriage =
+    isResidentialServiceSlug(service.slug) && service.slug !== serviceSlugs.preventiveMaintenance;
 
   return (
     <>
       <JsonLd data={serviceSchema(service)} />
+      <JsonLd data={faqPageSchema(service.faqs)} />
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: routes.home }, { name: "Services", url: routes.services }, { name: service.title, url: routes.service(service.slug) }])} />
       <ServiceHero
         eyebrow={service.eyebrow}
@@ -126,27 +129,27 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
         </Container>
       </Section>
 
-      {partnershipPromo ? (
+      {maintenancePromo ? (
         <Section className="bg-brand-ice py-8 sm:py-10">
           <Container>
             <div className="grid gap-5 rounded-[2rem] border border-brand-blue-dark/10 bg-white p-6 shadow-sm sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Commercial planning</p>
                 <h2 className="mt-3 text-2xl font-black text-balance text-brand-blue-dark sm:text-3xl">
-                  {partnershipPromo.title}
+                  {maintenancePromo.title}
                 </h2>
-                <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{partnershipPromo.description}</p>
+                <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{maintenancePromo.description}</p>
               </div>
               <Link
-                href={partnershipPromo.href}
+                href={maintenancePromo.href}
                 data-analytics-event="commercial_service_page_cta_click"
                 data-analytics-category="service_page"
-                data-analytics-label={partnershipPromo.label}
+                data-analytics-label={maintenancePromo.label}
                 data-analytics-location={service.slug}
-                data-analytics-href={partnershipPromo.href}
+                data-analytics-href={maintenancePromo.href}
                 className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}
               >
-                {partnershipPromo.label}
+                {maintenancePromo.label}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </div>
@@ -206,6 +209,18 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
           </Container>
         </Section>
       ) : null}
+
+      <Section>
+        <Container className="grid gap-8 lg:grid-cols-[0.7fr_1fr]">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-blue-dark/60">Service FAQ</p>
+            <h2 className="mt-3 text-3xl font-black text-balance text-brand-blue-dark sm:text-4xl">
+              Questions we hear before the service call.
+            </h2>
+          </div>
+          <FAQSection faqs={service.faqs} />
+        </Container>
+      </Section>
 
       <Section className="bg-brand-carbon text-white">
         <Container className="max-w-4xl">

@@ -52,10 +52,10 @@ export const commercialNavigation: NavigationChild = {
   description: navigationLaneDefinitions.commercial.description,
 };
 
-export const commercialPartnershipNavigation: NavigationChild = {
-  label: "Commercial Partnerships",
-  href: routes.commercialPartnerships,
-  description: "Build a commercial service plan for facilities, RTUs, and multi-site portfolios.",
+export const commercialMaintenanceNavigation: NavigationChild = {
+  label: "Commercial Maintenance Plans",
+  href: routes.commercialMaintenancePlans,
+  description: "Planned HVAC maintenance and service support for Central Indiana businesses and facility teams.",
 };
 
 export const emergencyNavigation: NavigationChild = {
@@ -89,7 +89,7 @@ export const commercialNavigationGroup: NavigationGroup = {
       ...serviceLink(serviceSlugs.industrial),
       label: "Industrial / Facility Support",
     },
-    commercialPartnershipNavigation,
+    commercialMaintenanceNavigation,
     {
       ...serviceLink(serviceSlugs.twentyFourHourEmergency),
       label: "Emergency Service",
@@ -140,10 +140,10 @@ export const footerServiceLinks: NavigationChild[] = [
 
 export const footerCommercialLinks: NavigationChild[] = [
   commercialOverviewLink,
-  commercialPartnershipNavigation,
+  commercialMaintenanceNavigation,
   serviceLink(serviceSlugs.commercial),
   {
     ...serviceLink(serviceSlugs.industrial),
-    label: "Industrial / Facility Support",
+      label: "Industrial / Facility Support",
   },
 ];

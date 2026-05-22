@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.home,
     routes.residential,
     routes.commercial,
-    routes.commercialPartnerships,
+    routes.commercialMaintenancePlans,
     routes.services,
     routes.troubleshoot,
     routes.industries,
@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       route === routes.home
         ? 1
-        : route === routes.residential || route === routes.commercial || route === routes.commercialPartnerships
+        : route === routes.residential || route === routes.commercial || route === routes.commercialMaintenancePlans
           ? 0.8
           : 0.7,
   }));

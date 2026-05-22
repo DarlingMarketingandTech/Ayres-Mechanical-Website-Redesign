@@ -43,8 +43,8 @@ export type DiagnosticSubmissionPayload = z.infer<typeof diagnosticSubmissionSch
 export const commercialLeadSchema = z
   .object({
     leadType: z.literal("commercial"),
-    submittedFrom: z.literal("commercial-partnerships"),
-    portfolioType: z.string().min(1, "Choose a facility scope."),
+    submittedFrom: z.literal("commercial-maintenance-plans"),
+    serviceScope: z.string().min(1, "Choose a facility scope."),
     scope: z.string().min(1, "Choose a facility scope."),
     squareFootage: z.string().min(1, "Choose a square footage range."),
     locations: z.string().min(1, "Choose the number of facility locations."),
@@ -58,10 +58,10 @@ export const commercialLeadSchema = z
     notes: z.string().trim().optional().or(z.literal("")),
     estimatedComplexity: z.enum(["low", "medium", "high"]),
     recommendedFollowUpAngle: z.enum([
-      "Commercial PMA discussion",
-      "Multi-site portfolio service plan",
-      "RTU lifecycle and CapEx planning",
-      "Industrial/facility support review",
+      "Commercial maintenance plan review",
+      "Multi-building maintenance planning",
+      "RTU condition and maintenance review",
+      "Industrial facility support review",
     ]),
     website: z.string().trim().optional(),
   })

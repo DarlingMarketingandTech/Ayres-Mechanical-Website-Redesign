@@ -29,7 +29,7 @@ export async function submitCommercialLead(values: CommercialLeadValues): Promis
   }
 
   const resend = new Resend(config.apiKey);
-  const subject = `[B2B Enterprise Lead] ${values.companyName} - ${values.principalCity}`;
+  const subject = `[Commercial Maintenance Lead] ${values.companyName} - ${values.principalCity}`;
 
   const response = await resend.emails.send({
     from: config.fromEmail,
@@ -65,7 +65,7 @@ function buildCommercialLeadHtml(values: CommercialLeadValues) {
         ["Recommended Follow-Up", values.recommendedFollowUpAngle],
       ])}
       ${section("Facility Scope", [
-        ["Portfolio Type", values.portfolioType],
+        ["Service Scope", values.serviceScope],
         ["Scope", values.scope],
         ["Square Footage", values.squareFootage],
         ["Locations", values.locations],
@@ -118,7 +118,7 @@ function buildCommercialLeadText(values: CommercialLeadValues) {
     `Recommended Follow-Up: ${values.recommendedFollowUpAngle}`,
     "",
     "Facility Scope",
-    `Portfolio Type: ${values.portfolioType}`,
+    `Service Scope: ${values.serviceScope}`,
     `Scope: ${values.scope}`,
     `Square Footage: ${values.squareFootage}`,
     `Locations: ${values.locations}`,

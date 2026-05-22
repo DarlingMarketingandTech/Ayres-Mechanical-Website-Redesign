@@ -25,6 +25,11 @@ export type ServiceContentCard = {
   description: string;
 };
 
+export type ServiceFaq = {
+  question: string;
+  answer: string;
+};
+
 export type ServiceSpecialNote = {
   tone: "tip" | "safety" | "business" | "assurance";
   label: string;
@@ -39,7 +44,7 @@ export type ServiceClosingCta = {
   secondaryLabel: string;
   secondaryHref: string;
   subtext?: string;
-  partnershipPromo?: {
+  maintenancePromo?: {
     title: string;
     description: string;
     label: string;
@@ -59,6 +64,7 @@ export type ServiceContent = {
   intro: string;
   whatWeHelpWith: ServiceContentCard[];
   commonProblems: ServiceContentCard[];
+  faqs: ServiceFaq[];
   specialNote?: ServiceSpecialNote;
   closingCTA: ServiceClosingCta;
   relatedServices: string[];
@@ -136,6 +142,28 @@ export const servicePageContent: ServiceContent[] = [
       label: "Pro Tip",
       text: "Don't wait for a total system failure. If your energy bills have spiked by more than 15% compared to last summer without a change in usage, your AC is likely working harder than it should.",
     },
+    faqs: [
+      {
+        question: "Why is my AC running but not cooling the house?",
+        answer:
+          "Restricted airflow, low refrigerant, frozen coils, thermostat issues, and electrical failures are all common causes. Ayres Mechanical can diagnose which problem is actually keeping the system from cooling properly.",
+      },
+      {
+        question: "When should I repair vs. replace an older AC system?",
+        answer:
+          "Frequent repairs, rising utility bills, major component failures, and aging equipment are the main signals. We look at the condition of the system first, then explain whether repair or replacement makes more sense for your home.",
+      },
+      {
+        question: "Can high humidity make my AC feel like it is not working?",
+        answer:
+          "Yes. If the system is running but indoor humidity stays high, the home can still feel warm and sticky. We check both cooling performance and dehumidification during the visit.",
+      },
+      {
+        question: "Do you service central AC systems in Central Indiana?",
+        answer:
+          "Yes. Ayres Mechanical services central air conditioning systems for homeowners across Central Indiana, including diagnostics, repair, tune-ups, and replacement guidance.",
+      },
+    ],
     closingCTA: {
       title: "Why Choose Ayres Mechanical?",
       description:
@@ -213,6 +241,28 @@ export const servicePageContent: ServiceContent[] = [
       label: "Safety Note",
       text: "If you smell “rotten eggs” (natural gas) or your carbon monoxide detector sounds, exit your home immediately and call for Emergency Service.",
     },
+    faqs: [
+      {
+        question: "What should I check before calling for no heat?",
+        answer:
+          "Start with the thermostat, filter, breaker, and furnace switch if they are safe to access. If the system still will not run or shuts down again right away, schedule service.",
+      },
+      {
+        question: "When is a furnace issue an emergency?",
+        answer:
+          "No heat during extreme cold, gas odors, repeated breaker trips, or suspected carbon monoxide concerns should be treated as urgent. If you suspect gas or carbon monoxide, leave the home and call emergency services first.",
+      },
+      {
+        question: "Do you service heat pumps and furnaces?",
+        answer:
+          "Yes. Ayres Mechanical services both furnace and heat-pump systems and can troubleshoot heating issues tied to airflow, controls, ignition, and overall system performance.",
+      },
+      {
+        question: "What heating problems can maintenance catch early?",
+        answer:
+          "Maintenance can uncover dirty burners, failing motors, airflow restrictions, safety-control issues, and heat-exchanger concerns before they become a mid-winter breakdown.",
+      },
+    ],
     closingCTA: {
       title: "Transparent Solutions for Every Home",
       description:
@@ -238,27 +288,27 @@ export const servicePageContent: ServiceContent[] = [
     accent: "blue",
     icon: "maintenance",
     intro:
-      "Maintenance isn't just a luxury; it is a strategy to protect one of your home's most expensive assets. Our planned service ensures your HVAC system remains a silent, efficient partner in your comfort.",
+      "Preventive maintenance helps homeowners and building managers catch wear early, keep airflow cleaner, and make better decisions before a heating or cooling problem becomes urgent.",
     whatWeHelpWith: [
+      {
+        title: "Residential Maintenance",
+        description:
+          "Home maintenance visits focus on seasonal tune-ups, filter and airflow checks, and the comfort issues homeowners notice first. We explain findings clearly so you know what matters now and what can be planned ahead.",
+      },
+      {
+        title: "Commercial Maintenance",
+        description:
+          "Commercial maintenance is built for rooftop units, split systems, filter schedules, coil cleaning, electrical and motor checks when needed, and service timing that works around business hours when possible.",
+      },
       {
         title: "Seasonal Performance Checks",
         description:
-          "As the seasons shift in Central Indiana, so do the demands on your equipment. Our seasonal performance checks involve testing the system in its “live” state—checking refrigerant charge in the summer and heat exchanger integrity in the winter—to ensure you are prepared for the first heatwave or deep freeze of the year.",
+          "As the seasons shift in Central Indiana, so do the demands on your equipment. We test cooling and heating performance before the weather turns so you are not surprised by the first heatwave or cold snap.",
       },
       {
-        title: "Filter and Airflow Review",
+        title: "Equipment Condition Notes",
         description:
-          "The leading cause of system failure is restricted airflow. We go beyond simply changing a filter; we inspect your entire intake system to ensure your blower motor isn't straining against dust buildup or poorly designed filtration, which can slash equipment life by years.",
-      },
-      {
-        title: "Equipment Condition Reporting",
-        description:
-          "Knowledge is power. After every visit, we provide a detailed Equipment Condition Report. We translate technical readings into plain English, letting you know which components are healthy and which ones may need attention in the future, so you are never surprised by a sudden failure.",
-      },
-      {
-        title: "Residential and Business Plans",
-        description:
-          "Maintenance needs vary between a family home and a commercial facility. We offer tailored Residential and Business Plans that automate your service schedule. Members receive priority scheduling and the confidence that their systems are being managed by professionals who know their equipment's history.",
+          "After the visit, Ayres Mechanical explains what we saw, what should be watched, and what likely needs follow-up next. That applies to home systems and to buildings with multiple pieces of equipment.",
       },
     ],
     commonProblems: [
@@ -283,21 +333,43 @@ export const servicePageContent: ServiceContent[] = [
           "Stop wondering if your 10-year-old unit will make it through the month. We provide a clear “health grade” for your system so you can plan for the future with confidence.",
       },
     ],
+    faqs: [
+      {
+        question: "How often should HVAC maintenance be scheduled?",
+        answer:
+          "Most systems benefit from seasonal service, typically before cooling season and before heating season. Commercial schedules can vary based on equipment type, runtime, and building use.",
+      },
+      {
+        question: "What is different about residential vs. commercial maintenance?",
+        answer:
+          "Residential visits usually focus on comfort, airflow, and homeowner-friendly explanations. Commercial maintenance often adds rooftop-unit support, recurring filter and coil schedules, equipment notes, and planning around building operations.",
+      },
+      {
+        question: "Can maintenance prevent every breakdown?",
+        answer:
+          "No. Maintenance lowers the chance of surprise failures and helps catch wear earlier, but it cannot guarantee that every part will last until the next visit.",
+      },
+      {
+        question: "What does Ayres check during a maintenance visit?",
+        answer:
+          "The exact checklist depends on the system, but it commonly includes performance testing, airflow review, filter inspection, electrical and component checks, and notes on overall equipment condition.",
+      },
+    ],
     closingCTA: {
-      title: "Invest in Efficiency, Not Emergencies",
+      title: "Choose the right maintenance path for the building you manage",
       description:
-        "A well-maintained system can run up to 20% more efficiently than a neglected one. At Ayres Mechanical, we believe in a straightforward path to resolution. If our maintenance check reveals a need for an upgrade, we offer Flexible Financing to help you transition to a new system without the financial sting of an emergency.",
-      primaryLabel: "Request Maintenance Service",
+        "Ayres Mechanical helps homeowners stay ahead of seasonal breakdowns and helps businesses build a steadier maintenance rhythm for rooftop units and other HVAC equipment. If an inspection shows bigger repair or replacement needs, we explain the next step clearly.",
+      primaryLabel: "Request Residential Maintenance",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
-      subtext: "Do you have multiple properties or a commercial facility that requires a custom maintenance schedule?",
-      partnershipPromo: {
-        title: "Managing maintenance for a commercial facility or portfolio?",
+      subtext: "Need planned maintenance for a business, property, or multi-system building instead?",
+      maintenancePromo: {
+        title: "Need a commercial maintenance path instead of a home tune-up?",
         description:
-          "Explore Commercial Partnerships to outline your footprint, recurring maintenance needs, and service planning priorities.",
-        label: "Explore Commercial Partnerships",
-        href: routes.commercialPartnerships,
+          "See Commercial Maintenance Plans for planned service, equipment notes, and seasonal support built around Central Indiana businesses and property teams.",
+        label: "View Commercial Maintenance Plans",
+        href: routes.commercialMaintenancePlans,
       },
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
@@ -311,33 +383,33 @@ export const servicePageContent: ServiceContent[] = [
     slug: serviceSlugs.commercial,
     title: "Commercial HVAC Service",
     shortTitle: "Commercial HVAC",
-    summary: "Commercial HVAC diagnostics, maintenance, zoning support, and responsive scheduling built around business continuity.",
+    summary: "Commercial HVAC diagnostics, rooftop unit service, planned maintenance, and responsive scheduling for Central Indiana businesses.",
     heroTitle: "Commercial HVAC Service",
     eyebrow: "Commercial HVAC",
     accent: "dark",
     icon: "commercial",
     intro:
-      "In a commercial setting, HVAC performance isn't just about comfort—it's about protecting your inventory, your electronics, and your bottom line. We provide specialized support tailored to the unique demands of business environments.",
+      "Ayres Mechanical helps businesses keep building comfort more reliable with practical diagnostics, RTU service, repairs, and planned maintenance that fit real operating schedules.",
     whatWeHelpWith: [
       {
         title: "Business HVAC Diagnostics",
         description:
-          "Commercial systems are complex, often involving rooftop units (RTUs), split systems, and advanced economizers. Our business HVAC diagnostics focus on finding the most cost-effective path to repair, ensuring your system meets the specific heating and cooling loads of your facility without wasting energy.",
+          "Commercial systems often include rooftop units, split systems, economizers, and zoning controls. We diagnose the actual cause of the issue and explain the most practical repair path for the building.",
       },
       {
         title: "Preventive Maintenance",
         description:
-          "Downtime is expensive. Our commercial preventive maintenance programs are designed to identify worn belts, failing motors, and clogged coils before they cause a full system shutdown. We work around your operational schedule to ensure your business remains open and comfortable for staff and customers alike.",
+          "Planned maintenance helps catch worn belts, failing motors, dirty coils, and airflow issues before they turn into a full shutdown. We work around business hours when the job allows.",
       },
       {
-        title: "Comfort and Airflow Support",
+        title: "Rooftop Unit and Airflow Support",
         description:
-          "Large open spaces, high ceilings, and partitioned offices create unique airflow challenges. We provide specialized support to balance your system, ensuring that air is distributed evenly. Proper airflow not only improves comfort but also protects sensitive equipment and improves indoor air quality.",
+          "Large open spaces, front offices, and customer areas create different comfort needs. We help balance airflow, improve problem zones, and keep rooftop units and other systems performing more consistently.",
       },
       {
         title: "Responsive Service Scheduling",
         description:
-          "We understand that a broken AC in a retail space or a failing furnace in an office is an emergency. Ayres Mechanical offers responsive service scheduling, prioritizing commercial clients to ensure your “business as usual” isn't interrupted by mechanical failures.",
+          "When a store, office, restaurant, or facility loses heating or cooling, you need a clear response. Ayres Mechanical provides responsive commercial scheduling and practical follow-up on what needs to happen next.",
       },
     ],
     commonProblems: [
@@ -359,29 +431,51 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Maintenance Uncertainty",
         description:
-          "Managing multiple units across one or several buildings can be a tracking nightmare. We provide clear documentation and Equipment Condition Reporting for every unit, taking the guesswork out of your facility budget.",
+          "When no one has a clear record of what was serviced, what is aging out, or what keeps failing, maintenance planning gets harder. We provide clear notes so the next step is easier to prioritize.",
       },
     ],
     specialNote: {
       tone: "business",
-      label: "Business Continuity Note",
-      text: "We focus on practical diagnostics. We won't recommend a total system overhaul if a targeted repair can safely and reliably keep you operational.",
+      label: "Commercial Service Note",
+      text: "We focus on practical diagnostics and clear follow-up. If a targeted repair is the right answer, we will say so instead of turning every call into a replacement pitch.",
     },
+    faqs: [
+      {
+        question: "What types of commercial HVAC systems do you service?",
+        answer:
+          "Ayres Mechanical services common commercial HVAC equipment including rooftop units, split systems, and other heating and cooling equipment used in offices, retail buildings, restaurants, and light industrial spaces.",
+      },
+      {
+        question: "Do you work on rooftop units?",
+        answer:
+          "Yes. Rooftop unit service is a common part of Ayres Mechanical's commercial work, including diagnostics, repair planning, seasonal maintenance, and condition notes.",
+      },
+      {
+        question: "Can you help reduce surprise HVAC breakdowns for a business?",
+        answer:
+          "Yes. Planned maintenance and clearer equipment notes help catch issues earlier and reduce the odds of avoidable breakdowns during business hours, even though no service plan can prevent every failure.",
+      },
+      {
+        question: "When should a business consider a maintenance plan?",
+        answer:
+          "A plan is worth considering when the building has multiple systems, recurring comfort complaints, rooftop units, or repeated service calls that would benefit from a steadier seasonal schedule.",
+      },
+    ],
     closingCTA: {
-      title: "A Partner in Your Operations",
+      title: "Commercial HVAC support with a clearer next step",
       description:
-        "At Ayres Mechanical, we view ourselves as an extension of your facility team. From the moment you Book Service, our goal is to provide dependable work that restores your confidence in your building's infrastructure. For larger projects or unexpected replacements, we also offer Financing Details to help manage your capital expenditures.",
+        "Ayres Mechanical supports business owners, property managers, and facility teams with clear communication, dependable service, and practical recommendations. If you need a steadier maintenance rhythm, we can help you move from reactive calls to planned service.",
       primaryLabel: "Request Commercial Service",
       primaryHref: routes.requestService,
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
-      subtext: "Do you manage multiple locations in Central Indiana that require a consolidated maintenance plan?",
-      partnershipPromo: {
+      subtext: "Need planned maintenance for rooftop units or multiple systems instead of a one-time repair call?",
+      maintenancePromo: {
         title: "Need planned support for multiple systems or facilities?",
         description:
-          "Use the Commercial Partnerships portal to outline your footprint, equipment mix, and service priorities.",
-        label: "Build a Commercial Service Plan",
-        href: routes.commercialPartnerships,
+          "View Commercial Maintenance Plans for seasonal service, equipment condition notes, and building-specific maintenance planning.",
+        label: "View Commercial Maintenance Plans",
+        href: routes.commercialMaintenancePlans,
       },
     },
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.twentyFourHourEmergency],
@@ -452,6 +546,28 @@ export const servicePageContent: ServiceContent[] = [
       label: "Industrial Assurance",
       text: "We understand the “operational awareness” required for industrial work. Our technicians respect your facility's safety protocols and operational flow.",
     },
+    faqs: [
+      {
+        question: "What does light industrial HVAC support mean?",
+        answer:
+          "It usually means HVAC service for facilities such as warehouses, operational spaces, and buildings with larger equipment loads or tighter service coordination needs than a typical office.",
+      },
+      {
+        question: "Do you support warehouses or operational spaces?",
+        answer:
+          "Yes. Ayres Mechanical supports warehouses, operational spaces, and similar facilities where airflow, temperature stability, and scheduling around operations matter.",
+      },
+      {
+        question: "Can service be coordinated around business operations?",
+        answer:
+          "Yes. When possible, Ayres Mechanical coordinates access and service timing around building operations, safety protocols, and the practical limits of the work being performed.",
+      },
+      {
+        question: "When should facility equipment be reviewed?",
+        answer:
+          "A review makes sense when equipment is aging, repeated breakdowns are affecting operations, or the building needs a clearer picture of what should be repaired, maintained, or planned next.",
+      },
+    ],
     closingCTA: {
       title: "Engineering Reliability into Your Facility",
       description:
@@ -461,12 +577,12 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
-      partnershipPromo: {
+      maintenancePromo: {
         title: "Need coordinated HVAC support for an operational facility?",
         description:
           "Start a facility service plan that accounts for equipment footprint, access needs, and service coordination.",
         label: "Start a Facility Service Plan",
-        href: routes.commercialPartnerships,
+        href: routes.commercialMaintenancePlans,
       },
     },
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
@@ -523,6 +639,28 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Communication Errors Between Heads",
         description: "Multi-zone systems rely on clean electrical and control wiring. We trace faults methodically instead of swapping parts blindly.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Where do ductless mini-splits work best?",
+        answer:
+          "They work especially well in room additions, bonus rooms, finished basements, garages, and homes where adding full ductwork would be difficult or unnecessary.",
+      },
+      {
+        question: "Can ductless systems heat and cool?",
+        answer:
+          "Yes. Most ductless mini-splits are heat-pump systems that provide both heating and cooling, making them useful year-round in Central Indiana.",
+      },
+      {
+        question: "Why is my ductless head leaking water?",
+        answer:
+          "Drain clogs, condensate pump problems, and installation issues are common causes. We inspect the drainage path and the head itself to correct the leak safely.",
+      },
+      {
+        question: "Do ductless systems need regular maintenance?",
+        answer:
+          "Yes. Filters, coils, drain components, and refrigerant performance still need attention. Regular maintenance helps keep the system efficient and lowers the risk of nuisance leaks or performance problems.",
       },
     ],
     closingCTA: {
@@ -590,6 +728,28 @@ export const servicePageContent: ServiceContent[] = [
       {
         title: "Allergy Flare-ups Indoors",
         description: "We review filtration, ventilation, and humidity together—often a combination fix works better than a single product pitch.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What causes excess dust in a home?",
+        answer:
+          "Excess dust can come from leaky ductwork, poor filtration, airflow imbalances, or outdoor air infiltration. We look at the system as a whole instead of blaming one part too quickly.",
+      },
+      {
+        question: "Can HVAC improvements help with indoor humidity?",
+        answer:
+          "Yes. Humidity problems are often tied to airflow, equipment sizing, or the need for humidification or dehumidification support. HVAC changes can improve comfort when the root cause is identified correctly.",
+      },
+      {
+        question: "Are high-MERV filters always better?",
+        answer:
+          "Not always. A filter that is too restrictive for the equipment can hurt airflow. We recommend filter options that balance air cleaning with what the system can handle safely.",
+      },
+      {
+        question: "What is the difference between filtration, humidity control, and ventilation?",
+        answer:
+          "Filtration helps capture particulates, humidity control manages moisture levels, and ventilation brings in or exchanges air. Many homes need a combination of those approaches rather than one standalone product.",
       },
     ],
     closingCTA: {
@@ -668,6 +828,28 @@ export const servicePageContent: ServiceContent[] = [
       label: "Safety First",
       text: "If you smell gas or suspect a carbon monoxide leak, exit the building immediately and call emergency services before contacting us for repair.",
     },
+    faqs: [
+      {
+        question: "What counts as an HVAC emergency?",
+        answer:
+          "No heat during dangerous cold, no cooling during severe heat for vulnerable occupants, gas odors, suspected carbon monoxide, electrical burning smells, and major active leaks are common emergency situations.",
+      },
+      {
+        question: "Should I call immediately if I smell gas or suspect carbon monoxide?",
+        answer:
+          "Yes. Leave the building and call emergency services or the gas utility first. After the immediate safety risk is addressed, contact Ayres Mechanical for HVAC repair.",
+      },
+      {
+        question: "Do you handle residential and commercial emergency calls?",
+        answer:
+          "Yes. Ayres Mechanical handles emergency HVAC calls for residential, commercial, and industrial customers across its Central Indiana service area.",
+      },
+      {
+        question: "What information should I have ready when I call?",
+        answer:
+          "Have the address, a callback number, the type of system if you know it, and a short description of the problem or safety concern. That helps us route the emergency faster.",
+      },
+    ],
     closingCTA: {
       title: "Restoring Comfort and Confidence",
       description:
