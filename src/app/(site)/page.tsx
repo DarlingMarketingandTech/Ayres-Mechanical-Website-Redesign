@@ -41,7 +41,7 @@ export default function HomePage() {
               <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
-          <ServiceCards limit={4} />
+          <ServiceCards limit={6} />
         </Container>
       </Section>
 

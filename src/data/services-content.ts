@@ -504,6 +504,7 @@ export const servicePageContent: ServiceContent[] = [
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
     media: {
+      heroBackground: media.services.ductlessSupportingGx,
       heroGallery: [media.pages.ductless.supporting],
     },
   },

@@ -5,6 +5,7 @@ import { media } from "@/content/media";
 
 const teamAsset = media.about.ownerTeam;
 const rheemAsset = media.partners.rheemDealer;
+const mitsubishiAsset = media.partners.mitsubishi;
 
 export function AuthoritySection() {
   return (
@@ -39,23 +40,33 @@ export function AuthoritySection() {
               </p>
             </div>
 
-            {/* Equipment experience */}
-            <div className="border-t border-border pt-6" aria-label="Authorized equipment certifications">
+            {/* Elite certifications */}
+            <div className="border-t border-border pt-6" aria-label="Elite partner certifications">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-red">
-                Featured Equipment Experience
+                Elite Certifications
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Ayres Mechanical works across the residential and light-commercial equipment families customers see most often in Central Indiana, with a focus on practical diagnostics, clean installations, and dependable follow-through.
+                As a Rheem Dealer and a Mitsubishi Diamond Contractor, we are factory-trained to provide the highest level of installation and service available today.
               </p>
-              <div className="mt-5 grid max-w-sm gap-3 sm:gap-4">
+              <div className="mt-5 grid max-w-sm grid-cols-2 gap-3 sm:gap-4">
                 <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
                   <CloudinaryImage
                     asset={rheemAsset}
                     disableLqip
                     width={rheemAsset.width}
                     height={rheemAsset.height}
-                    sizes="180px"
-                    className="h-auto max-h-[52px] w-full object-contain"
+                    sizes="150px"
+                    className="h-auto max-h-[48px] w-full object-contain"
+                  />
+                </div>
+                <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-sm ring-1 ring-border sm:p-5">
+                  <CloudinaryImage
+                    asset={mitsubishiAsset}
+                    disableLqip
+                    width={mitsubishiAsset.width}
+                    height={mitsubishiAsset.height}
+                    sizes="150px"
+                    className="h-auto max-h-[48px] w-full object-contain"
                   />
                 </div>
               </div>

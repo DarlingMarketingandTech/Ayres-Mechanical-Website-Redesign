@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/Hero";
+import { EliteCertificationsBanner } from "@/components/sections/EliteCertificationsBanner";
 import { FinancingPromoSection } from "@/components/sections/FinancingPromoSection";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Container } from "@/components/layout/Container";
@@ -25,6 +26,7 @@ export default function ServicesPage() {
           <ServiceCards />
         </Container>
       </Section>
+      <EliteCertificationsBanner />
       <FinancingPromoSection variant="service" />
     </>
   );

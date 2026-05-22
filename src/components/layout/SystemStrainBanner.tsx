@@ -1,6 +1,7 @@
 "use client";
 
 import { AlertTriangle, Phone, Snowflake } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { siteConfig } from "@/content/site";
@@ -21,6 +22,10 @@ type WeatherCoordinates = {
 };
 
 type LocationSource = "default" | "browser";
+type DebugSystemStrain = "heat" | "cold" | null;
+type SearchParamsReader = {
+  get(name: string): string | null;
+};
 
 type SystemStrainState =
   | { kind: "normal"; temperature: number; source: LocationSource }
@@ -105,11 +110,34 @@ function getBrowserCoordinates() {
   });
 }
 
+function getDebugSystemStrain(searchParams: SearchParamsReader): DebugSystemStrain {
+  const rawValue = searchParams.get("system-strain");
+
+  if (rawValue === "heat" || rawValue === "cold") {
+    return rawValue;
+  }
+
+  return null;
+}
+
 export function SystemStrainBanner() {
   const bannerRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
   const [systemStrain, setSystemStrain] = useState<SystemStrainState | null>(null);
+  const debugSystemStrain = getDebugSystemStrain(searchParams);
+  const debugState =
+    debugSystemStrain === "heat"
+      ? { kind: "heat", temperature: 96, source: "default" as const }
+      : debugSystemStrain === "cold"
+        ? { kind: "cold", temperature: 18, source: "default" as const }
+        : null;
+  const effectiveSystemStrain = debugState ?? systemStrain;
 
   useEffect(() => {
+    if (debugSystemStrain) {
+      return;
+    }
+
     const abortController = new AbortController();
 
     async function resolveWeather() {
@@ -152,10 +180,10 @@ export function SystemStrainBanner() {
     void resolveWeather();
 
     return () => abortController.abort();
-  }, []);
+  }, [debugSystemStrain]);
 
   useEffect(() => {
-    if (!systemStrain || systemStrain.kind === "normal" || !bannerRef.current) {
+    if (!effectiveSystemStrain || effectiveSystemStrain.kind === "normal" || !bannerRef.current) {
       resetBannerOffsetVariables();
       return;
     }
@@ -191,15 +219,15 @@ export function SystemStrainBanner() {
       window.removeEventListener("resize", scheduleMeasure);
       resetBannerOffsetVariables();
     };
-  }, [systemStrain]);
+  }, [effectiveSystemStrain]);
 
-  if (!systemStrain || systemStrain.kind === "normal") {
+  if (!effectiveSystemStrain || effectiveSystemStrain.kind === "normal") {
     return null;
   }
 
-  const isHeat = systemStrain.kind === "heat";
-  const temperatureLabel = `${Math.round(systemStrain.temperature)}F`;
-  const isBrowserLocal = systemStrain.source === "browser";
+  const isHeat = effectiveSystemStrain.kind === "heat";
+  const temperatureLabel = `${Math.round(effectiveSystemStrain.temperature)}F`;
+  const isBrowserLocal = effectiveSystemStrain.source === "browser";
   const areaLabel = isBrowserLocal ? "your area" : "Central Indiana";
   const locationChipLabel = isBrowserLocal ? `Near you ${temperatureLabel}` : `Indianapolis ${temperatureLabel}`;
   const title = isHeat

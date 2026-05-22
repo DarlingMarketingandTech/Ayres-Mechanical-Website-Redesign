@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/Section";
 import { PageHero } from "@/components/sections/Hero";
 import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
+import { EliteCertificationsBanner } from "@/components/sections/EliteCertificationsBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { buttonVariants } from "@/components/ui/button";
 import { media } from "@/content/media";
@@ -102,6 +103,7 @@ export default function AboutPage() {
           <AnimatedCardGrid items={whyChooseItems} className="md:grid-cols-2 xl:grid-cols-4" />
         </Container>
       </Section>
+      <EliteCertificationsBanner />
       <Section>
         <Container className="grid gap-8 lg:grid-cols-2">
           <MotionReveal>
