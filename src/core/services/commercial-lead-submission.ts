@@ -119,7 +119,6 @@ function buildCommercialLeadText(values: CommercialLeadValues) {
     "",
     "Facility Scope",
     `Service Scope: ${values.serviceScope}`,
-    `Scope: ${values.scope}`,
     `Square Footage: ${values.squareFootage}`,
     `Locations: ${values.locations}`,
     "",

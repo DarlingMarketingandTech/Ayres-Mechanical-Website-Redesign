@@ -12,7 +12,7 @@ export function buildRouteRedirects(routeCatalog: typeof routes): RouteRedirect[
     { source: routeCatalog.industry("commercial"), destination: routeCatalog.commercial, permanent: true },
     { source: routeCatalog.industry("industrial"), destination: routeCatalog.industrialFacilities, permanent: true },
     {
-      source: "/commercial-partnerships",
+      source: "/commercial-partnerships/:path*",
       destination: routeCatalog.commercialMaintenancePlans,
       permanent: true,
     },
