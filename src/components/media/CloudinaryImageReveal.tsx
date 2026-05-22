@@ -53,7 +53,7 @@ export function CloudinaryImageReveal({
         <span
           aria-hidden
           className={cn(
-            "pointer-events-none absolute inset-0 z-[1] bg-cover bg-center transition-opacity duration-700 ease-out motion-reduce:opacity-0",
+            "pointer-events-none absolute inset-0 z-1 bg-cover bg-center transition-opacity duration-700 ease-out motion-reduce:opacity-0",
             revealComplete ? "opacity-0" : "opacity-100",
             "scale-110 blur-3xl motion-reduce:blur-0",
           )}
@@ -72,8 +72,8 @@ export function CloudinaryImageReveal({
         onLoad={handleLoad}
         className={cn(
           "object-cover",
-          showReveal && !revealComplete && "relative z-[2] opacity-0",
-          showReveal && revealComplete && "relative z-[2] opacity-100",
+          showReveal && !revealComplete && "relative z-2 opacity-0",
+          showReveal && revealComplete && "relative z-2 opacity-100",
           showReveal && "transition-opacity duration-500 ease-out",
           className,
         )}

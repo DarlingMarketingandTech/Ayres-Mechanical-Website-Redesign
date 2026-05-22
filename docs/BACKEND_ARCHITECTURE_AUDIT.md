@@ -6,9 +6,9 @@
 
 ## Executive summary
 
-This site is a **marketing RSC app** with static content modules and three POST Route Handlers (contact, diagnostic, commercial lead). There is no ORM or external datastore yet. The main backend risks were **inconsistent API pipelines**, **duplicated rate limiting**, and **split page-data access** (some pages cached, many components importing `content/` directly).
+This site is a **marketing RSC app** with static content modules and three POST Route Handlers (contact, diagnostic, commercial lead). There is no ORM or external datastore yet. The main backend risks are now concentrated in **a few boundary leaks** after the initial `src/core/` migration: legacy cache imports, one metadata route bypassing the repository, and a small amount of env access outside integrations.
 
-Phase 2 introduced `src/core/` with service, repository, cache, and API layers while keeping `src/content/` and `src/data/` as authoring sources.
+Phase 2 introduced `src/core/` with service, repository, cache, and API layers while keeping `src/content/` and `src/data/` as authoring sources. The API transport layer is now thin; remaining work is mostly consistency and future-proofing.
 
 ---
 
@@ -26,7 +26,7 @@ Phase 2 introduced `src/core/` with service, repository, cache, and API layers w
 
 ### After (target layout)
 
-```
+```text
 src/
 ├── app/                    # Transport only (pages + route handlers)
 ├── core/
@@ -42,11 +42,12 @@ src/
 └── components/             # UI (may import content types/media)
 ```
 
-### Gaps (future)
+### Current gaps
 
 - No `proxy.ts` — add when edge auth, geo, or bot filtering is required.
 - No Server Actions — acceptable while forms use Route Handlers.
 - No `src/core/db/` — add when Supabase/Postgres lands; repositories become real DAL.
+- Deprecated `@/lib/*` server shims remain for backward compatibility; new server code should import `@/core/*` directly.
 
 ---
 
@@ -56,10 +57,11 @@ src/
 |---------|------------|
 | APIs | Zod validation on all POST bodies; honeypot fields return benign 200 |
 | Errors | Typed `*UnavailableError` → 503; upstream Resend failures → 502 |
-| Content | No secrets in `content/`; env only in `core/integrations/resend-config` |
+| Content | No secrets in `content/`; metadata routes use repository reads |
+| Env | Resend base env lives in `core/integrations`; commercial override env still lives in the commercial service |
 | Client components | Import presentation data from `content/` — acceptable for static marketing |
 
-**Recommendation:** New server pages should use `@/core/cache/static-content` (or repository for sync metadata). Client components can keep type-only imports from `content/`.
+**Recommendation:** New server pages should use `@/core/cache/static-content` (or repository for sync metadata). Client components can keep type-only imports from `content/`. Move commercial lead override env into `core/integrations/resend-config` when touching that flow next.
 
 ---
 
@@ -71,15 +73,17 @@ src/
 | `"use cache"` + `cacheLife` for static catalogs | ✅ (`core/cache/static-content.ts`) |
 | `await params` on dynamic routes | ✅ `[slug]`, `[city]` |
 | Legacy `middleware.ts` | None (not needed today) |
+| Parallel route `default.tsx` fallbacks | Not applicable; no `@slot` routes present |
 | In-memory rate limit on serverless | ⚠️ Documented limitation; upgrade to KV/Redis when traffic grows |
 
 ---
 
-## 4. API route findings (resolved)
+## 4. API route findings
 
-1. **Duplicated rate limiter** in `send-diagnostic/route.ts` — removed; all routes use `core/api/rate-limit`.
-2. **Inconsistent error envelopes** — unified via `handleValidatedPost` + `jsonFromSubmissionError`.
-3. **Diagnostic route owned Resend** — moved to `core/services/diagnostic-submission`.
+1. **Resolved: duplicated rate limiter** in `send-diagnostic/route.ts` — all routes use `core/api/rate-limit`.
+2. **Resolved: inconsistent error envelopes** — unified via `handleValidatedPost` + `jsonFromSubmissionError`.
+3. **Resolved: diagnostic route owned Resend** — moved to `core/services/diagnostic-submission`.
+4. **Remaining: raw Resend errors in contact/commercial services** — these currently throw generic `Error`, which maps to the fallback 502. Prefer `UpstreamDeliveryError` for stable logging and future observability.
 
 ---
 
@@ -90,7 +94,8 @@ src/
 | Consumer | Pattern |
 |----------|---------|
 | Dynamic RSC pages (`services/[slug]`, `service-area/[city]`, industries) | Cached getters |
-| `sitemap.ts`, `robots.ts` | Repository sync reads |
+| `sitemap.ts` | Repository sync reads |
+| `robots.ts` | Repository sync reads |
 | Layout chrome, marketing sections | Direct `content/` imports (static, bundled) |
 
 ### `content/` vs `data/`
@@ -98,9 +103,9 @@ src/
 - **`content/`** — site config, navigation, media registry, locations, industries, FAQs.
 - **`data/services-content.ts`** — large per-service page payloads; keep separate for bundle splitting.
 
-### Follow-ups (optional)
+### Follow-ups
 
-- Migrate `app/(site)/page.tsx` to `getCachedHomeFaqs()` / `getCachedMedia()`.
+- (Done) Removed deprecated `src/lib/*` server shims after migrating all imports to `src/core/*`.
 - Add `getCachedFinancingCopy()` if financing page becomes hot path.
 - When adding CMS/DB, repositories swap implementation; cache layer adds `cacheTag` invalidation.
 

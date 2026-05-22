@@ -9,15 +9,15 @@ import {
   primaryNavigation,
 } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
+import { getCachedCopyrightYear } from "@/core/cache/static-content";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
-import { getCachedCopyrightYear } from "@/lib/static-content-cache";
 import { Container } from "./Container";
 
 export async function SiteFooter() {
   const copyrightYear = await getCachedCopyrightYear();
   return (
-    <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-lg:pb-[var(--mobile-bottom-chrome-h)]">
+    <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-lg:pb-(--mobile-bottom-chrome-h)">
       <Container className="py-16 lg:py-24">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto] lg:gap-12">
           {/* Brand & Contact */}

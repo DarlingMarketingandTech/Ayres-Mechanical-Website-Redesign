@@ -1,8 +1,14 @@
 import type { MetadataRoute } from "next";
 
-import { siteConfig, siteIndexingEnabled } from "@/content/site";
+import {
+  getSiteConfig,
+  getSiteIndexingEnabled,
+} from "@/core/repositories/content-repository";
 
 export default function robots(): MetadataRoute.Robots {
+  const siteConfig = getSiteConfig();
+  const siteIndexingEnabled = getSiteIndexingEnabled();
+
   return {
     rules: siteIndexingEnabled
       ? {

@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-import { ContactSubmissionUnavailableError } from "@/core/api/errors";
+import { ContactSubmissionUnavailableError, UpstreamDeliveryError } from "@/core/api/errors";
 import { escapeAttribute, escapeHtml } from "@/core/emails/html-utils";
 import { getResendDeliveryConfig, ResendNotConfiguredError } from "@/core/integrations/resend-config";
 import type { ContactFormValues } from "@/lib/validators";
@@ -40,7 +40,11 @@ export async function submitContactRequest(values: ContactFormValues): Promise<C
   });
 
   if (response.error) {
-    throw new Error(`Resend contact request failed: ${response.error.message}`);
+    const error = new UpstreamDeliveryError(
+      "Unable to send this request right now. Please call for immediate service.",
+    );
+    (error as Error & { cause?: unknown }).cause = response.error;
+    throw error;
   }
 
   return {

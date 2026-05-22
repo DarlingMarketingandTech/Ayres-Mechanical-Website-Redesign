@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { LocationPageTemplate } from "@/components/templates/LocationPageTemplate";
+import { getCachedLocationBySlug, getCachedServiceLocations } from "@/core/cache/static-content";
 import { pageMetadata } from "@/lib/seo";
-import { getCachedLocationBySlug, getCachedServiceLocations } from "@/lib/static-content-cache";
 
 export async function generateStaticParams() {
   const serviceLocations = await getCachedServiceLocations();

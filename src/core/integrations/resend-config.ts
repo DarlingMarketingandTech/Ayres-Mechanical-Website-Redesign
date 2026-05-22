@@ -13,13 +13,13 @@ export type ResendDeliveryConfig = {
   toEmail: string;
 };
 
-export function getResendDeliveryConfig(): ResendDeliveryConfig {
+export function getResendDeliveryConfig(featureLabel?: string): ResendDeliveryConfig {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
   const toEmail = process.env.RESEND_TO_EMAIL?.trim();
 
   if (!apiKey || !fromEmail || !toEmail) {
-    throw new ResendNotConfiguredError();
+    throw new ResendNotConfiguredError(featureLabel);
   }
 
   return { apiKey, fromEmail, toEmail };
@@ -31,4 +31,11 @@ export function getResendDeliveryConfigOrNull(): ResendDeliveryConfig | null {
   } catch {
     return null;
   }
+}
+
+export function getCommercialLeadDeliveryConfig(): ResendDeliveryConfig {
+  const base = getResendDeliveryConfig("Commercial lead delivery");
+  const fromEmail = process.env.COMMERCIAL_LEAD_FROM_EMAIL?.trim() || base.fromEmail;
+  const toEmail = process.env.COMMERCIAL_LEAD_TO_EMAIL?.trim() || base.toEmail;
+  return { ...base, fromEmail, toEmail };
 }

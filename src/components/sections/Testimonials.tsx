@@ -58,7 +58,7 @@ export function Testimonials({ limit, variant = "default", marqueeFadeClassName 
       ) : (
       <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="group relative overflow-hidden rounded-3xl bg-brand-blue-dark p-5 text-white shadow-xl transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-blue-dark/35 motion-reduce:transform-none sm:p-6">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-red/15 via-transparent to-primary/20 opacity-60 transition-opacity duration-700 group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-brand-red/15 via-transparent to-primary/20 opacity-60 transition-opacity duration-700 group-hover:opacity-100" />
           <p className="relative z-10 text-sm font-black uppercase tracking-[0.2em] text-white/60">Reviews</p>
           <div className="relative z-10 mt-3 flex items-center justify-between gap-4 sm:mt-4 sm:items-end sm:justify-start">
             <div className="flex items-end gap-2 sm:gap-3">
@@ -130,20 +130,20 @@ export function Testimonials({ limit, variant = "default", marqueeFadeClassName 
           id={regionId}
           className={cn(
             "ayres-marquee relative py-4",
-            isEmbedded ? "-mx-0 px-0" : "-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
+            isEmbedded ? "mx-0 px-0" : "-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
           )}
           style={{ "--ayres-marquee-duration": `${marqueeDurationSec}s` } as CSSProperties}
           aria-label="Customer reviews"
         >
           <div
             className={cn(
-              "pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r to-transparent sm:w-16 lg:w-20",
+              "pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-linear-to-r to-transparent sm:w-16 lg:w-20",
               marqueeFadeClassName,
             )}
           />
           <div
             className={cn(
-              "pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l to-transparent sm:w-16 lg:w-20",
+              "pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-linear-to-l to-transparent sm:w-16 lg:w-20",
               marqueeFadeClassName,
             )}
           />

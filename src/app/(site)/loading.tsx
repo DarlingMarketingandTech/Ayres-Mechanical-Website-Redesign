@@ -20,7 +20,7 @@ export default function SiteLoading() {
               <Skeleton className="h-12 w-full animate-pulse rounded-lg bg-muted/70 sm:w-36" />
             </div>
           </div>
-          <Skeleton className="aspect-[4/3] min-h-[15rem] w-full animate-pulse rounded-3xl bg-muted sm:min-h-104 lg:min-h-[420px]" />
+          <Skeleton className="aspect-4/3 min-h-60 w-full animate-pulse rounded-3xl bg-muted sm:min-h-104 lg:min-h-[420px]" />
         </Container>
       </section>
 

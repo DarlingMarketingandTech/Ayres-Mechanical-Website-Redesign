@@ -1,8 +1,8 @@
 import { Resend } from "resend";
 
-import { CommercialLeadUnavailableError } from "@/core/api/errors";
+import { CommercialLeadUnavailableError, UpstreamDeliveryError } from "@/core/api/errors";
 import { escapeAttribute, escapeHtml } from "@/core/emails/html-utils";
-import { getResendDeliveryConfig, ResendNotConfiguredError } from "@/core/integrations/resend-config";
+import { getCommercialLeadDeliveryConfig, ResendNotConfiguredError } from "@/core/integrations/resend-config";
 import type { CommercialLeadValues } from "@/lib/validators";
 
 type CommercialLeadSubmissionResult = {
@@ -10,10 +10,10 @@ type CommercialLeadSubmissionResult = {
 };
 
 export async function submitCommercialLead(values: CommercialLeadValues): Promise<CommercialLeadSubmissionResult> {
-  let baseConfig;
+  let config;
 
   try {
-    baseConfig = getResendDeliveryConfig();
+    config = getCommercialLeadDeliveryConfig();
   } catch (error) {
     if (error instanceof ResendNotConfiguredError) {
       if (process.env.NODE_ENV !== "production") {
@@ -28,22 +28,23 @@ export async function submitCommercialLead(values: CommercialLeadValues): Promis
     throw error;
   }
 
-  const fromEmail = process.env.COMMERCIAL_LEAD_FROM_EMAIL?.trim() || baseConfig.fromEmail;
-  const toEmail = process.env.COMMERCIAL_LEAD_TO_EMAIL?.trim() || baseConfig.toEmail;
-
-  const resend = new Resend(baseConfig.apiKey);
+  const resend = new Resend(config.apiKey);
   const subject = `[B2B Enterprise Lead] ${values.companyName} - ${values.principalCity}`;
 
   const response = await resend.emails.send({
-    from: fromEmail,
-    to: toEmail,
+    from: config.fromEmail,
+    to: config.toEmail,
     subject,
     html: buildCommercialLeadHtml(values),
     text: buildCommercialLeadText(values),
   });
 
   if (response.error) {
-    throw new Error(`Resend commercial lead failed: ${response.error.message}`);
+    const error = new UpstreamDeliveryError(
+      "Unable to send this request right now. Please call for immediate service.",
+    );
+    (error as Error & { cause?: unknown }).cause = response.error;
+    throw error;
   }
 
   return {

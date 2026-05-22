@@ -17,7 +17,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteChrome />
       <main
         id="main-content"
-        className="min-h-screen max-lg:pb-[var(--mobile-bottom-chrome-h)]"
+        className="min-h-screen max-lg:pb-(--mobile-bottom-chrome-h)"
         style={{ paddingTop: "calc(var(--site-header-h, 7rem) + var(--system-strain-banner-h, 0px))" }}
       >
         {children}

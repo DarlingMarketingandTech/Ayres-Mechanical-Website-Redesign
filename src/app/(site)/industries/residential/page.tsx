@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { IndustryPageTemplate } from "@/components/templates/IndustryPageTemplate";
+import { getCachedIndustryBySlug } from "@/core/cache/static-content";
 import { pageMetadata } from "@/lib/seo";
-import { getCachedIndustryBySlug } from "@/lib/static-content-cache";
 
 export async function generateMetadata() {
   const industry = await getCachedIndustryBySlug("residential");

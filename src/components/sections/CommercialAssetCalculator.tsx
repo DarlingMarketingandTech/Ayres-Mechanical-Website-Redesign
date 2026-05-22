@@ -45,7 +45,7 @@ export function CommercialAssetCalculator() {
           <p className="mt-5 text-lg leading-8 text-muted-foreground">
             This lightweight capital planning widget helps facility teams frame maintenance and replacement conversations before costs become urgent.
           </p>
-          <figure className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
+          <figure className="relative mt-8 aspect-video overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-sm">
             <CloudinaryImageReveal
               asset={media.commercialPortal.assetPlanning}
               fill

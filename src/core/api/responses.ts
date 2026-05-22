@@ -44,6 +44,18 @@ export function jsonHoneypotSuccess(message = "Thanks. Your request has been rec
   return jsonOk({ message }, 200);
 }
 
+function logSubmissionError(error: unknown, options?: { logLabel?: string }) {
+  if (!options?.logLabel) return;
+
+  if (process.env.NODE_ENV !== "production") {
+    console.error(options.logLabel, error);
+    return;
+  }
+
+  // Avoid dumping provider payloads in production logs by default.
+  console.error(options.logLabel);
+}
+
 /** Maps known submission errors to stable client responses. */
 export function jsonFromSubmissionError(error: unknown, options?: { logLabel?: string }) {
   if (error instanceof ContactSubmissionUnavailableError || error instanceof CommercialLeadUnavailableError || error instanceof DiagnosticSubmissionUnavailableError || error instanceof ServiceUnavailableError) {
@@ -51,14 +63,11 @@ export function jsonFromSubmissionError(error: unknown, options?: { logLabel?: s
   }
 
   if (error instanceof UpstreamDeliveryError) {
+    logSubmissionError(error, options);
     return jsonError(error.message, 502);
   }
 
-  if (process.env.NODE_ENV !== "production" && options?.logLabel) {
-    console.error(options.logLabel, error);
-  } else if (options?.logLabel) {
-    console.error(options.logLabel);
-  }
+  logSubmissionError(error, options);
 
   return jsonError(
     "Unable to send this request right now. Please call for immediate service.",

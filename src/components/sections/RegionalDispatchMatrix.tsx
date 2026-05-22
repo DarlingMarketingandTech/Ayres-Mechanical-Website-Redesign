@@ -19,7 +19,7 @@ export function RegionalDispatchMatrix() {
               Select a county to see the commercial hubs, facility classes, and service relevance for multi-site readiness.
             </p>
           </div>
-          <figure className="relative aspect-[16/9] overflow-hidden rounded-[2rem] border border-white bg-white shadow-sm">
+          <figure className="relative aspect-video overflow-hidden rounded-[2rem] border border-white bg-white shadow-sm">
             <CloudinaryImage
               asset={media.commercialPortal.dispatchMap}
               fill

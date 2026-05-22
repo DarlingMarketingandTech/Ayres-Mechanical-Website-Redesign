@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate";
+import { getCachedServiceContentBySlug, getCachedServicePageContent } from "@/core/cache/static-content";
 import { pageMetadata } from "@/lib/seo";
-import { getCachedServiceContentBySlug, getCachedServicePageContent } from "@/lib/static-content-cache";
 
 export async function generateStaticParams() {
   const servicePageContent = await getCachedServicePageContent();

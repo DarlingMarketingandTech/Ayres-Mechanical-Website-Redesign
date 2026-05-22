@@ -104,14 +104,14 @@ export function PageHero({
             />
           </div>
           {effectiveOverlay ? (
-            <div className={cn("absolute inset-0 z-[1]", photoScrim[effectiveOverlay])} aria-hidden />
+            <div className={cn("absolute inset-0 z-1", photoScrim[effectiveOverlay])} aria-hidden />
           ) : null}
         </>
       ) : null}
 
-      <BrandPattern variant={patternVariant} className={cn("relative z-[2]", hasPhoto ? "opacity-25" : "")} />
+      <BrandPattern variant={patternVariant} className={cn("relative z-2", hasPhoto ? "opacity-25" : "")} />
 
-      <Container className="relative z-[3] py-10 sm:py-14 lg:py-20">
+      <Container className="relative z-3 py-10 sm:py-14 lg:py-20">
         <HeroStagger>
           <HeroFadeP
             className={cn(
