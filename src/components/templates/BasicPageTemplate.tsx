@@ -10,6 +10,7 @@ export function BasicPageTemplate({
   children,
   heroBackground,
   heroPhotoOverlay,
+  heroBackgroundClassName,
 }: {
   eyebrow: string;
   title: string;
@@ -17,6 +18,7 @@ export function BasicPageTemplate({
   children: React.ReactNode;
   heroBackground?: CloudinaryMediaAsset;
   heroPhotoOverlay?: "none" | "navy-strong" | "navy-soft" | "light-soft" | "light-blend";
+  heroBackgroundClassName?: string;
 }) {
   return (
     <>
@@ -29,6 +31,7 @@ export function BasicPageTemplate({
         photoOverlay={heroPhotoOverlay ?? (heroBackground ? "light-soft" : "none")}
         backgroundPriority={Boolean(heroBackground)}
         backgroundDeliveryWidth={heroBackground?.publicId === "service_locations" ? 2000 : undefined}
+        backgroundImageClassName={heroBackgroundClassName}
       />
       <Section>
         <Container>{children}</Container>

@@ -362,7 +362,7 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.twentyFourHourEmergency],
     media: {
       heroBackground: media.pages.commercial.hero,
-      heroImageClassName: "object-[center_32%]",
+      heroImageClassName: "object-[center_36%]",
       heroDeliveryWidth: 1600,
       heroGallery: [media.pages.commercial.supporting],
     },
@@ -504,7 +504,8 @@ export const servicePageContent: ServiceContent[] = [
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.preventiveMaintenance],
     media: {
-      heroBackground: media.services.ductlessSupportingGx,
+      heroBackground: media.pages.ductless.hero,
+      heroImageClassName: "object-[center_26%]",
       heroGallery: [media.pages.ductless.supporting],
     },
   },
@@ -571,9 +572,8 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.airConditioning, serviceSlugs.heating],
     media: {
       heroBackground: media.pages.indoorAirQuality.hero,
-      heroImageClassName: "object-[center_25%]",
-      heroPhotoOverlay: "navy-soft",
-      heroGallery: [media.pages.indoorAirQuality.supporting],
+      heroImageClassName: "object-[center_24%]",
+      heroPhotoOverlay: "light-blend",
     },
   },
   {
@@ -649,7 +649,7 @@ export const servicePageContent: ServiceContent[] = [
     relatedServices: [serviceSlugs.heating, serviceSlugs.airConditioning, serviceSlugs.commercial],
     media: {
       heroBackground: media.pages.emergency.hero,
-      heroImageClassName: "object-[center_30%]",
+      heroImageClassName: "object-[center_46%]",
     },
   },
 ];

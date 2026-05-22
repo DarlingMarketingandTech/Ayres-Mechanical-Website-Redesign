@@ -12,7 +12,8 @@ export default function ReviewsPage() {
       eyebrow="Reviews"
       title="Customer reviews for Ayres Mechanical."
       description="Read real customer feedback about heating, cooling, ductwork, diagnostics, and service follow-through."
-      heroBackground={media.ui.freshAirBg}
+      heroBackground={media.about.ownerPortrait}
+      heroBackgroundClassName="object-[center_28%]"
       heroPhotoOverlay="light-blend"
     >
       <ReviewPlatformBadges />

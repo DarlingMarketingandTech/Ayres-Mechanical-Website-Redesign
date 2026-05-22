@@ -31,6 +31,24 @@ const assets = {
     assetFolder: "ayres-mechanical-website/07-team-trucks-office",
     usageNotes: "Registry: `about.ownerTeam`.",
   },
+  aboutFamilyTeam: {
+    publicId: "am-big-family",
+    alt: "Ayres Mechanical family and team photo.",
+    width: 1136,
+    height: 756,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/02-pages/about",
+    usageNotes: "Registry: `about.familyTeam`. Approved local team proof for About and trust-led page heroes.",
+  },
+  ownerBrianJacket: {
+    publicId: "brian-am-jacket",
+    alt: "Brian Ayres wearing an Ayres Mechanical jacket.",
+    width: 1804,
+    height: 1479,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/07-team-trucks-office",
+    usageNotes: "Registry: `about.ownerPortrait`. Strong local-owner proof for trust-heavy page heroes.",
+  },
   serviceLocationsMap: {
     publicId: "service_locations",
     alt: "Map of Central Indiana counties served by Ayres Mechanical.",
@@ -130,6 +148,24 @@ const assets = {
     assetFolder: "ayres-mechanical-website/03-services/air-conditioning",
     usageNotes: "Registry: `pages.ductless.supporting`.",
   },
+  ductlessHeroHvacMitsubishi: {
+    publicId: "hvac-mitsubishi-ductless",
+    alt: "Mitsubishi ductless mini-split system installed in a finished interior space.",
+    width: 2500,
+    height: 1875,
+    format: "webp",
+    assetFolder: "ayres-mechanical-website/03-services/ductless-hvac",
+    usageNotes: "Registry: `pages.ductless.hero`. Approved ductless hero image with enough room for responsive cropping.",
+  },
+  ductlessFeature: {
+    publicId: "ductless-feature",
+    alt: "Close view of a ductless mini-split wall unit in a finished room.",
+    width: 1370,
+    height: 800,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/ductless-hvac",
+    usageNotes: "Registry: `pages.ductless.supporting`. Distinct gallery image to avoid hero duplication.",
+  },
   amServicesHvac: {
     publicId: "ac-service-outdoor-hvac-system",
     alt: "Outdoor HVAC system for Ayres Mechanical air conditioning service.",
@@ -186,6 +222,15 @@ const assets = {
     usageNotes:
       "NOT in active use. Moved to 90-temporary-stock/license-or-source-review in Cloudinary cleanup — filename references Redding, CA and must not appear as a polished live Ayres asset. Replace with an approved real emergency/service-call photo before launch. Emergency hero currently uses `pages.airConditioning.hero` (ac-service-outdoor-hvac-system) as a temporary fallback.",
   },
+  emergencyServiceRepair: {
+    publicId: "am-hvac-service-repair",
+    alt: "Ayres Mechanical HVAC service repair in progress.",
+    width: 1200,
+    height: 630,
+    format: "jpg",
+    assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+    usageNotes: "Registry: `pages.emergency.hero`. Approved service-repair image that reads as an active emergency/service-call response.",
+  },
 } satisfies Record<string, CloudinaryMediaAsset>;
 
 export const media = {
@@ -223,6 +268,10 @@ export const media = {
   about: {
     /** `brian-ayres-sabra-office-team` */
     ownerTeam: assets.ownerTeamBrianSabra,
+    /** `am-big-family` */
+    familyTeam: assets.aboutFamilyTeam,
+    /** `brian-am-jacket` */
+    ownerPortrait: assets.ownerBrianJacket,
   },
   serviceArea: {
     /** `service_locations` */
@@ -283,25 +332,33 @@ export const media = {
     },
     commercial: {
       hero: assets.amRooftopUnitServices,
-      supporting: assets.commercialRooftopHvacStockPhoto,
+      supporting: {
+        publicId: "helo-and-van",
+        alt: "Ayres Mechanical service van on site during commercial HVAC work.",
+        width: 960,
+        height: 720,
+        format: "jpg",
+        assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+        usageNotes: "Registry: `pages.commercial.supporting`. Local commercial proof replacing temporary stock.",
+      },
     },
     maintenance: {
       hero: assets.heatAmService,
       supporting: assets.systemsExplainer,
     },
     indoorAirQuality: {
-      hero: assets.freshAirBg,
+      hero: assets.fanFreshAir,
       supporting: assets.fanFreshAir,
     },
     ductless: {
-      supporting: assets.ductlessSupportingGx,
+      hero: assets.ductlessHeroHvacMitsubishi,
+      supporting: assets.ductlessFeature,
     },
     industrial: {
       hero: assets.industrialAm,
     },
     emergency: {
-      /** Temporary fallback: real emergency photo pending license review of `hvac-repair-redding-ca`. Replace with approved photo before launch. */
-      hero: assets.amServicesHvac,
+      hero: assets.emergencyServiceRepair,
     },
   },
   services: {
@@ -355,7 +412,7 @@ export const media = {
     commercial: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     maintenance: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     indoorAirQuality: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
-    ductless: { supporting: CloudinaryMediaAsset };
+    ductless: { hero: CloudinaryMediaAsset; supporting: CloudinaryMediaAsset };
     industrial: { hero: CloudinaryMediaAsset };
     emergency: { hero: CloudinaryMediaAsset };
   };

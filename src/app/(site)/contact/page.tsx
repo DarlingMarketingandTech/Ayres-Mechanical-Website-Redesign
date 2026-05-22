@@ -13,7 +13,8 @@ export default function ContactPage() {
       eyebrow="Contact"
       title="Contact Ayres Mechanical."
       description="Call for urgent HVAC service or send a request with the details below."
-      heroBackground={media.ui.freshAirBg}
+      heroBackground={media.home.localProof}
+      heroBackgroundClassName="object-[center_58%]"
       heroPhotoOverlay="light-soft"
     >
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
