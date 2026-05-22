@@ -2,7 +2,7 @@
 
 import { AlertTriangle, Phone, Snowflake } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { siteConfig } from "@/content/site";
 import { phoneHref } from "@/lib/constants";
@@ -120,7 +120,7 @@ function getDebugSystemStrain(searchParams: SearchParamsReader): DebugSystemStra
   return null;
 }
 
-export function SystemStrainBanner() {
+function SystemStrainBannerInner() {
   const bannerRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const [systemStrain, setSystemStrain] = useState<SystemStrainState | null>(null);
@@ -289,5 +289,13 @@ export function SystemStrainBanner() {
         </div>
       </Container>
     </div>
+  );
+}
+
+export function SystemStrainBanner() {
+  return (
+    <Suspense>
+      <SystemStrainBannerInner />
+    </Suspense>
   );
 }
