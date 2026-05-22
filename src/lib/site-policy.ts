@@ -105,7 +105,10 @@ export function isCommercialPath(pathname: string) {
     return true;
   }
 
-  if (pathname === routes.commercialPartnerships || pathname.startsWith(`${routes.commercialPartnerships}/`)) {
+  if (
+    pathname === routes.commercialMaintenancePlans ||
+    pathname.startsWith(`${routes.commercialMaintenancePlans}/`)
+  ) {
     return true;
   }
 

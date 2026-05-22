@@ -9,14 +9,11 @@ import { media } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
-export function CommercialPortfolioCTA({ interactiveToolId }: { interactiveToolId?: string }) {
+export function CommercialPortfolioCTA() {
   return (
     <Section className="bg-white pt-0">
       <Container>
-        <div
-          data-interactive-tool={interactiveToolId}
-          className="grid overflow-hidden rounded-[2rem] border border-brand-blue-dark/10 bg-brand-blue-dark text-white shadow-xl lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
-        >
+        <div className="grid overflow-hidden rounded-[2rem] border border-brand-blue-dark/10 bg-brand-blue-dark text-white shadow-xl lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <figure className="relative min-h-64 lg:min-h-full">
             <CloudinaryImage
               asset={media.commercialPortal.hero}
@@ -31,24 +28,22 @@ export function CommercialPortfolioCTA({ interactiveToolId }: { interactiveToolI
             <figcaption className="sr-only">{media.commercialPortal.hero.alt}</figcaption>
           </figure>
           <div className="p-7 sm:p-8 lg:p-10">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-white/55">Commercial facility support</p>
-            <h2 className="mt-3 text-3xl font-black text-balance sm:text-4xl">
-              Managing a Commercial Facility or Multi-Site Portfolio?
-            </h2>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-white/55">Commercial HVAC support</p>
+            <h2 className="mt-3 text-3xl font-black text-balance sm:text-4xl">Need planned HVAC maintenance for your business?</h2>
             <p className="mt-4 text-lg leading-8 text-white/78">
-              Explore dedicated commercial HVAC service planning, maintenance agreements, and facility support for Central Indiana businesses.
+              See how Ayres Mechanical supports offices, retail spaces, restaurants, property managers, and light industrial buildings with planned service and clear follow-up.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
-                href={routes.commercialPartnerships}
+                href={routes.commercialMaintenancePlans}
                 data-analytics-event="commercial_cta_click"
                 data-analytics-category="homepage"
-                data-analytics-label="commercial_partnerships"
+                data-analytics-label="commercial_maintenance_plans"
                 data-analytics-location="commercial_portfolio_cta"
-                data-analytics-href={routes.commercialPartnerships}
+                data-analytics-href={routes.commercialMaintenancePlans}
                 className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}
               >
-                Go to Commercial Portal
+                View Commercial Maintenance Plans
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
               <Link

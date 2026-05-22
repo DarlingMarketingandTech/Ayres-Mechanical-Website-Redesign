@@ -104,8 +104,8 @@ export function CommercialIntakeWizard() {
     const payload = {
       ...values,
       leadType: "commercial",
-      submittedFrom: "commercial-partnerships",
-      portfolioType: values.scope,
+      submittedFrom: "commercial-maintenance-plans",
+      serviceScope: values.scope,
       estimatedComplexity: computed.estimatedComplexity,
       recommendedFollowUpAngle: computed.recommendedFollowUpAngle,
     };
@@ -169,13 +169,13 @@ export function CommercialIntakeWizard() {
 
       <div className="mt-6">
         {step === 0 ? (
-          <ChoiceGroup
-            legend="Scope"
-            error={errors.scope}
-            options={["Single Facility", "Multi-Site Portfolio / Property Management"]}
-            value={values.scope}
-            onChange={(value) => updateValue("scope", value)}
-          />
+            <ChoiceGroup
+              legend="Scope"
+              error={errors.scope}
+              options={["Single Building", "Multi-Building / Property Management"]}
+              value={values.scope}
+              onChange={(value) => updateValue("scope", value)}
+            />
         ) : null}
 
         {step === 1 ? (
@@ -288,7 +288,7 @@ export function CommercialIntakeWizard() {
           </Button>
         ) : (
           <Button type="button" variant="emergency" onClick={submit} disabled={submitting}>
-            {submitting ? "Sending..." : "Submit Commercial Plan"}
+            {submitting ? "Sending..." : "Submit Maintenance Request"}
             <ArrowRight className="size-4" aria-hidden="true" />
           </Button>
         )}
@@ -350,18 +350,18 @@ function computeLeadDetails(values: Values) {
     values.locations === "11+" ||
     values.equipment.includes("Chillers / Hydronics");
   const mediumComplexity =
-    values.scope.includes("Multi-Site") ||
+    values.scope.includes("Multi-Building") ||
     values.locations === "6-10" ||
     values.equipment.includes("Rooftop Packaged Units (RTUs)");
 
   const estimatedComplexity = highComplexity ? "high" : mediumComplexity ? "medium" : "low";
-  const recommendedFollowUpAngle = values.scope.includes("Multi-Site")
-    ? "Multi-site portfolio service plan"
+  const recommendedFollowUpAngle = values.scope.includes("Multi-Building")
+    ? "Multi-building maintenance planning"
     : values.equipment.includes("Rooftop Packaged Units (RTUs)")
-      ? "RTU lifecycle and CapEx planning"
+      ? "RTU condition and maintenance review"
       : values.equipment.includes("Chillers / Hydronics")
-        ? "Industrial/facility support review"
-        : "Commercial PMA discussion";
+        ? "Industrial facility support review"
+        : "Commercial maintenance plan review";
 
   return { estimatedComplexity, recommendedFollowUpAngle };
 }

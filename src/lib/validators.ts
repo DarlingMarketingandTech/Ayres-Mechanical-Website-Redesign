@@ -43,9 +43,10 @@ export type DiagnosticSubmissionPayload = z.infer<typeof diagnosticSubmissionSch
 export const commercialLeadSchema = z
   .object({
     leadType: z.literal("commercial"),
-    submittedFrom: z.literal("commercial-partnerships"),
-    portfolioType: z.string().min(1, "Choose a facility scope."),
-    scope: z.string().min(1, "Choose a facility scope."),
+    submittedFrom: z.enum(["commercial-maintenance-plans", "commercial-partnerships"]),
+    serviceScope: z.string().min(1, "Choose a facility scope.").optional(),
+    portfolioType: z.string().min(1, "Choose a facility scope.").optional(),
+    scope: z.string().min(1, "Choose a facility scope.").optional(),
     squareFootage: z.string().min(1, "Choose a square footage range."),
     locations: z.string().min(1, "Choose the number of facility locations."),
     equipment: z.array(z.string().min(1)).min(1, "Choose at least one equipment option."),
@@ -58,13 +59,34 @@ export const commercialLeadSchema = z
     notes: z.string().trim().optional().or(z.literal("")),
     estimatedComplexity: z.enum(["low", "medium", "high"]),
     recommendedFollowUpAngle: z.enum([
-      "Commercial PMA discussion",
-      "Multi-site portfolio service plan",
-      "RTU lifecycle and CapEx planning",
-      "Industrial/facility support review",
+      "Commercial maintenance plan review",
+      "Multi-building maintenance planning",
+      "RTU condition and maintenance review",
+      "Industrial facility support review",
     ]),
     website: z.string().trim().optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((values, context) => {
+    if (values.serviceScope || values.portfolioType || values.scope) {
+      return;
+    }
+
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["serviceScope"],
+      message: "Choose a facility scope.",
+    });
+  })
+  .transform(({ portfolioType, ...values }) => {
+    const normalizedScope = values.serviceScope ?? portfolioType ?? values.scope ?? "";
+
+    return {
+      ...values,
+      submittedFrom: "commercial-maintenance-plans" as const,
+      serviceScope: normalizedScope,
+      scope: values.scope ?? normalizedScope,
+    };
+  });
 
 export type CommercialLeadValues = z.infer<typeof commercialLeadSchema>;
