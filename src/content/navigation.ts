@@ -144,6 +144,6 @@ export const footerCommercialLinks: NavigationChild[] = [
   serviceLink(serviceSlugs.commercial),
   {
     ...serviceLink(serviceSlugs.industrial),
-      label: "Industrial / Facility Support",
+    label: "Industrial / Facility Support",
   },
 ];
