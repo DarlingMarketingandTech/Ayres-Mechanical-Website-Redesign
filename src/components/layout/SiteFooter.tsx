@@ -4,6 +4,7 @@ import { Clock, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import {
   companyNavigation,
+  footerCommercialLinks,
   footerServiceLinks,
   primaryNavigation,
 } from "@/content/navigation";
@@ -16,7 +17,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-brand-blue-dark text-white max-lg:pb-[var(--mobile-bottom-chrome-h)]">
       <Container className="py-16 lg:py-24">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:gap-16">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto] lg:gap-12">
           {/* Brand & Contact */}
           <div className="flex flex-col items-start sm:col-span-2 lg:col-span-1">
             <Logo linkClassName="max-w-full" className="h-auto w-full max-h-12 sm:max-h-14" />
@@ -45,6 +46,23 @@ export function SiteFooter() {
             <p className="text-xs font-black uppercase tracking-[0.2em] text-white/50">Services</p>
             <ul className="mt-5 space-y-3">
               {footerServiceLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm font-medium text-white/75 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Commercial */}
+          <nav aria-label="Commercial HVAC">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-white/50">Commercial</p>
+            <ul className="mt-5 space-y-3">
+              {footerCommercialLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

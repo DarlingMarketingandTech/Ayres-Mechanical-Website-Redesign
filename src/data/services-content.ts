@@ -39,6 +39,12 @@ export type ServiceClosingCta = {
   secondaryLabel: string;
   secondaryHref: string;
   subtext?: string;
+  partnershipPromo?: {
+    title: string;
+    description: string;
+    label: string;
+    href: string;
+  };
 };
 
 export type ServiceContent = {
@@ -286,6 +292,13 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Do you have multiple properties or a commercial facility that requires a custom maintenance schedule?",
+      partnershipPromo: {
+        title: "Managing maintenance for a commercial facility or portfolio?",
+        description:
+          "Explore Commercial Partnerships to outline your footprint, recurring maintenance needs, and service planning priorities.",
+        label: "Explore Commercial Partnerships",
+        href: routes.commercialPartnerships,
+      },
     },
     relatedServices: [serviceSlugs.airConditioning, serviceSlugs.heating, serviceSlugs.commercial],
     media: {
@@ -363,6 +376,13 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Do you manage multiple locations in Central Indiana that require a consolidated maintenance plan?",
+      partnershipPromo: {
+        title: "Need planned support for multiple systems or facilities?",
+        description:
+          "Use the Commercial Partnerships portal to outline your footprint, equipment mix, and service priorities.",
+        label: "Build a Commercial Service Plan",
+        href: routes.commercialPartnerships,
+      },
     },
     relatedServices: [serviceSlugs.preventiveMaintenance, serviceSlugs.industrial, serviceSlugs.twentyFourHourEmergency],
     media: {
@@ -441,6 +461,13 @@ export const servicePageContent: ServiceContent[] = [
       secondaryLabel: "Call Now",
       secondaryHref: phoneHref,
       subtext: "Does your facility require specific safety certifications or specialized access equipment for service?",
+      partnershipPromo: {
+        title: "Need coordinated HVAC support for an operational facility?",
+        description:
+          "Start a facility service plan that accounts for equipment footprint, access needs, and service coordination.",
+        label: "Start a Facility Service Plan",
+        href: routes.commercialPartnerships,
+      },
     },
     relatedServices: [serviceSlugs.commercial, serviceSlugs.preventiveMaintenance, serviceSlugs.twentyFourHourEmergency],
     media: {

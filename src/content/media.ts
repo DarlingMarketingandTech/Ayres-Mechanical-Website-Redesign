@@ -398,6 +398,28 @@ export const media = {
     /** Alias of `serviceArea.map` for older imports. */
     serviceLocationsMap: assets.serviceLocationsMap,
   },
+  commercialPortal: {
+    /** Alias of `pages.commercial.hero` for the commercial hub and partnerships portal. */
+    hero: assets.amRooftopUnitServices,
+    /** Alias of `pages.commercial.supporting` for local commercial proof. */
+    rooftopProof: {
+      publicId: "helo-and-van",
+      alt: "Ayres Mechanical service van on site during commercial HVAC work.",
+      width: 960,
+      height: 720,
+      format: "jpg",
+      assetFolder: "ayres-mechanical-website/03-services/commercial-hvac",
+      usageNotes: "Registry: `commercialPortal.rooftopProof`. Alias of `pages.commercial.supporting` for commercial portal proof sections.",
+    },
+    /** Alias of `pages.industrial.hero` for facility support sections. */
+    facilitySupport: assets.industrialAm,
+    /** Alias of `serviceArea.map` for commercial coverage modules. */
+    dispatchMap: assets.serviceLocationsMap,
+    /** Alias of `pages.maintenance.supporting` for lifecycle and asset planning sections. */
+    assetPlanning: assets.systemsExplainer,
+    /** Approved temporary/demo stock fallback if no stronger real image fits a commercial slot. */
+    temporaryStock: assets.commercialRooftopHvacStockPhoto,
+  },
 } satisfies {
   brand: Record<string, CloudinaryMediaAsset>;
   home: Record<string, CloudinaryMediaAsset>;
@@ -418,4 +440,5 @@ export const media = {
   };
   services: Record<string, CloudinaryMediaAsset>;
   locations: Record<string, CloudinaryMediaAsset>;
+  commercialPortal: Record<string, CloudinaryMediaAsset>;
 };

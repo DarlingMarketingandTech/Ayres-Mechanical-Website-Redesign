@@ -120,6 +120,34 @@ export function ServicePageTemplate({ service }: { service: ServiceContent }) {
         </Container>
       </Section>
 
+      {service.closingCTA.partnershipPromo ? (
+        <Section className="bg-brand-ice py-8 sm:py-10">
+          <Container>
+            <div className="grid gap-5 rounded-[2rem] border border-brand-blue-dark/10 bg-white p-6 shadow-sm sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Commercial planning</p>
+                <h2 className="mt-3 text-2xl font-black text-balance text-brand-blue-dark sm:text-3xl">
+                  {service.closingCTA.partnershipPromo.title}
+                </h2>
+                <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{service.closingCTA.partnershipPromo.description}</p>
+              </div>
+              <Link
+                href={service.closingCTA.partnershipPromo.href}
+                data-analytics-event="commercial_service_page_cta_click"
+                data-analytics-category="service_page"
+                data-analytics-label={service.closingCTA.partnershipPromo.label}
+                data-analytics-location={service.slug}
+                data-analytics-href={service.closingCTA.partnershipPromo.href}
+                className={cn(buttonVariants({ variant: "emergency", size: "lg" }), "justify-center")}
+              >
+                {service.closingCTA.partnershipPromo.label}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
       {renderProofGallery({ service })}
 
       {service.media?.contentIllustration ? (

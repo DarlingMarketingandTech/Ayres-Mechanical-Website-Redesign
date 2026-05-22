@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { getResendDeliveryConfigOrNull } from "@/lib/resend-config";
 import { buildDiagnosticEmailHtml, buildDiagnosticEmailSubject } from "@/lib/send-diagnostic-email";
 import { diagnosticSubmissionSchema } from "@/lib/validators";
 
@@ -52,11 +53,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
-  const toEmail = process.env.RESEND_TO_EMAIL?.trim() || process.env.DIAGNOSTIC_NOTIFY_EMAIL?.trim();
+  const resendConfig = getResendDeliveryConfigOrNull();
 
-  if (!apiKey || !fromEmail || !toEmail) {
+  if (!resendConfig) {
     return NextResponse.json(
       { ok: false, message: "Diagnostic email is not configured yet. Please call 317-538-9837 for immediate service." },
       { status: 503 },
@@ -81,14 +80,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, message: "Thanks. Your request has been received." }, { status: 200 });
   }
 
-  const resend = new Resend(apiKey);
+  const resend = new Resend(resendConfig.apiKey);
   const subject = buildDiagnosticEmailSubject(parsed.data);
   const html = buildDiagnosticEmailHtml(parsed.data);
 
   try {
     const result = await resend.emails.send({
-      from: fromEmail,
-      to: [toEmail],
+      from: resendConfig.fromEmail,
+      to: [resendConfig.toEmail],
       subject,
       html,
     });

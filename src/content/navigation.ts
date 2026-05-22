@@ -33,24 +33,68 @@ export const serviceOverviewLink: NavigationChild = {
   description: "Browse residential, commercial, industrial, and emergency HVAC support.",
 };
 
+const residentialOverviewLink: NavigationChild = {
+  label: "Residential Overview",
+  href: routes.residential,
+  description: "Heating, cooling, maintenance, and indoor comfort help for Central Indiana homes.",
+};
+
+const commercialOverviewLink: NavigationChild = {
+  label: "Commercial Overview",
+  href: routes.commercial,
+  description: "Commercial diagnostics, rooftop unit service, planned maintenance, and facility support.",
+};
+
+export const commercialNavigation: NavigationChild = {
+  label: "Commercial",
+  href: routes.commercial,
+  description: "Facility HVAC support, planned maintenance, and commercial service planning.",
+};
+
+export const commercialPartnershipNavigation: NavigationChild = {
+  label: "Commercial Partnerships",
+  href: routes.commercialPartnerships,
+  description: "Build a commercial service plan for facilities, RTUs, and multi-site portfolios.",
+};
+
+export const emergencyNavigation: NavigationChild = {
+  label: "Emergency 24/7",
+  href: routes.service(serviceSlugs.twentyFourHourEmergency),
+  description: "Fast help for heating and cooling issues that cannot wait.",
+};
+
 export const serviceNavigationGroups: NavigationGroup[] = [
   {
     label: "Residential",
     items: [
+      residentialOverviewLink,
       serviceLink(serviceSlugs.heating),
       serviceLink(serviceSlugs.airConditioning),
       serviceLink(serviceSlugs.ductless),
       serviceLink(serviceSlugs.indoorAirQuality),
       serviceLink(serviceSlugs.preventiveMaintenance),
+      {
+        ...serviceLink(serviceSlugs.twentyFourHourEmergency),
+        label: "Emergency Service",
+      },
     ],
   },
   {
     label: "Commercial",
-    items: [serviceLink(serviceSlugs.commercial)],
-  },
-  {
-    label: "Industrial",
-    items: [serviceLink(serviceSlugs.industrial)],
+    items: [
+      commercialOverviewLink,
+      serviceLink(serviceSlugs.commercial),
+      {
+        ...serviceLink(serviceSlugs.industrial),
+        label: "Industrial / Facility Support",
+      },
+      commercialPartnershipNavigation,
+      serviceLink(serviceSlugs.preventiveMaintenance),
+      {
+        ...serviceLink(serviceSlugs.twentyFourHourEmergency),
+        label: "Emergency Service",
+      },
+    ],
   },
 ];
 
@@ -85,19 +129,22 @@ export const primaryNavigation: NavigationChild[] = [
   },
 ];
 
-export const emergencyNavigation: NavigationChild = {
-  label: "Emergency 24/7",
-  href: routes.service(serviceSlugs.twentyFourHourEmergency),
-  description: "Fast help for heating and cooling issues that cannot wait.",
-};
-
 export const footerServiceLinks: NavigationChild[] = [
+  residentialOverviewLink,
   serviceLink(serviceSlugs.heating),
   serviceLink(serviceSlugs.airConditioning),
   serviceLink(serviceSlugs.ductless),
   serviceLink(serviceSlugs.indoorAirQuality),
   serviceLink(serviceSlugs.preventiveMaintenance),
-  serviceLink(serviceSlugs.commercial),
-  serviceLink(serviceSlugs.industrial),
   serviceLink(serviceSlugs.twentyFourHourEmergency),
+];
+
+export const footerCommercialLinks: NavigationChild[] = [
+  commercialOverviewLink,
+  commercialPartnershipNavigation,
+  serviceLink(serviceSlugs.commercial),
+  {
+    ...serviceLink(serviceSlugs.industrial),
+    label: "Industrial / Facility Support",
+  },
 ];

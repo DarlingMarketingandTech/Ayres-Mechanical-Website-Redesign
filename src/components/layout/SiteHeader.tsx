@@ -38,9 +38,9 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileChromeHidden = useMobileChromeHidden({ disabled: menuOpen });
   // Track which service groups are open in the mobile nav.
-  // Default: first group open, rest collapsed.
+  // Default: both audience lanes open so residential and commercial paths are visible.
   const [openGroups, setOpenGroups] = useState<Set<string>>(
-    () => new Set([serviceNavigationGroups[0]?.label ?? ""]),
+    () => new Set(serviceNavigationGroups.map((group) => group.label)),
   );
 
   function toggleGroup(label: string) {

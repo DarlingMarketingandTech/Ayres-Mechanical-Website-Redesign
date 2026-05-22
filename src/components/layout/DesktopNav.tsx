@@ -12,12 +12,14 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
+  commercialNavigation,
   companyNavigation,
   primaryNavigation,
   serviceNavigationGroups,
   serviceOverviewLink,
   type NavigationChild,
 } from "@/content/navigation";
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 function isRouteActive(pathname: string, href: string) {
@@ -34,6 +36,11 @@ const topLevelClass =
 export function DesktopNav() {
   const pathname = usePathname();
   const servicesActive = pathname.startsWith("/services");
+  const commercialActive =
+    isRouteActive(pathname, routes.commercial) ||
+    isRouteActive(pathname, routes.commercialPartnerships) ||
+    isRouteActive(pathname, routes.commercialService) ||
+    isRouteActive(pathname, routes.industrialFacilities);
   const companyActive = companyNavigation.some((item) => isRouteActive(pathname, item.href));
 
   return (
@@ -62,34 +69,47 @@ export function DesktopNav() {
                   </NavigationMenuLink>
                 </div>
                 <div className="mt-3 grid gap-3 md:grid-cols-3">
-                  <div className="md:col-span-2 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
-                    <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">Residential</p>
-                    <ul className="grid gap-1 md:grid-cols-2">
-                      {serviceNavigationGroups.find(g => g.label === "Residential")?.items.map((item) => (
-                        <li key={item.href}>
-                          <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {serviceNavigationGroups.filter(g => g.label !== "Residential").map((group) => (
-                      <div key={group.label} className="flex-1 rounded-xl border border-border/50 bg-white p-3 shadow-sm">
-                        <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">{group.label}</p>
-                        <ul className="grid gap-1">
-                          {group.items.map((item) => (
-                            <li key={item.href}>
-                              <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                  {serviceNavigationGroups.map((group) => (
+                    <div key={group.label} className="rounded-xl border border-border/50 bg-white p-3 shadow-sm">
+                      <p className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-brand-red">{group.label}</p>
+                      <ul className="grid gap-1">
+                        {group.items.map((item) => (
+                          <li key={item.href}>
+                            <DesktopNavChild child={item} active={isRouteActive(pathname, item.href)} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  <div className="rounded-xl border border-brand-blue-dark/10 bg-brand-ice p-4 shadow-sm">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-blue-dark/60">Commercial portal</p>
+                    <h3 className="mt-2 text-lg font-black text-brand-blue-dark">Managing a facility or portfolio?</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      Outline equipment, service priorities, and follow-up needs in the commercial partnerships portal.
+                    </p>
+                    <NavigationMenuLink
+                      render={<Link href={routes.commercialPartnerships} />}
+                      className={cn(
+                        "mt-4 inline-flex rounded-full bg-brand-blue-dark px-4 py-2 text-sm font-black text-white transition-colors hover:bg-primary",
+                        isRouteActive(pathname, routes.commercialPartnerships) && "bg-primary",
+                      )}
+                    >
+                      Commercial Partnerships
+                    </NavigationMenuLink>
                   </div>
                 </div>
               </div>
             </div>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            render={<Link href={commercialNavigation.href} />}
+            className={cn(topLevelClass, commercialActive && "border-brand-blue-dark/10 bg-white/85 text-primary shadow-sm")}
+          >
+            {commercialNavigation.label}
+          </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>

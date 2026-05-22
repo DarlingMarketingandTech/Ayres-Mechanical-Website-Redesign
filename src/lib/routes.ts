@@ -1,7 +1,12 @@
 export const routes = {
   home: "/",
+  residential: "/residential",
+  commercial: "/commercial",
+  commercialPartnerships: "/commercial-partnerships",
   services: "/services",
   service: (slug: string) => "/services/" + slug,
+  commercialService: "/services/commercial",
+  industrialFacilities: "/services/industrial",
   industries: "/industries",
   industry: (slug: string) => "/industries/" + slug,
   serviceArea: "/service-area",

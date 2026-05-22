@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { AuthoritySection } from "@/components/sections/AuthoritySection";
 import { CommercialCapabilitySection } from "@/components/sections/CommercialCapabilitySection";
+import { CommercialPortfolioCTA } from "@/components/sections/CommercialPortfolioCTA";
 import { CountyServiceAreaSection } from "@/components/sections/CountyServiceAreaSection";
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -48,6 +49,8 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
+
+      <CommercialPortfolioCTA />
 
       <AuthoritySection />
 
