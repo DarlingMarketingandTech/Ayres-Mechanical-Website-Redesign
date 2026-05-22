@@ -13,9 +13,13 @@ import { cn } from "@/lib/utils";
 
 type TestimonialsProps = {
   limit?: number;
+  /** Full homepage/reviews layout, or compact strip for embedded pages (e.g. About). */
+  variant?: "default" | "embedded";
+  /** Marquee edge fade color — use parent section background on embedded layouts. */
+  marqueeFadeClassName?: string;
 };
 
-export function Testimonials({ limit }: TestimonialsProps) {
+export function Testimonials({ limit, variant = "default", marqueeFadeClassName = "from-background" }: TestimonialsProps) {
   const reduceMotion = useReducedMotion();
   const regionId = useId();
 
@@ -24,9 +28,34 @@ export function Testimonials({ limit }: TestimonialsProps) {
   const marqueeItems = [...displayTestimonials, ...displayTestimonials];
 
   const marqueeDurationSec = Math.max(28, displayTestimonials.length * 5.5);
+  const isEmbedded = variant === "embedded";
 
   return (
-    <div className="space-y-8 sm:space-y-12">
+    <div className={cn("space-y-8", isEmbedded ? "sm:space-y-10" : "sm:space-y-12")}>
+      {isEmbedded ? (
+        <div className="flex flex-col gap-5 rounded-3xl border border-border/70 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:p-6">
+          <div className="flex flex-wrap items-end gap-3 sm:gap-4">
+            <p className="w-full text-sm font-black uppercase tracking-[0.2em] text-brand-red sm:w-auto">Rated by customers</p>
+            <p className="text-5xl font-black leading-none text-brand-blue-dark">{reviewSummary.rating}</p>
+            <div className="flex items-center gap-0.5 pb-1" aria-hidden="true">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-brand-red text-brand-red" />
+              ))}
+            </div>
+            <p className="pb-1 text-sm font-bold uppercase tracking-[0.16em] text-muted-foreground">
+              {reviewSummary.count} verified reviews
+            </p>
+          </div>
+          {hasMoreReviews ? (
+            <Link
+              href={routes.reviews}
+              className="inline-flex shrink-0 items-center gap-1 font-black text-brand-red transition-[color,transform] duration-300 hover:text-brand-blue-dark hover:translate-x-0.5"
+            >
+              Read all reviews →
+            </Link>
+          ) : null}
+        </div>
+      ) : (
       <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="group relative overflow-hidden rounded-3xl bg-brand-blue-dark p-5 text-white shadow-xl transition-[transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-blue-dark/35 motion-reduce:transform-none sm:p-6">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-red/15 via-transparent to-primary/20 opacity-60 transition-opacity duration-700 group-hover:opacity-100" />
@@ -82,6 +111,7 @@ export function Testimonials({ limit }: TestimonialsProps) {
           </CardContent>
         </Card>
       </div>
+      )}
 
       {reduceMotion ? (
         <div
@@ -99,12 +129,25 @@ export function Testimonials({ limit }: TestimonialsProps) {
       ) : (
         <div
           id={regionId}
-          className="ayres-marquee relative -mx-4 px-4 py-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+          className={cn(
+            "ayres-marquee relative py-4",
+            isEmbedded ? "-mx-0 px-0" : "-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
+          )}
           style={{ "--ayres-marquee-duration": `${marqueeDurationSec}s` } as CSSProperties}
           aria-label="Customer reviews"
         >
-          <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r from-background to-transparent sm:w-20" />
-          <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l from-background to-transparent sm:w-20" />
+          <div
+            className={cn(
+              "pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r to-transparent sm:w-16 lg:w-20",
+              marqueeFadeClassName,
+            )}
+          />
+          <div
+            className={cn(
+              "pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l to-transparent sm:w-16 lg:w-20",
+              marqueeFadeClassName,
+            )}
+          />
           <div className="mask-edges overflow-hidden">
             <div className="ayres-marquee-track flex w-max gap-5 sm:gap-7">
               {marqueeItems.map((testimonial, idx) => (

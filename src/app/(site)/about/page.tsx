@@ -7,10 +7,13 @@ import { PageHero } from "@/components/sections/Hero";
 import { MotionReveal } from "@/components/sections/MotionReveal";
 import { AnimatedCardGrid } from "@/components/sections/AnimatedCardGrid";
 import { EliteCertificationsBanner } from "@/components/sections/EliteCertificationsBanner";
+import { AboutServiceAreaSection } from "@/components/sections/AboutServiceAreaSection";
+import { ReviewPlatformBadges } from "@/components/sections/ReviewPlatformBadges";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { buttonVariants } from "@/components/ui/button";
 import { media } from "@/content/media";
 import { siteConfig } from "@/content/site";
+import { reviewSummary } from "@/content/testimonials";
 import { pageMetadata } from "@/lib/seo";
 import { phoneHref } from "@/lib/constants";
 import { routes } from "@/lib/routes";
@@ -37,8 +40,6 @@ const whyChooseItems = [
     description: "From residential split systems to commercial RTUs and industrial refrigeration, we support a wide range of equipment and environments.",
   },
 ];
-
-const counties = ["Marion", "Hendricks", "Hamilton", "Montgomery", "Putnam", "Boone"];
 
 export default function AboutPage() {
   return (
@@ -105,53 +106,25 @@ export default function AboutPage() {
         </Container>
       </Section>
       <EliteCertificationsBanner />
-      <Section>
-        <Container className="grid gap-8 lg:grid-cols-2">
+      <Section className="bg-brand-ice">
+        <Container>
           <MotionReveal>
-            <div className="space-y-6 rounded-[2rem] border border-border/70 bg-white p-7 shadow-sm sm:p-8">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Social Proof</p>
-                <h2 className="mt-3 text-4xl font-black text-balance text-brand-blue-dark">What Our Customers Say</h2>
-              </div>
-              <Testimonials limit={3} />
+            <div className="mb-8 max-w-3xl">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-brand-red">Social Proof</p>
+              <h2 className="mt-3 text-(length:--text-section) font-black text-balance text-brand-blue-dark">
+                What Our Customers Say
+              </h2>
+              <p className="mt-4 max-w-2xl text-(length:--text-lead) leading-relaxed text-muted-foreground">
+                Real recommendations from Central Indiana homeowners and businesses — rated {reviewSummary.rating} across{" "}
+                {reviewSummary.count} verified reviews.
+              </p>
             </div>
           </MotionReveal>
-          <MotionReveal>
-            <div className="space-y-6 rounded-[2rem] border border-border/70 bg-brand-blue-dark p-7 text-white shadow-sm sm:p-8">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-white/60">Service Area</p>
-                <h2 className="mt-3 text-4xl font-black text-balance">Central Indiana coverage with dependable support.</h2>
-                <p className="mt-4 leading-8 text-white/75">
-                  We provide high-quality heating and cooling at a reasonable rate, serving residential, commercial, and industrial customers throughout Central Indiana.
-                </p>
-              </div>
-              <figure className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 shadow-lg">
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <CloudinaryImage
-                    asset={media.home.localProof}
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="object-cover object-center"
-                    crop="fill"
-                    gravity="auto"
-                  />
-                </div>
-                <figcaption className="sr-only">{media.home.localProof.alt}</figcaption>
-              </figure>
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-white/60">Currently serving</p>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  {counties.map((county) => (
-                    <span key={county} className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white/85">
-                      {county} County
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </MotionReveal>
+          <ReviewPlatformBadges />
+          <Testimonials limit={3} variant="embedded" marqueeFadeClassName="from-brand-ice" />
         </Container>
       </Section>
+      <AboutServiceAreaSection />
       <Section className="pt-0">
         <Container>
           <MotionReveal>
